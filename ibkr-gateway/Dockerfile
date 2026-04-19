@@ -1,4 +1,4 @@
-FROM openjdk:17-slim-bullseye
+FROM eclipse-temurin:17-jre-jammy
 
 # Install Python 3.11, supervisord, IBC dependencies
 RUN apt-get update && apt-get install -y \
