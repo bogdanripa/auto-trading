@@ -26,9 +26,13 @@ WORKDIR /home/trader
 # at github.com/gnzsnz/ib-gateway-docker releases offline-build tarballs as
 # GitHub release assets — that's what we pull from.
 #
-# IBC looks for the jars at `${tws-path}/${version}/jars/`, so we install
-# into /opt/ibgateway/${IB_GATEWAY_VERSION} (versioned subdir) and let the
-# runtime supervisord pass IB_GATEWAY_VERSION through to ibcstart.sh.
+# IBC 3.x's ibcstart.sh computes gateway_program_path as
+# `${tws-path}/ibgateway/${version}` — note the literal `ibgateway/`
+# segment between tws-path and the versioned dir. If we install anywhere
+# else, IBC falls back to looking for `tws.vmoptions` and exits 7 with
+# "Neither tws.vmoptions nor ibgateway.vmoptions could be found".
+# So: install at /opt/ibgateway/ibgateway/${IB_GATEWAY_VERSION}, and pass
+# --tws-path=/opt/ibgateway to IBC (the child dir is implicit).
 #
 # To bump versions: check https://github.com/gnzsnz/ib-gateway-docker/releases
 # for the latest `ibgateway-stable@<ver>` tag, then update the env var +
@@ -41,12 +45,12 @@ RUN set -eux \
        -O /tmp/ibgateway-installer.sh \
     && chmod +x /tmp/ibgateway-installer.sh \
     && mkdir -p /opt/ibgateway \
-    && yes '' | /tmp/ibgateway-installer.sh -q -dir "/opt/ibgateway/${IB_GATEWAY_VERSION}" \
+    && yes '' | /tmp/ibgateway-installer.sh -q -dir "/opt/ibgateway/ibgateway/${IB_GATEWAY_VERSION}" \
     && rm /tmp/ibgateway-installer.sh \
-    && test -d "/opt/ibgateway/${IB_GATEWAY_VERSION}/jars" \
+    && test -d "/opt/ibgateway/ibgateway/${IB_GATEWAY_VERSION}/jars" \
     && echo "IB Gateway ${IB_GATEWAY_VERSION} installed:" \
-    && ls -la "/opt/ibgateway/${IB_GATEWAY_VERSION}" \
-    && ls "/opt/ibgateway/${IB_GATEWAY_VERSION}/jars" | head -5
+    && ls -la "/opt/ibgateway/ibgateway/${IB_GATEWAY_VERSION}" \
+    && ls "/opt/ibgateway/ibgateway/${IB_GATEWAY_VERSION}/jars" | head -5
 
 # Install IBC (IB Controller) for automated login.
 # IBC's zip layout is `scripts/*.sh` (Gateway/TWS wrappers) plus some top-level

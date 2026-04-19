@@ -30,7 +30,7 @@ mkdir -p /home/trader/ibgateway-settings
 # Fail loudly if IB Gateway or IBC aren't where we expect them — otherwise
 # supervisord will happily keep restarting a process that can never succeed.
 : "${IB_GATEWAY_VERSION:?IB_GATEWAY_VERSION is required at runtime (set via Dockerfile ENV)}"
-for d in "/opt/ibgateway/${IB_GATEWAY_VERSION}/jars" /opt/ibc/scripts; do
+for d in "/opt/ibgateway/ibgateway/${IB_GATEWAY_VERSION}/jars" /opt/ibc/scripts; do
     if [ ! -d "$d" ]; then
         echo "FATAL: $d is missing — the Docker build did not install it correctly." >&2
         echo "       Contents of /opt:" >&2
