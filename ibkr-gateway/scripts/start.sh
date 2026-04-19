@@ -22,6 +22,11 @@ chmod 600 /home/trader/ibc.ini
 mkdir -p /var/log
 touch /var/log/xvfb.log /var/log/ibgateway.log /var/log/fastapi.log
 
+# IBC refuses to launch without this dir — it exits 5 with
+# "Error: TWS settings path: /home/trader/ibgateway-settings does not exist".
+# IB Gateway will populate it on first run (jts.ini, etc.).
+mkdir -p /home/trader/ibgateway-settings
+
 # Fail loudly if IB Gateway or IBC aren't where we expect them — otherwise
 # supervisord will happily keep restarting a process that can never succeed.
 : "${IB_GATEWAY_VERSION:?IB_GATEWAY_VERSION is required at runtime (set via Dockerfile ENV)}"
@@ -36,7 +41,7 @@ for d in "/opt/ibgateway/${IB_GATEWAY_VERSION}/jars" /opt/ibc/scripts; do
     fi
 done
 
-chown -R trader:trader /var/log /opt/ibgateway /opt/ibc
+chown -R trader:trader /var/log /opt/ibgateway /opt/ibc /home/trader/ibgateway-settings
 
 # Start supervisord (manages Xvfb + IB Gateway + FastAPI)
 echo "==> Handing off to supervisord"
