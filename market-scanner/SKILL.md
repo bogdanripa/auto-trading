@@ -1,95 +1,128 @@
 ---
 name: market-scanner
-description: Scan the BET-Plus stock universe for technical trading setups — swing entries, breakouts, trend continuations, and exit signals. Use this skill as part of every morning trading run. It pulls price and volume data for BET-Plus constituents, calculates technical indicators, and identifies actionable setups ranked by quality. Trigger whenever you need to scan BVB stocks for technical opportunities or check technical levels on specific stocks.
+description: Technical scan of the BET-Plus universe — computes RSI, moving averages, volume ratios, breakout levels, and trend direction from real price data, then ranks setups for entries and exits. Run this every morning after macro-analyst and bvb-news so the synthesis step has a concrete list of candidates. Uses Yahoo Finance OHLCV as the primary data source. Trigger whenever a technical scan is needed, or when evaluating a specific name's setup quality.
 ---
 
-# BVB Market Scanner
+# Market Scanner
 
-Scan BET-Plus stocks for technical trading setups using price action, volume, and momentum indicators.
+Quantitative scan over the BET-Plus universe. Fetches OHLCV, computes indicators, grades setups. No guesswork on current prices — always pulled fresh from Yahoo.
 
-## BET-Plus Universe
+## Universe (BET-Plus constituents)
 
-These are the primary stocks to scan (update if index composition changes):
+Primary (BET, high liquidity):
+`SNG, TLV, BRD, SNP, TGN, H2O, SNN, FP, DIGI, ONE, SFG, TRP, WINE, AQ, COTE, TEL, M, EL, BVB, ROCE`
 
-### BET Components (highest liquidity)
-SNN (Nuclearelectrica), H2O (Hidroelectrica), TLV (Banca Transilvania), SNP (OMV Petrom), SNG (Romgaz), BRD (BRD-Groupe Société Générale), TGN (Transgaz), DIGI (Digi Communications), ONE (One United Properties), FP (Fondul Proprietatea), SFG (Sphera Franchise Group), TRP (Teraplast), WINE (Purcari Wineries), AQ (Aquila Part Prod), COTE (Conpet), TEL (Transelectrica), M (MedLife), EL (Electromagnetica), BVB (Bursa de Valori Bucuresti), ROCE (Romanian Capital ETF)
+Extended (BET-Plus, thinner liquidity — be cautious on sizing):
+`ALR, ATB, BIO, CMP, IMP, LION, OIL, PPL, RRC, SIF1, SIF3, SIF5, STZ, TRANSI, UCM, EVER`
 
-### BET-Plus Additional (lower liquidity — scan but be cautious on position sizing)
-ALR (Alro), ATB (Antibiotice), BCM (Banca Comerciala Romana), BIO (Biofarm), CMP (Compa), IMP (Impact Developer), LION (Lion Capital), MECE (Mecanica Ceahlau), OIL (Oil Terminal), PCT (Prodplast), PPL (People's Financial Group), PREH (Prebet Aiud), RRC (Rompetrol Rafinare), SAFE (SAF Holland Romania), SIF1-SIF5, STZ (Siretul Pascani), TRANSI (Transilvania Investments), UCM (UCM Resita), EVER (Evergent Investments)
+Skip any symbol where 20-day average daily value traded (ADV) < 50,000 RON (PROJECT.md rule).
 
-## Data Collection
+## Price Data
 
-For each stock in the universe, gather via web search:
-- Current price and daily change
-- Volume (today vs 20-day average)
-- 52-week high and low
-- Key moving averages: 20 SMA, 50 SMA, 200 SMA
+Yahoo Finance chart API:
+```
+https://query1.finance.yahoo.com/v8/finance/chart/<SYMBOL>.RO?interval=1d&range=100d
+Header: User-Agent: Mozilla/5.0
+```
 
-Search patterns:
-- `[SYMBOL] BVB pret actiune` for current price
-- `[SYMBOL] tradeville cotatii` for detailed quotes
-- `bvb.ro [SYMBOL]` for official BVB data
-- Yahoo Finance or Google Finance for charts: `[SYMBOL].RO stock`
+Returns JSON. Parse:
+- `meta.regularMarketPrice`, `meta.regularMarketVolume`, `meta.fiftyTwoWeekHigh`, `meta.fiftyTwoWeekLow`, `meta.chartPreviousClose`
+- `indicators.quote[0].open|high|low|close|volume` arrays (one per trading day)
+- `timestamp` array (Unix seconds, aligned with the quote arrays)
 
-## Technical Signals to Identify
+100 trading days (~5 months) gives enough history for 200-day-less indicators, 50-day SMA, and recent support/resistance. If you need 200 SMA, use `range=1y`.
 
-### Buy Signals (ranked by reliability on BVB)
+## Indicators (computed on daily closes)
 
-**A-Grade Setups (highest conviction):**
-- Golden cross (50 SMA crossing above 200 SMA) with volume confirmation
-- Breakout above multi-week resistance on 2x+ average volume
-- RSI divergence: price making lower low while RSI makes higher low, in a stock with strong fundamentals
+**RSI(14)** — classic Wilder. 14-period average of gains vs losses on closes.
 
-**B-Grade Setups (good but need additional confirmation):**
-- RSI < 30 in a stock that's in a long-term uptrend (mean reversion within trend)
-- Price pulling back to 50 SMA support in an uptrend
-- Volume surge (3x+ average) on an up day after a consolidation period
+**SMA(n)** — simple moving average of closes, windows: 20, 50, 200.
 
-**C-Grade Setups (watch, don't trade yet):**
-- Price approaching key support level
-- Decreasing volume in a downtrend (potential reversal forming)
-- Sector rotation signals (money moving into a sector)
+**Volume ratio** — `today_volume / avg(last_20_days_volume)`. Above 1.5x = elevated; above 3x = surge.
 
-### Sell Signals
-- RSI > 70 with declining momentum (MACD histogram decreasing)
-- Death cross (50 SMA crossing below 200 SMA)
-- Break below key support on high volume
-- Volume dry-up on rally attempts (no buyers left)
+**ATR(14)** — average true range, for stop placement. Use ATR% = ATR / close.
 
-### Exit Signals for Current Positions
-- Stop-loss hit (10% from entry)
-- Trailing stop hit (7% from peak for trend rides)
-- Target reached (+15-20% for swing trades)
-- Fundamental thesis broken (news-driven, from bvb-news skill)
+**20-day high / low** — for breakout / breakdown detection.
+
+**Trend label** — derived:
+- `uptrend`: close > SMA50 > SMA200 (or SMA100 if 200 unavailable)
+- `downtrend`: close < SMA50 < SMA200
+- `range`: neither — use 20-day high/low instead
+
+## Setup Grading
+
+### A-grade (highest conviction — ≥1 match = flag)
+- **Breakout:** close > 20-day high AND volume ratio > 2.0 AND trend = uptrend
+- **Pullback to trend:** trend = uptrend AND close within 2% of SMA50 AND RSI between 40-55 AND volume ratio ≥ 0.8
+- **Oversold within uptrend:** trend = uptrend AND RSI(14) < 30 AND close > SMA200 — rare, strong when present
+
+### B-grade (good but needs confirmation)
+- **RSI oversold (no trend filter):** RSI < 30 AND last 5 days include at least one up-close — possible mean reversion
+- **Volume anomaly:** volume ratio > 3.0 AND close up on the day — someone is accumulating
+- **Higher low on RSI:** price lower low vs 10 days ago, RSI higher low — divergence
+
+### C-grade (watchlist only, no trade today)
+- **Approaching support:** trend = uptrend AND price within 3% above SMA50 but not yet touching
+- **Coiling:** 20-day range compressed to < 6% of price, volume declining — breakout pending
+- **Base forming after downtrend:** close > SMA20 for 5+ consecutive days after a downtrend
+
+### Sell / exit signals (for current positions)
+- **Trailing stop hit:** current price < (peak_since_entry × 0.93) for trend rides
+- **Hard stop hit:** current price < entry_price × 0.90 (PROJECT.md default, may be overridden per LESSONS.md)
+- **Take profit trigger:** current price > entry_price × 1.20 for swing trades unless volume ratio still > 1.5 (momentum accelerating — hand off to synthesis for decision)
+- **Overbought exhaustion:** RSI > 75 with MACD histogram declining 3 consecutive days
+- **Break of trend:** trend was `uptrend`, today close < SMA50 on volume ratio > 1.0 — trend compromised
+
+## Position Sizing Hint
+
+For each A or B setup, compute a suggested initial stop based on ATR:
+- Initial stop = entry × (1 - max(0.10, 2 × ATR%))
+
+This respects the PROJECT.md 10% minimum stop but widens for high-ATR names (financials, small caps) where 10% is inside daily noise.
+
+## Dividend Awareness
+
+Cross-check the upcoming events list from `bvb-news`. If a holding has ex-dividend in the next 2 trading days, the expected ex-dividend drop is NOT a sell signal — flag it explicitly so the exit logic doesn't trigger on the mechanical gap.
 
 ## Output Format
 
-For each identified setup:
-
 ```
-SYMBOL: [ticker]
-SETUP TYPE: [Swing Buy / Event Entry / Trend Continuation / Sell Signal / Exit Signal]
-GRADE: [A / B / C]
-CURRENT PRICE: [price] RON
-ENTRY ZONE: [price range]
-STOP LOSS: [price] (-X%)
-TARGET: [price] (+X%)
-VOLUME: [today] vs [20d avg] ([X]x)
-KEY LEVELS: Support [X], Resistance [X]
-TECHNICAL SUMMARY: [2-3 sentences]
+🔭 MARKET SCAN — [DATE]
+
+A-GRADE SETUPS (ranked by conviction)
+  [SYMBOL] [setup_type]  price [X] RON  RSI [Y]  vol [Z]x
+    Entry zone: [range]  Stop: [price] (-X%)  Target: [price] (+X%)
+    Notes: [1 sentence]
+
+B-GRADE SETUPS
+  [same format]
+
+WATCHLIST (C-grade, might trigger this week)
+  [SYMBOL]: [what needs to happen to upgrade]
+
+EXIT ALERTS (current positions)
+  [SYMBOL]: [signal] — handing to risk-monitor for decision
+  or
+  (no exit signals)
+
+SKIPPED (illiquid or no data)
+  [SYMBOL]: [reason]
 ```
 
-Then provide a ranked summary:
-1. **Top Setups**: Best 3 opportunities today (A and B grade only)
-2. **Watchlist**: Stocks approaching setups (C grade, might trigger this week)
-3. **Exit Alerts**: Current positions that should be reviewed
+## BVB Operational Rules
 
-## BVB-Specific Considerations
+- BVB open: 10:00 EET, close: 17:45 EET. Pre-open auction 09:45-10:00.
+- Yahoo data may lag 15-20 min during RTH. Use for end-of-day analysis, not live tick decisions.
+- Daily price variation limit: ±15% (tunnel). Symbols at the limit are suspended — don't attempt to trade.
+- Many BVB names trade in "waves" — weeks of flat, then a 10-15% move in days. Breakout signals are rarer than on US names but often cleaner.
+- January-April sees dividend-driven flows. Ex-dividend drops are mechanical; don't confuse with sell signals.
 
-- BVB opens at 10:00 AM and closes at 5:45 PM EET. Pre-open auction is 9:45-10:00.
-- Spreads are wide on many stocks. Always use limit orders.
-- Volume clusters around open and close. Mid-day can be very thin.
-- Dividend ex-dates cause mechanical price drops — don't confuse with sell signals.
-- BVB has ±15% daily price variation limits (tunnel). Stocks hitting the limit are suspended.
-- Many BVB stocks trade in "waves" — they go sideways for weeks then move 10-15% in a few days. Patience is key.
-- The January-April period often sees increased activity due to dividend announcements.
+## Failure Handling
+
+- Yahoo returns no data for a symbol → try Stooq fallback `https://stooq.com/q/d/l/?s=<symbol>.ro&i=d&d1=<YYYYMMDD_start>&d2=<YYYYMMDD_end>` (CSV format)
+- Both fail → log the symbol as unavailable for this run. Do not fabricate a signal.
+- Entire universe data fails → output a "scanner degraded" banner; synthesis should not initiate new trades without price data.
+
+## Caching
+
+Same pattern as news/macro — in-memory cache for the run only. Do not persist between runs; the next routine fires hours later and needs fresh data.

@@ -55,16 +55,16 @@ When multiple setups compete for limited capital:
 
 ### Morning Run (7:30 AM EET)
 Execute skills in this order:
-1. Read `LESSONS.md` — load active lessons into working context before analysis
-2. `macro-analyst` — Global overnight context
+1. Read `LESSONS.md` AND `THEMES.md` — load active lessons and active themes into working context before analysis
+2. `macro-analyst` — Global overnight context + theme-layer refresh (which active themes got signals today; any new theme candidates to propose)
 3. `bvb-news` — BVB announcements, Romanian news
 4. `market-scanner` — Technical scan of BET-Plus universe
 5. `company-analyst` — Deep dive on any flagged stocks
 6. `portfolio-manager` — Current state, cash available, position review
 7. `risk-monitor` — Check stops, exposure, override conditions
-8. **Synthesis** — Weigh all inputs against active lessons, decide today's actions
-9. `trade-executor` — Place orders via IBKR
-10. `trade-journal` — Append entry record for every new fill (thesis + context)
+8. **Synthesis** — Weigh all inputs against active lessons + active themes, decide today's actions
+9. `trade-executor` — Place orders (simulation mode writes to portfolio/orders.jsonl)
+10. `trade-journal` — Append entry record for every new fill (thesis + context, tag with theme if applicable)
 11. `telegram-reporter` — Send morning briefing
 
 ### Evening Run (5:30 PM EET)
@@ -89,6 +89,21 @@ The engine learns from its own history through three pieces:
 
 ### Rule changes to PROJECT.md
 `PROJECT.md` is the stable strategy foundation. The engine never edits it autonomously. When a lesson becomes `[active]` and conflicts with a rule here, the `retrospective` skill appends a proposed edit to the bottom of `LESSONS.md` and flags it in the weekly Telegram briefing. The user reviews and applies changes manually.
+
+## Thematic Bias
+
+Alongside the tactical day-to-day, the engine tracks **structural themes** in `THEMES.md` — macro narratives (AI datacenter buildout, BNR higher-for-longer, energy shocks, defense cycles, technology inflections) mapped to specific BVB tickers.
+
+### How themes affect decisions
+- **At entry:** a setup in a ticker that maps to an `[active]` theme gets a conviction bump (+1 on the 0-10 scale). A setup that runs against an active theme requires an extra confirmation before entry.
+- **At tracking:** every morning `macro-analyst` refreshes the theme layer — which themes got reinforcing or contradicting signals today.
+- **At review:** the retrospective step computes win rate per theme. Themes with persistent 0% hit rate across 5+ tagged trades become retirement candidates.
+
+### Theme governance
+Same gate as LESSONS: the engine **proposes** new themes or status changes at the bottom of `THEMES.md` when signals cross the threshold. The user reviews weekly and accepts or rejects. The engine never edits the `[active]` / `[candidate]` / `[retired]` sections autonomously.
+
+### BVB-or-bust rule
+Every theme must map to at least one BVB ticker. Context-only observations (e.g., "US housing cycle turning") belong in the macro briefing, not in THEMES.md — because we can't act on them.
 
 ## Telegram Briefing Format
 

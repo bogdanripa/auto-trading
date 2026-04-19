@@ -133,9 +133,76 @@ SECTOR IMPACT FOR BVB
 RISK FLAGS
   [Any macro risks that could produce sudden moves — surprise CB decision, geopolitical, etc.]
 
+THEME UPDATES (from THEMES.md active list)
+  [Theme name]: [reinforced | contradicted | unchanged] — [1 line why]
+  ...
+  Proposed changes: [count] (see THEMES.md bottom for details) — or "none"
+
 SUMMARY (for synthesis)
-[2-3 sentences — the most compact version of the above]
+[2-3 sentences — the most compact version of the above, flagging any theme-tagged names worth a closer scanner look today]
 ```
+
+## Theme Layer (structural bias tracking)
+
+News tells you what happened yesterday. Themes tell you what structural shift is underway and how to position. This layer runs *after* the daily news/macro gather and is the bridge from global-macro to BVB-ticker.
+
+### Every morning: read THEMES.md
+Load the file, extract `[active]` themes and their BVB ticker mappings. This goes into the synthesis step as a conviction bias (see THEMES.md "How themes affect decisions" section).
+
+### Every morning: scan for theme-relevant news
+For each `[active]` theme, run a targeted search using its "Signals to track" list. Example — for the AI/datacenter theme:
+```
+WebSearch: "datacenter Romania announcement <current month year>"
+WebSearch: "EU electricity market reform"
+WebSearch: "ANRE tariff decision <current month year>"
+```
+Note any hits in the macro output under a "THEME UPDATES" section — which themes got reinforcing or contradicting signals today.
+
+### Weekly (Friday morning): theme discovery
+In addition to the normal gather, run broader structural scans:
+```
+WebSearch: "emerging investment theme <current month year>"
+WebSearch: "structural shift markets <current month year>"
+WebSearch: "CEE Romania investment thesis <current year>"
+```
+Plus reflect: are there narratives *not* in THEMES.md that showed up repeatedly in this week's news? Common triggers:
+- A new geopolitical event creating a commodity / sector dislocation
+- A technology inflection (like AI in late 2022) creating new demand categories
+- A regulatory shift (EU taxonomy, carbon border adjustment, etc.) reallocating capital
+- A macro regime change (rate pivot, currency crisis, inflation breakout)
+
+### Propose new themes (never promote autonomously)
+
+When a structural pattern appears 3+ times across different sources in a week AND has a plausible BVB mapping, append a proposal to the "Proposed New Themes / Status Changes" section at the bottom of THEMES.md:
+
+```markdown
+### Proposed: [candidate] <Theme name>
+**Narrative:** <2-3 sentences on the structural shift>
+**Evidence:** <sources and dates>
+**BVB mapping (or "no direct BVB play"):**
+- TICKER — why it benefits/suffers
+**Signals to track:** <queries or datapoints>
+**Recommended action:** add as [candidate] | upgrade existing theme | retire existing theme
+```
+
+The user reviews these weekly and decides whether to accept the change. The engine never edits the `[active]` or `[candidate]` sections of THEMES.md directly.
+
+### Propose theme retirement
+A theme becomes a retirement candidate when:
+- The signals it tracks are no longer generating hits (narrative has gone quiet)
+- The mapped BVB tickers have outperformed by >30% since the theme was marked active (priced in)
+- A counter-narrative has emerged with stronger evidence
+
+If so, propose retirement in the same "Proposed" section. Don't retire autonomously.
+
+### BVB-or-bust filter
+Before proposing any theme, ask: *can we express this view on BVB*? Examples:
+- "AI chip demand" → if the only beneficiaries are US/Taiwan names, it's context-only, not a theme for us
+- "AI datacenter POWER demand" → yes, BVB has utilities exposure — actionable theme
+- "Iran oil shock" → yes, SNG/SNP benefit — actionable theme
+- "US housing cycle" → no direct BVB play — context only
+
+If a theme has no BVB mapping, note it in the macro summary for awareness but don't add it to THEMES.md.
 
 ## Interpretation Rules
 

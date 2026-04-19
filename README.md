@@ -15,6 +15,7 @@ It trades BET-Plus stocks through Interactive Brokers (IBKR), manages risk withi
 ```
 PROJECT.md                    — Strategy brain (risk rules, workflow, override logic)
 LESSONS.md                    — Living memory; distilled patterns from past trades
+THEMES.md                     — Structural themes biasing ticker selection (AI power demand, BNR rates, …)
 journal/trades.jsonl          — Append-only record of every trade (thesis + outcome)
 portfolio/                    — Simulated portfolio state (state.json, orders.jsonl, fills.jsonl)
 │
