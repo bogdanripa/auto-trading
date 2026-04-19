@@ -3,11 +3,23 @@ FROM eclipse-temurin:17-jre-jammy
 # Install Python 3.11, supervisord, IBC dependencies.
 # x11-utils provides xdpyinfo, which start-ibgateway.sh uses to poll
 # whether Xvfb is ready before launching the IB Gateway JVM.
+# Swing/AWT + IB Gateway UI dependencies. eclipse-temurin:17-jre-jammy is
+# Ubuntu 22.04, which ships a much thinner X11 baseline than 24.04 — so we
+# need to install the libs IB Gateway's Swing UI and jxbrowser component
+# expect, plus fonts for text rendering. Without these, `ibgateway` starts
+# but silently fails to render the login dialog; IBC times out after
+# LoginDialogDisplayTimeout seconds with exit code 1112.
 RUN apt-get update && apt-get install -y \
     python3 python3-pip python3-venv \
     supervisor \
     wget unzip curl \
-    xvfb x11-utils libxtst6 libxrender1 libxi6 \
+    xvfb x11-utils \
+    libxtst6 libxrender1 libxi6 libxext6 \
+    libxrandr2 libxcomposite1 libxdamage1 libxfixes3 libxcursor1 \
+    libnss3 libasound2 libgbm1 libxkbcommon0 libxshmfence1 \
+    libgtk-3-0 libpango-1.0-0 libcairo2 \
+    libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 \
+    fonts-dejavu-core fonts-liberation \
     socat \
     && rm -rf /var/lib/apt/lists/*
 
