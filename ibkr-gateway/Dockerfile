@@ -18,19 +18,26 @@ WORKDIR /home/trader
 # Install IB Gateway — MUST be the OFFLINE/STANDALONE build (pinned version).
 # IBC refuses to run against the auto-updating "stable" build; it logs:
 #   "Offline TWS/Gateway version <X> is not installed: can't find jars folder"
-# and exits 4. The pinned URL below produces that offline build.
+# and exits 4.
+#
+# IBKR currently only hosts the auto-updating installer on their own CDN
+# (the path /installers/ibgateway/*-standalone/ibgateway-<version>-*.sh
+# returns 404 for every pinned version). The community-maintained mirror
+# at github.com/gnzsnz/ib-gateway-docker releases offline-build tarballs as
+# GitHub release assets — that's what we pull from.
 #
 # IBC looks for the jars at `${tws-path}/${version}/jars/`, so we install
 # into /opt/ibgateway/${IB_GATEWAY_VERSION} (versioned subdir) and let the
 # runtime supervisord pass IB_GATEWAY_VERSION through to ibcstart.sh.
 #
-# To bump versions: update IB_GATEWAY_VERSION below. Use a value IBKR still
-# keeps on their CDN — check https://www.interactivebrokers.com/en/trading/ibgateway-stable.php
-# before changing.
+# To bump versions: check https://github.com/gnzsnz/ib-gateway-docker/releases
+# for the latest `ibgateway-stable@<ver>` tag, then update the env var +
+# the URL (note the literal '@' must be URL-encoded as %40).
 ENV IB_GATEWAY_VERSION=10.37.1q
+ENV IB_GATEWAY_RELEASE_CHANNEL=stable
 RUN set -eux \
     && wget --progress=dot:giga \
-       "https://download2.interactivebrokers.com/installers/ibgateway/stable-standalone/ibgateway-${IB_GATEWAY_VERSION}-standalone-linux-x64.sh" \
+       "https://github.com/gnzsnz/ib-gateway-docker/releases/download/ibgateway-${IB_GATEWAY_RELEASE_CHANNEL}%40${IB_GATEWAY_VERSION}/ibgateway-${IB_GATEWAY_VERSION}-standalone-linux-x64.sh" \
        -O /tmp/ibgateway-installer.sh \
     && chmod +x /tmp/ibgateway-installer.sh \
     && mkdir -p /opt/ibgateway \
