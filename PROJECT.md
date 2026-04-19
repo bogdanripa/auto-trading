@@ -55,23 +55,40 @@ When multiple setups compete for limited capital:
 
 ### Morning Run (7:30 AM EET)
 Execute skills in this order:
-1. `macro-analyst` — Global overnight context
-2. `bvb-news` — BVB announcements, Romanian news
-3. `market-scanner` — Technical scan of BET-Plus universe
-4. `company-analyst` — Deep dive on any flagged stocks
-5. `portfolio-manager` — Current state, cash available, position review
-6. `risk-monitor` — Check stops, exposure, override conditions
-7. **Synthesis** — Weigh all inputs, decide today's actions
-8. `trade-executor` — Place orders via IBKR
-9. `telegram-reporter` — Send morning briefing
+1. Read `LESSONS.md` — load active lessons into working context before analysis
+2. `macro-analyst` — Global overnight context
+3. `bvb-news` — BVB announcements, Romanian news
+4. `market-scanner` — Technical scan of BET-Plus universe
+5. `company-analyst` — Deep dive on any flagged stocks
+6. `portfolio-manager` — Current state, cash available, position review
+7. `risk-monitor` — Check stops, exposure, override conditions
+8. **Synthesis** — Weigh all inputs against active lessons, decide today's actions
+9. `trade-executor` — Place orders via IBKR
+10. `trade-journal` — Append entry record for every new fill (thesis + context)
+11. `telegram-reporter` — Send morning briefing
 
 ### Evening Run (5:30 PM EET)
 Execute skills in this order:
-1. `portfolio-manager` — What filled, P&L update
+1. `portfolio-manager` — What filled, P&L update, detect closed positions
 2. `bvb-news` — Late-breaking news
 3. `risk-monitor` — End-of-day risk check
-4. `tax-tracker` — Log any completed trades
-5. `telegram-reporter` — Send evening briefing
+4. `trade-journal` — Append exit record for every closed position (outcome + verdict + lessons)
+5. `tax-tracker` — Log any completed trades
+6. `retrospective` — On Fridays only: mine the journal, update `LESSONS.md`
+7. `telegram-reporter` — Send evening briefing (include retrospective summary on Fridays)
+
+## Learning Loop
+
+The engine learns from its own history through three pieces:
+
+1. **`journal/trades.jsonl`** — every trade is recorded at entry (thesis, context, exit plan) and at exit (outcome, verdict, lessons). Append-only, committed to git. Written by the `trade-journal` skill.
+
+2. **`LESSONS.md`** — distilled patterns from the journal, grouped as `[active]` (drives daily decisions), `[candidate]` (observed but not yet conclusive), and `[retired]` (contradicted by later data). Updated weekly by the `retrospective` skill.
+
+3. **Morning synthesis** — the first step of every morning run is to read `LESSONS.md` and carry active lessons into the analysis. A lesson like "widen stop for financials swing trades to 12%" overrides the default rule in this document *for that specific case*.
+
+### Rule changes to PROJECT.md
+`PROJECT.md` is the stable strategy foundation. The engine never edits it autonomously. When a lesson becomes `[active]` and conflicts with a rule here, the `retrospective` skill appends a proposed edit to the bottom of `LESSONS.md` and flags it in the weekly Telegram briefing. The user reviews and applies changes manually.
 
 ## Telegram Briefing Format
 

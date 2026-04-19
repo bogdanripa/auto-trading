@@ -14,6 +14,8 @@ It trades BET-Plus stocks through Interactive Brokers (IBKR), manages risk withi
 
 ```
 PROJECT.md                    — Strategy brain (risk rules, workflow, override logic)
+LESSONS.md                    — Living memory; distilled patterns from past trades
+journal/trades.jsonl          — Append-only record of every trade (thesis + outcome)
 │
 ├── macro-analyst/            — Global markets, FX, commodities, central banks
 ├── bvb-news/                 — BVB announcements, company news, regulatory
@@ -22,6 +24,8 @@ PROJECT.md                    — Strategy brain (risk rules, workflow, override
 ├── portfolio-manager/        — Position tracking, allocation, P&L
 ├── trade-executor/           — IBKR API interface for order execution
 ├── risk-monitor/             — Stop-losses, exposure limits, overrides
+├── trade-journal/            — Thesis + outcome log for every trade
+├── retrospective/            — Weekly pattern-mining over the journal → LESSONS.md
 ├── tax-tracker/              — Trade logging for Declarația Unică
 └── telegram-reporter/        — Formatted briefings and alerts
 ```

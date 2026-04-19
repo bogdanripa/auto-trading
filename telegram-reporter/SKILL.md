@@ -9,7 +9,44 @@ Compile analysis from all skills and deliver formatted briefings via Telegram.
 
 ## Telegram Integration
 
-Use the project's telegram skill to send messages. The bot should be configured with the user's chat ID and bot token.
+Send messages via a direct HTTP call to the Telegram Bot API. No plugin dependency — this works identically in local Claude Code sessions and in Anthropic scheduled routines.
+
+### Required environment variables
+- `TELEGRAM_BOT_TOKEN` — BotFather token for the bot
+- `TELEGRAM_CHAT_ID` — numeric chat ID of the recipient
+
+Both are configured in the scheduled routine's environment (https://claude.ai/code/routines → routine → Environment). Never commit either to this repo.
+
+### Sending a message
+
+```
+POST https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/sendMessage
+Content-Type: application/json
+
+{
+  "chat_id": "<TELEGRAM_CHAT_ID>",
+  "text": "<message body>",
+  "parse_mode": "Markdown",
+  "disable_web_page_preview": true
+}
+```
+
+Curl equivalent for quick tests:
+```
+curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+  -H "Content-Type: application/json" \
+  -d "{\"chat_id\":\"${TELEGRAM_CHAT_ID}\",\"text\":\"...\",\"parse_mode\":\"Markdown\"}"
+```
+
+### Handling long messages
+Telegram caps messages at 4096 characters. If the briefing exceeds that, split at paragraph boundaries and send sequentially. Prefix the second+ messages with `(2/N)`, `(3/N)` etc.
+
+### Failure handling
+- Log the full API response on any non-200
+- If the response body contains `"chat not found"` — the chat ID is wrong or the user hasn't messaged the bot yet
+- If `"Unauthorized"` — the token is wrong or revoked
+- On transient failures (network, 5xx), retry once after 5 seconds. Then give up — don't block the trading pipeline on Telegram delivery
+- If delivery fails, the run still succeeds; log the error for the next run's morning briefing to surface
 
 ## Message Types
 

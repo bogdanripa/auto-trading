@@ -113,9 +113,18 @@ PERFORMANCE:
 - Win rate: [X]% ([N] trades)
 ```
 
+## Closed Position Detection
+
+At the start of each evening run, diff today's IBKR holdings against yesterday's snapshot. Any symbol that was held yesterday and is not held (or is held with a smaller quantity) today is a closed (or partially closed) position. For each one, hand off to:
+- `trade-journal` — append an exit record with outcome narrative and thesis verdict
+- `tax-tracker` — log the numeric record for Declarația Unică
+
+These two are complementary, not redundant: tax-tracker captures the legal/numerical record, trade-journal captures the *why* and *what we learned*.
+
 ## Rules This Skill Enforces
 - Never approve a trade that breaks allocation limits without explicit override
 - Always report accurate P&L — no rounding or hiding losses
 - Track every trade for tax purposes (feed to tax-tracker)
+- Track every trade's narrative (feed to trade-journal on entry and on exit)
 - Flag any position that has been held longer than its intended timeframe
 - Flag any position approaching its stop-loss level
