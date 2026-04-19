@@ -27,7 +27,7 @@ WORKDIR /home/trader
 # To bump versions: update IB_GATEWAY_VERSION below. Use a value IBKR still
 # keeps on their CDN — check https://www.interactivebrokers.com/en/trading/ibgateway-stable.php
 # before changing.
-ENV IB_GATEWAY_VERSION=10.19.2g
+ENV IB_GATEWAY_VERSION=10.37.1q
 RUN set -eux \
     && wget --progress=dot:giga \
        "https://download2.interactivebrokers.com/installers/ibgateway/stable-standalone/ibgateway-${IB_GATEWAY_VERSION}-standalone-linux-x64.sh" \
@@ -46,7 +46,7 @@ RUN set -eux \
 # helpers. Recursive chmod so `ibcstart.sh` (under scripts/) is executable;
 # otherwise start-ibgateway.sh exits 126 on the first exec and supervisord
 # burns through its restart budget in seconds.
-ENV IBC_VERSION=3.20.0
+ENV IBC_VERSION=3.23.0
 RUN set -eux \
     && wget -q "https://github.com/IbcAlpha/IBC/releases/download/${IBC_VERSION}/IBCLinux-${IBC_VERSION}.zip" \
        -O /tmp/ibc.zip \
