@@ -148,6 +148,30 @@ Positions: [list with current P&L %]
 [Stocks/events to monitor]
 ```
 
+## Human-in-the-Loop Reconciliation (live mode only)
+
+The user may place manual trades via IBKR at any point. The engine must tolerate this without conflict.
+
+### On every live run, reconcile with IBKR first
+Before any analysis or ordering, fetch IBKR account state (cash, positions, open orders, today's fills) and diff against `portfolio/state.json`:
+- **Unknown position on IBKR** → user bought manually. Import into state.json with `engine_managed: false`. Write a `backfilled` entry to `journal/trades.jsonl` with minimal metadata so the position is not invisible to analytics.
+- **Position missing from IBKR** → user sold manually. Close in state.json. Write an exit record with `exit_reason: manual` and `thesis_verdict: inconclusive`.
+- **Quantity delta on an existing position** → partial manual trade. Adjust and log the delta. Do not change user-editable fields (`theme_tag`, `stop_loss`, `catalyst`).
+- **Cash delta only** → deposit or withdrawal. Update cash. No journal entry.
+
+### Hard rule: the engine never touches what you placed
+The engine **never** cancels, modifies, or resizes an order the user placed manually. It **never** overrides a position the user opened manually.
+
+Every order the engine places is tagged `engine_managed: true`. The engine may only close/cancel orders carrying that tag. If an IBKR order has no tag (or a tag it doesn't recognize), it treats it as manual — read-only.
+
+If the engine would like to act on a manually-opened position (e.g. apply its stop-loss logic), that is opt-in per position via `engine_managed: true`, set by the user manually in `state.json`.
+
+### Surface all reconciliation findings in the morning briefing
+Every manual-activity detection goes into the Telegram briefing under a "RECONCILED" section: what was imported, what was closed, what the P&L was. This gives the user a chance to retroactively tag a thesis / theme if useful.
+
+### Simulation mode
+Does not reconcile anything. Simulation state is the only source of truth. This section activates only when `EXECUTION_MODE=ibkr`.
+
 ## Execution Mode
 
 Controlled by the `EXECUTION_MODE` env var on the routine.
