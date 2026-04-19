@@ -16,13 +16,14 @@ It trades BET-Plus stocks through Interactive Brokers (IBKR), manages risk withi
 PROJECT.md                    — Strategy brain (risk rules, workflow, override logic)
 LESSONS.md                    — Living memory; distilled patterns from past trades
 journal/trades.jsonl          — Append-only record of every trade (thesis + outcome)
+portfolio/                    — Simulated portfolio state (state.json, orders.jsonl, fills.jsonl)
 │
 ├── macro-analyst/            — Global markets, FX, commodities, central banks
 ├── bvb-news/                 — BVB announcements, company news, regulatory
 ├── market-scanner/           — Technical scan of BET-Plus for setups
 ├── company-analyst/          — Deep fundamental dive on specific stocks
 ├── portfolio-manager/        — Position tracking, allocation, P&L
-├── trade-executor/           — IBKR API interface for order execution
+├── trade-executor/           — Simulation executor now, IBKR wrapper later
 ├── risk-monitor/             — Stop-losses, exposure limits, overrides
 ├── trade-journal/            — Thesis + outcome log for every trade
 ├── retrospective/            — Weekly pattern-mining over the journal → LESSONS.md
@@ -40,15 +41,23 @@ journal/trades.jsonl          — Append-only record of every trade (thesis + ou
 
 ## Setup
 
-1. Create a Claude Project and upload these skills
-2. Configure Telegram bot credentials
-3. Open an IBKR account (start with paper trading)
-4. Set up VPS running IBKR gateway (required for live trading)
-5. Configure scheduled tasks for morning/evening runs
+**Phase 1 — Simulation (current):**
+1. Create a Claude Code routine at https://claude.ai/code/routines
+2. Set env vars: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `EXECUTION_MODE=simulation`
+3. Adjust `portfolio/state.json` starting `cash_ron` to your intended simulation deposit
+4. Schedule the routine for morning (07:30 EET) and evening (17:30 EET) runs
+
+No IBKR account or gateway needed for phase 1. Prices come from Yahoo Finance.
+
+**Phase 2 — Live trading (later):**
+1. Open an IBKR account with paper + live profiles
+2. Run IB Gateway / Client Portal Gateway on an always-on machine
+3. Switch `EXECUTION_MODE=ibkr` and configure gateway endpoint
+4. Keep all other skills unchanged — the state files have the same shape
 
 ## Status
 
-🟡 **In development** — Paper trading phase
+🟡 **Phase 1 — Simulation**
 
 ## License
 

@@ -1,114 +1,166 @@
 ---
 name: trade-executor
-description: Interface with the IBKR API to execute trading orders on BVB. Use this skill when the synthesis step has decided to place, modify, or cancel orders. It handles order construction, submission, status checking, and fill confirmation. Also use to query account data (positions, cash, open orders) from IBKR. This skill manages the technical connection to IBKR — all other skills work with portfolio data through this interface. Trigger whenever orders need to be placed or IBKR account data is needed.
+description: Execute trades. While the engine is in simulation mode, this skill places orders against a local simulated portfolio using real BVB market prices — no IBKR connection required. When we eventually cut over to live trading, the same skill will wrap the IBKR gateway behind the same interface. Trigger whenever the synthesis step decides to place, modify, or cancel an order, or when current positions and fills need to be reconciled with market reality.
 ---
 
 # Trade Executor
 
-Execute trades on BVB through the Interactive Brokers API.
+Two execution backends sharing one interface: **simulation** (default, no external account) and **ibkr-live** (future). The skill's contract is identical either way — orders in, fills out, state in `portfolio/state.json`.
 
-## IBKR Connection
+Current mode: **simulation**. Switch by setting `EXECUTION_MODE=ibkr` in the routine environment (not wired yet).
 
-### Architecture
-The IBKR API requires an authenticated gateway session. The connection is maintained by a lightweight service running on a VPS that exposes endpoints for the Claude scheduled task to call.
+## Simulation Backend
 
-### Gateway Service Endpoints
-The VPS runs an IBKR gateway wrapper that exposes these REST endpoints:
-
+### State files (all committed to git)
 ```
-Base URL: https://[VPS_HOST]:[PORT]/api/v1
-
-Authentication: Bearer token in header
-
-GET  /account          — Account summary (cash, portfolio value)
-GET  /positions        — Current positions
-GET  /orders           — Open orders
-POST /orders           — Place new order
-PUT  /orders/{id}      — Modify order
-DELETE /orders/{id}    — Cancel order
-GET  /orders/{id}      — Order status
-GET  /executions       — Today's fills
-GET  /market-data/{symbol} — Current quote for a symbol
+portfolio/
+├── state.json        — current cash, positions, last-updated timestamp
+├── orders.jsonl      — open orders awaiting fill
+└── fills.jsonl       — historical fills (append-only, mirrors real exchange fills)
 ```
 
-### Order Construction
+### Simulation rules
+- **Price source:** Yahoo Finance OHLCV, `https://query1.finance.yahoo.com/v8/finance/chart/<SYMBOL>.RO?interval=1d`. See "BVB Symbol Mapping" below.
+- **Fill model:** At each run, for every open order in `orders.jsonl`, check the day's OHLC.
+  - BUY limit at `P`: fills if `daily_low ≤ P`. Fill price = `min(P, daily_open)` — conservative; assumes you got no better than the open if it gapped through your limit.
+  - SELL limit at `P`: fills if `daily_high ≥ P`. Fill price = `max(P, daily_open)`.
+  - Orders that don't fill: stay open if `tif=GTC`, cancelled if `tif=DAY` and the day has closed.
+- **Commission:** 0.1% of trade value, min 1 RON. This approximates IBKR's BVB commission tier.
+- **Slippage:** baked into the open-price rule above. No additional slippage.
+- **Partial fills:** not simulated. Orders either fully fill or stay open.
+- **No shorting:** SELL orders require an existing long position of ≥ quantity.
+- **Cash reservations:** BUY orders reserve cash at submission. Cancelled/expired orders release it.
 
-All BVB orders must use these parameters:
+### Simulation workflow on every run
 
+1. **Mark to market** — fetch latest close for every symbol in `state.json.positions`; update `state.json.positions[*].last_price` and `last_updated`.
+2. **Settle open orders** — for each order in `orders.jsonl` created before today, check today's OHLC. Apply fills per the rules above. Write fill records to `fills.jsonl`, update `state.json`, remove filled/expired orders from `orders.jsonl`.
+3. **Report closed positions** — any symbol whose quantity dropped to 0 this run is a closed trade. Surface these to `portfolio-manager` so it triggers `trade-journal` exit records.
+4. **Place new orders** — for each order the synthesis step decided on, validate (cash available, within allocation limits), write to `orders.jsonl`, reserve cash.
+
+### Order record schema (in orders.jsonl)
 ```json
 {
+  "order_id": "2026-04-19-SNG-buy-01",
+  "placed_at": "2026-04-19T07:45:00+03:00",
   "symbol": "SNG",
-  "exchange": "BVB",
-  "currency": "RON",
-  "action": "BUY" | "SELL",
+  "action": "BUY",
   "quantity": 10,
   "order_type": "LMT",
   "limit_price": 48.50,
   "tif": "DAY",
-  "outside_rth": false
+  "trade_type": "swing",
+  "trade_id": "2026-04-19-SNG-01",
+  "cash_reserved_ron": 485.49
 }
 ```
 
-Rules:
-- ALWAYS use limit orders on BVB. Market orders get terrible fills due to wide spreads.
-- Set limit price at or slightly above ask (for buys) or at or slightly below bid (for sells)
-- For urgent exits, set limit price 1-2% beyond current price to ensure fill
-- Time-in-force: DAY for swing trades, GTC for trend ride entries at support levels
-- Minimum order value on IBKR: check current minimums, usually ~€/$10 equivalent
-
-### BVB-Specific Symbol Mapping
-IBKR uses specific contract IDs for BVB stocks. The symbol mapping:
-- Exchange: `BVB` 
-- Currency: `RON`
-- Security type: `STK`
-- Some stocks may need the full ISIN or contract ID — verify on first use
-
-### Order Workflow
-
-1. **Pre-check**: Verify with portfolio-manager that the trade fits within limits
-2. **Construct**: Build the order with proper parameters
-3. **Submit**: POST to gateway
-4. **Confirm**: Log the order ID and expected fill
-5. **Monitor**: Check order status — filled, partial, open, cancelled
-6. **Report**: Feed fill data to portfolio-manager and tax-tracker
-
-### Error Handling
-- If order is rejected: Log reason, notify via Telegram, do not retry automatically
-- If gateway is unreachable: Log error, send Telegram alert, skip trading for this run
-- If partial fill: Log partial, keep remaining order active unless strategy says cancel
-- If price moved significantly since signal: Cancel and re-evaluate (>3% from intended entry)
-
-## Paper Trading Mode
-
-Before IBKR is live, simulate execution:
-- Use actual BVB prices from web search
-- Assume fills at limit price if the price touched the limit during the session
-- Apply realistic commission: 0.1% of trade value (IBKR's approximate BVB commission)
-- Track as if real — same logging, same portfolio updates
-
-## VPS Setup Requirements
-
-When setting up the VPS gateway service, it needs:
-1. IBKR TWS or IB Gateway installed
-2. Python wrapper (ib_insync library recommended)
-3. Flask/FastAPI REST server exposing the endpoints above
-4. SSL certificate for HTTPS
-5. Authentication token for Claude to use
-6. Auto-restart on failure (systemd service)
-7. Logging of all API calls and responses
-
-## Output Format
-
-After each execution attempt:
+### Fill record schema (in fills.jsonl)
+```json
+{
+  "fill_id": "2026-04-19-SNG-buy-01-fill",
+  "order_id": "2026-04-19-SNG-buy-01",
+  "filled_at": "2026-04-19T09:15:00+03:00",
+  "symbol": "SNG",
+  "action": "BUY",
+  "quantity": 10,
+  "fill_price": 48.45,
+  "commission_ron": 0.48,
+  "total_ron": 484.98
+}
 ```
-ORDER RESULT:
-  Action: BUY/SELL
-  Symbol: [SYMBOL]
-  Quantity: [N]
-  Limit Price: [X] RON
-  Status: FILLED / PARTIAL / OPEN / REJECTED / CANCELLED
-  Fill Price: [X] RON (if filled)
-  Commission: [X] RON
-  Order ID: [IBKR order ID]
-  Timestamp: [datetime]
+
+### state.json schema
+```json
+{
+  "mode": "simulation",
+  "as_of": "2026-04-19T17:30:00+03:00",
+  "cash_ron": 515.02,
+  "positions": [
+    {
+      "symbol": "SNG",
+      "quantity": 10,
+      "avg_cost": 48.45,
+      "last_price": 49.20,
+      "last_updated": "2026-04-19T17:30:00+03:00",
+      "trade_type": "swing",
+      "trade_id": "2026-04-19-SNG-01",
+      "opened_at": "2026-04-19T09:15:00+03:00"
+    }
+  ],
+  "totals": {
+    "position_value_ron": 492.00,
+    "total_value_ron": 1007.02,
+    "unrealized_pnl_ron": 7.50,
+    "unrealized_pnl_pct": 0.75
+  }
+}
 ```
+
+## BVB Symbol Mapping
+
+Yahoo Finance uses the BVB ticker + `.RO` suffix. A working subset of BET-Plus names:
+
+| BVB symbol | Yahoo symbol | Company |
+|------------|--------------|---------|
+| SNG | SNG.RO | Romgaz |
+| TLV | TLV.RO | Banca Transilvania |
+| BRD | BRD.RO | BRD-GSG |
+| FP  | FP.RO  | Fondul Proprietatea |
+| H2O | H2O.RO | Aquila Part Prod Com |
+| EL  | EL.RO  | Electrica |
+| SNP | SNP.RO | OMV Petrom |
+| TGN | TGN.RO | Transgaz |
+| TEL | TEL.RO | Transelectrica |
+| M   | M.RO   | MedLife |
+
+If a symbol fails on Yahoo: fallback to `https://stooq.com/q/d/l/?s=<symbol>.ro&i=d` (CSV). If both fail: log the symbol, skip it for this run, and alert via Telegram — don't silently drop.
+
+## Fetching prices (pseudo-curl)
+
+```bash
+# Latest daily OHLC for SNG
+curl -s 'https://query1.finance.yahoo.com/v8/finance/chart/SNG.RO?interval=1d&range=5d' \
+  -H 'User-Agent: Mozilla/5.0'
+```
+
+Yahoo rate limits are generous but not infinite. Batch by fetching one symbol at a time with small delays, or use `?symbols=SNG.RO,TLV.RO,BRD.RO` on the quote endpoint for multi-symbol snapshots.
+
+## Pre-trade checks (enforced by this skill before writing an order)
+
+1. Cash available ≥ order value + commission + 10% cash reserve minimum
+2. Quantity > 0
+3. Limit price within ±10% of current market (guards against fat-finger)
+4. Symbol resolves on the price feed
+5. Allocation limits from `portfolio-manager` not breached
+
+If any check fails, reject the order, log the reason, do not write to `orders.jsonl`.
+
+## Output format
+
+After each batch of order actions:
+
+```
+EXECUTION REPORT [DATETIME]
+
+Orders placed:
+  BUY  10 SNG @ 48.50 LMT DAY  → order_id 2026-04-19-SNG-buy-01
+
+Fills settled (from previous run):
+  BUY  10 TLV @ 23.80 filled @ 23.75  commission 0.24 RON
+
+Orders expired/cancelled:
+  BUY  20 H2O @ 12.00 — no fill, DAY expired
+
+Portfolio after this run:
+  Cash: 515.02 RON | Positions: 1 (SNG) | Total: 1007.02 RON
+```
+
+## IBKR Live Backend (not active)
+
+When we cut over, the live backend will:
+1. Connect to an IB Gateway (Client Portal or TWS) — separate setup
+2. Translate the same order schema into IBKR API calls
+3. Write the same `fills.jsonl` and update the same `state.json`
+
+Everything else — journal, retrospective, portfolio rules — stays identical. That's the point of keeping the interface stable now.

@@ -1,0 +1,13 @@
+{
+  "mode": "simulation",
+  "as_of": "2026-04-19T00:00:00+03:00",
+  "cash_ron": 500.00,
+  "positions": [],
+  "totals": {
+    "position_value_ron": 0.00,
+    "total_value_ron": 500.00,
+    "unrealized_pnl_ron": 0.00,
+    "unrealized_pnl_pct": 0.00
+  },
+  "notes": "Starting balance for paper trading. Adjust cash_ron to match your intended simulation deposit."
+}

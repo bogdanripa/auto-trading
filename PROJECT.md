@@ -133,9 +133,16 @@ Positions: [list with current P&L %]
 [Stocks/events to monitor]
 ```
 
-## IBKR Configuration
-- Account type: Paper trading (switch to live when strategy proves itself)
-- Market: BVB (Budapest gateway for CEE stocks)
+## Execution Mode
+
+Controlled by the `EXECUTION_MODE` env var on the routine.
+
+**`simulation` (current):** `trade-executor` maintains a simulated portfolio in `portfolio/state.json`, using real BVB prices from Yahoo Finance. No broker account required. Fills are computed against the day's OHLC range. Commission modeled at 0.1% (min 1 RON) to match IBKR's BVB tier.
+
+**`ibkr` (future):** `trade-executor` wraps a real IBKR gateway. Same state files, same order schema, same rules. Requires an always-on gateway process and a paper or live IBKR account.
+
+### Order rules (both modes)
+- Market: BVB
 - Order types: Limit orders only (no market orders on BVB — spreads too wide)
 - Currency: RON
 

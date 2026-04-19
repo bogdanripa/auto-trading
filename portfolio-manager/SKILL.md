@@ -9,18 +9,16 @@ Track portfolio state, enforce allocation rules, and provide the decision-making
 
 ## Data Sources
 
-### Live/Paper Trading (IBKR)
-When IBKR is connected, read portfolio data via the trade-executor skill's API connection:
-- Current positions (symbol, quantity, average cost, current value)
-- Cash balance (RON)
-- Open orders
-- Today's fills
+Portfolio state lives in three git-tracked files, maintained by `trade-executor`:
+- `portfolio/state.json` — current cash, positions, totals
+- `portfolio/orders.jsonl` — open orders awaiting fill
+- `portfolio/fills.jsonl` — historical fills (append-only)
 
-### Paper Trading Simulation (Pre-IBKR)
-Before IBKR is live, maintain a simulated portfolio using persistent storage. Track:
-- Virtual cash balance
-- Virtual positions with entry prices and dates
-- Simulated fills based on actual BVB prices
+**Simulation mode (current):** state.json is the source of truth. `trade-executor` fetches real BVB prices each run and updates positions.
+
+**IBKR live mode (future):** same files, but `trade-executor` reconciles them against IBKR's actual account state at the start of each run before this skill reads them. From the perspective of this skill, nothing changes — read the same files.
+
+Read `state.json` at the start of every run. If `mode` does not match the routine's `EXECUTION_MODE` env var (or if the file is older than the last run), flag it and halt — don't trade on stale state.
 
 ## Portfolio State Calculation
 
