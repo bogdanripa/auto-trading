@@ -15,24 +15,31 @@ RUN apt-get update && apt-get install -y \
 RUN useradd -m -s /bin/bash trader
 WORKDIR /home/trader
 
-# Install IB Gateway (stable channel).
-# IMPORTANT: do NOT swallow failures here — if the installer doesn't produce
-# /opt/ibgateway, start.sh will blow up later with a confusing chown error.
+# Install IB Gateway — MUST be the OFFLINE/STANDALONE build (pinned version).
+# IBC refuses to run against the auto-updating "stable" build; it logs:
+#   "Offline TWS/Gateway version <X> is not installed: can't find jars folder"
+# and exits 4. The pinned URL below produces that offline build.
 #
-# The installer is an IzPack self-extracting shell script; `-q` runs it in
-# unattended mode, and piping `yes ''` answers every prompt with the default.
-# We don't mix in `-c` (console mode) — combined with `-q` it becomes
-# interactive in unpredictable ways on some installer builds.
+# IBC looks for the jars at `${tws-path}/${version}/jars/`, so we install
+# into /opt/ibgateway/${IB_GATEWAY_VERSION} (versioned subdir) and let the
+# runtime supervisord pass IB_GATEWAY_VERSION through to ibcstart.sh.
+#
+# To bump versions: update IB_GATEWAY_VERSION below. Use a value IBKR still
+# keeps on their CDN — check https://www.interactivebrokers.com/en/trading/ibgateway-stable.php
+# before changing.
+ENV IB_GATEWAY_VERSION=10.19.2g
 RUN set -eux \
     && wget --progress=dot:giga \
-       "https://download2.interactivebrokers.com/installers/ibgateway/stable-standalone/ibgateway-stable-standalone-linux-x64.sh" \
+       "https://download2.interactivebrokers.com/installers/ibgateway/stable-standalone/ibgateway-${IB_GATEWAY_VERSION}-standalone-linux-x64.sh" \
        -O /tmp/ibgateway-installer.sh \
     && chmod +x /tmp/ibgateway-installer.sh \
-    && yes '' | /tmp/ibgateway-installer.sh -q -dir /opt/ibgateway \
+    && mkdir -p /opt/ibgateway \
+    && yes '' | /tmp/ibgateway-installer.sh -q -dir "/opt/ibgateway/${IB_GATEWAY_VERSION}" \
     && rm /tmp/ibgateway-installer.sh \
-    && test -d /opt/ibgateway \
-    && test -f /opt/ibgateway/ibgateway \
-    && ls -la /opt/ibgateway | head -20
+    && test -d "/opt/ibgateway/${IB_GATEWAY_VERSION}/jars" \
+    && echo "IB Gateway ${IB_GATEWAY_VERSION} installed:" \
+    && ls -la "/opt/ibgateway/${IB_GATEWAY_VERSION}" \
+    && ls "/opt/ibgateway/${IB_GATEWAY_VERSION}/jars" | head -5
 
 # Install IBC (IB Controller) for automated login.
 # IBC's zip layout is `scripts/*.sh` (Gateway/TWS wrappers) plus some top-level
