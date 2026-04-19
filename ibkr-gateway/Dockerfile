@@ -34,12 +34,19 @@ RUN set -eux \
     && test -f /opt/ibgateway/ibgateway \
     && ls -la /opt/ibgateway | head -20
 
-# Install IBC (IB Controller) for automated login
+# Install IBC (IB Controller) for automated login.
+# IBC's zip layout is `scripts/*.sh` (Gateway/TWS wrappers) plus some top-level
+# helpers. Recursive chmod so `ibcstart.sh` (under scripts/) is executable;
+# otherwise start-ibgateway.sh exits 126 on the first exec and supervisord
+# burns through its restart budget in seconds.
 ENV IBC_VERSION=3.20.0
-RUN wget -q https://github.com/IbcAlpha/IBC/releases/download/${IBC_VERSION}/IBCLinux-${IBC_VERSION}.zip \
-    -O /tmp/ibc.zip \
+RUN set -eux \
+    && wget -q "https://github.com/IbcAlpha/IBC/releases/download/${IBC_VERSION}/IBCLinux-${IBC_VERSION}.zip" \
+       -O /tmp/ibc.zip \
     && unzip -q /tmp/ibc.zip -d /opt/ibc \
-    && chmod +x /opt/ibc/*.sh
+    && find /opt/ibc -type f -name '*.sh' -exec chmod +x {} + \
+    && test -x /opt/ibc/scripts/ibcstart.sh \
+    && rm /tmp/ibc.zip
 
 # Copy Python application
 COPY app/ /app/
