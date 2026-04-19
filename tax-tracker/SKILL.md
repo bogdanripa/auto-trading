@@ -44,10 +44,22 @@ For BVB stocks traded in RON, exchange rate is 1.0. If any trades are in other c
 
 ## Gain/Loss Calculation
 
-Use FIFO (First In, First Out) method:
-- When selling, match against the earliest purchase of the same stock
-- Calculate gain/loss: (sell price - buy price) × quantity - commissions
-- Track partial lots: if you bought 20, sold 10, 10 remain at original cost basis
+Use the committed script — it reads `portfolio/fills.jsonl` (the authoritative trade record) and produces the FIFO-matched realized gain/loss:
+
+```
+python3 scripts/tax_fifo.py --year 2026             # summary
+python3 scripts/tax_fifo.py --year 2026 --detail    # per-match detail
+python3 scripts/tax_fifo.py --format=json           # machine-readable
+```
+
+**What the script does:**
+- FIFO-matches every SELL to the earliest open BUY lot(s) of the same symbol
+- Distributes commission per share on both sides (buy commission → cost basis; sell commission → reduces proceeds)
+- Groups results by year × symbol; reports gains, losses, net, and estimated 10% tax
+- Tracks partial lots (buy 20, sell 10 → 10 shares remain at original unit cost)
+- Warns on short-sales or reconciliation gaps (sells exceeding open lots)
+
+`fills.jsonl` is the single source of truth for the script. Never hand-edit it; `trade-executor` is the only writer. If the script reports a reconciliation gap, investigate the fills — don't "fix" by editing the file.
 
 ## Annual Summary Generation
 

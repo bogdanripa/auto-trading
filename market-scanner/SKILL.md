@@ -17,37 +17,31 @@ Extended (BET-Plus, thinner liquidity — be cautious on sizing):
 
 Skip any symbol where 20-day average daily value traded (ADV) < 50,000 RON (PROJECT.md rule).
 
-## Price Data
+## Price Data & Indicators
 
-Yahoo Finance chart API:
+Call the committed script rather than regenerating the math:
+
 ```
-https://query1.finance.yahoo.com/v8/finance/chart/<SYMBOL>.RO?interval=1d&range=100d
-Header: User-Agent: Mozilla/5.0
+python3 scripts/indicators.py --format=json SNG TLV BRD SNP TGN H2O SNN FP DIGI ONE SFG TRP WINE AQ COTE TEL M EL BVB ROCE
 ```
 
-Returns JSON. Parse:
-- `meta.regularMarketPrice`, `meta.regularMarketVolume`, `meta.fiftyTwoWeekHigh`, `meta.fiftyTwoWeekLow`, `meta.chartPreviousClose`
-- `indicators.quote[0].open|high|low|close|volume` arrays (one per trading day)
-- `timestamp` array (Unix seconds, aligned with the quote arrays)
+Returns a JSON array, one object per symbol, with:
+- `price`, `daily_change_pct`
+- `rsi14`, `sma20`, `sma50`, `sma200`
+- `volume_today`, `volume_avg20`, `volume_ratio`
+- `high_20d`, `low_20d`, `high_52w`, `low_52w`
+- `atr14_pct`
+- `trend` — one of `up | down | range`
+- `n_bars` — how many daily bars were available
 
-100 trading days (~5 months) gives enough history for 200-day-less indicators, 50-day SMA, and recent support/resistance. If you need 200 SMA, use `range=1y`.
+The script fetches from Yahoo Finance (`query1.finance.yahoo.com/v8/finance/chart/<SYMBOL>.RO`) and computes all indicators in Python using the stdlib. Any per-symbol fetch failures are reported on stderr with `[warn]`; successful symbols still appear in the JSON. Exit code is 1 if any symbol was missing data, 0 if all succeeded.
 
-## Indicators (computed on daily closes)
-
-**RSI(14)** — classic Wilder. 14-period average of gains vs losses on closes.
-
-**SMA(n)** — simple moving average of closes, windows: 20, 50, 200.
-
-**Volume ratio** — `today_volume / avg(last_20_days_volume)`. Above 1.5x = elevated; above 3x = surge.
-
-**ATR(14)** — average true range, for stop placement. Use ATR% = ATR / close.
-
-**20-day high / low** — for breakout / breakdown detection.
-
-**Trend label** — derived:
-- `uptrend`: close > SMA50 > SMA200 (or SMA100 if 200 unavailable)
-- `downtrend`: close < SMA50 < SMA200
-- `range`: neither — use 20-day high/low instead
+**Indicator definitions (for reference / audit — the script is the source of truth):**
+- RSI(14) — Wilder's original (no smoothing)
+- SMA(n) — simple mean of last n closes
+- ATR(14)% — ATR / current close × 100
+- Volume ratio — today's volume / 20-day average
+- Trend: `up` if close > SMA50 and (SMA20 ≥ SMA50); `down` if close < SMA50; else `range`
 
 ## Setup Grading
 
