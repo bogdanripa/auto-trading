@@ -35,50 +35,60 @@ ib = IB()
 connection_state = {"connected": False, "last_connect": None, "last_error": None}
 
 
-async def connect_ib():
-    """Connect to IB Gateway, retrying on failure."""
-    max_retries = 5
-    retry_delay = 10
-    for attempt in range(max_retries):
-        try:
-            log.info("connecting_to_ib", host=IB_HOST, port=IB_PORT, attempt=attempt + 1)
-            await ib.connectAsync(IB_HOST, IB_PORT, clientId=IB_CLIENT_ID, timeout=30)
-            connection_state["connected"] = True
-            connection_state["last_connect"] = datetime.utcnow().isoformat()
-            connection_state["last_error"] = None
-            log.info("ib_connected", mode=ACCOUNT_MODE)
-            return
-        except Exception as e:
-            connection_state["connected"] = False
-            connection_state["last_error"] = str(e)
-            log.error("ib_connect_failed", error=str(e), attempt=attempt + 1)
-            if attempt < max_retries - 1:
-                await asyncio.sleep(retry_delay)
-    raise RuntimeError("Failed to connect to IB Gateway after multiple attempts")
+async def connect_ib_once():
+    """Single attempt to connect to IB Gateway. Records state, does not raise."""
+    try:
+        log.info("connecting_to_ib", host=IB_HOST, port=IB_PORT)
+        await ib.connectAsync(IB_HOST, IB_PORT, clientId=IB_CLIENT_ID, timeout=30)
+        connection_state["connected"] = True
+        connection_state["last_connect"] = datetime.utcnow().isoformat()
+        connection_state["last_error"] = None
+        log.info("ib_connected", mode=ACCOUNT_MODE)
+        return True
+    except Exception as e:
+        connection_state["connected"] = False
+        connection_state["last_error"] = str(e)
+        log.warning("ib_connect_failed", error=str(e))
+        return False
 
 
-async def reconnect_loop():
-    """Background task: monitor connection and reconnect if dropped."""
+async def connect_and_monitor_loop():
+    """
+    Long-running background task.
+    - Keeps trying to connect while IB Gateway boots (first-time cold start can take 2 min).
+    - Once connected, watches for drops and reconnects.
+    - Runs forever so /health always has a fresh view of IB state.
+    This must NOT block FastAPI startup — the uvicorn server needs to bind
+    port 8080 before Cloud Run's startup probe times out.
+    """
+    backoff_while_down = 15  # seconds between retries before we ever connect
+    heartbeat = 60           # seconds between checks once connected
     while True:
-        await asyncio.sleep(60)
         if not ib.isConnected():
-            log.warning("ib_disconnected_reconnecting")
-            try:
-                await connect_ib()
-            except Exception as e:
-                log.error("reconnect_failed", error=str(e))
+            ok = await connect_ib_once()
+            if not ok:
+                await asyncio.sleep(backoff_while_down)
+                continue
+        await asyncio.sleep(heartbeat)
+        if not ib.isConnected():
+            log.warning("ib_disconnected")
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
+    """
+    IMPORTANT: do NOT await IB connection here.
+    Cloud Run requires port 8080 to open within its startup-probe window
+    (~240s). IB Gateway + IBC auto-login routinely takes 60-120s on a cold
+    start, and credentialing issues can make it take forever. Kick the
+    connection off as a background task and let /health report the live state.
+    """
     log.info("starting_gateway_api", mode=ACCOUNT_MODE)
+    monitor = asyncio.create_task(connect_and_monitor_loop())
     try:
-        await connect_ib()
-        task = asyncio.create_task(reconnect_loop())
         yield
-        task.cancel()
     finally:
+        monitor.cancel()
         if ib.isConnected():
             ib.disconnect()
         log.info("gateway_api_stopped")

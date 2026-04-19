@@ -21,6 +21,16 @@ chmod 600 /home/trader/ibc.ini
 # Create log directory
 mkdir -p /var/log
 touch /var/log/xvfb.log /var/log/ibgateway.log /var/log/fastapi.log
+
+# Fail loudly if IB Gateway or IBC aren't where we expect them — otherwise
+# supervisord will happily keep restarting a process that can never succeed.
+for d in /opt/ibgateway /opt/ibc; do
+    if [ ! -d "$d" ]; then
+        echo "FATAL: $d is missing — the Docker build did not install it correctly." >&2
+        exit 1
+    fi
+done
+
 chown -R trader:trader /var/log /opt/ibgateway /opt/ibc
 
 # Start supervisord (manages Xvfb + IB Gateway + FastAPI)

@@ -13,15 +13,24 @@ RUN apt-get update && apt-get install -y \
 RUN useradd -m -s /bin/bash trader
 WORKDIR /home/trader
 
-# Install IB Gateway (stable version)
-# Note: IBKR requires downloading the installer. We use the "latest stable" URL.
-# For production, pin to a specific version.
-ENV IB_GATEWAY_VERSION=10.19.2g
-RUN wget -q https://download2.interactivebrokers.com/installers/ibgateway/stable-standalone/ibgateway-stable-standalone-linux-x64.sh \
-    -O /tmp/ibgateway-installer.sh \
+# Install IB Gateway (stable channel).
+# IMPORTANT: do NOT swallow failures here — if the installer doesn't produce
+# /opt/ibgateway, start.sh will blow up later with a confusing chown error.
+#
+# The installer is an IzPack self-extracting shell script; `-q` runs it in
+# unattended mode, and piping `yes ''` answers every prompt with the default.
+# We don't mix in `-c` (console mode) — combined with `-q` it becomes
+# interactive in unpredictable ways on some installer builds.
+RUN set -eux \
+    && wget --progress=dot:giga \
+       "https://download2.interactivebrokers.com/installers/ibgateway/stable-standalone/ibgateway-stable-standalone-linux-x64.sh" \
+       -O /tmp/ibgateway-installer.sh \
     && chmod +x /tmp/ibgateway-installer.sh \
-    && echo "n" | /tmp/ibgateway-installer.sh -c -q -dir /opt/ibgateway \
-    || true
+    && yes '' | /tmp/ibgateway-installer.sh -q -dir /opt/ibgateway \
+    && rm /tmp/ibgateway-installer.sh \
+    && test -d /opt/ibgateway \
+    && test -f /opt/ibgateway/ibgateway \
+    && ls -la /opt/ibgateway | head -20
 
 # Install IBC (IB Controller) for automated login
 ENV IBC_VERSION=3.20.0
