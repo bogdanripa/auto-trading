@@ -31,6 +31,8 @@ Parse `trades.jsonl`. Pair each entry with its exit (via `trade_id`). Drop pairs
 - **Exit reason** (take_profit, stop_loss, trailing_stop, time_stop, thesis_invalidated, override_exit, manual)
 - **Thesis verdict** (correct / partially_correct / wrong / inconclusive)
 - **Entry conviction bucket** (low 0-4, mid 5-7, high 8-10)
+- **Theme tag** (from entry record — lets us compute per-theme win rates)
+- **Failure-mode pair** `(catalyst_occurred, mechanism_worked)` — the diagnostic grid below
 
 ### 3. Compute the numbers
 For each cluster, compute:
@@ -47,6 +49,24 @@ Write down any cluster where:
 - Thesis verdict skews in one direction
 - The same exit reason appears 3+ times
 - Overrides changed the outcome (compare pnl with/without override)
+
+#### Failure-mode grid (from catalyst_occurred × mechanism_worked)
+Build a 4×4 matrix and surface the hot cells:
+
+|                          | mechanism: yes | mechanism: no | mechanism: reversed | mechanism: different_path |
+|--------------------------|----------------|---------------|---------------------|---------------------------|
+| **catalyst: yes**        | correct        | **diagnosis wrong** | **exit wrong** | lucky — don't generalize |
+| **catalyst: no**         | n/a            | thesis never tested | n/a                | n/a                       |
+| **catalyst: delayed**    | right-but-late | wrong horizon | complicated        | n/a                       |
+| **catalyst: partial**    | partial win    | soft wrong    | soft wrong         | n/a                       |
+
+Each cell produces a distinct correction:
+- **diagnosis wrong** (catalyst yes + mechanism no): update priors on how the catalyst drives price. Possibly the market no longer cares about this catalyst type, or we misread which lever moves.
+- **exit wrong** (catalyst yes + mechanism yes_but_price_reversed): book partial at the catalyst next time; don't hold through the reversal.
+- **thesis never tested** (catalyst no): investigate whether timing was wrong (catalyst delayed on our side) or the catalyst was never going to happen. If the latter repeats, tighten catalyst research.
+- **lucky** (via_different_path): flag as `inconclusive` in the lesson extraction; do NOT generalize this trade into a rule.
+
+Trigger a proposed lesson whenever a single cell has 3+ trades with consistent outcome. Surface the cell and sample trade_ids in the weekly Telegram briefing so the user can see the specific pattern.
 
 ### 5. Draft lessons
 Each candidate lesson must be:
