@@ -17,6 +17,16 @@ Send messages via a direct HTTP call to the Telegram Bot API. No plugin dependen
 
 Both are configured in the scheduled routine's environment (https://claude.ai/code/routines → routine → Environment). Never commit either to this repo.
 
+### Simulation vs. live execution — Telegram always sends
+
+Telegram delivery is **independent of `EXECUTION_MODE`**. Whether the engine is in `simulation` or `ibkr` mode, real Telegram messages go out on every run. The user needs to see the decisions, fills, and alerts either way — the whole point of simulation mode is to validate the end-to-end pipeline including the notification path.
+
+The only thing that changes between modes is the *content* of the message:
+- In `simulation`, fills come from `scripts/sim_executor.py` (modeled) — label them as simulated if useful, but do not suppress the briefing.
+- In `ibkr`, fills come from the real broker.
+
+Do **not** add a mode guard around the Telegram HTTP call. If the env vars are missing, log and skip; never silently drop the message because the engine is in simulation.
+
 ### Sending a message
 
 ```

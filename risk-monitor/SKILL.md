@@ -7,6 +7,23 @@ description: Monitor portfolio risk in real-time — check stop-losses, exposure
 
 Continuously monitor portfolio risk and flag positions or conditions that require action.
 
+## Quick Path: run the report script
+
+For every run, the first action is to call the deterministic report:
+
+```
+python3 scripts/risk_report.py --format=json
+```
+
+The script reads `portfolio/state.json` and `journal/trades.jsonl`, then emits per-position stop distances, trailing-stop distances, time-in-trade, and any invalidation conditions captured at entry. At the portfolio level it computes single-stock weight, per-sector weight, cash ratio, and overall health.
+
+Exit codes are the machine-readable verdict:
+- `0` — GREEN: all within limits, no stops approaching
+- `1` — YELLOW: at least one warning (position within 2% of stop, exposure near a limit)
+- `2` — RED: a stop hit, a limit breached, or an invalidation condition is live
+
+Feed the JSON into the synthesis step. Use `--refresh-prices` to force a fresh Yahoo pull if state is stale. The rules below are the interpretation layer that runs on top of the script's numbers — the script never makes trade decisions, it only surfaces the facts.
+
 ## Stop-Loss Monitoring
 
 For each open position, check:
@@ -72,15 +89,19 @@ Never override more than ONE position at a time. If two positions hit stops simu
 - Top 2 positions > 50% of portfolio → FLAG
 
 ### Sector Mapping
+
+The authoritative sector map lives in `scripts/sim_executor.py` (`SECTOR_MAP`) and is mirrored in `scripts/risk_report.py`. When you add a new name, update both — the sector cap is enforced at order placement, not just reported here.
+
+Current buckets:
 ```
-Energy: SNN, H2O, SNP, SNG, TGN, COTE, OIL
-Banking: TLV, BRD
-Utilities: TEL, TRANSI
-Real Estate: ONE, IMP
-Consumer: SFG, AQ, WINE
-Healthcare: M, BIO, ATB
-Industrial: TRP, CMP, ALR, EL
-Tech/Telecom: DIGI
+Energy:             SNP, SNG, RRC, OIL
+Utilities:          H2O, SNN, TEL, EL, TGN, COTE, TRANSI, PE
+Banking:            TLV, BRD
+Real Estate:        ONE, IMP
+Consumer:           SFG, AQ, WINE, CFH
+Healthcare:         M, BIO, ATB
+Industrial:         TRP, CMP, ALR, TTS
+Tech/Telecom:       DIGI
 Financial Services: FP, BVB, EVER, SIF1-SIF5
 ```
 
@@ -124,7 +145,18 @@ OVERRIDES ACTIVE:
 PORTFOLIO HEALTH: [GREEN / YELLOW / RED]
 ```
 
+## Macro-Trigger RED Conditions
+
+These come from the rulebook (`rules/bvb_rules.json`) evaluated by `scripts/evaluate_rules.py` on the macro-analyst's market snapshot. They are portfolio-level RED signals that override the position-level picture — even if every stop is untriggered, these alone flip the report to RED and force a posture shift on the next run.
+
+- **FX-3 band break: EUR/RON > 5.10 intraday** — historical regime-break threshold. Fire RED: cash floor lifts to 60%, no new non-FX-hedged longs that session. Reference: `bvb-historical-patterns.md` §2 (FX regime).
+- **RAT-2 CDS spike: 5Y RO CDS +20bp over 3 consecutive sessions** — sovereign-risk widening template (2023 August, 2024 post-election). Fire RED: freeze new longs, prioritise trimming rate-sensitive names (ONE, IMP, banks).
+- **RATAG-2 tripwire: S&P or Fitch or Moody's downgrades Romania to sub-IG** — not a probability-weighted event, it is a hard cap. If fired: new-long allocation capped at 20% of portfolio, existing longs in rate-beta names (ONE/IMP/TLV/BRD) reviewed for partial trim the same session.
+- **REGIME-1 risk-off score ≥ 5** (weighted sum across FX band, rate spread, CDS level, DAX/Stoxx weekly, political newsflow) — cash floor 60%, no new longs that day. The evaluator returns the current score; treat ≥5 as the escalation line.
+
+When any of these fire, the Telegram alert must name the specific rule ID and the triggering value, not just say "risk-off."
+
 ## Escalation Rules
-- GREEN: All within limits, no stops approaching → Continue normal operations
-- YELLOW: A position within 2% of stop, or exposure near limits → Extra scrutiny on next run
-- RED: Stop hit, limit breached, or override active → Immediate action required, detailed Telegram alert
+- GREEN: All within limits, no stops approaching, no macro RED triggers → Continue normal operations
+- YELLOW: A position within 2% of stop, exposure near limits, or REGIME-1 score 3-4 → Extra scrutiny on next run
+- RED: Stop hit, limit breached, override active, OR any macro-trigger RED above → Immediate action required, detailed Telegram alert naming the rule ID and value

@@ -1,0 +1,599 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "source": "compass_artifact BVB macro-analyst reference (2015-2026)",
+    "generated_for": "BVB Autonomous Trading Engine",
+    "last_updated": "2026-04-19",
+    "description": "Encodable trading rules derived from a decade of BET drivers. Each rule has a machine-checkable trigger, direction, horizon, expected magnitude band, and exit. Strength reflects hit-rate in the 2015-2026 sample.",
+    "metric_glossary": {
+      "eur_ron_close": "EUR/RON official BNR reference close",
+      "eur_ron_close_streak_days": "Consecutive sessions close has held the condition",
+      "ro_5y_cds_bp": "Romania 5Y sovereign CDS in basis points",
+      "ro_5y_cds_delta_3d_bp": "3-session change in RO 5Y CDS, bp",
+      "ro_5y_cds_delta_wk_bp": "Week-on-week change in RO 5Y CDS, bp",
+      "ro_10y_yield_pct": "Romania 10-year government bond yield, percent",
+      "ro_10y_yield_delta_10d_bp": "10-session change in RO 10Y yield, bp",
+      "hu_pl_cds_concurrent_move": "Whether HU/PL CDS moved equivalently (filters global vs. idiosyncratic)",
+      "dax_overnight_pct": "DAX futures overnight move pre-BVB-open",
+      "dax_weekly_pct": "DAX weekly close-to-close percent change",
+      "stoxx_banks_weekly_pct": "Stoxx 600 Banks weekly percent change",
+      "wig20_daily_pct": "WIG20 daily percent change",
+      "bux_daily_pct": "BUX daily percent change",
+      "bet_sessions_flat": "Consecutive BET sessions with |change| < 0.3%",
+      "vix": "CBOE VIX level",
+      "vix_1d_pct_change": "VIX single-day percent change",
+      "brent_daily_pct": "Brent crude single-session percent change",
+      "brent_weekly_pct": "Brent crude week-on-week percent change",
+      "ttf_weekly_pct": "TTF natural gas week-on-week percent change",
+      "ttf_eur_mwh": "TTF spot in EUR/MWh",
+      "reservoirs_pct_norm": "Romanian hydro reservoir level as percent of seasonal norm",
+      "reservoirs_below_norm_weeks": "Consecutive weeks reservoirs have been < threshold",
+      "cpi_surprise_pp": "CPI print minus consensus, in percentage points",
+      "nbr_policy_bias": "NBR communication tone: 'hawkish' | 'neutral' | 'dovish'",
+      "fiscal_ordinance_leak": "Finance Ministry press briefing signaling listed-SOE targeted fiscal measure",
+      "election_first_round_antisystem_lead": "Sunday exit poll shows anti-system candidate in 1st-round lead",
+      "court_resolution_post_selloff": "Official/judicial resolution after BET sold off >5% on political event",
+      "pnrr_approval": "EC approved a PNRR payment request",
+      "pnrr_milestone_fail": "PNRR milestone failed with payment suspension",
+      "agency_outlook_change": "One of S&P/Fitch/Moody's changed outlook: 'stable_to_negative' | 'negative_to_stable' | 'affirm_bbb_minus' | 'downgrade_to_junk'",
+      "ftse_event_days_to_effective": "Days until FTSE GEIS rebalance effective date",
+      "msci_upgrade_emerging": "MSCI upgraded Romania from Advanced Frontier to Emerging",
+      "ukraine_escalation_within_100km_ro": "Credible military escalation within 100km of Romanian border",
+      "ukraine_ceasefire_credible": "Credible Ukraine ceasefire or truce signal",
+      "date_range": "Current calendar date falls in a named window (e.g. 'jul15_aug20')",
+      "ex_div_cluster_day": "Day is in the May-July BET blue-chip ex-dividend cluster",
+      "regime_score": "Composite REGIME-1 or REGIME-2 weighted score"
+    },
+    "action_glossary": {
+      "short_bet": "Reduce BET index exposure / open defensive shorts",
+      "long_bet": "Add BET index exposure / add longs",
+      "long_banks": "Add TLV + BRD long",
+      "long_sng": "Add SNG long (post-windfall-cap sensitivity reduced)",
+      "long_snp": "Add SNP long (Brent-driven, beta 0.5-0.7)",
+      "short_h2o": "Reduce H2O exposure / short (hydrology)",
+      "reduce_size": "Cut active position sizes by a percentage",
+      "widen_stops": "Increase stop-loss distance for current positions",
+      "long_basket": "Long basket of TLV/H2O/SNP/BRD (MSCI trade)",
+      "long_additions_short_deletions": "FTSE inclusion/exclusion window trade",
+      "long_reconstruction": "Long TGN/TRP/construction theme",
+      "max_defensive": "Raise cash to >60%",
+      "max_long": "Reduce cash to <20%",
+      "no_trade": "Do not treat as signal; skip or adjust for mechanical effect"
+    },
+    "notes": [
+      "All thresholds are central estimates from 2015-2026. Hit rate degrades under regime change.",
+      "Rules are AND-composed within a single rule. Multi-family confirmation (scoring) lives in REGIME-1/REGIME-2.",
+      "Confidence bands: strong (>70% in-sample hit), moderate (50-70%), weak (<50%, directional only).",
+      "April 2026 caveat: all three rating agencies sit at BBB-/Baa3 Negative. RATAG-2 tail is live; trend-following signals are degraded because the 70% YoY rally into ATH biases price discovery toward mean-reversion."
+    ]
+  },
+
+  "rules": [
+    {
+      "id": "FX-1",
+      "family": "FX",
+      "title": "EUR/RON >5.05 sustained with CDS widening",
+      "trigger_text": "EUR/RON close >5.05 for 2 consecutive days AND RO 5Y CDS widened >15bp week-on-week",
+      "conditions": [
+        {"metric": "eur_ron_close", "op": ">", "value": 5.05, "duration_days": 2},
+        {"metric": "ro_5y_cds_delta_wk_bp", "op": ">", "value": 15}
+      ],
+      "action": "short_bet",
+      "direction": "short",
+      "horizon_days": 5,
+      "expected_move_pct": {"low": -4.0, "high": -2.0},
+      "exit_condition": "EUR/RON close <5.02 or T+5",
+      "confidence": "moderate",
+      "tags": ["fx", "currency", "sovereign_risk"]
+    },
+    {
+      "id": "FX-2",
+      "family": "FX",
+      "title": "NBR intervention reversal — banks rebound",
+      "trigger_text": "EUR/RON drops -0.5% intraday after confirmed NBR intervention",
+      "conditions": [
+        {"metric": "eur_ron_intraday_pct", "op": "<=", "value": -0.5},
+        {"metric": "nbr_intervention_today", "op": "==", "value": true}
+      ],
+      "action": "long_banks",
+      "direction": "long",
+      "horizon_days": 3,
+      "expected_move_pct": {"low": 1.5, "high": 3.0},
+      "exit_condition": "Target hit or T+3",
+      "confidence": "moderate",
+      "tags": ["fx", "intervention", "banks"]
+    },
+    {
+      "id": "FX-3",
+      "family": "FX",
+      "title": "EUR/RON band-break above 5.10",
+      "trigger_text": "EUR/RON >5.10 break after 30-day range held at 5.05-5.10",
+      "conditions": [
+        {"metric": "eur_ron_close", "op": ">", "value": 5.10},
+        {"metric": "eur_ron_30d_range_top", "op": "<=", "value": 5.10},
+        {"metric": "eur_ron_30d_range_bottom", "op": ">=", "value": 5.05}
+      ],
+      "action": "short_bet",
+      "direction": "short",
+      "horizon_days": 14,
+      "expected_move_pct": {"low": -5.0, "high": -3.0},
+      "exit_condition": "Reversal back inside 5.05-5.10 band",
+      "confidence": "strong",
+      "tags": ["fx", "band_break", "regime_shift"],
+      "notes": "May 5 2025 set the precedent: break of 5.00 led to RO 10Y spike to 8.0% and junk-like Eurobond spreads."
+    },
+    {
+      "id": "INT-1",
+      "family": "INTERNATIONAL",
+      "title": "DAX overnight gap down",
+      "trigger_text": "DAX futures -1.5% or worse at BVB open (09:45 EET)",
+      "conditions": [
+        {"metric": "dax_overnight_pct", "op": "<=", "value": -1.5}
+      ],
+      "action": "short_bet",
+      "direction": "short",
+      "horizon_days": 1,
+      "expected_move_pct": {"low": -1.5, "high": -0.9},
+      "exit_condition": "Cover by 14:00 EET or EOD",
+      "confidence": "strong",
+      "tags": ["international", "overnight_gap"],
+      "notes": "BET follows ~60% of DAX overnight move in first 2 hours."
+    },
+    {
+      "id": "INT-2",
+      "family": "INTERNATIONAL",
+      "title": "BET catch-up vs CEE peers",
+      "trigger_text": "WIG20 +1% AND BUX +1% AND BET flat for 2 sessions",
+      "conditions": [
+        {"metric": "wig20_daily_pct", "op": ">=", "value": 1.0},
+        {"metric": "bux_daily_pct", "op": ">=", "value": 1.0},
+        {"metric": "bet_sessions_flat", "op": ">=", "value": 2}
+      ],
+      "action": "long_bet",
+      "direction": "long",
+      "horizon_days": 3,
+      "expected_move_pct": {"low": 0.8, "high": 1.5},
+      "exit_condition": "Target hit or T+3",
+      "confidence": "moderate",
+      "tags": ["international", "mean_reversion", "cee"]
+    },
+    {
+      "id": "INT-3",
+      "family": "INTERNATIONAL",
+      "title": "VIX spike",
+      "trigger_text": "VIX 1-day pct change >30% AND VIX close >25",
+      "conditions": [
+        {"metric": "vix_1d_pct_change", "op": ">", "value": 30},
+        {"metric": "vix", "op": ">", "value": 25}
+      ],
+      "action": "short_bet",
+      "direction": "short",
+      "horizon_days": 3,
+      "expected_move_pct": {"low": -4.0, "high": -2.0},
+      "exit_condition": "T+3 or VIX <22",
+      "confidence": "moderate",
+      "tags": ["international", "risk_off"]
+    },
+    {
+      "id": "COM-1",
+      "family": "COMMODITY",
+      "title": "Brent daily spike",
+      "trigger_text": "Brent +4% in one session",
+      "conditions": [
+        {"metric": "brent_daily_pct", "op": ">=", "value": 4.0}
+      ],
+      "action": "long_snp",
+      "direction": "long",
+      "horizon_days": 1,
+      "expected_move_pct": {"low": 2.0, "high": 3.0},
+      "exit_condition": "EOD next session",
+      "confidence": "strong",
+      "tags": ["commodity", "oil", "snp"],
+      "notes": "SNP beta to Brent ~0.5-0.7. Brent correlation 0.60-0.75."
+    },
+    {
+      "id": "COM-2",
+      "family": "COMMODITY",
+      "title": "TTF supply disruption spike",
+      "trigger_text": "TTF jumps >10% w/w on supply disruption",
+      "conditions": [
+        {"metric": "ttf_weekly_pct", "op": ">", "value": 10.0},
+        {"metric": "ttf_supply_disruption_flag", "op": "==", "value": true}
+      ],
+      "action": "long_sng",
+      "direction": "long",
+      "horizon_days": 10,
+      "expected_move_pct": {"low": 3.0, "high": 5.0},
+      "exit_condition": "TTF normalizes",
+      "confidence": "weak",
+      "tags": ["commodity", "gas", "sng"],
+      "notes": "Post-OUG 27/2022 windfall caps dampened SNG sensitivity from 0.70 to 0.30. Needs TTF >€50/MWh to meaningfully fire."
+    },
+    {
+      "id": "COM-3",
+      "family": "COMMODITY",
+      "title": "Hydrology drought signal",
+      "trigger_text": "Romanian reservoirs <70% of seasonal norm for 4+ weeks in summer",
+      "conditions": [
+        {"metric": "reservoirs_pct_norm", "op": "<", "value": 70},
+        {"metric": "reservoirs_below_norm_weeks", "op": ">=", "value": 4},
+        {"metric": "season", "op": "==", "value": "summer"}
+      ],
+      "action": "short_h2o",
+      "direction": "short",
+      "horizon_days": 60,
+      "expected_move_pct": {"low": -12.0, "high": -8.0},
+      "exit_condition": "Hydrology recovery or T+60",
+      "confidence": "moderate",
+      "tags": ["commodity", "hydrology", "h2o"]
+    },
+    {
+      "id": "RAT-1",
+      "family": "RATES",
+      "title": "RO 10Y breakout",
+      "trigger_text": "RO 10Y close >7.40% AND 10-day move >+40bp",
+      "conditions": [
+        {"metric": "ro_10y_yield_pct", "op": ">", "value": 7.40},
+        {"metric": "ro_10y_yield_delta_10d_bp", "op": ">", "value": 40}
+      ],
+      "action": "short_bet",
+      "direction": "short",
+      "horizon_days": 10,
+      "expected_move_pct": {"low": -4.0, "high": -2.0},
+      "exit_condition": "Yield <7.20% or T+10",
+      "confidence": "strong",
+      "tags": ["rates", "sovereign", "banks"]
+    },
+    {
+      "id": "RAT-2",
+      "family": "RATES",
+      "title": "CDS idiosyncratic blowout",
+      "trigger_text": "RO 5Y CDS +20bp in 3 sessions with no HU/PL equivalent move",
+      "conditions": [
+        {"metric": "ro_5y_cds_delta_3d_bp", "op": ">=", "value": 20},
+        {"metric": "hu_pl_cds_concurrent_move", "op": "==", "value": false}
+      ],
+      "action": "short_bet",
+      "direction": "short",
+      "horizon_days": 7,
+      "expected_move_pct": {"low": -3.0, "high": -2.0},
+      "exit_condition": "CDS retracement",
+      "confidence": "strong",
+      "tags": ["rates", "cds", "idiosyncratic"]
+    },
+    {
+      "id": "RAT-3",
+      "family": "RATES",
+      "title": "NBR first-cut pre-positioning",
+      "trigger_text": "Confirmed NBR first cut at upcoming meeting (priced + communicated)",
+      "conditions": [
+        {"metric": "nbr_first_cut_confirmed", "op": "==", "value": true},
+        {"metric": "days_to_nbr_meeting", "op": "between", "value": [0, 5]}
+      ],
+      "action": "long_bet",
+      "direction": "long",
+      "horizon_days": 7,
+      "expected_move_pct": {"low": 2.0, "high": 4.0},
+      "exit_condition": "T+7 post-meeting",
+      "confidence": "strong",
+      "tags": ["rates", "nbr", "monetary_easing"],
+      "notes": "Live as of April 2026 for the expected May 2026 meeting — high-conviction near-term trade."
+    },
+    {
+      "id": "RAT-4",
+      "family": "RATES",
+      "title": "CPI upside surprise",
+      "trigger_text": "CPI print >+0.3pp above consensus",
+      "conditions": [
+        {"metric": "cpi_surprise_pp", "op": ">", "value": 0.3}
+      ],
+      "action": "short_bet",
+      "direction": "short",
+      "horizon_days": 1,
+      "expected_move_pct": {"low": -1.5, "high": -0.8},
+      "exit_condition": "EOD",
+      "confidence": "moderate",
+      "tags": ["rates", "cpi"]
+    },
+    {
+      "id": "POL-1",
+      "family": "POLITICAL",
+      "title": "Fiscal-ordinance leak",
+      "trigger_text": "New fiscal package targeting listed SOEs announced / leaked",
+      "conditions": [
+        {"metric": "fiscal_ordinance_leak", "op": "==", "value": true}
+      ],
+      "action": "short_bet",
+      "direction": "short",
+      "horizon_days": 5,
+      "expected_move_pct": {"low": -8.0, "high": -3.0},
+      "exit_condition": "Target hit or softening signal from MoF",
+      "confidence": "strong",
+      "tags": ["political", "fiscal", "tail_risk"],
+      "notes": "Highest-conviction short in the dataset. OUG 114/2018 template: -11.2% in 2 sessions. Monitor 'Ministerul Finanțelor pregătește' headline pattern on weekends."
+    },
+    {
+      "id": "POL-2",
+      "family": "POLITICAL",
+      "title": "Sunday election anti-system 1st-round lead",
+      "trigger_text": "Sunday exit poll shows anti-system candidate in 1st-round lead",
+      "conditions": [
+        {"metric": "election_first_round_antisystem_lead", "op": "==", "value": true}
+      ],
+      "action": "short_bet",
+      "direction": "short",
+      "horizon_days": 2,
+      "expected_move_pct": {"low": -8.0, "high": -4.0},
+      "exit_condition": "Court/official resolution",
+      "confidence": "strong",
+      "tags": ["political", "election", "gap"],
+      "notes": "Nov 24 2024 (Georgescu) BET -1.45% Monday, mid-caps -3 to -7.6%. May 4 2025 (Simion) BET -2.52%, EUR/RON broke 5.00."
+    },
+    {
+      "id": "POL-3",
+      "family": "POLITICAL",
+      "title": "Relief rally on resolution",
+      "trigger_text": "Court/official resolution after BET has sold off >5% on political event",
+      "conditions": [
+        {"metric": "court_resolution_post_selloff", "op": "==", "value": true}
+      ],
+      "action": "long_bet",
+      "direction": "long",
+      "horizon_days": 1,
+      "expected_move_pct": {"low": 3.0, "high": 5.0},
+      "exit_condition": "EOD +1",
+      "confidence": "strong",
+      "tags": ["political", "mean_reversion"],
+      "notes": "Dec 6 2024 annulment: +3.0%. May 19 2025 Dan runoff win: +3.5% Monday, +7% through May 28."
+    },
+    {
+      "id": "POL-4",
+      "family": "POLITICAL",
+      "title": "PNRR disbursement approval",
+      "trigger_text": "EC approved a PNRR payment request",
+      "conditions": [
+        {"metric": "pnrr_approval", "op": "==", "value": true}
+      ],
+      "action": "long_bet",
+      "direction": "long",
+      "horizon_days": 3,
+      "expected_move_pct": {"low": 0.8, "high": 1.5},
+      "exit_condition": "T+3",
+      "confidence": "moderate",
+      "tags": ["political", "eu", "fiscal"]
+    },
+    {
+      "id": "POL-5",
+      "family": "POLITICAL",
+      "title": "PNRR milestone failure",
+      "trigger_text": "PNRR milestone failed with payment suspension",
+      "conditions": [
+        {"metric": "pnrr_milestone_fail", "op": "==", "value": true}
+      ],
+      "action": "short_bet",
+      "direction": "short",
+      "horizon_days": 5,
+      "expected_move_pct": {"low": -3.0, "high": -1.5},
+      "exit_condition": "T+5",
+      "confidence": "moderate",
+      "tags": ["political", "eu", "fiscal"]
+    },
+    {
+      "id": "CAL-1",
+      "family": "CALENDAR",
+      "title": "Ex-dividend cluster day",
+      "trigger_text": "Day is in the May-July blue-chip ex-dividend cluster",
+      "conditions": [
+        {"metric": "ex_div_cluster_day", "op": "==", "value": true}
+      ],
+      "action": "no_trade",
+      "direction": "neutral",
+      "horizon_days": 1,
+      "expected_move_pct": {"low": 0.0, "high": 0.0},
+      "exit_condition": "Post-ex",
+      "confidence": "strong",
+      "tags": ["calendar", "dividend", "mechanical"],
+      "notes": "June alone drags BET -2 to -4% mechanically. Do NOT treat ex-div drop as sell signal."
+    },
+    {
+      "id": "CAL-2",
+      "family": "CALENDAR",
+      "title": "Summer liquidity collapse",
+      "trigger_text": "Current date in window Jul 15 - Aug 20",
+      "conditions": [
+        {"metric": "date_range", "op": "==", "value": "jul15_aug20"}
+      ],
+      "action": "reduce_size",
+      "direction": "defensive",
+      "horizon_days": 37,
+      "expected_move_pct": {"low": 0.0, "high": 0.0},
+      "exit_condition": "Sep 1",
+      "confidence": "strong",
+      "tags": ["calendar", "liquidity"],
+      "parameters": {"size_cut_pct": 40, "stop_widen_pct": 30}
+    },
+    {
+      "id": "CAL-3",
+      "family": "CALENDAR",
+      "title": "Year-end window-dressing",
+      "trigger_text": "Current date in window Dec 15 - Dec 30",
+      "conditions": [
+        {"metric": "date_range", "op": "==", "value": "dec15_dec30"}
+      ],
+      "action": "long_bet",
+      "direction": "long",
+      "horizon_days": 14,
+      "expected_move_pct": {"low": 1.0, "high": 3.0},
+      "exit_condition": "Dec 30",
+      "confidence": "moderate",
+      "tags": ["calendar", "seasonal"]
+    },
+    {
+      "id": "RATAG-1",
+      "family": "RATING",
+      "title": "Outlook cut to Negative",
+      "trigger_text": "Any agency outlook changed Stable → Negative",
+      "conditions": [
+        {"metric": "agency_outlook_change", "op": "==", "value": "stable_to_negative"}
+      ],
+      "action": "short_bet",
+      "direction": "short",
+      "horizon_days": 2,
+      "expected_move_pct": {"low": -4.0, "high": -2.0},
+      "exit_condition": "T+2",
+      "confidence": "moderate",
+      "tags": ["rating", "sovereign"]
+    },
+    {
+      "id": "RATAG-2",
+      "family": "RATING",
+      "title": "Downgrade to junk — tail event",
+      "trigger_text": "Any agency downgrades RO to BB+/Ba1 (junk)",
+      "conditions": [
+        {"metric": "agency_outlook_change", "op": "==", "value": "downgrade_to_junk"}
+      ],
+      "action": "max_defensive",
+      "direction": "short",
+      "horizon_days": 10,
+      "expected_move_pct": {"low": -12.0, "high": -6.0},
+      "exit_condition": "Rating reversal (rare) or T+10",
+      "confidence": "strong",
+      "tags": ["rating", "sovereign", "tail_risk", "discontinuity"],
+      "notes": "April 2026 configuration is the highest-risk in the dataset for this outcome. Engine should hold this as a persistent tripwire. Reduce longs to 20%, consider outright short.",
+      "parameters": {"max_long_pct_on_fire": 20}
+    },
+    {
+      "id": "RATAG-3",
+      "family": "RATING",
+      "title": "Affirmation after feared review",
+      "trigger_text": "Agency affirms BBB- with no deterioration after a feared review",
+      "conditions": [
+        {"metric": "agency_outlook_change", "op": "==", "value": "affirm_bbb_minus"}
+      ],
+      "action": "long_bet",
+      "direction": "long",
+      "horizon_days": 1,
+      "expected_move_pct": {"low": 1.0, "high": 2.0},
+      "exit_condition": "EOD",
+      "confidence": "moderate",
+      "tags": ["rating", "relief"]
+    },
+    {
+      "id": "IDX-1",
+      "family": "INDEX",
+      "title": "FTSE rebalance window",
+      "trigger_text": "40 days before FTSE GEIS effective date",
+      "conditions": [
+        {"metric": "ftse_event_days_to_effective", "op": "between", "value": [1, 40]}
+      ],
+      "action": "long_additions_short_deletions",
+      "direction": "neutral",
+      "horizon_days": 40,
+      "expected_move_pct": {"low": 3.0, "high": 6.0},
+      "exit_condition": "Effective date close",
+      "confidence": "strong",
+      "tags": ["index", "passive_flow"]
+    },
+    {
+      "id": "IDX-2",
+      "family": "INDEX",
+      "title": "MSCI EM upgrade review",
+      "trigger_text": "MSCI June 2026 review upgrades Romania from Advanced Frontier to Emerging",
+      "conditions": [
+        {"metric": "msci_upgrade_emerging", "op": "==", "value": true}
+      ],
+      "action": "long_basket",
+      "direction": "long",
+      "horizon_days": 90,
+      "expected_move_pct": {"low": 8.0, "high": 15.0},
+      "exit_condition": "Target hit or T+90",
+      "confidence": "strong",
+      "tags": ["index", "msci", "passive_flow"],
+      "notes": "Estimated $180m passive inflows. Basket: TLV, H2O, SNP, BRD. Live review window: June 2026.",
+      "parameters": {"basket": ["TLV", "H2O", "SNP", "BRD"]}
+    },
+    {
+      "id": "GEO-1",
+      "family": "GEOPOLITICAL",
+      "title": "Ukraine escalation near RO border",
+      "trigger_text": "Credible Ukraine escalation within 100km of RO border",
+      "conditions": [
+        {"metric": "ukraine_escalation_within_100km_ro", "op": "==", "value": true}
+      ],
+      "action": "short_bet",
+      "direction": "short",
+      "horizon_days": 3,
+      "expected_move_pct": {"low": -5.0, "high": -2.0},
+      "exit_condition": "De-escalation signal",
+      "confidence": "moderate",
+      "tags": ["geopolitical", "ukraine"]
+    },
+    {
+      "id": "GEO-2",
+      "family": "GEOPOLITICAL",
+      "title": "Ukraine ceasefire / truce",
+      "trigger_text": "Credible Ukraine ceasefire or truce signal",
+      "conditions": [
+        {"metric": "ukraine_ceasefire_credible", "op": "==", "value": true}
+      ],
+      "action": "long_reconstruction",
+      "direction": "long",
+      "horizon_days": 10,
+      "expected_move_pct": {"low": 3.0, "high": 6.0},
+      "exit_condition": "Target hit",
+      "confidence": "moderate",
+      "tags": ["geopolitical", "ukraine", "reconstruction"],
+      "notes": "Basket: TGN (BRUA/Vertical Corridor), TRP (construction/PVC), any construction name."
+    },
+    {
+      "id": "REGIME-1",
+      "family": "REGIME",
+      "title": "Risk-off score",
+      "trigger_text": "Weighted score ≥5 triggers max-defensive posture",
+      "scoring": {
+        "type": "weighted_sum",
+        "threshold": 5,
+        "components": [
+          {"metric": "eur_ron_close", "op": ">", "value": 5.05, "weight": 2},
+          {"metric": "dax_daily_pct", "op": "<", "value": -1.0, "weight": 1},
+          {"metric": "ro_5y_cds_delta_wk_bp", "op": ">", "value": 15, "weight": 2},
+          {"metric": "vix", "op": ">", "value": 25, "weight": 1},
+          {"metric": "ro_10y_yield_pct", "op": ">", "value": 7.40, "weight": 2}
+        ]
+      },
+      "action": "max_defensive",
+      "direction": "defensive",
+      "horizon_days": null,
+      "expected_move_pct": {"low": null, "high": null},
+      "exit_condition": "Score <3",
+      "confidence": "strong",
+      "tags": ["regime", "risk_off"],
+      "parameters": {"cash_floor_pct": 60}
+    },
+    {
+      "id": "REGIME-2",
+      "family": "REGIME",
+      "title": "Risk-on score",
+      "trigger_text": "Weighted score ≥6 triggers max-long posture",
+      "scoring": {
+        "type": "weighted_sum",
+        "threshold": 6,
+        "components": [
+          {"metric": "dax_above_200dma", "op": "==", "value": true, "weight": 1},
+          {"metric": "eur_ron_close", "op": "<", "value": 5.02, "weight": 1},
+          {"metric": "ro_5y_cds_bp", "op": "<", "value": 120, "weight": 2},
+          {"metric": "ro_10y_yield_pct", "op": "<", "value": 6.80, "weight": 2},
+          {"metric": "nbr_policy_bias", "op": "==", "value": "dovish", "weight": 2}
+        ]
+      },
+      "action": "max_long",
+      "direction": "long",
+      "horizon_days": null,
+      "expected_move_pct": {"low": null, "high": null},
+      "exit_condition": "Score <4",
+      "confidence": "strong",
+      "tags": ["regime", "risk_on"],
+      "parameters": {"cash_ceiling_pct": 20}
+    }
+  ]
+}

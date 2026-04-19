@@ -6,7 +6,7 @@ This project is a fully autonomous swing trading engine for the Bucharest Stock 
 ## Strategy Framework
 
 ### Universe
-BET-Plus index constituents (~40 stocks). Focus on liquid names that can be entered and exited cleanly. Ignore anything with average daily volume below 50,000 RON.
+BET-Plus index constituents (~40-45 stocks). Current engine coverage is 36 tickers across two liquidity tiers — see `market-scanner/SKILL.md` for the canonical list. Focus on liquid names that can be entered and exited cleanly. Ignore anything with 20-day average daily value traded below 50,000 RON. Expansion into AeRO small caps is off-limits until the portfolio is >10,000 RON — below that, our sizing caps clash with their liquidity.
 
 ### Trade Types
 Three distinct timeframes, managed concurrently:
@@ -21,7 +21,11 @@ Three distinct timeframes, managed concurrently:
 - 3–5 concurrent positions (2–3 early when portfolio is small)
 - Max 30% of portfolio in a single stock
 - Max 60% in a single sector
-- Min 10% cash reserve at all times
+- **Regime-aware cash reserve** (not a single fixed floor):
+  - **Default (neutral regime):** 10% minimum, 30% typical
+  - **Risk-off regime (`REGIME-1` fires in `rules/bvb_rules.json`):** 60% minimum cash floor
+  - **Risk-on regime (`REGIME-2` fires):** cash ceiling at 20%, permitted to deploy aggressively
+  - **Rating-downgrade tripwire (`RATAG-2` fires):** longs capped at 20% of portfolio regardless of other signals; the rest stays in cash until the downgrade is reversed or the tripwire clears
 - Never deploy more than 50% of available cash in a single day
 
 ### Risk Rules
@@ -55,8 +59,8 @@ When multiple setups compete for limited capital:
 
 ### Morning Run (7:30 AM EET)
 Execute skills in this order:
-1. Read `LESSONS.md` AND `THEMES.md` — load active lessons and active themes into working context before analysis
-2. `macro-analyst` — Global overnight context + theme-layer refresh (which active themes got signals today; any new theme candidates to propose)
+1. Read `LESSONS.md`, `THEMES.md`, and `macro-analyst/references/bvb-historical-patterns.md` — load active lessons, active themes, and the historical playbook before analysis
+2. `macro-analyst` — Populates `rules/market_snapshot.json` from live feeds, runs `scripts/evaluate_rules.py` against `rules/bvb_rules.json`, emits the firing rules + REGIME score + narrative context
 3. `bvb-news` — BVB announcements, Romanian news
 4. `market-scanner` — Technical scan of BET-Plus universe
 5. `company-analyst` — Deep dive on any flagged stocks
@@ -90,9 +94,26 @@ The engine learns from its own history through three pieces:
 ### Rule changes to PROJECT.md
 `PROJECT.md` is the stable strategy foundation. The engine never edits it autonomously. When a lesson becomes `[active]` and conflicts with a rule here, the `retrospective` skill appends a proposed edit to the bottom of `LESSONS.md` and flags it in the weekly Telegram briefing. The user reviews and applies changes manually.
 
+## Rulebook and Regime Score
+
+The engine consults two complementary artifacts every run:
+
+- **`rules/bvb_rules.json`** — 30 encodable trading rules derived from a decade of BET drivers (FX, international, commodity, rates, political, calendar, rating, index, geopolitical, regime). Each rule has a machine-checkable trigger, direction, horizon, expected magnitude band, and exit condition. Source of truth for *what to do when a specific condition holds*.
+- **`rules/market_snapshot.json`** — populated each morning by `macro-analyst` from live feeds. Source of truth for *what the world looks like right now*.
+
+`scripts/evaluate_rules.py` joins these and emits (a) firing rules, (b) `REGIME-1` / `REGIME-2` weighted scores, (c) a recommended posture. Synthesis consumes this as structured input, not prose.
+
+The **reference anchor** for the rulebook is `macro-analyst/references/bvb-historical-patterns.md` — a 2015-2026 BET event catalog, sector playbook, and regime-break notes. When thresholds are debated or new rules proposed, they must be justified against this document or explicitly flagged as extrapolating beyond it.
+
+### Regime caveat (April 2026)
+After the 70% YoY rally to ATH (~28,900), the reference doc flags: **"bias toward mean-reversion over trend-following at current levels."** Synthesis should surface this in the daily briefing, weight relief-rally triggers (`POL-3`, `RATAG-3`) more heavily, and treat fresh breakout setups with extra skepticism.
+
+### Downgrade-to-junk discipline
+The 2024-2026 rating configuration (all three agencies BBB-/Baa3 Negative, 8.6% of GDP deficit 2024, EDP escalated, PNRR partially suspended) is flagged in the reference doc as **the highest-risk configuration in the entire decade-long dataset** for a discontinuous downgrade to junk. This is not a maybe — it is a live tripwire. `RATAG-2` firing halts new longs and caps existing longs at 20% of portfolio. This takes precedence over any other signal, including an active theme.
+
 ## Thematic Bias
 
-Alongside the tactical day-to-day, the engine tracks **structural themes** in `THEMES.md` — macro narratives (AI datacenter buildout, BNR higher-for-longer, energy shocks, defense cycles, technology inflections) mapped to specific BVB tickers.
+Alongside the tactical rulebook, the engine tracks **structural themes** in `THEMES.md` — macro narratives mapped to specific BVB tickers. Themes are the narrative context; rules are the operational triggers.
 
 ### How themes affect decisions
 - **At entry:** a setup in a ticker that maps to an `[active]` theme gets a conviction bump (+1 on the 0-10 scale). A setup that runs against an active theme requires an extra confirmation before entry.

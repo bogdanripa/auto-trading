@@ -21,10 +21,22 @@ Turn the raw trade journal into durable lessons. This skill is the feedback loop
 
 ## Process
 
-### 1. Scope the window
-For weekly: last 7 days of exit records. For monthly: last 30. For on-demand: whatever the user asks for, defaulting to "since last retrospective."
+### 0. Run the stats script first
 
-### 2. Load and cluster
+Do not hand-parse the journal. Call the committed script, which owns the clustering math and produces the numbers this skill then interprets:
+
+```
+python3 scripts/journal_stats.py --window=7   # weekly
+python3 scripts/journal_stats.py --window=30  # monthly
+python3 scripts/journal_stats.py --since=2026-01-01  # on-demand range
+```
+
+Output is a JSON blob with overall stats, per-cluster breakdowns (trade_type, sector, exit_reason, thesis_verdict, conviction bucket, theme_tag, rule_id, catalyst×mechanism grid), and the failure-mode hot cells already tagged. Steps 2-4 below describe what the script computes — they're documented so this skill's audit trail is reproducible, but do not re-implement them in prose.
+
+### 1. Scope the window
+For weekly: last 7 days of exit records. For monthly: last 30. For on-demand: whatever the user asks for, defaulting to "since last retrospective." Pass the window to `journal_stats.py`; do not filter in this skill.
+
+### 2. Load and cluster (handled by journal_stats.py)
 Parse `trades.jsonl`. Pair each entry with its exit (via `trade_id`). Drop pairs where the exit is outside the window. Cluster by:
 - **Trade type** (swing / event / trend)
 - **Sector** (energy, financials, utilities, etc.)
@@ -34,7 +46,7 @@ Parse `trades.jsonl`. Pair each entry with its exit (via `trade_id`). Drop pairs
 - **Theme tag** (from entry record — lets us compute per-theme win rates)
 - **Failure-mode pair** `(catalyst_occurred, mechanism_worked)` — the diagnostic grid below
 
-### 3. Compute the numbers
+### 3. Compute the numbers (handled by journal_stats.py)
 For each cluster, compute:
 - Count
 - Win rate (pnl > 0)

@@ -42,11 +42,18 @@ python3 scripts/sim_executor.py settle
 # 2. Place any new orders the synthesis step decided on (one call per order)
 python3 scripts/sim_executor.py place \
     --symbol TGN --action BUY --quantity 2 --limit 89.00 --tif DAY \
-    --trade-type swing --trade-id 2026-04-19-TGN-01
+    --trade-type swing --trade-id 2026-04-19-TGN-01 \
+    --theme-tag nbr_first_cut_pivot \
+    --invalidation "NBR holds rates in May; or EUR/RON > 5.10"
 
 # 3. Snapshot for diagnostics
 python3 scripts/sim_executor.py status
 ```
+
+**Optional flags on `place` that feed the journal / retrospective:**
+- `--theme-tag <slug>` — ties the order to a theme from `THEMES.md` (e.g. `nbr_first_cut_pivot`, `msci_em_review`). When the position later closes, the retrospective groups P&L by theme to detect which macro setups actually paid.
+- `--invalidation "<text>"` — the explicit condition under which this trade's thesis is wrong. Stored on the position and surfaced by `risk-monitor` alongside the mechanical stop. Forces the synthesis step to write down a pre-mortem instead of relying on the -10% hard stop alone.
+- `--rule-id <id>` — if the trade was triggered by a specific rulebook rule (`COM-1`, `RAT-3`, …), tag it for the weekly retrospective's rule-fire attribution.
 
 **What `settle` does, in order:**
 1. Mark to market every held symbol (Yahoo last bar → `last_price` + `peak_since_entry`)

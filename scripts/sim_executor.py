@@ -43,14 +43,37 @@ COMMISSION_BPS = 10       # 0.10% of trade value
 COMMISSION_MIN_RON = 1.0
 CASH_RESERVE_PCT = 0.10   # PROJECT.md: min 10% cash reserve
 MAX_SINGLE_POSITION_PCT = 0.30
+MAX_SECTOR_PCT = 0.60     # PROJECT.md: max 60% in a single sector
 MAX_DAILY_DEPLOY_PCT = 0.50
 MAX_CONCURRENT_POSITIONS = 5
 FAT_FINGER_BAND = 0.10    # limit must be within ±10% of current price
+STATE_FRESHNESS_HOURS = 36  # state.json older than this = stale, halt
 
 PORTFOLIO_DIR = os.environ.get("PORTFOLIO_DIR", "portfolio")
 STATE_PATH = os.path.join(PORTFOLIO_DIR, "state.json")
 ORDERS_PATH = os.path.join(PORTFOLIO_DIR, "orders.jsonl")
 FILLS_PATH = os.path.join(PORTFOLIO_DIR, "fills.jsonl")
+
+# Sector mapping — mirrors risk-monitor/SKILL.md. Single source of truth for the sector cap.
+# Keys are sectors; values are the BVB tickers in that sector.
+SECTOR_MAP = {
+    "Energy":            {"SNP", "SNG", "RRC", "OIL"},
+    "Utilities":         {"H2O", "SNN", "TEL", "EL", "TGN", "COTE", "TRANSI", "PE"},
+    "Banking":           {"TLV", "BRD"},
+    "Real Estate":       {"ONE", "IMP"},
+    "Consumer":          {"SFG", "AQ", "WINE", "CFH"},
+    "Healthcare":        {"M", "BIO", "ATB"},
+    "Industrial":        {"TRP", "CMP", "ALR", "TTS"},
+    "Tech/Telecom":      {"DIGI"},
+    "Financial Services": {"FP", "BVB", "EVER", "SIF1", "SIF2", "SIF3", "SIF4", "SIF5"},
+}
+
+
+def sector_of(symbol: str) -> str:
+    for sector, syms in SECTOR_MAP.items():
+        if symbol in syms:
+            return sector
+    return "Unclassified"
 
 YAHOO_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{s}?interval=1d&range=5d"
 
@@ -198,10 +221,22 @@ def validate_buy(state: dict, orders: list[dict], symbol: str, qty: int, limit: 
     # single-stock cap
     existing = find_position(state, symbol)
     existing_value = (existing["quantity"] * existing.get("last_price", existing["avg_cost"])) if existing else 0
-    proposed_value = existing_value + qty * current_price if current_price else existing_value + notional
+    add_value = qty * (current_price or limit)
+    proposed_value = existing_value + add_value
     if proposed_value > tv * MAX_SINGLE_POSITION_PCT:
         return (f"would breach 30% single-stock cap: proposed_value={proposed_value:.2f} "
                 f"limit={tv * MAX_SINGLE_POSITION_PCT:.2f}")
+
+    # sector cap — sum current sector value + this order
+    sector = sector_of(symbol)
+    current_sector_value = sum(
+        p["quantity"] * p.get("last_price", p["avg_cost"])
+        for p in state["positions"] if sector_of(p["symbol"]) == sector
+    )
+    proposed_sector_value = current_sector_value + add_value - existing_value  # avoid double-count if adding to existing
+    if proposed_sector_value > tv * MAX_SECTOR_PCT:
+        return (f"would breach 60% sector cap (sector={sector}): "
+                f"proposed={proposed_sector_value:.2f} limit={tv * MAX_SECTOR_PCT:.2f}")
 
     # daily deployment cap: sum of BUYs placed today
     today = datetime.now(timezone.utc).date().isoformat()
@@ -215,6 +250,22 @@ def validate_buy(state: dict, orders: list[dict], symbol: str, qty: int, limit: 
     if existing is None and len(state["positions"]) >= MAX_CONCURRENT_POSITIONS:
         return f"already at max {MAX_CONCURRENT_POSITIONS} concurrent positions"
 
+    return None
+
+
+def guard_state(state: dict, require_fresh: bool = True) -> str | None:
+    """Return an error string if the state file is stale or in the wrong mode. None if OK."""
+    expected_mode = os.environ.get("EXECUTION_MODE", "simulation")
+    if state.get("mode") != expected_mode:
+        return f"state.mode={state.get('mode')!r} does not match EXECUTION_MODE={expected_mode!r} — refusing to operate"
+    if require_fresh and state.get("as_of"):
+        try:
+            as_of = datetime.fromisoformat(state["as_of"].replace("Z", "+00:00"))
+            age_h = (datetime.now(timezone.utc) - as_of).total_seconds() / 3600
+            if age_h > STATE_FRESHNESS_HOURS:
+                return f"state.json is {age_h:.1f}h old (> {STATE_FRESHNESS_HOURS}h) — refusing to operate on stale state"
+        except ValueError:
+            return f"state.as_of is not a valid ISO timestamp: {state.get('as_of')!r}"
     return None
 
 
@@ -234,6 +285,13 @@ def cmd_place(args: argparse.Namespace) -> int:
     if state is None:
         print(f"error: {STATE_PATH} not found", file=sys.stderr)
         return 2
+
+    # `place` allows stale state (we may be placing orders before the morning mark-to-market)
+    err = guard_state(state, require_fresh=False)
+    if err:
+        print(f"error: {err}", file=sys.stderr)
+        return 2
+
     orders = _read_jsonl(ORDERS_PATH)
 
     bar = fetch_today_bar(args.symbol)
@@ -258,6 +316,7 @@ def cmd_place(args: argparse.Namespace) -> int:
         "order_id": args.order_id or f"{datetime.now(timezone.utc).date().isoformat()}-{args.symbol}-{action.lower()}-{len(orders)+1:02d}",
         "placed_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "symbol": args.symbol,
+        "sector": sector_of(args.symbol),
         "action": action,
         "quantity": args.quantity,
         "order_type": "LMT",
@@ -265,6 +324,9 @@ def cmd_place(args: argparse.Namespace) -> int:
         "tif": args.tif,
         "trade_type": args.trade_type,
         "trade_id": args.trade_id,
+        "theme_tag": args.theme_tag,
+        "invalidation_conditions": args.invalidation or [],
+        "engine_managed": True,
         "cash_reserved_ron": round(cash_reserved_ron, 2),
     }
     orders.append(order)
@@ -278,6 +340,12 @@ def cmd_settle(args: argparse.Namespace) -> int:
     state = _read_json(STATE_PATH, None)
     if state is None:
         print(f"error: {STATE_PATH} not found", file=sys.stderr)
+        return 2
+
+    # `settle` requires mode match; freshness guard is relaxed because settle itself updates the timestamp
+    err = guard_state(state, require_fresh=False)
+    if err:
+        print(f"error: {err}", file=sys.stderr)
         return 2
 
     orders = _read_jsonl(ORDERS_PATH)
@@ -344,7 +412,7 @@ def cmd_settle(args: argparse.Namespace) -> int:
             remaining_orders.append(o)
             continue
 
-        # write fill
+        # write fill (carry trade metadata through so the journal and retrospective can see it)
         qty = o["quantity"]
         notional = qty * fill_price
         comm = commission(notional)
@@ -353,6 +421,7 @@ def cmd_settle(args: argparse.Namespace) -> int:
             "order_id": o["order_id"],
             "filled_at": now.isoformat(timespec="seconds"),
             "symbol": sym,
+            "sector": sector_of(sym),
             "action": o["action"],
             "quantity": qty,
             "fill_price": round(fill_price, 4),
@@ -360,6 +429,9 @@ def cmd_settle(args: argparse.Namespace) -> int:
             "total_ron": round(notional + (comm if o["action"] == "BUY" else -comm), 2),
             "trade_type": o.get("trade_type"),
             "trade_id": o.get("trade_id"),
+            "theme_tag": o.get("theme_tag"),
+            "invalidation_conditions": o.get("invalidation_conditions", []),
+            "engine_managed": o.get("engine_managed", True),
         }
         new_fills.append(fill)
         _append_jsonl(FILLS_PATH, fill)
@@ -375,15 +447,23 @@ def cmd_settle(args: argparse.Namespace) -> int:
                 pos["quantity"] += qty
                 pos["avg_cost"] = round(total_cost / pos["quantity"], 4)
                 pos["last_price"] = fill_price
+                # do NOT overwrite user-editable fields (theme_tag, stop_loss, catalyst)
+                # if the existing position was manually opened.
+                if pos.get("engine_managed") is None:
+                    pos["engine_managed"] = o.get("engine_managed", True)
             else:
                 state["positions"].append({
                     "symbol": sym,
+                    "sector": sector_of(sym),
                     "quantity": qty,
                     "avg_cost": round(fill_price, 4),
                     "last_price": fill_price,
                     "last_updated": now.isoformat(timespec="seconds"),
                     "trade_type": o.get("trade_type"),
                     "trade_id": o.get("trade_id"),
+                    "theme_tag": o.get("theme_tag"),
+                    "invalidation_conditions": o.get("invalidation_conditions", []),
+                    "engine_managed": o.get("engine_managed", True),
                     "opened_at": now.isoformat(timespec="seconds"),
                     "peak_since_entry": fill_price,
                 })
@@ -395,8 +475,10 @@ def cmd_settle(args: argparse.Namespace) -> int:
                 closed_positions.append({
                     "symbol": sym,
                     "trade_id": pos.get("trade_id"),
+                    "theme_tag": pos.get("theme_tag"),
                     "exit_price": fill_price,
                     "avg_cost": pos["avg_cost"],
+                    "realized_pnl_ron": round((fill_price - pos["avg_cost"]) * qty - comm, 2),
                     "days_held": (now - datetime.fromisoformat(pos["opened_at"])).days if pos.get("opened_at") else None,
                 })
                 state["positions"] = [p for p in state["positions"] if p["symbol"] != sym]
@@ -455,6 +537,10 @@ def main() -> int:
     sp.add_argument("--trade-type", default="swing", choices=["swing", "event", "trend"])
     sp.add_argument("--trade-id", required=True)
     sp.add_argument("--order-id", default=None)
+    sp.add_argument("--theme-tag", default=None,
+                    help="Tag the trade with an active/candidate theme from THEMES.md")
+    sp.add_argument("--invalidation", action="append", default=None,
+                    help="Discrete invalidation condition (may be passed multiple times)")
     sp.set_defaults(func=cmd_place)
 
     ss = sub.add_parser("settle", help="Mark to market and fill eligible orders")

@@ -9,21 +9,31 @@ Quantitative scan over the BET-Plus universe. Fetches OHLCV, computes indicators
 
 ## Universe (BET-Plus constituents)
 
-Primary (BET, high liquidity):
-`SNG, TLV, BRD, SNP, TGN, H2O, SNN, FP, DIGI, ONE, SFG, TRP, WINE, AQ, COTE, TEL, M, EL, BVB, ROCE`
+Organized in two tiers to match the BVB index structure (~37 names in BET-Plus; we cover ~39, with a couple of legacy tickers kept for historical continuity):
 
-Extended (BET-Plus, thinner liquidity — be cautious on sizing):
-`ALR, ATB, BIO, CMP, IMP, LION, OIL, PPL, RRC, SIF1, SIF3, SIF5, STZ, TRANSI, UCM, EVER`
+**Tier A — BET core (20 names, main index, high liquidity):**
+`TLV, SNP, SNG, H2O, TGN, BRD, DIGI, EL, M, SNN, TEL, PE, FP, ONE, AQ, TRP, TTS, ATB, SFG, CFH`
 
-Skip any symbol where 20-day average daily value traded (ADV) < 50,000 RON (PROJECT.md rule).
+Where:
+- **PE** — Premier Energy (Utilities). IPO'd on BVB 2024.
+- **TTS** — Transport Trade Services (Industrial / logistics / Constanta port).
+- **CFH** — Cris-Tim Family Holding (Consumer / food, entrepreneurial). IPO'd Nov 2025.
+- **ATB** — Antibiotice (Healthcare). Promoted from extended tier to BET core to match current BET composition.
+
+**Tier B — BET-Plus beyond BET (decent liquidity, thinner names):**
+`WINE, COTE, BVB, ROCE, ALR, BIO, CMP, IMP, LION, OIL, PPL, RRC, SIF1, SIF3, SIF5, STZ, TRANSI, UCM, EVER`
+
+Skip any symbol where 20-day average daily value traded (ADV) < 50,000 RON (PROJECT.md rule). Whenever BVB announces a BET index reshuffle, cross-check this list against the updated composition at `https://bvb.ro/FinancialInstruments/Indices/IndicesProfiles.aspx?i=BET-PLUS` and propose a diff in the morning briefing.
 
 ## Price Data & Indicators
 
 Call the committed script rather than regenerating the math:
 
 ```
-python3 scripts/indicators.py --format=json SNG TLV BRD SNP TGN H2O SNN FP DIGI ONE SFG TRP WINE AQ COTE TEL M EL BVB ROCE
+python3 scripts/indicators.py --format=json TLV SNP SNG H2O TGN BRD DIGI EL M SNN TEL PE FP ONE AQ TRP TTS ATB SFG CFH
 ```
+
+(Scan the BET core first. Run Tier B only if the core produces fewer than 3 A-grade setups or if a Tier B name has a specific catalyst today.)
 
 Returns a JSON array, one object per symbol, with:
 - `price`, `daily_change_pct`
@@ -102,6 +112,46 @@ EXIT ALERTS (current positions)
 SKIPPED (illiquid or no data)
   [SYMBOL]: [reason]
 ```
+
+## Sector Beta Notes (from `macro-analyst/references/bvb-historical-patterns.md`)
+
+Sector-specific priors the scanner should weight when grading setups. These override intuitive assumptions — several historical correlations have broken.
+
+**Energy (SNP, SNG, TGN, RRC, OIL):**
+- SNP-Brent correlation **0.60-0.75** (strong, linear). Brent +4% / day → `COM-1` long SNP trade (+2-3% / 1 day).
+- SNG-TTF correlation **broke post-OUG 27/2022**: was 0.70, now ~0.30. Don't size SNG on TTF alone.
+- Regulatory shock is the dominant tail risk — fiscal-ordinance leaks (`POL-1`) drop energy names -5 to -15% same-day.
+- SNP removed from FTSE All Cap Feb 2026 (12-month passive-flow headwind).
+
+**Banking (TLV, BRD):**
+- Rate-cycle sensitivity is dominant. Each 100bp NBR move → ~8-12% re-rate over 2-3 months.
+- Bank-specific fiscal shocks (turnover tax) are the idiosyncratic tail: Law 296/2023 (2%) and Law 141/2025 (4%) each produced 5-10% drawdowns.
+- TLV higher-beta growth; BRD more defensive with SG-parent Stoxx Banks beta ~0.6.
+- In global banking stress (SVB/CS template), RO banks -7 to -10%, **recover faster** than Austrian cross-border banks.
+
+**Utilities (H2O, SNN, TEL, EL, TGN, COTE, TRANSI, PE):**
+- H2O: 100% payout, dividend proxy; hydrology-sensitive (`COM-3` drought short). ~15.7% of BET weight.
+- TEL: Jan 1 ANRE tariff reset; June 2024 +40% system services hike → +7.35% single day.
+- TGN: Oct ANRE reset; +233% YoY to April 2026 on post-cap regulatory reset + BRUA + Neptun Deep offtake — mean-reversion risk.
+- All: sensitive to ROBOR/NBR rates (discount rate for RAB) and state dividend directives.
+
+**Real Estate (ONE, IMP):**
+- **Highest rate-beta on BVB.** Each +100bp NBR hike → ~-15 to -20% on ONE.
+- May 2026 NBR first cut is a high-conviction ONE long setup (theme: "NBR first-cut pivot").
+- Catalysts: quarterly presales (>20% YoY surprise = +5-7% in 48h).
+
+**Consumer (SFG, AQ, WINE, M, CFH):**
+- Heterogeneous. SFG highest COVID/lockdown beta. AQ yield floor (3.4-7.7%). WINE export/FX beta.
+- **Mid-caps have the highest political-event beta** (MedLife, Aquila, TTS, Antibiotice, Purcari all -3 to -7.6% on 2024 election shock days).
+
+**Industrial (TRP, CMP, ALR, TTS):**
+- ALR-LME aluminum beta only **0.24** (dampened by Hidroelectrica long-term electricity contract). Strongest at LME >$3,000/t. Inversely sensitive to RO wholesale electricity prices.
+- TRP: PVC + construction PMI play.
+- CMP: German auto supplier — weak on European auto slowdown.
+
+**Tech/Telecom (DIGI):**
+- **No longer a Romanian telecom proxy** — driven by Spanish M&A since 2023 (MásOrange, FTTH sale to Macquarie). +560% from May 2019 ATL to Feb 2026 ATH.
+- Leverage watch: net debt/EBITDA >3.5x triggers derating risk.
 
 ## BVB Operational Rules
 
