@@ -1,11 +1,13 @@
 FROM eclipse-temurin:17-jre-jammy
 
-# Install Python 3.11, supervisord, IBC dependencies
+# Install Python 3.11, supervisord, IBC dependencies.
+# x11-utils provides xdpyinfo, which start-ibgateway.sh uses to poll
+# whether Xvfb is ready before launching the IB Gateway JVM.
 RUN apt-get update && apt-get install -y \
     python3 python3-pip python3-venv \
     supervisor \
     wget unzip curl \
-    xvfb libxtst6 libxrender1 libxi6 \
+    xvfb x11-utils libxtst6 libxrender1 libxi6 \
     socat \
     && rm -rf /var/lib/apt/lists/*
 
