@@ -1,0 +1,57 @@
+{
+  "_comment": "Morning run 2026-04-19 (Sunday). Markets closed; BNR has published next session's reference rate. Populated from: BNR XML, Yahoo Finance, WebSearch for rates/CDS/rating/NBR. Missing fields left null per SKILL.md guidance.",
+  "as_of": "2026-04-19T07:30:00+03:00",
+
+  "eur_ron_close": 5.0989,
+  "eur_ron_close_streak_days": 5,
+  "eur_ron_intraday_pct": null,
+  "eur_ron_30d_range_top": 5.1020,
+  "eur_ron_30d_range_bottom": 5.0780,
+  "nbr_intervention_today": false,
+
+  "ro_10y_yield_pct": 7.14,
+  "ro_10y_yield_delta_10d_bp": 28,
+  "ro_5y_cds_bp": null,
+  "ro_5y_cds_delta_3d_bp": null,
+  "ro_5y_cds_delta_wk_bp": null,
+  "hu_pl_cds_concurrent_move": null,
+  "cpi_surprise_pp": null,
+  "nbr_policy_bias": "neutral",
+  "nbr_first_cut_confirmed": false,
+  "days_to_nbr_meeting": 21,
+
+  "dax_overnight_pct": null,
+  "dax_daily_pct": null,
+  "dax_weekly_pct": null,
+  "dax_above_200dma": true,
+  "stoxx_banks_weekly_pct": null,
+  "wig20_daily_pct": null,
+  "bux_daily_pct": null,
+  "bet_sessions_flat": null,
+  "vix": 19.39,
+  "vix_1d_pct_change": 10.9,
+
+  "brent_daily_pct": 0.0,
+  "brent_weekly_pct": 0.3,
+  "ttf_eur_mwh": null,
+  "ttf_weekly_pct": null,
+  "ttf_supply_disruption_flag": false,
+  "reservoirs_pct_norm": null,
+  "reservoirs_below_norm_weeks": null,
+  "season": "spring",
+
+  "fiscal_ordinance_leak": false,
+  "election_first_round_antisystem_lead": false,
+  "court_resolution_post_selloff": false,
+  "pnrr_approval": false,
+  "pnrr_milestone_fail": false,
+  "agency_outlook_change": null,
+
+  "ftse_event_days_to_effective": null,
+  "msci_upgrade_emerging": false,
+  "ukraine_escalation_within_100km_ro": false,
+  "ukraine_ceasefire_credible": false,
+
+  "date_range": "spring_neutral",
+  "ex_div_cluster_day": false
+}

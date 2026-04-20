@@ -1,40 +1,40 @@
 {
   "mode": "simulation",
-  "as_of": "2026-04-19T07:30:00+03:00",
-  "cash_ron": 500.00,
+  "as_of": "2026-04-20T15:47:18+00:00",
+  "cash_ron": 500.0,
   "positions": [
     {
       "symbol": "H2O",
       "quantity": 4,
-      "avg_cost": 140.00,
-      "last_price": 159.00,
-      "last_updated": "2026-04-17T17:45:00+03:00",
+      "avg_cost": 140.0,
+      "last_price": 154.0,
+      "last_updated": "2026-04-20T15:47:18+00:00",
       "trade_type": "trend",
       "trade_id": "2026-03-10-H2O-01",
       "opened_at": "2026-03-10T10:15:00+03:00",
       "theme_tag": "AI / datacenter power demand",
-      "stop_loss": 126.00,
-      "peak_since_entry": 161.00
+      "stop_loss": 126.0,
+      "peak_since_entry": 161.0
     },
     {
       "symbol": "TLV",
       "quantity": 15,
-      "avg_cost": 35.00,
-      "last_price": 38.20,
-      "last_updated": "2026-04-17T17:45:00+03:00",
+      "avg_cost": 35.0,
+      "last_price": 37.4,
+      "last_updated": "2026-04-20T15:47:18+00:00",
       "trade_type": "swing",
       "trade_id": "2026-04-02-TLV-01",
       "opened_at": "2026-04-02T10:30:00+03:00",
       "theme_tag": "BNR higher-for-longer",
-      "stop_loss": 31.50,
+      "stop_loss": 31.5,
       "peak_since_entry": 38.34
     },
     {
       "symbol": "SNG",
       "quantity": 40,
-      "avg_cost": 12.80,
-      "last_price": 12.70,
-      "last_updated": "2026-04-17T17:45:00+03:00",
+      "avg_cost": 12.8,
+      "last_price": 12.32,
+      "last_updated": "2026-04-20T15:47:18+00:00",
       "trade_type": "event",
       "trade_id": "2026-04-08-SNG-01",
       "opened_at": "2026-04-08T10:20:00+03:00",
@@ -45,10 +45,10 @@
     }
   ],
   "totals": {
-    "position_value_ron": 1717.00,
-    "total_value_ron": 2217.00,
-    "unrealized_pnl_ron": 120.00,
-    "unrealized_pnl_pct": 7.52,
-    "cost_basis_ron": 1597.00
+    "position_value_ron": 1669.8,
+    "total_value_ron": 2169.8,
+    "unrealized_pnl_ron": 72.8,
+    "unrealized_pnl_pct": 4.56,
+    "cost_basis_ron": 1597.0
   }
 }
