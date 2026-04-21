@@ -9,11 +9,11 @@ Three execution backends, one interface. The skill's contract is identical eithe
 
 | `EXECUTION_MODE` | Backend | Broker contact | Real money |
 |---|---|---|---|
-| `simulation` (default) | `scripts/sim_executor.mjs` | None — Yahoo/stooq prices only | No |
-| `demo` | `scripts/bt_executor.mjs` (`demo: true`) | BT Trade demo environment | No (paper) |
+| `demo` (**current active mode**) | `scripts/bt_executor.mjs` (`demo: true`) | BT Trade demo environment | No (paper) |
 | `live` | `scripts/bt_executor.mjs` (`--live`) | BT Trade live environment | **Yes — real RON** |
+| `simulation` (legacy; dev-only) | `scripts/sim_executor.mjs` | None — Yahoo/stooq prices only | No |
 
-Read `EXECUTION_MODE` from the environment at the start of each run. If unset, default to `simulation`. Never upgrade modes implicitly — the routine's env is the only switch.
+Read `EXECUTION_MODE` from the environment at the start of each run. **The routine runs in `demo`.** `simulation` is retained for offline development (no BT creds needed) but must not be used for scheduled routine runs — it gives fake fills that pollute the journal. If `EXECUTION_MODE` is unset, default to `simulation` only to prevent accidentally hitting a real broker when running ad-hoc scripts locally; the routine always sets it explicitly. Never upgrade modes implicitly — the routine's env is the only switch.
 
 ### ⚠️ Cash and holdings are NEVER read from a file
 

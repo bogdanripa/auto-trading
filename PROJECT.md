@@ -197,9 +197,11 @@ Does not reconcile anything. Simulation state is the only source of truth. This 
 
 Controlled by the `EXECUTION_MODE` env var on the routine.
 
-**`simulation` (current):** `trade-executor` maintains a simulated portfolio in `portfolio_state/current` (Firestore store), using real BVB prices from Yahoo Finance. No broker account required. Fills are computed against the day's OHLC range. Commission modeled at 0.1% (min 1 RON) to match BT Trade's BVB tier.
+**`demo` (current):** `trade-executor` calls BT Trade's demo (paper) environment via the vendored `@bogdanripa/bt-trade` client. Orders rest on BT's book and fill against real market data; no real RON moves. This is the active mode for all scheduled runs.
 
-**`demo` / `live`:** `trade-executor` calls BT Trade via the vendored `@bogdanripa/bt-trade` client. `demo` is BT Trade's paper environment; `live` moves real RON. Both share the same order schema and rules as `simulation`. See `trade-executor/SKILL.md` for the full backend matrix.
+**`live` (future):** same backend as `demo` but against BT Trade's live environment — real RON. Flip `EXECUTION_MODE=live` on the routine when ready.
+
+**`simulation` (legacy, dev-only):** `trade-executor` maintains a simulated portfolio in `portfolio_state/current` using real BVB prices from Yahoo Finance with modeled fills. Retained for offline development without BT credentials. Must not be used for scheduled runs — fills are synthetic and pollute the journal.
 
 ### Order rules (both modes)
 - Market: BVB
