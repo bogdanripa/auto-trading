@@ -242,9 +242,11 @@ node scripts/bt_executor.mjs holdings
 
 On login, BT sends an SMS. Your phone's Shortcut forwards the SMS body to the ntfy.sh topic named by `BT_NTFY_TOPIC`. `bt_executor.mjs` waits on that topic for up to 2 minutes, parses the code, and submits it. No human in the loop if the forwarding is working.
 
-### Session persistence (planned)
+### Session persistence
 
-Scheduled routines get a fresh filesystem each run, so a naïve "one login per run" design burns OTPs at every cron fire. A follow-up change persists `client.toSnapshot()` to GCS (`gs://auto-trader-493814-bt-session/bt_session.json`) and adds a 45-minute scheduled keeper that refreshes the tokens. While the keeper is running, trading routines restore the snapshot and skip OTP entirely; if the keeper ever misses more than ~1 hour the next run falls back to a fresh login (one OTP). Not yet wired — until it lands, expect one OTP per morning + evening run.
+Scheduled routines get a fresh filesystem each run, so a naïve "one login per run" design burns OTPs at every cron fire. `bt_executor.mjs` persists `client.toSnapshot()` via `scripts/store.mjs` to **Firestore** (collection `bt_session`, doc `current`) in `europe-west3` on every login/refresh/logout. A 45-minute scheduled keeper routine calls `node scripts/bt_executor.mjs refresh` so the refresh token never ages past its ~1h server-side expiry. Trading routines restore the snapshot at startup and skip OTP entirely; if the keeper ever misses more than ~1h the next run falls back to a fresh login (one OTP).
+
+Required env: `FIRESTORE_PROJECT=auto-trader-493814`, plus either `GOOGLE_APPLICATION_CREDENTIALS` pointing to the `bt-session-rw` service-account JSON or the same JSON inlined in `GCS_SA_KEY_JSON`. The service account needs `roles/datastore.user` on the project. In dev (no `FIRESTORE_PROJECT`), the snapshot falls back to a local `.bt_session.json` file.
 
 ### Per-run invocation pattern
 

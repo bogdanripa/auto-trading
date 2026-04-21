@@ -432,7 +432,11 @@ export async function cmdSettle(/* args */) {
       sector: sectorOf(sym),
       action: o.action,
       quantity: qty,
+      limit_price: Math.round(limit * 10000) / 10000,
       fill_price: Math.round(fillPrice * 10000) / 10000,
+      slippage_bps: Math.round(
+        ((o.action === 'BUY' ? (fillPrice - limit) : (limit - fillPrice)) / limit) * 10_000 * 100
+      ) / 100,
       commission_ron: Math.round(comm * 100) / 100,
       total_ron: Math.round((notional + (o.action === 'BUY' ? comm : -comm)) * 100) / 100,
       trade_type: o.trade_type ?? null,

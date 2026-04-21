@@ -2,3 +2,12 @@ __pycache__/
 *.pyc
 .DS_Store
 .env
+
+# Node
+node_modules/
+package-lock.json
+
+# Local dev store (LocalStore fallback when FIRESTORE_PROJECT is unset)
+.bt_session.json
+considered/
+snapshots/

@@ -255,3 +255,16 @@ Before proposing any theme, ask: *can we express this view on BVB*? If the only 
 ## Caching
 
 Same policy as `bvb-news`: in-memory cache for the run, no persistence between runs. The routine should never hit the same URL twice within one run. The snapshot itself *is* written to `rules/market_snapshot.json` as the audit trail of what the rule evaluator saw today.
+
+## Daily Snapshot Archive
+
+After writing `rules/market_snapshot.json`, also archive it to durable storage keyed by date so regimes can be replayed historically:
+
+```js
+import { openStore } from '../scripts/store.mjs';
+const store = await openStore();
+const date = new Date().toISOString().slice(0, 10);   // 'YYYY-MM-DD'
+await store.saveSnapshot(date, snapshot);
+```
+
+Backend: Firestore `market_snapshots` collection (doc id = date) when `FIRESTORE_PROJECT` is set; otherwise `snapshots/YYYY-MM-DD.json` for dev. This feeds the retrospective ("what did the macro picture look like the week before the ALR trade went wrong?") and enables rulebook-change backtesting ("if REGIME-1 had weighted inflation at 0.30 instead of 0.25, how would the March regime reads have differed?").

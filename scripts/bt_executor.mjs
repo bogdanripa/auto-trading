@@ -46,7 +46,7 @@
  */
 
 import { BTTradeClient, ntfyOtpProvider } from '../vendor/bt-trade/src/index.js';
-import { loadSession, saveSession, isPersistenceEnabled } from './gcs_session.mjs';
+import { openStore } from './store.mjs';
 
 // ---------- argv parsing ----------
 
@@ -90,13 +90,14 @@ function requireEnv(name) {
  */
 async function makeClient({ demo }) {
   const topic = process.env.BT_NTFY_TOPIC; // only required if we end up doing a fresh login
+  const store = await openStore();
 
   // onSessionChange is called after login, every refresh, and on logout.
-  // Persisting every time means the GCS object always reflects the freshest
+  // Persisting every time means the Firestore doc always reflects the freshest
   // tokens, so the keeper routine (and subsequent runs) can resume cleanly.
   const onSessionChange = async (snap) => {
-    try { await saveSession(snap); }
-    catch (e) { console.error(`[bt_executor] saveSession failed: ${e.message}`); }
+    try { await store.saveBtSession(snap); }
+    catch (e) { console.error(`[bt_executor] saveBtSession failed: ${e.message}`); }
   };
 
   const client = new BTTradeClient({
@@ -105,9 +106,9 @@ async function makeClient({ demo }) {
     onSessionChange,
   });
 
-  // Try to resume from GCS first. toSnapshot excludes the password, so a
+  // Try to resume from Firestore first. toSnapshot excludes the password, so a
   // resumed client can refresh tokens without re-triggering 2FA or re-login.
-  const prior = await loadSession();
+  const prior = await store.loadBtSession();
   if (prior && prior.accessToken && prior.refreshToken) {
     try {
       client.restore(prior);
@@ -176,7 +177,7 @@ async function cmdHoldings(client) {
  * Proactively rotate the access+refresh tokens. Designed to be called every
  * ~45 min by a dedicated keeper routine so the refresh token never ages out
  * past its ~1h server-side expiry. onSessionChange persists the new tokens
- * to GCS automatically.
+ * to Firestore automatically.
  */
 async function cmdRefresh(client) {
   const before = client.toSnapshot();
@@ -192,11 +193,11 @@ async function cmdRefresh(client) {
 }
 
 /**
- * Revoke the server-side session and clear the persisted snapshot from GCS.
+ * Revoke the server-side session and clear the persisted snapshot from Firestore.
  * Only use when you explicitly want to force a fresh 2FA login on the next run.
  */
 async function cmdLogout(client) {
-  await client.logout();              // also fires onSessionChange(null) → GCS clear
+  await client.logout();              // also fires onSessionChange(null) → Firestore clear
   return { ok: true, logged_out: true };
 }
 
@@ -262,7 +263,7 @@ Commands:
   holdings         List current positions
   place            Place a limit order (requires --symbol --action --quantity --limit --trade-id)
   refresh          Rotate access+refresh tokens (for the keeper routine)
-  logout           Revoke the server-side session and clear GCS snapshot
+  logout           Revoke the server-side session and clear Firestore snapshot
 
 Global flags:
   --live           Use real-money mode (default: demo/paper)
@@ -309,7 +310,7 @@ async function main() {
   } finally {
     // We deliberately do NOT call client.logout() here — logging out revokes
     // the server-side session, which defeats the whole point of persisting
-    // tokens to GCS for reuse across routine runs. The `logout` subcommand
+    // tokens to Firestore for reuse across routine runs. The `logout` subcommand
     // is the only place we revoke. We DO want to stop the library's
     // auto-refresh timer so the process can exit; do that by nulling the
     // reference — Node will GC the timer. If the library exposes a nicer

@@ -27,6 +27,8 @@ import path from 'node:path';
 
 const JOURNAL_DIR = process.env.JOURNAL_DIR || 'journal';
 const TRADES_PATH = path.join(JOURNAL_DIR, 'trades.jsonl');
+const PORTFOLIO_DIR = process.env.PORTFOLIO_DIR || 'portfolio';
+const FILLS_PATH = path.join(PORTFOLIO_DIR, 'fills.jsonl');
 
 const CONVICTION_BUCKETS = [
   [0, 4, 'low'],
@@ -135,8 +137,41 @@ function mapGroups(pairs, keyFn) {
   return out;
 }
 
+/**
+ * Slippage stats over fills.jsonl. Each fill carries `slippage_bps` (sim_executor
+ * records it as (fill - limit)/limit for buys, (limit - fill)/limit for sells —
+ * positive bps means we paid *up* vs our limit).
+ */
+function computeSlippageStats(fills, windowStart) {
+  const rows = fills.filter(f => {
+    if (f.slippage_bps == null) return false;
+    if (!windowStart) return true;
+    const t = new Date(f.filled_at || 0);
+    return !isNaN(t.getTime()) && t >= windowStart;
+  });
+  if (!rows.length) return { count: 0 };
+  const byAction = { BUY: [], SELL: [] };
+  for (const f of rows) (byAction[f.action] ||= []).push(f.slippage_bps);
+  const summarize = (arr) => {
+    if (!arr.length) return null;
+    const sorted = [...arr].sort((a, b) => a - b);
+    return {
+      count: arr.length,
+      avg_bps: round(arr.reduce((a, b) => a + b, 0) / arr.length, 2),
+      median_bps: round(sorted[Math.floor(sorted.length / 2)], 2),
+      worst_bps: round(Math.max(...arr), 2),
+    };
+  };
+  return {
+    count: rows.length,
+    overall: summarize(rows.map(f => f.slippage_bps)),
+    buys: summarize(byAction.BUY || []),
+    sells: summarize(byAction.SELL || []),
+  };
+}
+
 function parseArgs(argv) {
-  const args = { window: null, since: null, format: 'text', trades: TRADES_PATH };
+  const args = { window: null, since: null, format: 'text', trades: TRADES_PATH, fills: FILLS_PATH };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const eq = (p) => a.startsWith(p + '=') ? a.slice(p.length + 1) : null;
@@ -148,6 +183,8 @@ function parseArgs(argv) {
     else if (eq('--format')) args.format = eq('--format');
     else if (a === '--trades') args.trades = argv[++i];
     else if (eq('--trades')) args.trades = eq('--trades');
+    else if (a === '--fills') args.fills = argv[++i];
+    else if (eq('--fills')) args.fills = eq('--fills');
     else if (a === '-h' || a === '--help') args.help = true;
     else throw new Error(`unknown argument: ${a}`);
   }
@@ -209,12 +246,16 @@ async function main() {
     ),
   };
 
+  const fills = readJsonl(args.fills);
+  const slippage = computeSlippageStats(fills, windowStart);
+
   const payload = {
     generated_at: new Date().toISOString().replace(/\.\d+Z$/, 'Z'),
     window: args.window || args.since || 'all-time',
     n_closed: pairs.length,
     overall,
     groups,
+    slippage,
   };
 
   if (args.format === 'json') {
@@ -241,6 +282,14 @@ async function main() {
         `exp ${padLeft(r.expectancy_pct.toFixed(2), 6)}%`
       );
     }
+  }
+  if (slippage.count) {
+    lines.push('');
+    lines.push('-- slippage (bps vs. limit; + = paid up) --');
+    const fmt = (s) => s ? `n=${padLeft(s.count, 3)} avg ${padLeft(s.avg_bps, 7)}  med ${padLeft(s.median_bps, 7)}  worst ${padLeft(s.worst_bps, 7)}` : '(none)';
+    lines.push(`  overall  ${fmt(slippage.overall)}`);
+    lines.push(`  buys     ${fmt(slippage.buys)}`);
+    lines.push(`  sells    ${fmt(slippage.sells)}`);
   }
   process.stdout.write(lines.join('\n') + '\n');
   return 0;

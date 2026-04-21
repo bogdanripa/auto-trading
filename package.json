@@ -1,0 +1,17 @@
+{
+  "name": "auto-trading",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "BVB Autonomous Trading Engine — Anthropic scheduled routines + Node scripts.",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test tests/*.mjs"
+  },
+  "dependencies": {
+    "@bogdanripa/bt-trade": "file:vendor/bt-trade",
+    "@google-cloud/firestore": "^7.10.0"
+  }
+}

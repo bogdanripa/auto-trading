@@ -127,6 +127,31 @@ For each closed position, regardless of mode, hand off to:
 
 These two are complementary, not redundant: tax-tracker captures the legal/numerical record, trade-journal captures the *why* and *what we learned*.
 
+## Considered-but-Rejected Candidates (Learning Signal)
+
+Every candidate the decision layer looks at but does **not** trade — either rejected by allocation limits, deferred by a rule, or skipped for a macro reason — must be logged to the `considered` collection. Without this log, the retrospective can only learn from what we *did* do, never from what we wisely skipped or what we wrongly avoided.
+
+Write via `scripts/store.mjs`:
+
+```js
+import { openStore } from './scripts/store.mjs';
+const store = await openStore();
+await store.appendConsidered({
+  date: '2026-04-21',
+  symbol: 'TLV',
+  decision: 'rejected',            // 'rejected' | 'deferred' | 'skipped'
+  reason: 'sector cap (Banking at 58%)',
+  theme_tag: 'BNR higher-for-longer',
+  rule_id: 'risk-on-banking',
+  conviction: 7,
+  entry_price_considered: 38.40,
+  stop_considered: 35.00,
+  target_considered: 42.00,
+});
+```
+
+Backend: Firestore `considered` collection when `FIRESTORE_PROJECT` is set; otherwise `considered/considered.jsonl` for dev. The retrospective pulls this in its post-mortem: "of N rejected candidates in the window, M would have been winners — is a rule too restrictive?"
+
 ## Rules This Skill Enforces
 - Never approve a trade that breaks allocation limits without explicit override
 - Always report accurate P&L — no rounding or hiding losses
