@@ -1,6 +1,6 @@
 ---
 name: trade-executor
-description: Execute trades. Routes orders to one of three backends based on EXECUTION_MODE — a local simulation (default, no broker contact), BT Trade demo (paper trading via real BT Trade API), or BT Trade live (real RON). The skill's interface is identical across all three. Trigger whenever the synthesis step decides to place, modify, or cancel an order, or when current positions and fills need to be reconciled with market reality.
+description: Execute trades AND answer any question about the brokerage account itself — current cash balance, positions, open orders, recent fills. Routes to one of three backends based on EXECUTION_MODE — a local simulation (default, no broker contact), BT Trade demo (paper trading via real BT Trade API), or BT Trade live (real RON). The skill's interface is identical across all three. Trigger whenever the synthesis step decides to place, modify, or cancel an order, whenever current positions and fills need to be reconciled with market reality, OR whenever the user asks anything about their trading account (e.g. "how much cash do I have", "what do I own", "what orders are open", "show me my portfolio").
 ---
 
 # Trade Executor
