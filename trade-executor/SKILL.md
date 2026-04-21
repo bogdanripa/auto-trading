@@ -58,7 +58,7 @@ Thereafter `sim_executor.mjs` owns the state and writes every change back to Fir
   - BUY limit at `P`: fills if `daily_low ≤ P`. Fill price = `min(P, daily_open)` — conservative; assumes you got no better than the open if it gapped through your limit.
   - SELL limit at `P`: fills if `daily_high ≥ P`. Fill price = `max(P, daily_open)`.
   - Orders that don't fill: stay open if `tif=GTC`, cancelled if `tif=DAY` and the day has closed.
-- **Commission:** 0.1% of trade value, min 1 RON. This approximates IBKR's BVB commission tier.
+- **Commission:** 0.1% of trade value, min 1 RON. Approximates BT Trade's BVB commission tier.
 - **Slippage:** baked into the open-price rule above. No additional slippage.
 - **Partial fills:** not simulated. Orders either fully fill or stay open.
 - **No shorting:** SELL orders require an existing long position of ≥ quantity.

@@ -1,7 +1,7 @@
 # BVB Autonomous Trading Engine
 
 ## Overview
-This project is a fully autonomous swing trading engine for the Bucharest Stock Exchange (BVB), operating through a BT Trade account (Banca Transilvania's retail platform, native BVB access, RON-denominated). IBKR was the originally-planned broker and is still referenced in some historical notes; the live/demo integration is BT Trade. It runs as scheduled Claude tasks — a morning pre-market session and an evening post-close session — that analyze markets, make trading decisions, execute orders, and report via Telegram.
+This project is a fully autonomous swing trading engine for the Bucharest Stock Exchange (BVB), operating through a BT Trade account (Banca Transilvania's retail platform, native BVB access, RON-denominated). The engine connects to BT Trade via the vendored `@bogdanripa/bt-trade` HTTP client (`vendor/bt-trade/`) called from `scripts/bt_executor.mjs`. It runs as scheduled Claude tasks — a morning pre-market session and an evening post-close session — that analyze markets, make trading decisions, execute orders, and report via Telegram.
 
 ## Strategy Framework
 
@@ -45,7 +45,7 @@ Example: "OVERRIDE: SNG hit -10% stop but holding. Reason: market-wide selloff o
 ### Cash Management
 - Cash is a valid position. No forced trades when nothing looks good.
 - Budget is variable — the owner wires money irregularly. Some days 100 RON, some days much more, some days nothing.
-- The engine works with whatever cash is available in the IBKR account each morning.
+- The engine works with whatever cash is available in the BT Trade account each morning.
 - Cash accumulates until a good setup appears, then deploys a properly sized position.
 
 ### Capital Allocation Logic
@@ -171,19 +171,19 @@ Positions: [list with current P&L %]
 
 ## Human-in-the-Loop Reconciliation (live mode only)
 
-The user may place manual trades via IBKR at any point. The engine must tolerate this without conflict.
+The user may place manual trades in the BT Trade app at any point. The engine must tolerate this without conflict.
 
-### On every live run, reconcile with IBKR first
-Before any analysis or ordering, fetch IBKR account state (cash, positions, open orders, today's fills) and diff against `portfolio_state/current`:
-- **Unknown position on IBKR** → user bought manually. Import into `portfolio_state/current` with `engine_managed: false`. Append a `backfilled` entry to `trades_journal/*` with minimal metadata so the position is not invisible to analytics.
-- **Position missing from IBKR** → user sold manually. Close in `portfolio_state/current`. Append an exit record with `exit_reason: manual` and `thesis_verdict: inconclusive`.
+### On every live run, reconcile with BT Trade first
+Before any analysis or ordering, fetch BT Trade account state (cash, positions, open orders, today's fills) via `node scripts/bt_executor.mjs status` and diff against `portfolio_state/current`:
+- **Unknown position on BT Trade** → user bought manually. Import into `portfolio_state/current` with `engine_managed: false`. Append a `backfilled` entry to `trades_journal/*` with minimal metadata so the position is not invisible to analytics.
+- **Position missing from BT Trade** → user sold manually. Close in `portfolio_state/current`. Append an exit record with `exit_reason: manual` and `thesis_verdict: inconclusive`.
 - **Quantity delta on an existing position** → partial manual trade. Adjust and log the delta. Do not change user-editable fields (`theme_tag`, `stop_loss`, `catalyst`).
 - **Cash delta only** → deposit or withdrawal. Update cash. No journal entry.
 
 ### Hard rule: the engine never touches what you placed
 The engine **never** cancels, modifies, or resizes an order the user placed manually. It **never** overrides a position the user opened manually.
 
-Every order the engine places is tagged `engine_managed: true`. The engine may only close/cancel orders carrying that tag. If an IBKR order has no tag (or a tag it doesn't recognize), it treats it as manual — read-only.
+Every order the engine places is tagged `engine_managed: true`. The engine may only close/cancel orders carrying that tag. If a BT Trade order has no tag (or a tag it doesn't recognize), it treats it as manual — read-only.
 
 If the engine would like to act on a manually-opened position (e.g. apply its stop-loss logic), that is opt-in per position via `engine_managed: true`, set by the user manually on the position inside `portfolio_state/current`.
 
@@ -191,15 +191,15 @@ If the engine would like to act on a manually-opened position (e.g. apply its st
 Every manual-activity detection goes into the Telegram briefing under a "RECONCILED" section: what was imported, what was closed, what the P&L was. This gives the user a chance to retroactively tag a thesis / theme if useful.
 
 ### Simulation mode
-Does not reconcile anything. Simulation state is the only source of truth. This section activates only when `EXECUTION_MODE=ibkr`.
+Does not reconcile anything. Simulation state is the only source of truth. This reconciliation section activates only when `EXECUTION_MODE=demo` or `EXECUTION_MODE=live`.
 
 ## Execution Mode
 
 Controlled by the `EXECUTION_MODE` env var on the routine.
 
-**`simulation` (current):** `trade-executor` maintains a simulated portfolio in `portfolio_state/current` (Firestore store), using real BVB prices from Yahoo Finance. No broker account required. Fills are computed against the day's OHLC range. Commission modeled at 0.1% (min 1 RON) to match IBKR's BVB tier.
+**`simulation` (current):** `trade-executor` maintains a simulated portfolio in `portfolio_state/current` (Firestore store), using real BVB prices from Yahoo Finance. No broker account required. Fills are computed against the day's OHLC range. Commission modeled at 0.1% (min 1 RON) to match BT Trade's BVB tier.
 
-**`demo` / `live`:** `trade-executor` calls BT Trade via the vendored `@bogdanripa/bt-trade` client. `demo` is BT Trade's paper environment; `live` moves real RON. Both share the same order schema and rules as `simulation`. See `trade-executor/SKILL.md` for the full backend matrix. (Legacy references to "ibkr" mode elsewhere in this repo are historical — IBKR was the originally-planned broker but was never integrated.)
+**`demo` / `live`:** `trade-executor` calls BT Trade via the vendored `@bogdanripa/bt-trade` client. `demo` is BT Trade's paper environment; `live` moves real RON. Both share the same order schema and rules as `simulation`. See `trade-executor/SKILL.md` for the full backend matrix.
 
 ### Order rules (both modes)
 - Market: BVB

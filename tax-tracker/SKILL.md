@@ -7,9 +7,9 @@ description: Log every trade for Romanian tax reporting (Declarația Unică). Us
 
 Maintain a complete, accurate trade log for Declarația Unică filing.
 
-## Romanian Tax Rules for IBKR (Non-Resident Broker)
+## Romanian Tax Rules
 
-Since IBKR is not a Romanian broker:
+BT Trade (Banca Transilvania) is a Romanian broker and withholds capital-gains tax at source for resident individuals, so the tax-tracker's role there is primarily verification + Declarația Unică reconciliation. The rules below apply regardless of broker:
 - Capital gains tax: 10% on net realized gains
 - Losses can offset gains within the same year
 - If the year ends negative, losses carry forward to offset up to 70% of next year's gains
@@ -87,5 +87,5 @@ If total investment income exceeds 6 minimum gross salaries (check current thres
 ## Data Integrity Rules
 - Never modify or delete a trade record after creation
 - Every trade from the trade-executor MUST have a corresponding tax-tracker entry
-- Reconcile with IBKR statement monthly — flag discrepancies
+- Reconcile with the BT Trade statement monthly — flag discrepancies
 - Store BNR exchange rates for any non-RON transaction dates

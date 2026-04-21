@@ -19,11 +19,11 @@ Both are configured in the scheduled routine's environment (https://claude.ai/co
 
 ### Simulation vs. live execution — Telegram always sends
 
-Telegram delivery is **independent of `EXECUTION_MODE`**. Whether the engine is in `simulation` or `ibkr` mode, real Telegram messages go out on every run. The user needs to see the decisions, fills, and alerts either way — the whole point of simulation mode is to validate the end-to-end pipeline including the notification path.
+Telegram delivery is **independent of `EXECUTION_MODE`**. Whether the engine is in `simulation`, `demo`, or `live` mode, real Telegram messages go out on every run. The user needs to see the decisions, fills, and alerts either way — the whole point of simulation mode is to validate the end-to-end pipeline including the notification path.
 
 The only thing that changes between modes is the *content* of the message:
 - In `simulation`, fills come from `scripts/sim_executor.mjs` (modeled) — label them as simulated if useful, but do not suppress the briefing.
-- In `ibkr`, fills come from the real broker.
+- In `demo` / `live`, fills come from the real BT Trade account via `scripts/bt_executor.mjs`.
 
 Do **not** add a mode guard around the Telegram HTTP call. If the env vars are missing, log and skip; never silently drop the message because the engine is in simulation.
 

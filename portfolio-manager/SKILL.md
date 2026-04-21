@@ -1,6 +1,6 @@
 ---
 name: portfolio-manager
-description: Track and manage the trading portfolio — positions, cash, P&L, allocation, and performance metrics. Use this skill in every daily trading run to understand current portfolio state before making decisions. It reads portfolio data from IBKR (or from the paper trading simulation), calculates performance, checks allocation limits, and determines available capital for new trades. Trigger whenever you need to know the current portfolio state, check if a trade fits within risk limits, or review historical performance.
+description: Track and manage the trading portfolio — positions, cash, P&L, allocation, and performance metrics. Use this skill in every daily trading run to understand current portfolio state before making decisions. It reads portfolio data via `trade-executor` (BT Trade in demo/live mode, or the local simulation in simulation mode), calculates performance, checks allocation limits, and determines available capital for new trades. Trigger whenever you need to know the current portfolio state, check if a trade fits within risk limits, or review historical performance.
 ---
 
 # Portfolio Manager
@@ -68,7 +68,7 @@ Final size = minimum of (position size, max position by allocation)
 
 Early portfolio (< 2,000 RON total):
 - Accept concentrated positions (fewer, larger relative positions)
-- Minimum trade size: Must be above IBKR's minimum order value
+- Minimum trade size: Must be above BT Trade's minimum order value
 - May only hold 1-2 positions — that's OK
 
 Growing portfolio (2,000 - 10,000 RON):
