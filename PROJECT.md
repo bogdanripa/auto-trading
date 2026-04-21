@@ -57,6 +57,16 @@ When multiple setups compete for limited capital:
 
 ## Daily Workflow
 
+### Step 0 (every run, morning or evening) — Install dependencies
+
+**Before any skill runs, execute `npm install` at the repo root.** The routine's sandbox is ephemeral; `node_modules/` does not survive between runs. The Node scripts under `scripts/` depend on `@google-cloud/firestore` (Firestore persistence for portfolio state, orders, fills, journal, and BT Trade session tokens) and the vendored `@bogdanripa/bt-trade` client. Without `npm install`, the store abstraction silently falls back to `LocalStore` (ephemeral disk that also disappears between runs) and every run re-triggers 2FA.
+
+```
+npm install
+```
+
+If `npm install` fails (network blip, registry timeout), abort the run and report via `telegram-reporter`. Do **not** proceed with a partial install — a missing Firestore SDK means the state persistence path is broken and the run would corrupt nothing (because it can't write) but would read stale/empty state.
+
 ### Morning Run (7:30 AM EET)
 Execute skills in this order:
 1. Read `LESSONS.md`, `THEMES.md`, and `macro-analyst/references/bvb-historical-patterns.md` — load active lessons, active themes, and the historical playbook before analysis

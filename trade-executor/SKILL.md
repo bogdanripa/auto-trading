@@ -28,6 +28,12 @@ Cash balances, position quantities, open orders, and recent fills change asynchr
 
 If an executor run fails, report the failure — do not fall back to reading the stored state, and do not answer with stale numbers.
 
+### Prerequisite: `npm install` before any executor call
+
+The executor scripts depend on `@google-cloud/firestore` (Firestore backend for `scripts/store.mjs`) and the vendored `@bogdanripa/bt-trade` client. The routine's sandbox is ephemeral — `node_modules/` does not survive between runs — so **every run must execute `npm install` at the repo root before invoking `sim_executor.mjs` or `bt_executor.mjs`**. See `PROJECT.md` § Daily Workflow → Step 0.
+
+If the SDK is missing, `openStore()` silently falls back to `LocalStore` (local JSONL files under `portfolio/` + `journal/`), which *also* don't survive sandbox recycling — so cash balances come back wrong and BT Trade tokens are lost, forcing re-authentication (and OTP) on every run.
+
 **Why BT Trade** (Banca Transilvania's retail platform, not IBKR): it has native BVB access with RON-native cash and the symbols our skills already use, and the HTTP API (via the vendored `@bogdanripa/bt-trade` client at `vendor/bt-trade/`) works without the GUI-automation plumbing IBKR's Gateway requires. One trade-off: BT's demo and live APIs both require OTP via SMS — the library bridges this to ntfy.sh, which must have a running phone Shortcut forwarding BT's SMS codes to the configured topic.
 
 ## Simulation Backend

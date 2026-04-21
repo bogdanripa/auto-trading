@@ -45,9 +45,14 @@ Firestore store               — Portfolio state (portfolio_state/current), ope
 
 **Phase 1 — BT Trade demo (current):**
 1. Create a Claude Code routine at https://claude.ai/code/routines
-2. Set env vars: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `FIRESTORE_PROJECT`, `BT_USER`, `BT_PASS`, `BT_NTFY_TOPIC`, `EXECUTION_MODE=demo`
-3. Install the ntfy.sh phone Shortcut that forwards BT's OTP SMS to the configured topic
-4. First run triggers 2FA → OTP via ntfy. Tokens persist to `bt_session/current` in Firestore; subsequent runs resume silently.
+2. Set env vars on the routine:
+   - `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`
+   - `FIRESTORE_PROJECT=auto-trader-493814`
+   - `GCS_SA_KEY_JSON=<single-line JSON of a service account with `roles/datastore.user`>`
+   - `BT_USER`, `BT_PASS`, `BT_NTFY_TOPIC`
+   - `EXECUTION_MODE=demo`
+3. Ensure the routine prompt's **first action is `npm install`** — the sandbox is ephemeral and `node_modules/` does not survive between runs. Without this, the Firestore SDK is missing and the store silently falls back to ephemeral local files, re-triggering 2FA on every run. See `PROJECT.md` § Daily Workflow → Step 0.
+4. In demo mode, BT sends OTP to email (not SMS). On first run, fetch the code from email and feed it to the client; the resulting session snapshot persists to `bt_session/current` in Firestore and subsequent runs resume silently until the refresh token expires (typically weeks).
 5. Schedule the routine for morning (07:30 EET) and evening (17:30 EET) runs
 
 **Phase 2 — Live trading (real RON, future):**
