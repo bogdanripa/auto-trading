@@ -7,7 +7,7 @@ description: Establish the macro context for today's BVB trading decisions — F
 
 Two jobs, in order:
 
-1. **Populate the market snapshot** (`rules/market_snapshot.json`) from live feeds. This drives the structured rulebook `rules/bvb_rules.json` via `scripts/evaluate_rules.py`.
+1. **Populate the market snapshot** (`rules/market_snapshot.json`) from live feeds. This drives the structured rulebook `rules/bvb_rules.json` via `scripts/evaluate_rules.mjs`.
 2. **Narrate the macro context** — what shifted overnight, which central bank is in focus, which theme has a tailwind today.
 
 The research anchor is `macro-analyst/references/bvb-historical-patterns.md` — a decade of BET event history, sector betas, and regime-break notes. Consult it whenever interpreting thresholds or writing new signals.
@@ -28,9 +28,9 @@ Every morning, build `rules/market_snapshot.json` following `rules/market_snapsh
 After populating, run:
 
 ```
-python3 scripts/evaluate_rules.py --format=json > /tmp/rules_eval.json
+node scripts/evaluate_rules.mjs --format=json > /tmp/rules_eval.json
 # or for human-readable output:
-python3 scripts/evaluate_rules.py --format=text
+node scripts/evaluate_rules.mjs --format=text
 ```
 
 The evaluator output is the machine-readable macro verdict that goes into synthesis.

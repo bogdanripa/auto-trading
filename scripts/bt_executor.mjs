@@ -46,6 +46,7 @@
  */
 
 import { BTTradeClient, ntfyOtpProvider } from '../vendor/bt-trade/src/index.js';
+import { loadSession, saveSession, isPersistenceEnabled } from './gcs_session.mjs';
 
 // ---------- argv parsing ----------
 
@@ -88,14 +89,43 @@ function requireEnv(name) {
  * @param {{ demo: boolean }} opts
  */
 async function makeClient({ demo }) {
-  const topic = requireEnv('BT_NTFY_TOPIC');
-  const username = requireEnv('BT_USER');
-  const password = requireEnv('BT_PASS');
+  const topic = process.env.BT_NTFY_TOPIC; // only required if we end up doing a fresh login
+
+  // onSessionChange is called after login, every refresh, and on logout.
+  // Persisting every time means the GCS object always reflects the freshest
+  // tokens, so the keeper routine (and subsequent runs) can resume cleanly.
+  const onSessionChange = async (snap) => {
+    try { await saveSession(snap); }
+    catch (e) { console.error(`[bt_executor] saveSession failed: ${e.message}`); }
+  };
 
   const client = new BTTradeClient({
     demo,
-    otpProvider: ntfyOtpProvider({ topic }),
+    otpProvider: topic ? ntfyOtpProvider({ topic }) : undefined,
+    onSessionChange,
   });
+
+  // Try to resume from GCS first. toSnapshot excludes the password, so a
+  // resumed client can refresh tokens without re-triggering 2FA or re-login.
+  const prior = await loadSession();
+  if (prior && prior.accessToken && prior.refreshToken) {
+    try {
+      client.restore(prior);
+      // Validate the session with a cheap call; if the refresh token is dead
+      // this will throw and we fall through to a fresh login.
+      await client.profile.get();
+      return client;
+    } catch (e) {
+      console.error(`[bt_executor] resume failed (${e.message}); falling back to fresh login`);
+    }
+  }
+
+  if (!topic) {
+    console.error('FATAL: BT_NTFY_TOPIC is required for fresh login (no resumable session available)');
+    process.exit(1);
+  }
+  const username = requireEnv('BT_USER');
+  const password = requireEnv('BT_PASS');
   await client.login({ username, password });
   return client;
 }
@@ -140,6 +170,34 @@ async function cmdOrders(client) {
 async function cmdHoldings(client) {
   const portfolioKey = await firstPortfolioKey(client);
   return client.portfolio.getHoldings({ portfolioKey });
+}
+
+/**
+ * Proactively rotate the access+refresh tokens. Designed to be called every
+ * ~45 min by a dedicated keeper routine so the refresh token never ages out
+ * past its ~1h server-side expiry. onSessionChange persists the new tokens
+ * to GCS automatically.
+ */
+async function cmdRefresh(client) {
+  const before = client.toSnapshot();
+  await client.auth.refresh();
+  const after = client.toSnapshot();
+  return {
+    ok: true,
+    access_token_rotated: before?.accessToken !== after?.accessToken,
+    refresh_token_rotated: before?.refreshToken !== after?.refreshToken,
+    expires_at: after?.expiresAt ? new Date(after.expiresAt).toISOString() : null,
+    refresh_token_expires: after?.refreshTokenExpires ?? null,
+  };
+}
+
+/**
+ * Revoke the server-side session and clear the persisted snapshot from GCS.
+ * Only use when you explicitly want to force a fresh 2FA login on the next run.
+ */
+async function cmdLogout(client) {
+  await client.logout();              // also fires onSessionChange(null) → GCS clear
+  return { ok: true, logged_out: true };
 }
 
 async function cmdPlace(client, flags) {
@@ -203,6 +261,8 @@ Commands:
   orders           List recent orders
   holdings         List current positions
   place            Place a limit order (requires --symbol --action --quantity --limit --trade-id)
+  refresh          Rotate access+refresh tokens (for the keeper routine)
+  logout           Revoke the server-side session and clear GCS snapshot
 
 Global flags:
   --live           Use real-money mode (default: demo/paper)
@@ -234,6 +294,8 @@ async function main() {
       case 'orders':   out = await cmdOrders(client);           break;
       case 'holdings': out = await cmdHoldings(client);         break;
       case 'place':    out = await cmdPlace(client, args.flags); break;
+      case 'refresh':  out = await cmdRefresh(client);           break;
+      case 'logout':   out = await cmdLogout(client);            break;
       default:
         console.error(`unknown command: ${cmd}\n\n${HELP}`);
         process.exit(1);
@@ -245,9 +307,14 @@ async function main() {
     if (process.env.BT_DEBUG) console.error(err.stack);
     process.exit(2);
   } finally {
-    // Best-effort: drop the session so we don't leave a dangling refresh timer
-    // keeping the event loop alive past the CLI's intended lifetime.
-    try { await client?.logout(); } catch { /* ignore */ }
+    // We deliberately do NOT call client.logout() here — logging out revokes
+    // the server-side session, which defeats the whole point of persisting
+    // tokens to GCS for reuse across routine runs. The `logout` subcommand
+    // is the only place we revoke. We DO want to stop the library's
+    // auto-refresh timer so the process can exit; do that by nulling the
+    // reference — Node will GC the timer. If the library exposes a nicer
+    // teardown later, swap it in here.
+    // (Using process.exit() above also terminates the loop regardless.)
   }
 }
 

@@ -116,14 +116,14 @@ PERFORMANCE:
 The detection mechanism differs by execution mode, but the downstream hand-off is identical.
 
 **Simulation mode (`EXECUTION_MODE=simulation`):**
-The `settle` step of `scripts/sim_executor.py` is the authoritative source. When a BUY/SELL sequence drives a position's quantity to zero, `sim_executor` emits the close in its report under a `closed_positions` list with entry price, exit price, quantity, and trade metadata (`trade_type`, `trade_id`, `theme_tag`, `rule_id`, `invalidation`). Read that list verbatim at the start of each evening run — do not try to recompute from fills, the script has already reconciled cash and commissions.
+The `settle` step of `scripts/sim_executor.mjs` is the authoritative source. When a BUY/SELL sequence drives a position's quantity to zero, `sim_executor` emits the close in its report under a `closed_positions` list with entry price, exit price, quantity, and trade metadata (`trade_type`, `trade_id`, `theme_tag`, `rule_id`, `invalidation`). Read that list verbatim at the start of each evening run — do not try to recompute from fills, the script has already reconciled cash and commissions.
 
 **IBKR live mode (future):**
 Diff today's IBKR holdings against yesterday's `state.json` snapshot. Any symbol held yesterday that is absent today (or held at a smaller quantity) is a closed (or partially closed) position. Reconstruct the exit P&L from the matching fill in `fills.jsonl`.
 
 For each closed position, regardless of mode, hand off to:
 - `trade-journal` — append an exit record with outcome narrative and thesis verdict, carrying forward the `theme_tag`, `rule_id`, and `invalidation` so the retrospective can attribute P&L to the originating theme or rule
-- `tax-tracker` — log the numeric record for Declarația Unică (uses `scripts/tax_fifo.py` on `fills.jsonl` for FIFO matching; cash flows are in RON, no FX adjustment needed)
+- `tax-tracker` — log the numeric record for Declarația Unică (uses `scripts/tax_fifo.mjs` on `fills.jsonl` for FIFO matching; cash flows are in RON, no FX adjustment needed)
 
 These two are complementary, not redundant: tax-tracker captures the legal/numerical record, trade-journal captures the *why* and *what we learned*.
 

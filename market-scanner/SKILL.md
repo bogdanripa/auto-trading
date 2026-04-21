@@ -30,7 +30,7 @@ Skip any symbol where 20-day average daily value traded (ADV) < 50,000 RON (PROJ
 Call the committed script rather than regenerating the math:
 
 ```
-python3 scripts/indicators.py --format=json TLV SNP SNG H2O TGN BRD DIGI EL M SNN TEL PE FP ONE AQ TRP TTS ATB SFG CFH
+node scripts/indicators.mjs --format=json TLV SNP SNG H2O TGN BRD DIGI EL M SNN TEL PE FP ONE AQ TRP TTS ATB SFG CFH
 ```
 
 (Scan the BET core first. Run Tier B only if the core produces fewer than 3 A-grade setups or if a Tier B name has a specific catalyst today.)

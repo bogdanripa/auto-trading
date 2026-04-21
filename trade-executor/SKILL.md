@@ -9,7 +9,7 @@ Three execution backends, one interface. The skill's contract is identical eithe
 
 | `EXECUTION_MODE` | Backend | Broker contact | Real money |
 |---|---|---|---|
-| `simulation` (default) | `scripts/sim_executor.py` | None — Yahoo/stooq prices only | No |
+| `simulation` (default) | `scripts/sim_executor.mjs` | None — Yahoo/stooq prices only | No |
 | `demo` | `scripts/bt_executor.mjs` (`demo: true`) | BT Trade demo environment | No (paper) |
 | `live` | `scripts/bt_executor.mjs` (`--live`) | BT Trade live environment | **Yes — real RON** |
 

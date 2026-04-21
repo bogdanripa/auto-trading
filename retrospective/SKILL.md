@@ -26,9 +26,9 @@ Turn the raw trade journal into durable lessons. This skill is the feedback loop
 Do not hand-parse the journal. Call the committed script, which owns the clustering math and produces the numbers this skill then interprets:
 
 ```
-python3 scripts/journal_stats.py --window=7   # weekly
-python3 scripts/journal_stats.py --window=30  # monthly
-python3 scripts/journal_stats.py --since=2026-01-01  # on-demand range
+node scripts/journal_stats.mjs --window=7   # weekly
+node scripts/journal_stats.mjs --window=30  # monthly
+node scripts/journal_stats.mjs --since=2026-01-01  # on-demand range
 ```
 
 Output is a JSON blob with overall stats, per-cluster breakdowns (trade_type, sector, exit_reason, thesis_verdict, conviction bucket, theme_tag, rule_id, catalyst×mechanism grid), and the failure-mode hot cells already tagged. Steps 2-4 below describe what the script computes — they're documented so this skill's audit trail is reproducible, but do not re-implement them in prose.

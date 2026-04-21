@@ -1,5 +1,5 @@
 {
-  "_comment": "Template for rules/market_snapshot.json. macro-analyst populates this each morning from live feeds, then scripts/evaluate_rules.py consumes it. Unknown fields should be omitted rather than guessed — evaluate_rules.py marks rules with missing inputs as 'indeterminate', not 'un-fired'. Replace this template with the real snapshot at rules/market_snapshot.json.",
+  "_comment": "Template for rules/market_snapshot.json. macro-analyst populates this each morning from live feeds, then scripts/evaluate_rules.mjs consumes it. Unknown fields should be omitted rather than guessed — evaluate_rules.py marks rules with missing inputs as 'indeterminate', not 'un-fired'. Replace this template with the real snapshot at rules/market_snapshot.json.",
   "as_of": "YYYY-MM-DDTHH:MM:SS+00:00",
 
   "_fx_rates": "--- BNR XML: https://bnr.ro/nbrfxrates.xml ---",

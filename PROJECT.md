@@ -60,7 +60,7 @@ When multiple setups compete for limited capital:
 ### Morning Run (7:30 AM EET)
 Execute skills in this order:
 1. Read `LESSONS.md`, `THEMES.md`, and `macro-analyst/references/bvb-historical-patterns.md` — load active lessons, active themes, and the historical playbook before analysis
-2. `macro-analyst` — Populates `rules/market_snapshot.json` from live feeds, runs `scripts/evaluate_rules.py` against `rules/bvb_rules.json`, emits the firing rules + REGIME score + narrative context
+2. `macro-analyst` — Populates `rules/market_snapshot.json` from live feeds, runs `scripts/evaluate_rules.mjs` against `rules/bvb_rules.json`, emits the firing rules + REGIME score + narrative context
 3. `bvb-news` — BVB announcements, Romanian news
 4. `market-scanner` — Technical scan of BET-Plus universe
 5. `company-analyst` — Deep dive on any flagged stocks
@@ -101,7 +101,7 @@ The engine consults two complementary artifacts every run:
 - **`rules/bvb_rules.json`** — 30 encodable trading rules derived from a decade of BET drivers (FX, international, commodity, rates, political, calendar, rating, index, geopolitical, regime). Each rule has a machine-checkable trigger, direction, horizon, expected magnitude band, and exit condition. Source of truth for *what to do when a specific condition holds*.
 - **`rules/market_snapshot.json`** — populated each morning by `macro-analyst` from live feeds. Source of truth for *what the world looks like right now*.
 
-`scripts/evaluate_rules.py` joins these and emits (a) firing rules, (b) `REGIME-1` / `REGIME-2` weighted scores, (c) a recommended posture. Synthesis consumes this as structured input, not prose.
+`scripts/evaluate_rules.mjs` joins these and emits (a) firing rules, (b) `REGIME-1` / `REGIME-2` weighted scores, (c) a recommended posture. Synthesis consumes this as structured input, not prose.
 
 The **reference anchor** for the rulebook is `macro-analyst/references/bvb-historical-patterns.md` — a 2015-2026 BET event catalog, sector playbook, and regime-break notes. When thresholds are debated or new rules proposed, they must be justified against this document or explicitly flagged as extrapolating beyond it.
 

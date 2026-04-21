@@ -47,9 +47,9 @@ For BVB stocks traded in RON, exchange rate is 1.0. If any trades are in other c
 Use the committed script — it reads `portfolio/fills.jsonl` (the authoritative trade record) and produces the FIFO-matched realized gain/loss:
 
 ```
-python3 scripts/tax_fifo.py --year 2026             # summary
-python3 scripts/tax_fifo.py --year 2026 --detail    # per-match detail
-python3 scripts/tax_fifo.py --format=json           # machine-readable
+node scripts/tax_fifo.mjs --year 2026             # summary
+node scripts/tax_fifo.mjs --year 2026 --detail    # per-match detail
+node scripts/tax_fifo.mjs --format=json           # machine-readable
 ```
 
 **What the script does:**

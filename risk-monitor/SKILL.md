@@ -12,7 +12,7 @@ Continuously monitor portfolio risk and flag positions or conditions that requir
 For every run, the first action is to call the deterministic report:
 
 ```
-python3 scripts/risk_report.py --format=json
+node scripts/risk_report.mjs --format=json
 ```
 
 The script reads `portfolio/state.json` and `journal/trades.jsonl`, then emits per-position stop distances, trailing-stop distances, time-in-trade, and any invalidation conditions captured at entry. At the portfolio level it computes single-stock weight, per-sector weight, cash ratio, and overall health.
@@ -90,7 +90,7 @@ Never override more than ONE position at a time. If two positions hit stops simu
 
 ### Sector Mapping
 
-The authoritative sector map lives in `scripts/sim_executor.py` (`SECTOR_MAP`) and is mirrored in `scripts/risk_report.py`. When you add a new name, update both — the sector cap is enforced at order placement, not just reported here.
+The authoritative sector map lives in `scripts/sim_executor.mjs` (`SECTOR_MAP`) and is mirrored in `scripts/risk_report.mjs`. When you add a new name, update both — the sector cap is enforced at order placement, not just reported here.
 
 Current buckets:
 ```
@@ -147,7 +147,7 @@ PORTFOLIO HEALTH: [GREEN / YELLOW / RED]
 
 ## Macro-Trigger RED Conditions
 
-These come from the rulebook (`rules/bvb_rules.json`) evaluated by `scripts/evaluate_rules.py` on the macro-analyst's market snapshot. They are portfolio-level RED signals that override the position-level picture — even if every stop is untriggered, these alone flip the report to RED and force a posture shift on the next run.
+These come from the rulebook (`rules/bvb_rules.json`) evaluated by `scripts/evaluate_rules.mjs` on the macro-analyst's market snapshot. They are portfolio-level RED signals that override the position-level picture — even if every stop is untriggered, these alone flip the report to RED and force a posture shift on the next run.
 
 - **FX-3 band break: EUR/RON > 5.10 intraday** — historical regime-break threshold. Fire RED: cash floor lifts to 60%, no new non-FX-hedged longs that session. Reference: `bvb-historical-patterns.md` §2 (FX regime).
 - **RAT-2 CDS spike: 5Y RO CDS +20bp over 3 consecutive sessions** — sovereign-risk widening template (2023 August, 2024 post-election). Fire RED: freeze new longs, prioritise trimming rate-sensitive names (ONE, IMP, banks).
