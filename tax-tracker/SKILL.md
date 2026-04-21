@@ -44,7 +44,7 @@ For BVB stocks traded in RON, exchange rate is 1.0. If any trades are in other c
 
 ## Gain/Loss Calculation
 
-Use the committed script — it reads `portfolio/fills.jsonl` (the authoritative trade record) and produces the FIFO-matched realized gain/loss:
+Use the committed script — it reads `fills/*` from the Firestore store (the authoritative trade record) and produces the FIFO-matched realized gain/loss:
 
 ```
 node scripts/tax_fifo.mjs --year 2026             # summary
@@ -59,7 +59,7 @@ node scripts/tax_fifo.mjs --format=json           # machine-readable
 - Tracks partial lots (buy 20, sell 10 → 10 shares remain at original unit cost)
 - Warns on short-sales or reconciliation gaps (sells exceeding open lots)
 
-`fills.jsonl` is the single source of truth for the script. Never hand-edit it; `trade-executor` is the only writer. If the script reports a reconciliation gap, investigate the fills — don't "fix" by editing the file.
+The `fills/*` collection is the single source of truth for the script. Never hand-edit fill docs; `trade-executor` is the only writer. If the script reports a reconciliation gap, investigate the fills — don't "fix" by editing them.
 
 ## Annual Summary Generation
 

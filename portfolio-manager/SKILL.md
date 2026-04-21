@@ -9,16 +9,16 @@ Track portfolio state, enforce allocation rules, and provide the decision-making
 
 ## Data Sources
 
-Portfolio state lives in three git-tracked files, maintained by `trade-executor`:
-- `portfolio/state.json` — current cash, positions, totals
-- `portfolio/orders.jsonl` — open orders awaiting fill
-- `portfolio/fills.jsonl` — historical fills (append-only)
+Portfolio state lives in the Firestore store (or local-file fallback in dev), maintained by `trade-executor`:
+- `portfolio_state/current` — singleton doc with cash, positions, totals
+- `orders/open` — single doc holding the array of open orders
+- `fills/*` — one doc per historical fill (append-only)
 
-**Simulation mode (current):** state.json is the source of truth. `trade-executor` fetches real BVB prices each run and updates positions.
+**Simulation mode (current):** `portfolio_state/current` is the source of truth. `trade-executor` fetches real BVB prices each run and updates positions.
 
-**IBKR live mode (future):** same files, but `trade-executor` reconciles them against IBKR's actual account state at the start of each run before this skill reads them. From the perspective of this skill, nothing changes — read the same files.
+**IBKR live mode (future):** same collections, but `trade-executor` reconciles them against IBKR's actual account state at the start of each run before this skill reads them. From the perspective of this skill, nothing changes — read the same docs.
 
-Read `state.json` at the start of every run. If `mode` does not match the routine's `EXECUTION_MODE` env var (or if the file is older than the last run), flag it and halt — don't trade on stale state.
+Read `portfolio_state/current` at the start of every run. If `mode` does not match the routine's `EXECUTION_MODE` env var (or if the doc's `as_of` is older than the last run), flag it and halt — don't trade on stale state.
 
 ## Portfolio State Calculation
 
@@ -119,11 +119,11 @@ The detection mechanism differs by execution mode, but the downstream hand-off i
 The `settle` step of `scripts/sim_executor.mjs` is the authoritative source. When a BUY/SELL sequence drives a position's quantity to zero, `sim_executor` emits the close in its report under a `closed_positions` list with entry price, exit price, quantity, and trade metadata (`trade_type`, `trade_id`, `theme_tag`, `rule_id`, `invalidation`). Read that list verbatim at the start of each evening run — do not try to recompute from fills, the script has already reconciled cash and commissions.
 
 **IBKR live mode (future):**
-Diff today's IBKR holdings against yesterday's `state.json` snapshot. Any symbol held yesterday that is absent today (or held at a smaller quantity) is a closed (or partially closed) position. Reconstruct the exit P&L from the matching fill in `fills.jsonl`.
+Diff today's IBKR holdings against yesterday's `portfolio_state/current` snapshot. Any symbol held yesterday that is absent today (or held at a smaller quantity) is a closed (or partially closed) position. Reconstruct the exit P&L from the matching doc in `fills/*`.
 
 For each closed position, regardless of mode, hand off to:
 - `trade-journal` — append an exit record with outcome narrative and thesis verdict, carrying forward the `theme_tag`, `rule_id`, and `invalidation` so the retrospective can attribute P&L to the originating theme or rule
-- `tax-tracker` — log the numeric record for Declarația Unică (uses `scripts/tax_fifo.mjs` on `fills.jsonl` for FIFO matching; cash flows are in RON, no FX adjustment needed)
+- `tax-tracker` — log the numeric record for Declarația Unică (uses `scripts/tax_fifo.mjs` reading `fills/*` from the store for FIFO matching; cash flows are in RON, no FX adjustment needed)
 
 These two are complementary, not redundant: tax-tracker captures the legal/numerical record, trade-journal captures the *why* and *what we learned*.
 

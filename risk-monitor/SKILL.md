@@ -15,7 +15,7 @@ For every run, the first action is to call the deterministic report:
 node scripts/risk_report.mjs --format=json
 ```
 
-The script reads `portfolio/state.json` and `journal/trades.jsonl`, then emits per-position stop distances, trailing-stop distances, time-in-trade, and any invalidation conditions captured at entry. At the portfolio level it computes single-stock weight, per-sector weight, cash ratio, and overall health.
+The script reads `portfolio_state/current` and `trades_journal/*` from the Firestore store (or the local-file fallback), then emits per-position stop distances, trailing-stop distances, time-in-trade, and any invalidation conditions captured at entry. At the portfolio level it computes single-stock weight, per-sector weight, cash ratio, and overall health.
 
 Exit codes are the machine-readable verdict:
 - `0` — GREEN: all within limits, no stops approaching

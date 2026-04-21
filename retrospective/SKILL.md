@@ -15,7 +15,7 @@ Turn the raw trade journal into durable lessons. This skill is the feedback loop
 
 ## Inputs
 
-1. `journal/trades.jsonl` — full history
+1. `trades_journal/*` in the Firestore store — full history (read via `store.listJournal()`)
 2. `LESSONS.md` — current distilled lessons (to avoid duplicating what's already there)
 3. `PROJECT.md` — so lessons can be flagged against specific rules they reinforce or challenge
 
@@ -37,7 +37,7 @@ Output is a JSON blob with overall stats, per-cluster breakdowns (trade_type, se
 For weekly: last 7 days of exit records. For monthly: last 30. For on-demand: whatever the user asks for, defaulting to "since last retrospective." Pass the window to `journal_stats.py`; do not filter in this skill.
 
 ### 2. Load and cluster (handled by journal_stats.py)
-Parse `trades.jsonl`. Pair each entry with its exit (via `trade_id`). Drop pairs where the exit is outside the window. Cluster by:
+Parse the journal records from `trades_journal/*`. Pair each entry with its exit (via `trade_id`). Drop pairs where the exit is outside the window. Cluster by:
 - **Trade type** (swing / event / trend)
 - **Sector** (energy, financials, utilities, etc.)
 - **Exit reason** (take_profit, stop_loss, trailing_stop, time_stop, thesis_invalidated, override_exit, manual)

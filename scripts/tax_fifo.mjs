@@ -22,22 +22,9 @@
  *     (NOT implemented here — flagged for user to handle manually per year)
  */
 
-import fs from 'node:fs';
-import path from 'node:path';
+import { openStore } from './store.mjs';
 
-const PORTFOLIO_DIR = process.env.PORTFOLIO_DIR || 'portfolio';
-const FILLS_PATH = path.join(PORTFOLIO_DIR, 'fills.jsonl');
 const TAX_RATE_CAPITAL_GAINS = 0.10;
-
-function readJsonl(filePath) {
-  if (!fs.existsSync(filePath)) return [];
-  const rows = [];
-  for (const line of fs.readFileSync(filePath, 'utf8').split(/\r?\n/)) {
-    const t = line.trim();
-    if (t) rows.push(JSON.parse(t));
-  }
-  return rows;
-}
 
 /**
  * Process fills chronologically, FIFO-match sells to buys.
@@ -205,7 +192,7 @@ function formatText(summary, detail, matches) {
 }
 
 function parseArgs(argv) {
-  const args = { year: null, detail: false, format: 'text', fills: FILLS_PATH };
+  const args = { year: null, detail: false, format: 'text' };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--year') args.year = parseInt(argv[++i], 10);
@@ -213,8 +200,6 @@ function parseArgs(argv) {
     else if (a === '--detail') args.detail = true;
     else if (a === '--format') args.format = argv[++i];
     else if (a.startsWith('--format=')) args.format = a.split('=', 2)[1];
-    else if (a === '--fills') args.fills = argv[++i];
-    else if (a.startsWith('--fills=')) args.fills = a.split('=', 2)[1];
     else if (a === '-h' || a === '--help') args.help = true;
     else throw new Error(`unknown argument: ${a}`);
   }
@@ -231,17 +216,13 @@ async function main() {
 
   if (args.help) {
     process.stdout.write(
-      'Usage: node scripts/tax_fifo.mjs [--year N] [--detail] [--format=text|json] [--fills=PATH]\n'
+      'Usage: node scripts/tax_fifo.mjs [--year N] [--detail] [--format=text|json]\n'
     );
     return 0;
   }
 
-  if (!fs.existsSync(args.fills)) {
-    process.stderr.write(`no fills file at ${args.fills}\n`);
-    return 2;
-  }
-
-  const fills = readJsonl(args.fills);
+  const store = await openStore();
+  const fills = await store.listFills();
   if (!fills.length) {
     process.stderr.write('no fills recorded yet\n');
     if (args.format === 'json') {

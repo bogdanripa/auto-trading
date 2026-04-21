@@ -19,17 +19,29 @@ Read `EXECUTION_MODE` from the environment at the start of each run. If unset, d
 
 ## Simulation Backend
 
-### State files (all committed to git)
+### State storage (Firestore)
+
+All persistent state lives in Firestore (`europe-west3`, project `auto-trader-493814`) via `scripts/store.mjs`:
+
+| Collection / doc | Contents |
+|---|---|
+| `portfolio_state/current` | cash, positions, totals, mode, as_of |
+| `orders/open` | array doc of open orders awaiting fill |
+| `fills/*` | one doc per historical fill (append-only) |
+| `trades_journal/*` | entry/exit journal (feeds retrospective) |
+| `bt_session/current` | BT Trade token snapshot |
+
+Git-tracked `portfolio/state.seed.json` is the one-shot fixture used to bootstrap a fresh Firestore database. Run once after creating the DB:
+
 ```
-portfolio/
-├── state.json        — current cash, positions, last-updated timestamp
-├── orders.jsonl      — open orders awaiting fill
-└── fills.jsonl       — historical fills (append-only, mirrors real exchange fills)
+FIRESTORE_PROJECT=auto-trader-493814 node scripts/seed_state.mjs portfolio/state.seed.json
 ```
+
+Thereafter `sim_executor.mjs` owns the state and writes every change back to Firestore. In dev (no `FIRESTORE_PROJECT`), the same script transparently falls back to local files under `portfolio/` + `journal/` so you can run scripts locally against a throwaway dataset.
 
 ### Simulation rules
 - **Price source:** Yahoo Finance OHLCV, `https://query1.finance.yahoo.com/v8/finance/chart/<SYMBOL>.RO?interval=1d`. See "BVB Symbol Mapping" below.
-- **Fill model:** At each run, for every open order in `orders.jsonl`, check the day's OHLC.
+- **Fill model:** At each run, for every open order in `orders/open`, check the day's OHLC.
   - BUY limit at `P`: fills if `daily_low ≤ P`. Fill price = `min(P, daily_open)` — conservative; assumes you got no better than the open if it gapped through your limit.
   - SELL limit at `P`: fills if `daily_high ≥ P`. Fill price = `max(P, daily_open)`.
   - Orders that don't fill: stay open if `tif=GTC`, cancelled if `tif=DAY` and the day has closed.
@@ -41,7 +53,7 @@ portfolio/
 
 ### Simulation workflow on every run
 
-Use the committed script, which owns the state files and enforces every rule in this document:
+`sim_executor.mjs` owns portfolio state in the Firestore store (or local-files fallback in dev) and enforces every rule in this document:
 
 ```
 # 1. Mark to market + settle yesterday's eligible orders
@@ -69,7 +81,7 @@ node scripts/sim_executor.mjs status
 3. Apply fills to positions (weighted-average cost on BUY; FIFO-less quantity-deduction on SELL — detailed FIFO matching is the tax-tracker's job)
 4. Detect closed positions (quantity dropped to 0) and emit them in the report for `trade-journal` to pick up
 5. Rebuild `totals` from current positions
-6. Write state.json atomically, rewrite orders.jsonl without filled/expired orders
+6. Write `portfolio_state/current` and replace `orders/open` atomically; each new fill is appended as a doc in `fills/*`
 
 **What `place` does:**
 1. Pre-trade checks (all enforced, script rejects with non-zero exit if any fails):
@@ -79,11 +91,11 @@ node scripts/sim_executor.mjs status
    - 30% single-stock cap not breached
    - 50% daily deployment cap not breached
    - 5 concurrent positions not exceeded
-2. Write the order to orders.jsonl with a reservation on the cash
+2. Append the order to `orders/open` with a reservation on the cash
 
 Returns JSON describing the accepted order (or the rejection reason on stderr + exit code 1).
 
-### Order record schema (in orders.jsonl)
+### Order record schema (stored under `orders/open`)
 ```json
 {
   "order_id": "2026-04-19-SNG-buy-01",
@@ -100,7 +112,7 @@ Returns JSON describing the accepted order (or the rejection reason on stderr + 
 }
 ```
 
-### Fill record schema (in fills.jsonl)
+### Fill record schema (one doc per fill under `fills/*`)
 ```json
 {
   "fill_id": "2026-04-19-SNG-buy-01-fill",
@@ -115,7 +127,7 @@ Returns JSON describing the accepted order (or the rejection reason on stderr + 
 }
 ```
 
-### state.json schema
+### Portfolio state schema (singleton `portfolio_state/current`)
 ```json
 {
   "mode": "simulation",
@@ -179,7 +191,7 @@ Yahoo rate limits are generous but not infinite. Batch by fetching one symbol at
 4. Symbol resolves on the price feed
 5. Allocation limits from `portfolio-manager` not breached
 
-If any check fails, reject the order, log the reason, do not write to `orders.jsonl`.
+If any check fails, reject the order, log the reason, do not write to `orders/open`.
 
 ## Output format
 
@@ -259,7 +271,7 @@ Because of the single-session rule, the morning/evening flow calls `bt_executor.
 | Fill model | Deterministic: BUY at `min(limit, open)` if `low ≤ limit` | Real market — limit orders rest on BT's book |
 | Settlement | `sim_executor.mjs settle` marks to market against Yahoo OHLC | BT fills asynchronously; we poll `orders.search` |
 | Commission | Modeled as 0.1% min 1 RON | Real BT commission surfaced via `orders.preview` |
-| State source of truth | `portfolio/state.json` (committed) | BT Trade server (fetched via `portfolio.getHoldings`) |
-| `state.json` role | Authoritative | Local snapshot/cache for diagnostics only |
+| State source of truth | `portfolio_state/current` in Firestore | BT Trade server (fetched via `portfolio.getHoldings`) |
+| Firestore state role | Authoritative | Local snapshot/cache for diagnostics only |
 
-**Implication for downstream skills:** portfolio-manager, risk-monitor, and retrospective read `portfolio/state.json` today. In `demo`/`live` mode, `bt_executor.mjs status` writes a refreshed `state.json` snapshot at the start of every run so those skills keep working unchanged. The `mode` field in state.json reflects the current EXECUTION_MODE so the retrospective can separate simulated vs. real P&L.
+**Implication for downstream skills:** portfolio-manager, risk-monitor, and retrospective read `portfolio_state/current` today. In `demo`/`live` mode, `bt_executor.mjs status` writes a refreshed state snapshot at the start of every run so those skills keep working unchanged. The `mode` field in the state doc reflects the current EXECUTION_MODE so the retrospective can separate simulated vs. real P&L.

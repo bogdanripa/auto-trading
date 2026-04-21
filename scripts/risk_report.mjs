@@ -24,13 +24,7 @@
  *     2 — RED: limits breached or stops hit
  */
 
-import fs from 'node:fs';
-import path from 'node:path';
-
-const PORTFOLIO_DIR = process.env.PORTFOLIO_DIR || 'portfolio';
-const JOURNAL_DIR = process.env.JOURNAL_DIR || 'journal';
-const STATE_PATH = path.join(PORTFOLIO_DIR, 'state.json');
-const TRADES_PATH = path.join(JOURNAL_DIR, 'trades.jsonl');
+import { openStore } from './store.mjs';
 
 // Must match PROJECT.md / sim_executor defaults.
 const HARD_STOP_PCT = 0.10;
@@ -61,21 +55,6 @@ function sectorOf(symbol) {
     if (syms.has(symbol)) return sector;
   }
   return 'Unclassified';
-}
-
-function readJson(filePath, dflt) {
-  if (!fs.existsSync(filePath)) return dflt;
-  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
-}
-
-function readJsonl(filePath) {
-  if (!fs.existsSync(filePath)) return [];
-  const rows = [];
-  for (const line of fs.readFileSync(filePath, 'utf8').split(/\r?\n/)) {
-    const t = line.trim();
-    if (t) rows.push(JSON.parse(t));
-  }
-  return rows;
 }
 
 function lastEntryForTrade(trades, tradeId) {
@@ -351,12 +330,12 @@ async function main() {
     return 0;
   }
 
-  const state = readJson(STATE_PATH, null);
+  const store = await openStore();
+  const [state, trades] = await Promise.all([store.getState(), store.listJournal()]);
   if (state === null) {
-    process.stderr.write(`error: ${STATE_PATH} not found\n`);
+    process.stderr.write(`error: portfolio state not found in store (${store.kind})\n`);
     return 2;
   }
-  const trades = readJsonl(TRADES_PATH);
 
   if (args.refreshPrices) {
     for (const pos of state.positions) {

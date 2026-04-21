@@ -67,7 +67,7 @@ Execute skills in this order:
 6. `portfolio-manager` — Current state, cash available, position review
 7. `risk-monitor` — Check stops, exposure, override conditions
 8. **Synthesis** — Weigh all inputs against active lessons + active themes, decide today's actions
-9. `trade-executor` — Place orders (simulation mode writes to portfolio/orders.jsonl)
+9. `trade-executor` — Place orders (simulation mode appends to `orders/open` in the Firestore store)
 10. `trade-journal` — Append entry record for every new fill (thesis + context, tag with theme if applicable)
 11. `telegram-reporter` — Send morning briefing
 
@@ -85,7 +85,7 @@ Execute skills in this order:
 
 The engine learns from its own history through three pieces:
 
-1. **`journal/trades.jsonl`** — every trade is recorded at entry (thesis, context, exit plan) and at exit (outcome, verdict, lessons). Append-only, committed to git. Written by the `trade-journal` skill.
+1. **`trades_journal/*` in the Firestore store** — every trade is recorded at entry (thesis, context, exit plan) and at exit (outcome, verdict, lessons). Append-only. Written by the `trade-journal` skill via `store.appendJournal()`; dev fallback writes `journal/trades.jsonl`.
 
 2. **`LESSONS.md`** — distilled patterns from the journal, grouped as `[active]` (drives daily decisions), `[candidate]` (observed but not yet conclusive), and `[retired]` (contradicted by later data). Updated weekly by the `retrospective` skill.
 
@@ -174,9 +174,9 @@ Positions: [list with current P&L %]
 The user may place manual trades via IBKR at any point. The engine must tolerate this without conflict.
 
 ### On every live run, reconcile with IBKR first
-Before any analysis or ordering, fetch IBKR account state (cash, positions, open orders, today's fills) and diff against `portfolio/state.json`:
-- **Unknown position on IBKR** → user bought manually. Import into state.json with `engine_managed: false`. Write a `backfilled` entry to `journal/trades.jsonl` with minimal metadata so the position is not invisible to analytics.
-- **Position missing from IBKR** → user sold manually. Close in state.json. Write an exit record with `exit_reason: manual` and `thesis_verdict: inconclusive`.
+Before any analysis or ordering, fetch IBKR account state (cash, positions, open orders, today's fills) and diff against `portfolio_state/current`:
+- **Unknown position on IBKR** → user bought manually. Import into `portfolio_state/current` with `engine_managed: false`. Append a `backfilled` entry to `trades_journal/*` with minimal metadata so the position is not invisible to analytics.
+- **Position missing from IBKR** → user sold manually. Close in `portfolio_state/current`. Append an exit record with `exit_reason: manual` and `thesis_verdict: inconclusive`.
 - **Quantity delta on an existing position** → partial manual trade. Adjust and log the delta. Do not change user-editable fields (`theme_tag`, `stop_loss`, `catalyst`).
 - **Cash delta only** → deposit or withdrawal. Update cash. No journal entry.
 
@@ -185,7 +185,7 @@ The engine **never** cancels, modifies, or resizes an order the user placed manu
 
 Every order the engine places is tagged `engine_managed: true`. The engine may only close/cancel orders carrying that tag. If an IBKR order has no tag (or a tag it doesn't recognize), it treats it as manual — read-only.
 
-If the engine would like to act on a manually-opened position (e.g. apply its stop-loss logic), that is opt-in per position via `engine_managed: true`, set by the user manually in `state.json`.
+If the engine would like to act on a manually-opened position (e.g. apply its stop-loss logic), that is opt-in per position via `engine_managed: true`, set by the user manually on the position inside `portfolio_state/current`.
 
 ### Surface all reconciliation findings in the morning briefing
 Every manual-activity detection goes into the Telegram briefing under a "RECONCILED" section: what was imported, what was closed, what the P&L was. This gives the user a chance to retroactively tag a thesis / theme if useful.
@@ -197,9 +197,9 @@ Does not reconcile anything. Simulation state is the only source of truth. This 
 
 Controlled by the `EXECUTION_MODE` env var on the routine.
 
-**`simulation` (current):** `trade-executor` maintains a simulated portfolio in `portfolio/state.json`, using real BVB prices from Yahoo Finance. No broker account required. Fills are computed against the day's OHLC range. Commission modeled at 0.1% (min 1 RON) to match IBKR's BVB tier.
+**`simulation` (current):** `trade-executor` maintains a simulated portfolio in `portfolio_state/current` (Firestore store), using real BVB prices from Yahoo Finance. No broker account required. Fills are computed against the day's OHLC range. Commission modeled at 0.1% (min 1 RON) to match IBKR's BVB tier.
 
-**`ibkr` (future):** `trade-executor` wraps a real IBKR gateway. Same state files, same order schema, same rules. Requires an always-on gateway process and a paper or live IBKR account.
+**`ibkr` (future):** `trade-executor` wraps a real IBKR gateway. Same store collections, same order schema, same rules. Requires an always-on gateway process and a paper or live IBKR account.
 
 ### Order rules (both modes)
 - Market: BVB

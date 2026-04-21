@@ -1,29 +1,27 @@
 #!/usr/bin/env node
 /**
- * Simulated BVB execution engine — Node port of sim_executor.py.
+ * Simulated BVB execution engine.
  *
- * Owns three files under portfolio/:
- *     state.json      — current cash, positions, totals
- *     orders.jsonl    — open orders awaiting fill
- *     fills.jsonl     — historical fills, append-only
+ * All persistence goes through `scripts/store.mjs` — Firestore in production,
+ * LocalStore for dev/tests. Collections used:
+ *     portfolio_state/current   — cash, positions, totals
+ *     orders/open               — open orders awaiting fill
+ *     fills/*                   — historical fills (append-only)
  *
  * Commands: place, settle, status.
  *
- * All writes are atomic (write to tmp, then rename) and idempotent where possible.
+ * Node 18+ stdlib + @google-cloud/firestore (only loaded when
+ * FIRESTORE_PROJECT is set).
  *
- * Node 18+ stdlib only. No runtime deps.
- *
- * Test-friendly structure: exports a mutable `config` (paths, env) and `deps`
- * (fetchTodayBar) so tests can redirect paths to a tempdir and stub out the
- * Yahoo call without monkey-patching module-level bindings (which ESM makes
- * immutable).
+ * Test-friendly structure: exports mutable `config` (store, env) and `deps`
+ * (fetchTodayBar). Tests inject a LocalStore rooted at a tempdir and a fake
+ * fetchTodayBar so nothing hits Yahoo or Firestore.
  */
 
-import fs from 'node:fs';
 import path from 'node:path';
-import os from 'node:os';
-import crypto from 'node:crypto';
 import url from 'node:url';
+
+import { openStore } from './store.mjs';
 
 // ---- constants ------------------------------------------------------------
 
@@ -59,78 +57,24 @@ export function sectorOf(symbol) {
 
 // ---- mutable config (tests override) --------------------------------------
 
-const DEFAULT_PORTFOLIO_DIR = process.env.PORTFOLIO_DIR || 'portfolio';
-
 export const config = {
-  portfolioDir: DEFAULT_PORTFOLIO_DIR,
-  statePath: path.join(DEFAULT_PORTFOLIO_DIR, 'state.json'),
-  ordersPath: path.join(DEFAULT_PORTFOLIO_DIR, 'orders.jsonl'),
-  fillsPath: path.join(DEFAULT_PORTFOLIO_DIR, 'fills.jsonl'),
+  // Tests set this to a LocalStore over a tempdir. When null, we lazily call
+  // openStore() — picking Firestore or LocalStore per env.
+  store: null,
 };
 
-/** Re-point all three file paths to a new portfolio dir (tests use this). */
-export function setPortfolioDir(dir) {
-  config.portfolioDir = dir;
-  config.statePath = path.join(dir, 'state.json');
-  config.ordersPath = path.join(dir, 'orders.jsonl');
-  config.fillsPath = path.join(dir, 'fills.jsonl');
-}
-
-// ---- file helpers ---------------------------------------------------------
-
-export function readJson(filePath, dflt) {
-  if (!fs.existsSync(filePath)) return dflt;
-  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
-}
-
-export function writeJsonAtomic(filePath, obj) {
-  const dir = path.dirname(filePath) || '.';
-  fs.mkdirSync(dir, { recursive: true });
-  const tmp = path.join(dir, `.tmp_${crypto.randomBytes(8).toString('hex')}`);
-  try {
-    fs.writeFileSync(tmp, JSON.stringify(obj, null, 2) + '\n');
-    fs.renameSync(tmp, filePath);
-  } catch (e) {
-    try { fs.unlinkSync(tmp); } catch { /* ignore */ }
-    throw e;
-  }
-}
-
-export function readJsonl(filePath) {
-  if (!fs.existsSync(filePath)) return [];
-  const rows = [];
-  for (const line of fs.readFileSync(filePath, 'utf8').split(/\r?\n/)) {
-    const t = line.trim();
-    if (t) rows.push(JSON.parse(t));
-  }
-  return rows;
-}
-
-export function writeJsonlAtomic(filePath, rows) {
-  const dir = path.dirname(filePath) || '.';
-  fs.mkdirSync(dir, { recursive: true });
-  const tmp = path.join(dir, `.tmp_${crypto.randomBytes(8).toString('hex')}`);
-  try {
-    fs.writeFileSync(tmp, rows.map(r => JSON.stringify(r)).join('\n') + (rows.length ? '\n' : ''));
-    fs.renameSync(tmp, filePath);
-  } catch (e) {
-    try { fs.unlinkSync(tmp); } catch { /* ignore */ }
-    throw e;
-  }
-}
-
-export function appendJsonl(filePath, row) {
-  fs.mkdirSync(path.dirname(filePath) || '.', { recursive: true });
-  fs.appendFileSync(filePath, JSON.stringify(row) + '\n');
+async function getStore() {
+  if (!config.store) config.store = await openStore();
+  return config.store;
 }
 
 // ---- market data ----------------------------------------------------------
 
 async function defaultFetchTodayBar(symbol) {
   const yahooSym = symbol.includes('.') ? symbol : `${symbol}.RO`;
-  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(yahooSym)}?interval=1d&range=5d`;
+  const yUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(yahooSym)}?interval=1d&range=5d`;
   try {
-    const resp = await fetch(url, {
+    const resp = await fetch(yUrl, {
       headers: { 'User-Agent': 'Mozilla/5.0' },
       signal: AbortSignal.timeout(15000),
     });
@@ -148,9 +92,7 @@ async function defaultFetchTodayBar(symbol) {
     for (let i = closes.length - 1; i >= 0; i--) {
       if (closes[i] != null) {
         const ts = timestamps[i];
-        const barDate = ts
-          ? new Date(ts * 1000).toISOString().slice(0, 10)
-          : null;
+        const barDate = ts ? new Date(ts * 1000).toISOString().slice(0, 10) : null;
         return {
           price: meta.regularMarketPrice ?? closes[i],
           open: opens[i] ?? null,
@@ -168,12 +110,12 @@ async function defaultFetchTodayBar(symbol) {
   }
 }
 
-/** Dependency-injection slot for tests. `deps.fetchTodayBar` is called by settle/place. */
+/** Dependency-injection slot for tests. */
 export const deps = {
   fetchTodayBar: defaultFetchTodayBar,
 };
 
-// ---- core logic -----------------------------------------------------------
+// ---- core logic (pure) ----------------------------------------------------
 
 export function commission(notional) {
   return Math.max((notional * COMMISSION_BPS) / 10_000, COMMISSION_MIN_RON);
@@ -194,13 +136,8 @@ function cashReserved(orders) {
     .reduce((s, o) => s + (o.cash_reserved_ron || 0), 0);
 }
 
-function todayIso() {
-  return new Date().toISOString().slice(0, 10);
-}
-
-function nowIsoSec() {
-  return new Date().toISOString().replace(/\.\d+Z$/, 'Z');
-}
+function todayIso() { return new Date().toISOString().slice(0, 10); }
+function nowIsoSec() { return new Date().toISOString().replace(/\.\d+Z$/, 'Z'); }
 
 export function validateBuy(state, orders, symbol, qty, limit, currentPrice) {
   if (qty <= 0) return `quantity must be > 0, got ${qty}`;
@@ -273,7 +210,7 @@ export function guardState(state, { requireFresh = true } = {}) {
     if (isNaN(t.getTime())) return `state.as_of is not a valid ISO timestamp: ${JSON.stringify(state.as_of)}`;
     const ageH = (Date.now() - t.getTime()) / 3_600_000;
     if (ageH > STATE_FRESHNESS_HOURS) {
-      return `state.json is ${ageH.toFixed(1)}h old (> ${STATE_FRESHNESS_HOURS}h) — refusing to operate on stale state`;
+      return `state is ${ageH.toFixed(1)}h old (> ${STATE_FRESHNESS_HOURS}h) — refusing to operate on stale state`;
     }
   }
   return null;
@@ -289,16 +226,16 @@ export function validateSell(state, symbol, qty) {
 // ---- commands -------------------------------------------------------------
 
 export async function cmdPlace(args) {
-  const state = readJson(config.statePath, null);
+  const store = await getStore();
+  const state = await store.getState();
   if (state === null) {
-    process.stderr.write(`error: ${config.statePath} not found\n`);
+    process.stderr.write(`error: portfolio state not found in store (${store.kind})\n`);
     return 2;
   }
-  // `place` allows stale state (we may be placing orders before morning MTM)
   const gerr = guardState(state, { requireFresh: false });
   if (gerr) { process.stderr.write(`error: ${gerr}\n`); return 2; }
 
-  const orders = readJsonl(config.ordersPath);
+  const orders = await store.listOrders();
 
   const bar = await deps.fetchTodayBar(args.symbol);
   const currentPrice = bar ? bar.price : null;
@@ -336,22 +273,23 @@ export async function cmdPlace(args) {
     cash_reserved_ron: Math.round(cashReservedRon * 100) / 100,
   };
   orders.push(order);
-  writeJsonlAtomic(config.ordersPath, orders);
+  await store.replaceOrders(orders);
 
   process.stdout.write(JSON.stringify({ status: 'accepted', order }, null, 2) + '\n');
   return 0;
 }
 
 export async function cmdSettle(/* args */) {
-  const state = readJson(config.statePath, null);
+  const store = await getStore();
+  const state = await store.getState();
   if (state === null) {
-    process.stderr.write(`error: ${config.statePath} not found\n`);
+    process.stderr.write(`error: portfolio state not found in store (${store.kind})\n`);
     return 2;
   }
   const gerr = guardState(state, { requireFresh: false });
   if (gerr) { process.stderr.write(`error: ${gerr}\n`); return 2; }
 
-  const orders = readJsonl(config.ordersPath);
+  const orders = await store.listOrders();
   const now = new Date();
   const nowIso = nowIsoSec();
 
@@ -388,8 +326,6 @@ export async function cmdSettle(/* args */) {
     const placedDate = (o.placed_at || '').slice(0, 10);
     const limit = o.limit_price;
 
-    // BVB fills are checked against the next session's OHLC once placed.
-    // If the order was placed today or later relative to the bar date, defer.
     if (placedDate >= bar.bar_date) {
       remainingOrders.push(o);
       continue;
@@ -413,10 +349,7 @@ export async function cmdSettle(/* args */) {
     }
 
     if (!filled) {
-      if (o.tif === 'DAY' && placedDate < bar.bar_date) {
-        // DAY order, prior session, didn't fill — drop
-        continue;
-      }
+      if (o.tif === 'DAY' && placedDate < bar.bar_date) continue; // DAY, expired
       remainingOrders.push(o);
       continue;
     }
@@ -446,7 +379,7 @@ export async function cmdSettle(/* args */) {
       engine_managed: o.engine_managed ?? true,
     };
     newFills.push(fill);
-    appendJsonl(config.fillsPath, fill);
+    await store.appendFill(fill);
 
     if (o.action === 'BUY') {
       state.cash_ron -= notional + comm;
@@ -514,8 +447,8 @@ export async function cmdSettle(/* args */) {
     cost_basis_ron: Math.round(costBasis * 100) / 100,
   };
 
-  writeJsonlAtomic(config.ordersPath, remainingOrders);
-  writeJsonAtomic(config.statePath, state);
+  await store.replaceOrders(remainingOrders);
+  await store.setState(state);
 
   const report = {
     as_of: state.as_of,
@@ -529,10 +462,14 @@ export async function cmdSettle(/* args */) {
 }
 
 export async function cmdStatus(/* args */) {
-  const state = readJson(config.statePath, null);
-  const orders = readJsonl(config.ordersPath);
-  const fills = readJsonl(config.fillsPath);
+  const store = await getStore();
+  const [state, orders, fills] = await Promise.all([
+    store.getState(),
+    store.listOrders(),
+    store.listFills(),
+  ]);
   process.stdout.write(JSON.stringify({
+    backend: store.kind,
     state,
     open_orders: orders,
     total_fills_ever: fills.length,
@@ -575,7 +512,6 @@ function parseArgs(argv) {
     else throw new Error(`unknown argument: ${a}`);
   }
 
-  // per-cmd required checks
   if (out.cmd === 'place') {
     const missing = ['symbol', 'action', 'quantity', 'limit', 'trade_id']
       .filter(k => out[k] == null || Number.isNaN(out[k]));

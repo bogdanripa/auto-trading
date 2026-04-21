@@ -9,8 +9,8 @@ Append-only narrative log of every trade. Distinct from `tax-tracker` (which cap
 
 ## Storage
 
-- File: `journal/trades.jsonl` (one JSON object per line, append-only)
-- Location: committed to git, so history is versioned
+- Collection: `trades_journal/*` in the Firestore store (one doc per record, append-only). In dev with no `FIRESTORE_PROJECT`, falls back to `journal/trades.jsonl`.
+- Written via `store.appendJournal(record)` / read via `store.listJournal()` (see `scripts/store.mjs`).
 - Never rewrite history. Corrections go in as new records with `"correction_of": "<trade_id>"`.
 
 ## Record Schema

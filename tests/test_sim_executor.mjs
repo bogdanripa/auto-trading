@@ -2,8 +2,8 @@
 /**
  * Tests for scripts/sim_executor.mjs.
  *
- * Uses a temporary portfolio dir and injects a fake fetchTodayBar so we
- * don't touch Yahoo. Built-in node:test runner — no deps.
+ * Uses a tempdir-rooted LocalStore + a fake fetchTodayBar so we don't hit
+ * Yahoo or Firestore. Built-in node:test runner — no deps.
  *
  * Run:
  *     node --test tests/test_sim_executor.mjs
@@ -16,6 +16,7 @@ import os from 'node:os';
 import path from 'node:path';
 
 import * as se from '../scripts/sim_executor.mjs';
+import { LocalStore } from '../scripts/store.mjs';
 
 // ---- helpers --------------------------------------------------------------
 
@@ -34,9 +35,7 @@ function fakeBar({ price, open, high, low, dateIso }) {
 }
 
 function today() { return new Date().toISOString().slice(0, 10); }
-function yesterday() {
-  return new Date(Date.now() - 86400_000).toISOString().slice(0, 10);
-}
+function yesterday() { return new Date(Date.now() - 86400_000).toISOString().slice(0, 10); }
 
 /** Capture stdout/stderr from an async function. */
 async function capture(fn) {
@@ -46,36 +45,45 @@ async function capture(fn) {
   process.stdout.write = (chunk) => { out += chunk; return true; };
   process.stderr.write = (chunk) => { err += chunk; return true; };
   let rc;
-  try {
-    rc = await fn();
-  } finally {
+  try { rc = await fn(); }
+  finally {
     process.stdout.write = origOut;
     process.stderr.write = origErr;
   }
   return { rc, out, err };
 }
 
-/** Fresh tempdir + path override + env reset per test. Returns teardown fn. */
+/**
+ * Fresh LocalStore over a tempdir per test. Injects it into sim_executor via
+ * config.store so every read/write hits the tempdir. Resets env + deps on
+ * teardown.
+ */
 function newFixture() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'sim-exec-'));
-  se.setPortfolioDir(dir);
+  const store = new LocalStore({ root: dir });
+  const origStore = se.config.store;
   const origMode = process.env.EXECUTION_MODE;
-  process.env.EXECUTION_MODE = 'simulation';
   const origFetch = se.deps.fetchTodayBar;
+
+  se.config.store = store;
+  process.env.EXECUTION_MODE = 'simulation';
+
   return {
     dir,
+    store,
     setBar(bar) { se.deps.fetchTodayBar = async () => bar; },
     teardown() {
+      se.config.store = origStore;
       se.deps.fetchTodayBar = origFetch;
       if (origMode === undefined) delete process.env.EXECUTION_MODE;
       else process.env.EXECUTION_MODE = origMode;
       try { fs.rmSync(dir, { recursive: true, force: true }); } catch { /* ignore */ }
     },
-    state() { return JSON.parse(fs.readFileSync(se.config.statePath, 'utf8')); },
-    orders() { return se.readJsonl(se.config.ordersPath); },
-    fills() { return se.readJsonl(se.config.fillsPath); },
-    writeState(s) { se.writeJsonAtomic(se.config.statePath, s); },
-    writeOrders(o) { se.writeJsonlAtomic(se.config.ordersPath, o); },
+    async state()   { return store.getState(); },
+    async orders()  { return store.listOrders(); },
+    async fills()   { return store.listFills(); },
+    async writeState(s) { await store.setState(s); },
+    async writeOrders(o) { await store.replaceOrders(o); },
   };
 }
 
@@ -84,7 +92,7 @@ function newFixture() {
 test('buy → settle → sell → settle round-trip', async () => {
   const fx = newFixture();
   try {
-    fx.writeState(seedState({ cashRon: 5_000.0 }));
+    await fx.writeState(seedState({ cashRon: 5_000.0 }));
     const td = today();
     const yd = yesterday();
 
@@ -99,7 +107,7 @@ test('buy → settle → sell → settle round-trip', async () => {
       '--invalidation', 'close below 35.00',
     ]));
     assert.equal(rc, 0, err);
-    let orders = fx.orders();
+    let orders = await fx.orders();
     assert.equal(orders.length, 1);
     assert.equal(orders[0].theme_tag, 'BNR higher-for-longer');
     assert.equal(orders[0].invalidation_conditions.length, 2);
@@ -107,14 +115,14 @@ test('buy → settle → sell → settle round-trip', async () => {
 
     // back-date so settle considers it eligible
     orders[0].placed_at = `${yd}T10:00:00Z`;
-    fx.writeOrders(orders);
+    await fx.writeOrders(orders);
 
     // SETTLE — bar today, limit 38.0, low 37.5 → fills at min(38.0, 37.8) = 37.8
     fx.setBar(fakeBar({ price: 38.2, open: 37.8, high: 38.5, low: 37.5, dateIso: td }));
     ({ rc, err } = await capture(() => se.main(['settle'])));
     assert.equal(rc, 0, err);
 
-    let s = fx.state();
+    let s = await fx.state();
     assert.equal(s.positions.length, 1);
     const pos = s.positions[0];
     assert.equal(pos.symbol, 'TLV');
@@ -122,11 +130,13 @@ test('buy → settle → sell → settle round-trip', async () => {
     assert.ok(Math.abs(pos.avg_cost - 37.8) < 1e-4, `avg_cost=${pos.avg_cost}`);
     assert.equal(pos.theme_tag, 'BNR higher-for-longer');
     assert.equal(pos.engine_managed, true);
-    assert.deepEqual(fx.orders(), []);
-    const fills = fx.fills();
+    assert.deepEqual(await fx.orders(), []);
+    const fills = await fx.fills();
     assert.equal(fills.length, 1);
     assert.equal(fills[0].action, 'BUY');
     assert.equal(fills[0].theme_tag, 'BNR higher-for-longer');
+    assert.equal(fills[0].limit_price, 38.0);
+    assert.ok(Math.abs(fills[0].fill_price - 37.8) < 1e-4);
 
     // SELL 10
     fx.setBar(fakeBar({ price: 40.0, open: 39.8, high: 40.5, low: 39.0, dateIso: td }));
@@ -137,9 +147,9 @@ test('buy → settle → sell → settle round-trip', async () => {
     ])));
     assert.equal(rc, 0, err);
 
-    orders = fx.orders();
+    orders = await fx.orders();
     orders[0].placed_at = `${yd}T10:00:00Z`;
-    fx.writeOrders(orders);
+    await fx.writeOrders(orders);
 
     fx.setBar(fakeBar({ price: 40.2, open: 39.8, high: 40.5, low: 39.0, dateIso: td }));
     let out;
@@ -153,7 +163,7 @@ test('buy → settle → sell → settle round-trip', async () => {
     // fill = max(39.5, 39.8) = 39.8
     assert.ok(Math.abs(closed.exit_price - 39.8) < 1e-4, `exit=${closed.exit_price}`);
 
-    s = fx.state();
+    s = await fx.state();
     assert.deepEqual(s.positions, []);
     assert.ok(s.cash_ron > 5_000.0, `cash=${s.cash_ron}`);
   } finally {
@@ -164,7 +174,7 @@ test('buy → settle → sell → settle round-trip', async () => {
 test('DAY buy order that does not fill expires (not kept)', async () => {
   const fx = newFixture();
   try {
-    fx.writeState(seedState({ cashRon: 5_000.0 }));
+    await fx.writeState(seedState({ cashRon: 5_000.0 }));
     const td = today();
     const yd = yesterday();
 
@@ -177,18 +187,18 @@ test('DAY buy order that does not fill expires (not kept)', async () => {
     ]));
     assert.equal(rc, 0, err);
 
-    const orders = fx.orders();
+    const orders = await fx.orders();
     orders[0].placed_at = `${yd}T10:00:00Z`;
     orders[0].limit_price = 35.0; // below bar's low
-    fx.writeOrders(orders);
+    await fx.writeOrders(orders);
 
     fx.setBar(fakeBar({ price: 38.0, open: 37.8, high: 38.5, low: 37.5, dateIso: td }));
     ({ rc, err } = await capture(() => se.main(['settle'])));
     assert.equal(rc, 0, err);
 
-    assert.deepEqual(fx.orders(), []);
-    assert.deepEqual(fx.fills(), []);
-    assert.deepEqual(fx.state().positions, []);
+    assert.deepEqual(await fx.orders(), []);
+    assert.deepEqual(await fx.fills(), []);
+    assert.deepEqual((await fx.state()).positions, []);
   } finally {
     fx.teardown();
   }
@@ -198,7 +208,7 @@ test('BUY breaching the 60% sector cap is rejected', async () => {
   const fx = newFixture();
   try {
     // total value ~ 5000; 60% cap => 3000
-    fx.writeState(seedState({
+    await fx.writeState(seedState({
       cashRon: 2_500.0,
       positions: [{
         symbol: 'TLV',
@@ -220,7 +230,7 @@ test('BUY breaching the 60% sector cap is rejected', async () => {
     ]));
     assert.equal(rc, 1, err);
     assert.match(err, /sector cap/);
-    assert.deepEqual(fx.orders(), []);
+    assert.deepEqual(await fx.orders(), []);
   } finally {
     fx.teardown();
   }
@@ -229,7 +239,7 @@ test('BUY breaching the 60% sector cap is rejected', async () => {
 test('EXECUTION_MODE mismatch blocks both place and settle', async () => {
   const fx = newFixture();
   try {
-    fx.writeState(seedState({ cashRon: 5_000.0, mode: 'ibkr' })); // env says simulation
+    await fx.writeState(seedState({ cashRon: 5_000.0, mode: 'ibkr' })); // env says simulation
 
     fx.setBar(fakeBar({ price: 38.0, open: 37.8, high: 38.5, low: 37.5, dateIso: '2026-04-19' }));
     let { rc, err } = await capture(() => se.main([
@@ -243,6 +253,20 @@ test('EXECUTION_MODE mismatch blocks both place and settle', async () => {
     ({ rc, err } = await capture(() => se.main(['settle'])));
     assert.equal(rc, 2, err);
     assert.match(err, /EXECUTION_MODE/);
+  } finally {
+    fx.teardown();
+  }
+});
+
+test('status reports store backend', async () => {
+  const fx = newFixture();
+  try {
+    await fx.writeState(seedState({ cashRon: 1_000.0 }));
+    const { rc, out, err } = await capture(() => se.main(['status']));
+    assert.equal(rc, 0, err);
+    const report = JSON.parse(out);
+    assert.equal(report.backend, 'local');
+    assert.equal(report.state.cash_ron, 1_000.0);
   } finally {
     fx.teardown();
   }

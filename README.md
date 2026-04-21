@@ -16,8 +16,9 @@ It trades BET-Plus stocks through Interactive Brokers (IBKR), manages risk withi
 PROJECT.md                    — Strategy brain (risk rules, workflow, override logic)
 LESSONS.md                    — Living memory; distilled patterns from past trades
 THEMES.md                     — Structural themes biasing ticker selection (AI power demand, BNR rates, …)
-journal/trades.jsonl          — Append-only record of every trade (thesis + outcome)
-portfolio/                    — Simulated portfolio state (state.json, orders.jsonl, fills.jsonl)
+Firestore store               — Portfolio state (portfolio_state/current), open orders (orders/open),
+                                 fills (fills/*), journal (trades_journal/*). Local-file fallback under
+                                 portfolio/ + journal/ when FIRESTORE_PROJECT is unset (dev only).
 │
 ├── macro-analyst/            — Global markets, FX, commodities, central banks
 ├── bvb-news/                 — BVB announcements, company news, regulatory
@@ -45,7 +46,7 @@ portfolio/                    — Simulated portfolio state (state.json, orders.
 **Phase 1 — Simulation (current):**
 1. Create a Claude Code routine at https://claude.ai/code/routines
 2. Set env vars: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `EXECUTION_MODE=simulation`
-3. Adjust `portfolio/state.json` starting `cash_ron` to your intended simulation deposit
+3. Seed the portfolio state once: edit `portfolio/state.seed.json` with your starting `cash_ron`, then run `FIRESTORE_PROJECT=<proj> node scripts/seed_state.mjs portfolio/state.seed.json` — thereafter `sim_executor.mjs` owns the state in Firestore
 4. Schedule the routine for morning (07:30 EET) and evening (17:30 EET) runs
 
 No IBKR account or gateway needed for phase 1. Prices come from Yahoo Finance.
@@ -54,7 +55,7 @@ No IBKR account or gateway needed for phase 1. Prices come from Yahoo Finance.
 1. Open an IBKR account with paper + live profiles
 2. Run IB Gateway / Client Portal Gateway on an always-on machine
 3. Switch `EXECUTION_MODE=ibkr` and configure gateway endpoint
-4. Keep all other skills unchanged — the state files have the same shape
+4. Keep all other skills unchanged — the Firestore docs have the same shape
 
 ## Status
 

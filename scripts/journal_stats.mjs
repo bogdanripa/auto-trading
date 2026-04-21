@@ -22,29 +22,13 @@
  *     2 — fatal (file missing, bad arg)
  */
 
-import fs from 'node:fs';
-import path from 'node:path';
-
-const JOURNAL_DIR = process.env.JOURNAL_DIR || 'journal';
-const TRADES_PATH = path.join(JOURNAL_DIR, 'trades.jsonl');
-const PORTFOLIO_DIR = process.env.PORTFOLIO_DIR || 'portfolio';
-const FILLS_PATH = path.join(PORTFOLIO_DIR, 'fills.jsonl');
+import { openStore } from './store.mjs';
 
 const CONVICTION_BUCKETS = [
   [0, 4, 'low'],
   [5, 7, 'mid'],
   [8, 10, 'high'],
 ];
-
-function readJsonl(filePath) {
-  if (!fs.existsSync(filePath)) return [];
-  const rows = [];
-  for (const line of fs.readFileSync(filePath, 'utf8').split(/\r?\n/)) {
-    const t = line.trim();
-    if (t) rows.push(JSON.parse(t));
-  }
-  return rows;
-}
 
 function parseWindow(windowStr, since) {
   if (since) {
@@ -171,7 +155,7 @@ function computeSlippageStats(fills, windowStart) {
 }
 
 function parseArgs(argv) {
-  const args = { window: null, since: null, format: 'text', trades: TRADES_PATH, fills: FILLS_PATH };
+  const args = { window: null, since: null, format: 'text' };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const eq = (p) => a.startsWith(p + '=') ? a.slice(p.length + 1) : null;
@@ -181,10 +165,6 @@ function parseArgs(argv) {
     else if (eq('--since')) args.since = eq('--since');
     else if (a === '--format') args.format = argv[++i];
     else if (eq('--format')) args.format = eq('--format');
-    else if (a === '--trades') args.trades = argv[++i];
-    else if (eq('--trades')) args.trades = eq('--trades');
-    else if (a === '--fills') args.fills = argv[++i];
-    else if (eq('--fills')) args.fills = eq('--fills');
     else if (a === '-h' || a === '--help') args.help = true;
     else throw new Error(`unknown argument: ${a}`);
   }
@@ -203,11 +183,12 @@ async function main() {
   catch (e) { process.stderr.write(`error: ${e.message}\n`); return 2; }
 
   if (args.help) {
-    process.stdout.write('Usage: node scripts/journal_stats.mjs [--window Nd|Nw] [--since YYYY-MM-DD] [--format=text|json] [--trades=PATH]\n');
+    process.stdout.write('Usage: node scripts/journal_stats.mjs [--window Nd|Nw] [--since YYYY-MM-DD] [--format=text|json]\n');
     return 0;
   }
 
-  const records = readJsonl(args.trades);
+  const store = await openStore();
+  const [records, fills] = await Promise.all([store.listJournal(), store.listFills()]);
   if (!records.length) {
     process.stderr.write('no journal entries\n');
     return 2;
@@ -246,7 +227,6 @@ async function main() {
     ),
   };
 
-  const fills = readJsonl(args.fills);
   const slippage = computeSlippageStats(fills, windowStart);
 
   const payload = {
