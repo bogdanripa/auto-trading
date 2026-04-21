@@ -54,7 +54,7 @@ Firestore store               — Portfolio state (portfolio_state/current), ope
 3. Ensure the routine prompt's **first action is `npm install`** — the sandbox is ephemeral and `node_modules/` does not survive between runs. Without this, the Firestore SDK is missing and the store silently falls back to ephemeral local files, re-triggering 2FA on every run. See `PROJECT.md` § Daily Workflow → Step 0.
 4. In demo mode, BT sends OTP to email (not SMS). On first run, fetch the code from email and feed it to the client; the resulting session snapshot persists to `bt_session/current` in Firestore and subsequent runs resume silently until the refresh token expires (typically weeks).
 5. Schedule the routine for morning (07:30 EET) and evening (17:30 EET) runs
-6. Create a **token-keeper routine** scheduled `*/45 * * * *` — see [`routines/token-keeper.md`](routines/token-keeper.md). It rotates BT Trade's tokens every 45 min so the refresh token never ages past its ~1h server-side expiry; without it the 10-hour gap between morning and evening runs would kill the session and trigger 2FA twice a day.
+6. Create a **token-keeper routine** scheduled `*/45 * * * *` — see [`routines/token-keeper.md`](routines/token-keeper.md). It rotates BT Trade's tokens every 45 min so the refresh token never ages past its ~1h server-side expiry. Without it the 10-hour gap between morning and evening runs means every evening starts with a fresh login — which works (OTP is automated) but is slower and, if repeated often, flags BT's fraud heuristics.
 
 **Phase 2 — Live trading (real RON, future):**
 1. Same BT Trade account, live profile

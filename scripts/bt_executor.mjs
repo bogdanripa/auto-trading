@@ -156,16 +156,17 @@ async function makeClient({ demo, resumeOnly = false }) {
     } catch (e) {
       if (resumeOnly) {
         throw new Error(
-          `resume failed (${e.message}) and resumeOnly=true — refusing to attempt a fresh login. ` +
-          `This path is reserved for unattended routines (e.g. the token keeper) that must not trigger 2FA.`
+          `resume failed (${e.message}) and resumeOnly=true — refusing to fresh-login. ` +
+          `The keeper's job is to extend an existing session, not create one; fresh logins belong in ` +
+          `the scheduled trading routines. Repeat logins also trip BT's fraud heuristics.`
         );
       }
       console.error(`[bt_executor] resume failed (${e.message}); falling back to fresh login`);
     }
   } else if (resumeOnly) {
     throw new Error(
-      'no resumable BT Trade session in store and resumeOnly=true — refusing to trigger 2FA. ' +
-      'A human-driven run (morning or evening routine) must establish a session first.'
+      'no resumable BT Trade session in store and resumeOnly=true — refusing to fresh-login. ' +
+      'The scheduled morning/evening routine must establish a session first; the keeper only extends it.'
     );
   }
 
@@ -328,9 +329,10 @@ async function main() {
 
   const demo = !args.flags.live;
 
-  // `refresh` (the keeper routine) must never trigger 2FA. If there's no
-  // snapshot or the refresh token is dead, we'd rather fail loudly and let
-  // the next human-scheduled run re-login than burn an OTP at 02:45 AM.
+  // `refresh` (the keeper routine) extends an existing session; it does not
+  // establish one. If there's no snapshot or the stored refresh token is
+  // dead, fail loudly — let the next scheduled morning/evening run handle
+  // the fresh login. Repeat fresh logins also trip BT's fraud heuristics.
   const resumeOnly = cmd === 'refresh';
 
   let client;

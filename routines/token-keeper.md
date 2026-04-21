@@ -6,9 +6,11 @@ morning/evening trading runs.
 ## Why
 
 BT Trade's refresh token expires ~1h after issue. The morning routine runs at
-07:30 and the evening routine at 17:30 — a 10-hour gap. Without intervention
-the refresh token dies and the next run triggers a fresh 2FA login (email OTP
-in demo mode, SMS in live), which breaks the "fully autonomous" promise.
+07:30 and the evening routine at 17:30 — a 10-hour gap that outlives the
+refresh token, so the evening run would always start with a fresh login.
+Fresh logins work fine (OTP delivery is automated via ntfy for SMS, email
+for demo), but they're slower, add a latency bump to the evening briefing,
+and — if done too often — trip BT's fraud heuristics.
 
 The keeper fires every 45 minutes, rotates the tokens via
 `client.auth.refresh()`, and the new snapshot is written to Firestore by the
@@ -18,9 +20,9 @@ The keeper fires every 45 minutes, rotates the tokens via
 
 `scripts/bt_executor.mjs refresh` runs in **resume-only** mode: if there's no
 snapshot in Firestore, or the stored refresh token is already dead, it exits
-with an error instead of attempting a fresh login. The keeper must never
-trigger 2FA — a human-scheduled morning/evening run establishes the session;
-the keeper only extends it.
+with an error instead of attempting a fresh login. The keeper's job is to
+extend an existing session — establishing one is the scheduled morning/
+evening routine's job. Splitting the two roles keeps login frequency low.
 
 ## Schedule
 
@@ -85,6 +87,7 @@ Hard rules:
 ## Failure handling
 
 If the keeper alerts, the next morning/evening run will fall through to a
-fresh 2FA login (one OTP burned) and re-establish the session. No manual
-intervention needed unless alerts fire repeatedly — that would indicate a
-Firestore permissions issue or a BT-side account lockout.
+fresh login and re-establish the session automatically (OTP delivery is
+automated). No manual intervention needed unless alerts fire repeatedly —
+that would indicate a Firestore permissions issue or a BT-side account
+lockout.
