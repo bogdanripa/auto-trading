@@ -1,18 +1,22 @@
-__pycache__/
-*.pyc
+# OS
 .DS_Store
+
+# Secrets
 .env
 
 # Node
 node_modules/
 package-lock.json
 
-# Local dev store (LocalStore fallback when FIRESTORE_PROJECT is unset).
-# Authoritative state lives in Firestore; these files are dev-only scratch.
+# Claude Code
+.claude/settings.local.json
+
+# LocalStore dev fallback (used only when FIRESTORE_PROJECT is unset).
+# Authoritative state lives in Firestore; these files are scratch.
 .bt_session.json
-considered/
-snapshots/
 portfolio/state.json
 portfolio/orders.jsonl
 portfolio/fills.jsonl
 journal/trades.jsonl
+considered/
+snapshots/
