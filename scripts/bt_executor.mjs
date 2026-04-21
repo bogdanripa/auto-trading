@@ -45,8 +45,24 @@
  *   3  — unexpected runtime error
  */
 
+import dns from 'node:dns/promises';
 import { BTTradeClient, ntfyOtpProvider } from '../vendor/bt-trade/src/index.js';
 import { openStore } from './store.mjs';
+
+// ---------- DNS pre-warm ----------
+//
+// The sandbox (Anthropic routine) has a tight DNS cache. When we boot the
+// Firestore SDK first, Google's auth + metadata + Firestore endpoints flood
+// the cache; a subsequent bt-trade lookup for evo.bt-trade.ro then blows the
+// cache with "DNS cache overflow" and the whole run dies.
+//
+// Pre-warming the BT Trade host before any Firestore I/O keeps the BT entry
+// hot in the cache regardless of whatever Google adds later.
+async function prewarmBtTradeDns({ demo }) {
+  const host = 'evo.bt-trade.ro';
+  try { await dns.lookup(host); }
+  catch (e) { console.error(`[bt_executor] DNS prewarm for ${host} failed: ${e.message}`); }
+}
 
 // ---------- argv parsing ----------
 
@@ -90,14 +106,33 @@ function requireEnv(name) {
  */
 async function makeClient({ demo }) {
   const topic = process.env.BT_NTFY_TOPIC; // only required if we end up doing a fresh login
-  const store = await openStore();
+
+  // STEP 1: Pre-warm BT Trade DNS BEFORE any Firestore I/O. See prewarmBtTradeDns
+  // comment for the DNS-cache-overflow background.
+  await prewarmBtTradeDns({ demo });
+
+  // STEP 2: Lazy-opened store. First touch defers the Firestore SDK init
+  // (which is expensive: OAuth + metadata + endpoint DNS lookups) until we
+  // actually need to load or save a session snapshot.
+  let storePromise = null;
+  const getStore = () => (storePromise ??= openStore());
 
   // onSessionChange is called after login, every refresh, and on logout.
-  // Persisting every time means the Firestore doc always reflects the freshest
+  // Persisting every time means the store doc always reflects the freshest
   // tokens, so the keeper routine (and subsequent runs) can resume cleanly.
+  // This hook lazily opens the store on first fire — so a pure BT-Trade-only
+  // command path (e.g. a smoke test that never triggers a token refresh) can
+  // complete without ever touching Firestore.
   const onSessionChange = async (snap) => {
-    try { await store.saveBtSession(snap); }
-    catch (e) { console.error(`[bt_executor] saveBtSession failed: ${e.message}`); }
+    try {
+      const store = await getStore();
+      await store.saveBtSession(snap);
+    } catch (e) {
+      // DO NOT silently swallow — if Firestore was requested (FIRESTORE_PROJECT
+      // set) and failed, the routine needs to see it. Session changes that
+      // don't land durably mean re-2FA on the next run.
+      console.error(`[bt_executor] saveBtSession failed: ${e.message}`);
+    }
   };
 
   const client = new BTTradeClient({
@@ -106,8 +141,10 @@ async function makeClient({ demo }) {
     onSessionChange,
   });
 
-  // Try to resume from Firestore first. toSnapshot excludes the password, so a
-  // resumed client can refresh tokens without re-triggering 2FA or re-login.
+  // STEP 3: Try to resume. We have to hit the store to read the prior snapshot;
+  // there's no way around it for the resume path. But BT Trade's DNS is already
+  // warmed above, so Firestore's init can't starve it.
+  const store = await getStore();
   const prior = await store.loadBtSession();
   if (prior && prior.accessToken && prior.refreshToken) {
     try {

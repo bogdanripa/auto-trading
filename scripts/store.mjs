@@ -285,7 +285,20 @@ export async function openStore({ force } = {}) {
   if (useFirestore) {
     if (!project) throw new Error('FIRESTORE_PROJECT env var is required for firestore backend');
     // Dynamic import so dev without the SDK installed still works.
-    const mod = await import('@google-cloud/firestore');
+    let mod;
+    try {
+      mod = await import('@google-cloud/firestore');
+    } catch (e) {
+      // Addressed to the agent running in the routine, not a human:
+      // the fix is to run `npm install` as Step 0 of the routine prompt
+      // before invoking any script. node_modules/ does not survive
+      // between sandbox runs. See PROJECT.md § Daily Workflow → Step 0.
+      throw new Error(
+        `Firestore backend requested (FIRESTORE_PROJECT=${project}) but @google-cloud/firestore is not installed in this sandbox. ` +
+        `The routine must run \`npm install\` at the repo root as its FIRST action — node_modules/ is wiped between runs. ` +
+        `Original error: ${e.message}`
+      );
+    }
     const Firestore = mod.Firestore || mod.default?.Firestore || mod.default;
     const sa = loadServiceAccountFromEnv();
     const opts = { projectId: project };
@@ -294,6 +307,21 @@ export async function openStore({ force } = {}) {
     return new FirestoreStore(db);
   }
 
+  // LocalStore is DEV-ONLY. Production/routine runs MUST set FIRESTORE_PROJECT.
+  // If that env is unset in the routine, state does not survive sandbox
+  // recycling and every run re-triggers 2FA. See PROJECT.md § Daily Workflow
+  // → Step 0 and trade-executor/SKILL.md § Store policy.
+  if (!force || force === 'firestore') {
+    // Force === 'firestore' handled above; fallthrough only if no project and no force override.
+    // Only warn here; tests and ad-hoc dev runs legitimately use LocalStore with force='local'.
+    if (process.env.ROUTINE_RUN === '1') {
+      throw new Error(
+        'LocalStore is forbidden for scheduled routine runs (ROUTINE_RUN=1). ' +
+        'Set FIRESTORE_PROJECT (and GCS_SA_KEY_JSON) in the routine env. ' +
+        'LocalStore state does not survive sandbox recycling.'
+      );
+    }
+  }
   return new LocalStore({ root: process.env.STORE_ROOT || process.cwd() });
 }
 
