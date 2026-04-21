@@ -250,137 +250,46 @@ No `BT_USER`, `BT_PASS`, or `BT_NTFY_TOPIC` needed — the gateway handles crede
 
 When `EXECUTION_MODE=live`, trade-executor passes `--live` to every `bt_executor.mjs` invocation. The script cross-checks that the API key starts with `bvb_live_` and aborts if it doesn't, preventing accidental mode mismatches.
 
-### CLI surface and output shapes
+### CLI surface
 
-**Do not read `scripts/bt_executor.mjs` source.** Everything you need to
-know is here. The script prints JSON to stdout on exit 0, an error message
-to stderr on exit 1/2/3.
+All commands print JSON to stdout on exit 0, an error message to stderr
+on exit 1/2/3. **Do not hardcode expectations about the JSON shape.**
+BT Trade's API passes through raw broker responses whose field names,
+casing, and nesting can change between demo/live and across BT releases.
+The contract is only that the output is valid JSON and that stdout-vs-stderr
+separates "success payload" from "error message". Run the command, parse
+the JSON, then inspect the structure and extract what you need.
 
----
+If you can't find a field by its obvious name, **print the raw JSON and
+look at what's actually there** — don't guess. Examples: a cash field
+might be `available`, `availableAmount`, `availableCash`, or nested under
+`balances.RON`. A position quantity might be `quantity`, `qty`, `Quantity`,
+or `Shares`. Orders might come back as a flat array, or wrapped in
+`{ Items: [...] }`, or under `items`. Adapt to what's in front of you.
 
-#### `status` — cash + holdings snapshot
+| Command | Purpose |
+|---|---|
+| `status` | Cash + holdings snapshot. Also writes `portfolio_state/current` as a side-effect so downstream skills keep working. |
+| `place` | Submit a limit order. Required flags: `--symbol`, `--action` (BUY\|SELL), `--quantity`, `--limit`, `--tif` (DAY\|GTC), `--trade-id`. |
+| `orders` | Recent/open orders. |
+| `holdings` | Current positions only. |
+| `refresh` | Nudge the gateway to rotate the BT session. Rarely needed — the gateway's 45-min cron handles it. |
 
+Pass `--live` (only) when `EXECUTION_MODE=live`; the script cross-checks
+this against the API key prefix and aborts on mismatch.
+
+Example invocation:
 ```bash
-node scripts/bt_executor.mjs status            # demo
-node scripts/bt_executor.mjs status --live     # live
-```
-
-Output:
-```json
-{
-  "mode": "demo",
-  "cash": {
-    "availableAmount": 4823.17,
-    "totalAmount": 5310.00,
-    "currencyId": "RON"
-  },
-  "holdings": [
-    {
-      "symbol": "TLV",
-      "quantity": 10,
-      "averagePrice": 35.40,
-      "currentPrice": 36.20,
-      "marketValue": 362.00,
-      "unrealizedPnl": 8.00
-    }
-  ]
-}
-```
-
-Key fields to read:
-- Available cash → `cash.availableAmount`
-- Positions list → `holdings` (array; may be empty `[]`)
-- Per position: `symbol`, `quantity`, `averagePrice`, `currentPrice`
-
-Side-effect: writes a refreshed `portfolio_state/current` to Firestore.
-
----
-
-#### `place` — place a limit order
-
-```bash
+node scripts/bt_executor.mjs status
 node scripts/bt_executor.mjs place \
     --symbol TGN --action BUY --quantity 2 --limit 89.00 --tif DAY \
     --trade-id 2026-04-19-TGN-01
 ```
 
-Flags: `--symbol` (BVB ticker), `--action` (BUY|SELL), `--quantity`,
-`--limit` (limit price in RON), `--tif` (DAY|GTC), `--trade-id` (your
-own reference string).
-
-Output:
-```json
-{
-  "submitted": {
-    "symbol": "TGN",
-    "side": "buy",
-    "quantity": 2,
-    "price": 89.00,
-    "orderType": "limit",
-    "valability": "day"
-  },
-  "trade_id": "2026-04-19-TGN-01",
-  "result": {
-    "orderNumber": "abc123...",
-    "result": "ok",
-    "errorMessages": [],
-    "warningMessages": [],
-    "successMessages": []
-  }
-}
-```
-
-Success: `result.result === "ok"`. Any `result.errorMessages` entries
-mean the broker rejected the order — log them and do not treat as filled.
-
----
-
-#### `orders` — open/recent orders
-
-```bash
-node scripts/bt_executor.mjs orders
-```
-
-Output: array of order objects from BT Trade:
-```json
-[
-  {
-    "orderNumber": "abc123...",
-    "symbol": "TGN",
-    "side": "buy",
-    "quantity": 2,
-    "price": 89.00,
-    "status": "open",
-    "placedAt": "2026-04-19T07:45:00Z"
-  }
-]
-```
-
----
-
-#### `holdings` — current positions
-
-```bash
-node scripts/bt_executor.mjs holdings
-```
-
-Output: same array shape as `status.holdings` above.
-
----
-
-#### `refresh` — nudge the gateway to refresh the BT session
-
-```bash
-node scripts/bt_executor.mjs refresh
-```
-
-Output:
-```json
-{ "ok": true }
-```
-
-Rarely needed manually — the gateway's Cloud Scheduler cron fires every
-45 minutes automatically.
+For `place`, success vs rejection is encoded somewhere in the response —
+look for an `errorMessages` / `errors` / `result` / `status` field and
+check whether it indicates the broker accepted the order. Log the raw
+response either way so the journal has the full picture.
 
 ---
 
