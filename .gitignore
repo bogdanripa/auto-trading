@@ -7,7 +7,12 @@ __pycache__/
 node_modules/
 package-lock.json
 
-# Local dev store (LocalStore fallback when FIRESTORE_PROJECT is unset)
+# Local dev store (LocalStore fallback when FIRESTORE_PROJECT is unset).
+# Authoritative state lives in Firestore; these files are dev-only scratch.
 .bt_session.json
 considered/
 snapshots/
+portfolio/state.json
+portfolio/orders.jsonl
+portfolio/fills.jsonl
+journal/trades.jsonl
