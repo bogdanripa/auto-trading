@@ -57,15 +57,24 @@ When multiple setups compete for limited capital:
 
 ## Daily Workflow
 
-### Step 0 (every run, morning or evening) — Install dependencies
+### Step 0 (every run) — Confirm the gateway credentials are present
 
-**Before any skill runs, execute `npm install` at the repo root.** The routine's sandbox is ephemeral; `node_modules/` does not survive between runs. The Node scripts under `scripts/` depend on `@google-cloud/firestore` (Firestore persistence for portfolio state, orders, fills, journal, and BT Trade session tokens) and the vendored `@bogdanripa/bt-trade` client. Without `npm install`, the store abstraction silently falls back to `LocalStore` (ephemeral disk that also disappears between runs) and every run re-triggers 2FA.
+All long-lived state (portfolio cache, trade journal, fills, considered
+candidates, daily market snapshots) and all broker activity go through the
+**bt-gateway** Cloud Run service. The routine needs only:
 
-```
-npm install
-```
+- `BT_GATEWAY_API_KEY` — a `bvb_demo_...` or `bvb_live_...` key from
+  the gateway's Settings → Access page.
 
-If `npm install` fails (network blip, registry timeout), abort the run and report via `telegram-reporter`. Do **not** proceed with a partial install — a missing Firestore SDK means the state persistence path is broken and the run would corrupt nothing (because it can't write) but would read stale/empty state.
+No `FIRESTORE_PROJECT`, no `GCS_SA_KEY_JSON`, no service-account JSON,
+no `@google-cloud/firestore` dep. `scripts/store.mjs` is a thin HTTP
+client. If the key is missing, abort the run and report via
+`telegram-reporter` — there is no local fallback, and proceeding without
+it would corrupt nothing but would also do nothing useful.
+
+`npm install` is still worth running at the top of a routine run so
+ambient deps resolve, but the critical preflight is that the gateway
+API key is set.
 
 ### Morning Run (7:30 AM EET)
 Execute skills in this order:
@@ -77,7 +86,7 @@ Execute skills in this order:
 6. `portfolio-manager` — Current state, cash available, position review
 7. `risk-monitor` — Check stops, exposure, override conditions
 8. **Synthesis** — Weigh all inputs against active lessons + active themes, decide today's actions
-9. `trade-executor` — Place orders (simulation mode appends to `orders/open` in the Firestore store)
+9. `trade-executor` — Place orders via bt-gateway against BT Trade
 10. `trade-journal` — Append entry record for every new fill (thesis + context, tag with theme if applicable)
 11. `telegram-reporter` — Send morning briefing
 
@@ -95,7 +104,7 @@ Execute skills in this order:
 
 The engine learns from its own history through three pieces:
 
-1. **`trades_journal/*` in the Firestore store** — every trade is recorded at entry (thesis, context, exit plan) and at exit (outcome, verdict, lessons). Append-only. Written by the `trade-journal` skill via `store.appendJournal()`; dev fallback writes `journal/trades.jsonl`.
+1. **Trade journal via bt-gateway** — every trade is recorded at entry (thesis, context, exit plan) and at exit (outcome, verdict, lessons). Append-only. Written by the `trade-journal` skill via `store.appendJournal()`, which POSTs to `/api/v1/journal` on the gateway.
 
 2. **`LESSONS.md`** — distilled patterns from the journal, grouped as `[active]` (drives daily decisions), `[candidate]` (observed but not yet conclusive), and `[retired]` (contradicted by later data). Updated weekly by the `retrospective` skill.
 
@@ -200,18 +209,20 @@ If the engine would like to act on a manually-opened position (e.g. apply its st
 ### Surface all reconciliation findings in the morning briefing
 Every manual-activity detection goes into the Telegram briefing under a "RECONCILED" section: what was imported, what was closed, what the P&L was. This gives the user a chance to retroactively tag a thesis / theme if useful.
 
-### Simulation mode
-Does not reconcile anything. Simulation state is the only source of truth. This reconciliation section activates only when `EXECUTION_MODE=demo` or `EXECUTION_MODE=live`.
-
 ## Execution Mode
 
-Controlled by the `EXECUTION_MODE` env var on the routine.
+Mode is encoded in the bt-gateway API key prefix — `bvb_demo_...` or
+`bvb_live_...`. There is no `EXECUTION_MODE` env var.
 
-**`demo` (current):** `trade-executor` calls BT Trade's demo (paper) environment via the vendored `@bogdanripa/bt-trade` client. Orders rest on BT's book and fill against real market data; no real RON moves. This is the active mode for all scheduled runs.
+**`demo` (current):** `trade-executor` calls BT Trade's demo (paper)
+environment via bt-gateway. Orders rest on BT's book and fill against real
+market data; no real RON moves. This is the active mode for all scheduled
+runs — use a `bvb_demo_...` key.
 
-**`live` (future):** same backend as `demo` but against BT Trade's live environment — real RON. Flip `EXECUTION_MODE=live` on the routine when ready.
-
-**`simulation` (legacy, dev-only):** `trade-executor` maintains a simulated portfolio in `portfolio_state/current` using real BVB prices from Yahoo Finance with modeled fills. Retained for offline development without BT credentials. Must not be used for scheduled runs — fills are synthetic and pollute the journal.
+**`live`:** same gateway, live BT environment — real RON. Issue a
+`bvb_live_...` key and swap it in when ready. The `bt_executor.mjs place`
+call must carry `--live` whenever the key is a live key; the script
+cross-checks and aborts on mismatch.
 
 ### Order rules (both modes)
 - Market: BVB

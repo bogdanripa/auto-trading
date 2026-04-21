@@ -7,10 +7,5 @@
   "engines": {
     "node": ">=18"
   },
-  "scripts": {
-    "test": "node --test tests/*.mjs"
-  },
-  "dependencies": {
-    "@google-cloud/firestore": "^7.10.0"
-  }
+  "dependencies": {}
 }

@@ -63,18 +63,30 @@ async function gw(path, { method = 'GET', body } = {}) {
   };
   if (body !== undefined) init.body = JSON.stringify(body);
 
-  // Retry once on 502/503 — Cloud Run can briefly return these during
-  // rolling deploys even with min-instances=1.
+  // Retry on 502/503/504 with exponential backoff. Cloud Run returns these
+  // during rolling deploys, cold-start overlap, and when the warm instance
+  // is temporarily saturated (e.g. by an in-flight BT OTP login). min-instances
+  // guarantees warmth, not availability during scale-up.
+  const BACKOFF_MS = [1000, 3000, 6000, 12000];  // 4 retries, ~22s total
   let res;
-  for (let attempt = 0; attempt < 2; attempt++) {
-    try { res = await fetch(url, { ...init, signal: AbortSignal.timeout(30_000) }); }
-    catch (e) { throw new Error(`Gateway unreachable: ${e.message}`); }
-    if (res.status !== 502 && res.status !== 503) break;
-    if (attempt === 0) {
-      console.error(`[bt_executor] ${res.status} from gateway, retrying in 3s…`);
-      await new Promise(r => setTimeout(r, 3000));
+  let lastErr;
+  for (let attempt = 0; attempt <= BACKOFF_MS.length; attempt++) {
+    try {
+      res = await fetch(url, { ...init, signal: AbortSignal.timeout(30_000) });
+      lastErr = null;
+    } catch (e) {
+      lastErr = e;
+      res = null;
     }
+    const transient = lastErr || (res && (res.status === 502 || res.status === 503 || res.status === 504));
+    if (!transient) break;
+    if (attempt === BACKOFF_MS.length) break;  // no more retries
+    const waitMs = BACKOFF_MS[attempt];
+    const code = lastErr ? `network (${lastErr.message})` : `${res.status}`;
+    console.error(`[bt_executor] transient gateway error (${code}), retry ${attempt + 1}/${BACKOFF_MS.length} in ${waitMs}ms…`);
+    await new Promise(r => setTimeout(r, waitMs));
   }
+  if (!res) throw new Error(`Gateway unreachable after retries: ${lastErr?.message || 'unknown'}`);
 
   let json;
   try { json = await res.json(); }
