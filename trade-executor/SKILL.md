@@ -10,7 +10,7 @@ Three execution backends, one interface. The skill's contract is identical eithe
 | `EXECUTION_MODE` | Backend | Broker contact | Real money |
 |---|---|---|---|
 | `demo` (**current active mode**) | `scripts/bt_executor.mjs` (`demo: true`) | BT Trade demo environment | No (paper) |
-| `live` | `scripts/bt_executor.mjs` (`EXECUTION_MODE=live`) | BT Trade live environment | **Yes — real RON** |
+| `live` | `scripts/bt_executor.mjs` (`--live`) | BT Trade live environment | **Yes — real RON** |
 | `simulation` (legacy; dev-only) | `scripts/sim_executor.mjs` | None — Yahoo/stooq prices only | No |
 
 Read `EXECUTION_MODE` from the environment at the start of each run. **The routine runs in `demo`.** `simulation` is retained for offline development (no BT creds needed) but must not be used for scheduled routine runs — it gives fake fills that pollute the journal. If `EXECUTION_MODE` is unset, default to `simulation` only to prevent accidentally hitting a real broker when running ad-hoc scripts locally; the routine always sets it explicitly. Never upgrade modes implicitly — the routine's env is the only switch.
@@ -23,16 +23,16 @@ Cash balances, position quantities, open orders, and recent fills change asynchr
 - To answer "how much cash do I have" / "what do I own" / "what orders are open" — **run the executor script for the active EXECUTION_MODE and parse its fresh output**. Never `cat`/`grep`/`jq` `portfolio/state.json`, never read `portfolio_state/current` directly, never read `portfolio/state.seed.json` (that's a bootstrap template, not current state).
 - The single correct command is:
   - `simulation` → `node scripts/sim_executor.mjs status`
-  - `demo` / `live` → `node scripts/bt_executor.mjs status` (mode comes from `EXECUTION_MODE`; no CLI flag)
+  - `demo` / `live` → `node scripts/bt_executor.mjs status` (add `--live` only when `EXECUTION_MODE=live`)
 - These scripts re-fetch from the source of truth (Yahoo + stored sim state; or BT Trade's live API) and emit JSON. Parse that JSON. That is the only authoritative cash/holdings number.
 
 If an executor run fails, report the failure — do not fall back to reading the stored state, and do not answer with stale numbers.
 
 ### Prerequisite: `npm install` before any executor call
 
-The executor scripts depend on `@google-cloud/firestore` (Firestore backend for `scripts/store.mjs`) and the vendored `@bogdanripa/bt-trade` client. The routine's sandbox is ephemeral — `node_modules/` does not survive between runs — so **every run must execute `npm install` at the repo root before invoking `sim_executor.mjs` or `bt_executor.mjs`**. See `PROJECT.md` § Daily Workflow → Step 0.
+The executor scripts depend on `@google-cloud/firestore` (Firestore backend for `scripts/store.mjs`). The routine's sandbox is ephemeral — `node_modules/` does not survive between runs — so **every run must execute `npm install` at the repo root before invoking `sim_executor.mjs` or `bt_executor.mjs`**. See `PROJECT.md` § Daily Workflow → Step 0.
 
-If the SDK is missing, `openStore()` silently falls back to `LocalStore` (local JSONL files under `portfolio/` + `journal/`), which *also* don't survive sandbox recycling — so cash balances come back wrong and BT Trade tokens are lost, forcing re-authentication (and OTP) on every run.
+If the SDK is missing, `openStore()` silently falls back to `LocalStore` (local JSONL files under `portfolio/` + `journal/`), which *also* don't survive sandbox recycling — so portfolio snapshots come back wrong.
 
 **Why BT Trade** (Banca Transilvania's retail platform, not IBKR): it has native BVB access with RON-native cash and the symbols our skills already use, and the HTTP API (via the vendored `@bogdanripa/bt-trade` client at `vendor/bt-trade/`) works without the GUI-automation plumbing IBKR's Gateway requires. One trade-off: BT's demo and live APIs both require OTP via SMS — the library bridges this to ntfy.sh, which must have a running phone Shortcut forwarding BT's SMS codes to the configured topic.
 
@@ -234,26 +234,30 @@ Portfolio after this run:
 
 ## BT Trade Backend (`demo` and `live`)
 
-Script: `scripts/bt_executor.mjs`. Vendored library: `vendor/bt-trade/` (`@bogdanripa/bt-trade`, no external npm install — zero runtime deps).
+Script: `scripts/bt_executor.mjs`. Calls the **bt-gateway** REST API — no
+direct BT Trade client, no OTP handling, no session management. The gateway
+(a Cloud Run service) owns the BT Trade session and keeps tokens fresh via
+its own 45-minute cron.
 
 ### Required environment variables
 
 | Var | Purpose |
 |---|---|
-| `BT_USER` | BT Trade username |
-| `BT_PASS` | BT Trade password |
-| `BT_NTFY_TOPIC` | ntfy.sh topic where BT's SMS OTPs are forwarded (the phone Shortcut you already run) |
+| `BT_GATEWAY_URL` | Gateway base URL, e.g. `https://bt-gateway-o2qixn6u6q-ey.a.run.app` |
+| `BT_GATEWAY_API_KEY` | API key from bt-gateway Settings → Access. Prefix encodes mode: `bvb_demo_...` or `bvb_live_...` |
 | `EXECUTION_MODE` | `simulation` \| `demo` \| `live` — selects backend |
 
-`bt_executor.mjs` reads `EXECUTION_MODE` directly from the environment — there is no CLI flag for mode. Set it on the routine once; every invocation picks it up.
+No `BT_USER`, `BT_PASS`, or `BT_NTFY_TOPIC` needed — the gateway handles credentials and OTP.
+
+When `EXECUTION_MODE=live`, trade-executor passes `--live` to every `bt_executor.mjs` invocation. The script cross-checks that the API key starts with `bvb_live_` and aborts if it doesn't, preventing accidental mode mismatches.
 
 ### CLI surface
 
 ```
-# Account + cash + holdings snapshot
+# Account + cash + holdings snapshot (also writes portfolio_state/current)
 node scripts/bt_executor.mjs status
 
-# Place an order (demo or live per EXECUTION_MODE)
+# Place a limit order
 node scripts/bt_executor.mjs place \
     --symbol TGN --action BUY --quantity 2 --limit 89.00 --tif DAY \
     --trade-id 2026-04-19-TGN-01
@@ -263,34 +267,31 @@ node scripts/bt_executor.mjs orders
 
 # Current positions
 node scripts/bt_executor.mjs holdings
+
+# Ask the gateway to refresh the BT Trade session
+node scripts/bt_executor.mjs refresh
 ```
 
-### Single-session discipline
+### Session and OTP
 
-**One `login()` per process.** The executor creates the `BTTradeClient` once at startup and reuses it for every operation in that invocation. BT's fraud heuristics flag repeated logins from the same account. This is why the skill should batch all its BT work into a single `bt_executor.mjs` call rather than calling once per order — see "Per-run invocation pattern" below.
-
-### OTP delivery
-
-On login, BT sends an SMS. Your phone's Shortcut forwards the SMS body to the ntfy.sh topic named by `BT_NTFY_TOPIC`. `bt_executor.mjs` waits on that topic for up to 2 minutes, parses the code, and submits it. No human in the loop if the forwarding is working.
-
-### Session persistence
-
-Scheduled routines get a fresh filesystem each run, so a naïve "one login per run" design burns OTPs at every cron fire. `bt_executor.mjs` persists `client.toSnapshot()` via `scripts/store.mjs` to **Firestore** (collection `bt_session`, doc `current`) in `europe-west3` on every login/refresh/logout. A 45-minute scheduled keeper routine calls `node scripts/bt_executor.mjs refresh` so the refresh token never ages past its ~1h server-side expiry. Trading routines restore the snapshot at startup and skip OTP entirely; if the keeper ever misses more than ~1h the next run falls back to a fresh login (one OTP).
-
-Required env: `FIRESTORE_PROJECT=auto-trader-493814`, plus either `GOOGLE_APPLICATION_CREDENTIALS` pointing to the `bt-session-rw` service-account JSON or the same JSON inlined in `GCS_SA_KEY_JSON`. The service account needs `roles/datastore.user` on the project. In dev (no `FIRESTORE_PROJECT`), the snapshot falls back to a local `.bt_session.json` file.
-
-### Per-run invocation pattern
-
-Because of the single-session rule, the morning/evening flow calls `bt_executor.mjs` **once** with all the work batched. The skill's planner writes an intent JSON (orders to place, cancel, etc.), passes it on stdin, and reads back a decision JSON on stdout. CLI commands above are for ad-hoc / diagnostic use.
+Session lifecycle is fully delegated to bt-gateway:
+- The gateway stores encrypted BT credentials in Firestore (KMS-encrypted).
+- On the first call, if no live session exists, the gateway triggers a fresh
+  BT login and delivers the SMS OTP via ntfy to your phone. No action needed
+  from this script.
+- The gateway's own 45-minute Cloud Scheduler cron keeps the session alive.
+  This script's `refresh` command is an explicit nudge if needed but is no
+  longer part of the routine's keepalive path.
 
 ### Differences from simulation
 
 | Behavior | `simulation` | `demo` / `live` |
 |---|---|---|
 | Fill model | Deterministic: BUY at `min(limit, open)` if `low ≤ limit` | Real market — limit orders rest on BT's book |
-| Settlement | `sim_executor.mjs settle` marks to market against Yahoo OHLC | BT fills asynchronously; we poll `orders.search` |
-| Commission | Modeled as 0.1% min 1 RON | Real BT commission surfaced via `orders.preview` |
-| State source of truth | `portfolio_state/current` in Firestore | BT Trade server (fetched via `portfolio.getHoldings`) |
-| Firestore state role | Authoritative | Local snapshot/cache for diagnostics only |
+| Settlement | `sim_executor.mjs settle` marks to market against Yahoo OHLC | BT fills asynchronously; we poll via `orders` command |
+| Commission | Modeled as 0.1% min 1 RON | Real BT commission returned by the gateway |
+| State source of truth | `portfolio_state/current` in Firestore | BT Trade server (fetched via gateway) |
+| Firestore state role | Authoritative | Local snapshot/cache for downstream skills |
+| Session management | N/A | bt-gateway Cloud Run service |
 
-**Implication for downstream skills:** portfolio-manager, risk-monitor, and retrospective read `portfolio_state/current` today. In `demo`/`live` mode, `bt_executor.mjs status` writes a refreshed state snapshot at the start of every run so those skills keep working unchanged. The `mode` field in the state doc reflects the current EXECUTION_MODE so the retrospective can separate simulated vs. real P&L.
+**Downstream skills** (portfolio-manager, risk-monitor, retrospective) read `portfolio_state/current`. In `demo`/`live` mode, `bt_executor.mjs status` writes a refreshed snapshot as a side-effect so those skills keep working unchanged.
