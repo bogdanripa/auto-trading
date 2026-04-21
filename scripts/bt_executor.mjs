@@ -104,7 +104,7 @@ function requireEnv(name) {
  * Create + login a BTTradeClient. Called exactly once per process.
  * @param {{ demo: boolean }} opts
  */
-async function makeClient({ demo }) {
+async function makeClient({ demo, resumeOnly = false }) {
   const topic = process.env.BT_NTFY_TOPIC; // only required if we end up doing a fresh login
 
   // STEP 1: Pre-warm BT Trade DNS BEFORE any Firestore I/O. See prewarmBtTradeDns
@@ -154,8 +154,19 @@ async function makeClient({ demo }) {
       await client.profile.get();
       return client;
     } catch (e) {
+      if (resumeOnly) {
+        throw new Error(
+          `resume failed (${e.message}) and resumeOnly=true — refusing to attempt a fresh login. ` +
+          `This path is reserved for unattended routines (e.g. the token keeper) that must not trigger 2FA.`
+        );
+      }
       console.error(`[bt_executor] resume failed (${e.message}); falling back to fresh login`);
     }
+  } else if (resumeOnly) {
+    throw new Error(
+      'no resumable BT Trade session in store and resumeOnly=true — refusing to trigger 2FA. ' +
+      'A human-driven run (morning or evening routine) must establish a session first.'
+    );
   }
 
   if (!topic) {
@@ -317,9 +328,14 @@ async function main() {
 
   const demo = !args.flags.live;
 
+  // `refresh` (the keeper routine) must never trigger 2FA. If there's no
+  // snapshot or the refresh token is dead, we'd rather fail loudly and let
+  // the next human-scheduled run re-login than burn an OTP at 02:45 AM.
+  const resumeOnly = cmd === 'refresh';
+
   let client;
   try {
-    client = await makeClient({ demo });
+    client = await makeClient({ demo, resumeOnly });
   } catch (err) {
     console.error(`FATAL: login failed: ${err.message}`);
     process.exit(2);
