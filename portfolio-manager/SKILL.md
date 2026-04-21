@@ -9,16 +9,21 @@ Track portfolio state, enforce allocation rules, and provide the decision-making
 
 ## Data Sources
 
-Portfolio state lives in the Firestore store (or local-file fallback in dev), maintained by `trade-executor`:
-- `portfolio_state/current` — singleton doc with cash, positions, totals
+**Always refresh via `trade-executor`. Never read cash/holdings from a file or Firestore doc directly.**
+
+Cash, positions, open orders, and fills change asynchronously (broker fills, manual trades, intraday price moves). The authoritative snapshot for any run comes from:
+
+- `simulation` mode → `node scripts/sim_executor.mjs status`
+- `demo` / `live` mode → `node scripts/bt_executor.mjs status` (adds `--live` only when `EXECUTION_MODE=live`)
+
+Each command re-fetches live data and writes a refreshed snapshot to `portfolio_state/current` (Firestore, or the LocalStore fallback in dev) **as a side-effect**. That doc is a cache for downstream skills that don't need sub-second freshness — it is *not* a primary source. If an analysis skill only needs yesterday's snapshot for context, it may read `portfolio_state/current`; if anyone is answering a question about *current* cash or holdings, they MUST run the executor.
+
+Underlying collections (for reference only):
+- `portfolio_state/current` — singleton doc with cash, positions, totals (refreshed by the executor)
 - `orders/open` — single doc holding the array of open orders
 - `fills/*` — one doc per historical fill (append-only)
 
-**Simulation mode (current):** `portfolio_state/current` is the source of truth. `trade-executor` fetches real BVB prices each run and updates positions.
-
-**BT Trade demo/live mode:** same collections, but `trade-executor` reconciles them against the BT Trade account's actual state (via `bt_executor.mjs status`) at the start of each run before this skill reads them. From the perspective of this skill, nothing changes — read the same docs.
-
-Read `portfolio_state/current` at the start of every run. If `mode` does not match the routine's `EXECUTION_MODE` env var (or if the doc's `as_of` is older than the last run), flag it and halt — don't trade on stale state.
+At the start of every run, execute `status` for the active mode. If the resulting `mode` does not match the routine's `EXECUTION_MODE`, halt — don't trade across mode boundaries.
 
 ## Portfolio State Calculation
 

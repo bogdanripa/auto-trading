@@ -15,6 +15,19 @@ Three execution backends, one interface. The skill's contract is identical eithe
 
 Read `EXECUTION_MODE` from the environment at the start of each run. If unset, default to `simulation`. Never upgrade modes implicitly — the routine's env is the only switch.
 
+### ⚠️ Cash and holdings are NEVER read from a file
+
+Cash balances, position quantities, open orders, and recent fills change asynchronously — a manual trade on the broker, a fill between the last `settle` and now, an intraday price move. Any file or Firestore doc holding these values is a *snapshot*, not the truth.
+
+**Hard rule for every skill (including this one, including ad-hoc user questions):**
+- To answer "how much cash do I have" / "what do I own" / "what orders are open" — **run the executor script for the active EXECUTION_MODE and parse its fresh output**. Never `cat`/`grep`/`jq` `portfolio/state.json`, never read `portfolio_state/current` directly, never read `portfolio/state.seed.json` (that's a bootstrap template, not current state).
+- The single correct command is:
+  - `simulation` → `node scripts/sim_executor.mjs status`
+  - `demo` / `live` → `node scripts/bt_executor.mjs status` (add `--live` only when `EXECUTION_MODE=live`)
+- These scripts re-fetch from the source of truth (Yahoo + stored sim state; or BT Trade's live API) and emit JSON. Parse that JSON. That is the only authoritative cash/holdings number.
+
+If an executor run fails, report the failure — do not fall back to reading the stored state, and do not answer with stale numbers.
+
 **Why BT Trade** (Banca Transilvania's retail platform, not IBKR): it has native BVB access with RON-native cash and the symbols our skills already use, and the HTTP API (via the vendored `@bogdanripa/bt-trade` client at `vendor/bt-trade/`) works without the GUI-automation plumbing IBKR's Gateway requires. One trade-off: BT's demo and live APIs both require OTP via SMS — the library bridges this to ntfy.sh, which must have a running phone Shortcut forwarding BT's SMS codes to the configured topic.
 
 ## Simulation Backend
