@@ -63,9 +63,18 @@ async function gw(path, { method = 'GET', body } = {}) {
   };
   if (body !== undefined) init.body = JSON.stringify(body);
 
+  // Retry once on 502/503 — Cloud Run can briefly return these during
+  // rolling deploys even with min-instances=1.
   let res;
-  try { res = await fetch(url, init); }
-  catch (e) { throw new Error(`Gateway unreachable: ${e.message}`); }
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try { res = await fetch(url, { ...init, signal: AbortSignal.timeout(30_000) }); }
+    catch (e) { throw new Error(`Gateway unreachable: ${e.message}`); }
+    if (res.status !== 502 && res.status !== 503) break;
+    if (attempt === 0) {
+      console.error(`[bt_executor] ${res.status} from gateway, retrying in 3s…`);
+      await new Promise(r => setTimeout(r, 3000));
+    }
+  }
 
   let json;
   try { json = await res.json(); }
