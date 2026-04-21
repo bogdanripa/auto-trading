@@ -14,18 +14,21 @@ It trades BET-Plus stocks through BT Trade (Banca Transilvania's retail platform
 
 ```
 PROJECT.md                    — Strategy brain (risk rules, workflow, override logic)
-LESSONS.md                    — Living memory; distilled patterns from past trades
-THEMES.md                     — Structural themes biasing ticker selection (AI power demand, BNR rates, …)
-Firestore store               — Portfolio state (portfolio_state/current), open orders (orders/open),
-                                 fills (fills/*), journal (trades_journal/*). Local-file fallback under
-                                 portfolio/ + journal/ when FIRESTORE_PROJECT is unset (dev only).
+LESSONS.md                    — Living memory; distilled patterns from past trades (git-tracked; committed after every retrospective run)
+THEMES.md                     — Structural themes biasing ticker selection (git-tracked; committed after macro-analyst edits it)
+bt-gateway (Cloud Run)        — Owns the BT Trade session, encrypted credentials, OTP via ntfy,
+                                 tokens refreshed server-side, and ALL long-term storage
+                                 (portfolio state, fills, journal, considered candidates,
+                                 daily market snapshots). Per-tenant, per-mode. The scripts
+                                 in this repo talk to it via HTTP only — no direct Firestore,
+                                 no local-file fallback.
 │
 ├── macro-analyst/            — Global markets, FX, commodities, central banks
 ├── bvb-news/                 — BVB announcements, company news, regulatory
 ├── market-scanner/           — Technical scan of BET-Plus for setups
 ├── company-analyst/          — Deep fundamental dive on specific stocks
 ├── portfolio-manager/        — Position tracking, allocation, P&L
-├── trade-executor/           — Simulation, BT Trade demo, or BT Trade live (per EXECUTION_MODE)
+├── trade-executor/           — BT Trade demo or live, via bt-gateway
 ├── risk-monitor/             — Stop-losses, exposure limits, overrides
 ├── trade-journal/            — Thesis + outcome log for every trade
 ├── retrospective/            — Weekly pattern-mining over the journal → LESSONS.md
@@ -44,28 +47,23 @@ Firestore store               — Portfolio state (portfolio_state/current), ope
 ## Setup
 
 **Phase 1 — BT Trade demo (current):**
-1. Create a Claude Code routine at https://claude.ai/code/routines
-2. Set env vars on the routine:
-   - `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`
-   - `FIRESTORE_PROJECT=auto-trader-493814`
-   - `GCS_SA_KEY_JSON=<single-line JSON of a service account with `roles/datastore.user`>`
-   - `BT_USER`, `BT_PASS`, `BT_NTFY_TOPIC`
-   - `EXECUTION_MODE=demo`
-3. Ensure the routine prompt's **first action is `npm install`** — the sandbox is ephemeral and `node_modules/` does not survive between runs. Without this, the Firestore SDK is missing and the store silently falls back to ephemeral local files, re-triggering 2FA on every run. See `PROJECT.md` § Daily Workflow → Step 0.
-4. In demo mode, BT sends OTP to email (not SMS). On first run, fetch the code from email and feed it to the client; the resulting session snapshot persists to `bt_session/current` in Firestore and subsequent runs resume silently until the refresh token expires (typically weeks).
-5. Schedule the routine for morning (07:30 EET) and evening (17:30 EET) runs
-6. Create a **token-keeper routine** scheduled `*/45 * * * *` — see [`routines/token-keeper.md`](routines/token-keeper.md). It rotates BT Trade's tokens every 45 min so the refresh token never ages past its ~1h server-side expiry. Without it the 10-hour gap between morning and evening runs means every evening starts with a fresh login — which works (OTP is automated) but is slower and, if repeated often, flags BT's fraud heuristics.
+1. In the bt-gateway dashboard, store BT Trade credentials for the `demo` profile and mint an API key (`bvb_demo_...`).
+2. Create a Claude Code routine at https://claude.ai/code/routines
+3. Set env vars on the routine:
+   - `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` (optional — bt-gateway can also notify directly)
+   - `BT_GATEWAY_API_KEY=bvb_demo_...`
+4. Schedule the routine for morning (07:30 EET) and evening (17:30 EET) runs.
 
-**Phase 2 — Live trading (real RON, future):**
-1. Same BT Trade account, live profile
-2. Switch `EXECUTION_MODE=live` on the routine
-3. Keep all other skills unchanged — the Firestore docs have the same shape
+That's it. The gateway owns credentials, OTP (delivered via ntfy to your phone shortcut), token refresh (every 45 min via its own Cloud Scheduler cron), and storage. This repo's scripts are thin HTTP clients — no BT Trade SDK, no Firestore SDK, no `@google-cloud/*` dependencies.
 
-**Offline dev (optional):** `EXECUTION_MODE=simulation` runs a local Yahoo-priced simulator via `scripts/sim_executor.mjs` with no broker contact. Use this only for script development; never for scheduled routine runs.
+**Phase 2 — Live trading (real RON):**
+1. Store live credentials in bt-gateway for the `live` profile; mint a `bvb_live_...` key.
+2. Swap `BT_GATEWAY_API_KEY` on the routine.
+3. Pass `--live` to `bt_executor.mjs` commands (the script cross-checks the key prefix and aborts on mismatch — a live key with no `--live` flag will not place orders).
 
 ## Status
 
-🟡 **Phase 1 — Simulation**
+🟢 **Phase 1 — Demo trading via bt-gateway**
 
 ## License
 

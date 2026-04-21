@@ -15,7 +15,7 @@ For every run, the first action is to call the deterministic report:
 node scripts/risk_report.mjs --format=json
 ```
 
-The script reads `portfolio_state/current` and `trades_journal/*` from the Firestore store (or the local-file fallback), then emits per-position stop distances, trailing-stop distances, time-in-trade, and any invalidation conditions captured at entry. At the portfolio level it computes single-stock weight, per-sector weight, cash ratio, and overall health.
+The script reads the portfolio state and journal via bt-gateway (`store.getState()` and `store.listJournal()`), then emits per-position stop distances, trailing-stop distances, time-in-trade, and any invalidation conditions captured at entry. At the portfolio level it computes single-stock weight, per-sector weight, cash ratio, and overall health.
 
 Exit codes are the machine-readable verdict:
 - `0` — GREEN: all within limits, no stops approaching
@@ -90,7 +90,7 @@ Never override more than ONE position at a time. If two positions hit stops simu
 
 ### Sector Mapping
 
-The authoritative sector map lives in `scripts/sim_executor.mjs` (`SECTOR_MAP`) and is mirrored in `scripts/risk_report.mjs`. When you add a new name, update both — the sector cap is enforced at order placement, not just reported here.
+The authoritative sector map lives in `scripts/risk_report.mjs` (`SECTOR_MAP`). When you add a new name, update it there — the sector cap is enforced by trade-executor's pre-trade checks consulting the same map.
 
 Current buckets:
 ```

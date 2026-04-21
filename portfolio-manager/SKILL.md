@@ -1,6 +1,6 @@
 ---
 name: portfolio-manager
-description: Track and manage the trading portfolio — positions, cash, P&L, allocation, and performance metrics. Use this skill in every daily trading run to understand current portfolio state before making decisions. It reads portfolio data via `trade-executor` (BT Trade in demo/live mode, or the local simulation in simulation mode), calculates performance, checks allocation limits, and determines available capital for new trades. Trigger whenever you need to know the current portfolio state, check if a trade fits within risk limits, or review historical performance.
+description: Track and manage the trading portfolio — positions, cash, P&L, allocation, and performance metrics. Use this skill in every daily trading run to understand current portfolio state before making decisions. It reads portfolio data via `trade-executor` (BT Trade demo or live, via bt-gateway), calculates performance, checks allocation limits, and determines available capital for new trades. Trigger whenever you need to know the current portfolio state, check if a trade fits within risk limits, or review historical performance.
 ---
 
 # Portfolio Manager
@@ -13,18 +13,16 @@ Track portfolio state, enforce allocation rules, and provide the decision-making
 
 Cash, positions, open orders, and fills change asynchronously (broker fills, manual trades, intraday price moves). The authoritative snapshot for any run comes from:
 
-- `simulation` mode → `node scripts/sim_executor.mjs status`
-- `demo` mode → `node scripts/bt_executor.mjs status`
-- `live` mode → `node scripts/bt_executor.mjs status --live`
+- demo mode → `node scripts/bt_executor.mjs status`
+- live mode → `node scripts/bt_executor.mjs status --live`
 
-Each command re-fetches live data and writes a refreshed snapshot to `portfolio_state/current` (Firestore, or the LocalStore fallback in dev) **as a side-effect**. That doc is a cache for downstream skills that don't need sub-second freshness — it is *not* a primary source. If an analysis skill only needs yesterday's snapshot for context, it may read `portfolio_state/current`; if anyone is answering a question about *current* cash or holdings, they MUST run the executor.
+Mode is encoded in the `BT_GATEWAY_API_KEY` prefix (`bvb_demo_...` / `bvb_live_...`); `--live` must be passed explicitly when using a live key, or the script aborts.
 
-Underlying collections (for reference only):
-- `portfolio_state/current` — singleton doc with cash, positions, totals (refreshed by the executor)
-- `orders/open` — single doc holding the array of open orders
-- `fills/*` — one doc per historical fill (append-only)
+Each command re-fetches live data from BT Trade via bt-gateway and writes a refreshed portfolio snapshot back to the gateway's `/api/v1/state/portfolio` cache **as a side-effect**. That cached state is for downstream skills that don't need sub-second freshness — it is *not* a primary source. If an analysis skill only needs the morning's snapshot for context, it may read `store.getState()`; if anyone is answering a question about *current* cash or holdings, they MUST run the executor.
 
-At the start of every run, execute `status` for the active mode. If the resulting `mode` does not match the routine's `EXECUTION_MODE`, halt — don't trade across mode boundaries.
+Storage is gateway-only — there is no Firestore access from this side and no local-file fallback. `scripts/store.mjs` is a thin HTTP client; every read and write lands behind `/api/v1/state|fills|journal|considered|snapshots` on bt-gateway.
+
+At the start of every run, execute `status`. If the returned `mode` does not match what you expect from the API key prefix, halt — don't trade across mode boundaries.
 
 ## Portfolio State Calculation
 
@@ -119,17 +117,11 @@ PERFORMANCE:
 
 ## Closed Position Detection
 
-The detection mechanism differs by execution mode, but the downstream hand-off is identical.
+Diff today's BT Trade holdings against the previous run's cached portfolio state (`store.getState()`). Any symbol held previously that is absent today (or held at a smaller quantity) is a closed (or partially closed) position. Reconstruct the exit P&L from the matching records in the `fills` collection (`store.listFills({ since: ... })`).
 
-**Simulation mode (`EXECUTION_MODE=simulation`):**
-The `settle` step of `scripts/sim_executor.mjs` is the authoritative source. When a BUY/SELL sequence drives a position's quantity to zero, `sim_executor` emits the close in its report under a `closed_positions` list with entry price, exit price, quantity, and trade metadata (`trade_type`, `trade_id`, `theme_tag`, `rule_id`, `invalidation`). Read that list verbatim at the start of each evening run — do not try to recompute from fills, the script has already reconciled cash and commissions.
-
-**BT Trade demo/live mode:**
-Diff today's BT Trade holdings against yesterday's `portfolio_state/current` snapshot. Any symbol held yesterday that is absent today (or held at a smaller quantity) is a closed (or partially closed) position. Reconstruct the exit P&L from the matching doc in `fills/*`.
-
-For each closed position, regardless of mode, hand off to:
+For each closed position, hand off to:
 - `trade-journal` — append an exit record with outcome narrative and thesis verdict, carrying forward the `theme_tag`, `rule_id`, and `invalidation` so the retrospective can attribute P&L to the originating theme or rule
-- `tax-tracker` — log the numeric record for Declarația Unică (uses `scripts/tax_fifo.mjs` reading `fills/*` from the store for FIFO matching; cash flows are in RON, no FX adjustment needed)
+- `tax-tracker` — log the numeric record for Declarația Unică (uses `scripts/tax_fifo.mjs` reading fills via the gateway for FIFO matching; cash flows are in RON, no FX adjustment needed)
 
 These two are complementary, not redundant: tax-tracker captures the legal/numerical record, trade-journal captures the *why* and *what we learned*.
 
@@ -156,7 +148,7 @@ await store.appendConsidered({
 });
 ```
 
-Backend: Firestore `considered` collection when `FIRESTORE_PROJECT` is set; otherwise `considered/considered.jsonl` for dev. The retrospective pulls this in its post-mortem: "of N rejected candidates in the window, M would have been winners — is a rule too restrictive?"
+Backend: the gateway's `/api/v1/considered` endpoint, tenant+mode-scoped. The retrospective pulls this in its post-mortem: "of N rejected candidates in the window, M would have been winners — is a rule too restrictive?"
 
 ## Rules This Skill Enforces
 - Never approve a trade that breaks allocation limits without explicit override

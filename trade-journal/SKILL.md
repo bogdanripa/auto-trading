@@ -9,8 +9,8 @@ Append-only narrative log of every trade. Distinct from `tax-tracker` (which cap
 
 ## Storage
 
-- Collection: `trades_journal/*` in the Firestore store (one doc per record, append-only). In dev with no `FIRESTORE_PROJECT`, falls back to `journal/trades.jsonl`.
-- Written via `store.appendJournal(record)` / read via `store.listJournal()` (see `scripts/store.mjs`).
+- Records live behind bt-gateway's `/api/v1/journal` endpoint (Firestore, tenant+mode-scoped, append-only). `scripts/store.mjs` is the thin HTTP client — never talk to the gateway directly.
+- Written via `store.appendJournal(record)` / read via `store.listJournal({ since, type, limit })`.
 - Never rewrite history. Corrections go in as new records with `"correction_of": "<trade_id>"`.
 
 ## Record Schema
@@ -150,7 +150,7 @@ The `retrospective` skill is the main consumer, but the journal is also availabl
 - "What was my thesis on SNG in March?"
 - "Which exit reasons correlate with losses?"
 
-Read the JSONL file directly. Filter in memory — the file will stay small (hundreds of records per year).
+Use `store.listJournal({ since, type, limit })` and filter in memory — the collection stays small (hundreds of records per year). Never read Firestore or any local file directly; the gateway is the only path in and out.
 
 ## Integrity Rules
 

@@ -267,4 +267,6 @@ const date = new Date().toISOString().slice(0, 10);   // 'YYYY-MM-DD'
 await store.saveSnapshot(date, snapshot);
 ```
 
-Backend: Firestore `market_snapshots` collection (doc id = date) when `FIRESTORE_PROJECT` is set; otherwise `snapshots/YYYY-MM-DD.json` for dev. This feeds the retrospective ("what did the macro picture look like the week before the ALR trade went wrong?") and enables rulebook-change backtesting ("if REGIME-1 had weighted inflation at 0.30 instead of 0.25, how would the March regime reads have differed?").
+Backend: bt-gateway's `/api/v1/snapshots/{date}` endpoint, tenant+mode-scoped. No local-file fallback; the gateway is the only path in and out. This feeds the retrospective ("what did the macro picture look like the week before the ALR trade went wrong?") and enables rulebook-change backtesting ("if REGIME-1 had weighted inflation at 0.30 instead of 0.25, how would the March regime reads have differed?").
+
+If macro-analyst also edits `THEMES.md`, that file must be committed and pushed to `main` at the end of the run — same rule as `LESSONS.md` in retrospective. An edit in the ephemeral sandbox that isn't pushed is lost.

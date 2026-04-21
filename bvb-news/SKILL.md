@@ -14,7 +14,7 @@ Both layers run every run. The structured layer is the anchor; search fills in t
 
 ## Layer 1 — BVB Per-Symbol Pages (WebFetch)
 
-For every symbol in `portfolio_state/current` holdings PLUS the BET-Plus watchlist (defined in `trade-executor/SKILL.md`), fetch:
+For every symbol in the current portfolio holdings (`store.getState().holdings`) PLUS the BET-Plus watchlist (defined in `trade-executor/SKILL.md`), fetch:
 
 ```
 https://bvb.ro/FinancialInstruments/Details/FinancialInstrumentsDetails.aspx?s=<SYMBOL>
@@ -42,7 +42,7 @@ Example (extracted by WebFetch with prompt: *"List company announcements and upc
 Run these searches each morning (evening can be lighter — skip per-symbol unless a position moved >3% that day):
 
 ### Per-holding search (highest priority)
-For each symbol in `portfolio_state/current.positions`:
+For each symbol in the current portfolio's positions (`store.getState().positions`):
 ```
 WebSearch: "<company full name> news <current month year>"
 WebSearch: "<SYMBOL> BVB news this week"

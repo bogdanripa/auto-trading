@@ -193,9 +193,9 @@ Positions: [list with current P&L %]
 The user may place manual trades in the BT Trade app at any point. The engine must tolerate this without conflict.
 
 ### On every live run, reconcile with BT Trade first
-Before any analysis or ordering, fetch BT Trade account state (cash, positions, open orders, today's fills) via `node scripts/bt_executor.mjs status` and diff against `portfolio_state/current`:
-- **Unknown position on BT Trade** → user bought manually. Import into `portfolio_state/current` with `engine_managed: false`. Append a `backfilled` entry to `trades_journal/*` with minimal metadata so the position is not invisible to analytics.
-- **Position missing from BT Trade** → user sold manually. Close in `portfolio_state/current`. Append an exit record with `exit_reason: manual` and `thesis_verdict: inconclusive`.
+Before any analysis or ordering, fetch BT Trade account state (cash, positions, open orders, today's fills) via `node scripts/bt_executor.mjs status` and diff against the previous run's cached portfolio state (`store.getState()`):
+- **Unknown position on BT Trade** → user bought manually. Import into the portfolio state with `engine_managed: false`. Append a `backfilled` entry via `store.appendJournal(...)` with minimal metadata so the position is not invisible to analytics.
+- **Position missing from BT Trade** → user sold manually. Close the position in the portfolio state. Append an exit record with `exit_reason: manual` and `thesis_verdict: inconclusive`.
 - **Quantity delta on an existing position** → partial manual trade. Adjust and log the delta. Do not change user-editable fields (`theme_tag`, `stop_loss`, `catalyst`).
 - **Cash delta only** → deposit or withdrawal. Update cash. No journal entry.
 
@@ -204,7 +204,7 @@ The engine **never** cancels, modifies, or resizes an order the user placed manu
 
 Every order the engine places is tagged `engine_managed: true`. The engine may only close/cancel orders carrying that tag. If a BT Trade order has no tag (or a tag it doesn't recognize), it treats it as manual — read-only.
 
-If the engine would like to act on a manually-opened position (e.g. apply its stop-loss logic), that is opt-in per position via `engine_managed: true`, set by the user manually on the position inside `portfolio_state/current`.
+If the engine would like to act on a manually-opened position (e.g. apply its stop-loss logic), that is opt-in per position via `engine_managed: true`, set by the user manually on the position inside the cached portfolio state (writable via `store.setState(...)`).
 
 ### Surface all reconciliation findings in the morning briefing
 Every manual-activity detection goes into the Telegram briefing under a "RECONCILED" section: what was imported, what was closed, what the P&L was. This gives the user a chance to retroactively tag a thesis / theme if useful.

@@ -1,6 +1,6 @@
 ---
 name: retrospective
-description: Weekly pattern-mining pass over the trade journal. Reads `journal/trades.jsonl`, clusters closed trades by trade_type, sector, exit_reason, and thesis_verdict, identifies patterns that repeat (both successes and failures), and appends distilled observations to `LESSONS.md`. Run this skill once a week, typically Friday evening after the post-close run, or on-demand when the user asks for a performance review, a post-mortem on a losing streak, or wants to revisit what the strategy has learned. Also trigger before making larger-than-usual strategy changes — the lessons are the empirical grounding for any rule adjustments.
+description: Weekly pattern-mining pass over the trade journal. Reads the journal via bt-gateway (`store.listJournal()`), clusters closed trades by trade_type, sector, exit_reason, and thesis_verdict, identifies patterns that repeat (both successes and failures), and appends distilled observations to `LESSONS.md`. Run this skill once a week, typically Friday evening after the post-close run, or on-demand when the user asks for a performance review, a post-mortem on a losing streak, or wants to revisit what the strategy has learned. Also trigger before making larger-than-usual strategy changes — the lessons are the empirical grounding for any rule adjustments.
 ---
 
 # Retrospective
@@ -15,7 +15,7 @@ Turn the raw trade journal into durable lessons. This skill is the feedback loop
 
 ## Inputs
 
-1. `trades_journal/*` in the Firestore store — full history (read via `store.listJournal()`)
+1. The trade journal via bt-gateway — full history (read via `store.listJournal()`)
 2. `LESSONS.md` — current distilled lessons (to avoid duplicating what's already there)
 3. `PROJECT.md` — so lessons can be flagged against specific rules they reinforce or challenge
 
@@ -37,7 +37,7 @@ Output is a JSON blob with overall stats, per-cluster breakdowns (trade_type, se
 For weekly: last 7 days of exit records. For monthly: last 30. For on-demand: whatever the user asks for, defaulting to "since last retrospective." Pass the window to `journal_stats.py`; do not filter in this skill.
 
 ### 2. Load and cluster (handled by journal_stats.py)
-Parse the journal records from `trades_journal/*`. Pair each entry with its exit (via `trade_id`). Drop pairs where the exit is outside the window. Cluster by:
+Parse the journal records (via `store.listJournal()`). Pair each entry with its exit (via `trade_id`). Drop pairs where the exit is outside the window. Cluster by:
 - **Trade type** (swing / event / trend)
 - **Sector** (energy, financials, utilities, etc.)
 - **Exit reason** (take_profit, stop_loss, trailing_stop, time_stop, thesis_invalidated, override_exit, manual)
@@ -165,6 +165,21 @@ Current PROJECT.md rule: `Hard stop-loss at 10% per position`
 Suggested edit: `Hard stop-loss at 10% per position (12% for sector=financials, trade_type=swing)`
 Pending user review.
 ```
+
+## Persistence — commit LESSONS.md and THEMES.md to main
+
+`LESSONS.md` and `THEMES.md` are the only two pieces of long-term memory that live as files in git (everything else — journal, fills, portfolio state, considered candidates, market snapshots — is in Firestore via bt-gateway). The routine's sandbox is ephemeral; any edit made to these files during a run is lost unless it's pushed to the repo.
+
+**Whenever this skill modifies `LESSONS.md` (or macro-analyst modifies `THEMES.md`), the run MUST commit and push the change to `main`:**
+
+```bash
+cd <repo-root>
+git add LESSONS.md THEMES.md
+git commit -m "retrospective: <date> weekly lessons"
+git push
+```
+
+If the push fails (auth, conflict, network), surface it via telegram-reporter and do NOT silently carry on — the next run will start from stale lessons. Treat a failed push the same as a missed run.
 
 ## Anti-patterns
 
