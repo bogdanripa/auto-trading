@@ -1,7 +1,7 @@
 # BVB Autonomous Trading Engine
 
 ## Overview
-This project is a fully autonomous swing trading engine for the Bucharest Stock Exchange (BVB), operating through an Interactive Brokers (IBKR) account. It runs as scheduled Claude tasks — a morning pre-market session and an evening post-close session — that analyze markets, make trading decisions, execute orders, and report via Telegram.
+This project is a fully autonomous swing trading engine for the Bucharest Stock Exchange (BVB), operating through a BT Trade account (Banca Transilvania's retail platform, native BVB access, RON-denominated). IBKR was the originally-planned broker and is still referenced in some historical notes; the live/demo integration is BT Trade. It runs as scheduled Claude tasks — a morning pre-market session and an evening post-close session — that analyze markets, make trading decisions, execute orders, and report via Telegram.
 
 ## Strategy Framework
 
@@ -199,7 +199,7 @@ Controlled by the `EXECUTION_MODE` env var on the routine.
 
 **`simulation` (current):** `trade-executor` maintains a simulated portfolio in `portfolio_state/current` (Firestore store), using real BVB prices from Yahoo Finance. No broker account required. Fills are computed against the day's OHLC range. Commission modeled at 0.1% (min 1 RON) to match IBKR's BVB tier.
 
-**`ibkr` (future):** `trade-executor` wraps a real IBKR gateway. Same store collections, same order schema, same rules. Requires an always-on gateway process and a paper or live IBKR account.
+**`demo` / `live`:** `trade-executor` calls BT Trade via the vendored `@bogdanripa/bt-trade` client. `demo` is BT Trade's paper environment; `live` moves real RON. Both share the same order schema and rules as `simulation`. See `trade-executor/SKILL.md` for the full backend matrix. (Legacy references to "ibkr" mode elsewhere in this repo are historical — IBKR was the originally-planned broker but was never integrated.)
 
 ### Order rules (both modes)
 - Market: BVB

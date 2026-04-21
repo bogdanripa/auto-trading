@@ -8,7 +8,7 @@ The engine runs twice daily as Claude scheduled tasks:
 - **7:30 AM** — Pre-market analysis and order placement
 - **5:30 PM** — Post-close review and next-day preparation
 
-It trades BET-Plus stocks through Interactive Brokers (IBKR), manages risk within defined parameters, and reports everything via Telegram.
+It trades BET-Plus stocks through BT Trade (Banca Transilvania's retail platform, native BVB + RON), manages risk within defined parameters, and reports everything via Telegram.
 
 ## Architecture
 
@@ -25,7 +25,7 @@ Firestore store               — Portfolio state (portfolio_state/current), ope
 ├── market-scanner/           — Technical scan of BET-Plus for setups
 ├── company-analyst/          — Deep fundamental dive on specific stocks
 ├── portfolio-manager/        — Position tracking, allocation, P&L
-├── trade-executor/           — Simulation executor now, IBKR wrapper later
+├── trade-executor/           — Simulation, BT Trade demo, or BT Trade live (per EXECUTION_MODE)
 ├── risk-monitor/             — Stop-losses, exposure limits, overrides
 ├── trade-journal/            — Thesis + outcome log for every trade
 ├── retrospective/            — Weekly pattern-mining over the journal → LESSONS.md
@@ -49,13 +49,17 @@ Firestore store               — Portfolio state (portfolio_state/current), ope
 3. Seed the portfolio state once: edit `portfolio/state.seed.json` with your starting `cash_ron`, then run `FIRESTORE_PROJECT=<proj> node scripts/seed_state.mjs portfolio/state.seed.json` — thereafter `sim_executor.mjs` owns the state in Firestore
 4. Schedule the routine for morning (07:30 EET) and evening (17:30 EET) runs
 
-No IBKR account or gateway needed for phase 1. Prices come from Yahoo Finance.
+No broker account needed for phase 1. Prices come from Yahoo Finance.
 
-**Phase 2 — Live trading (later):**
-1. Open an IBKR account with paper + live profiles
-2. Run IB Gateway / Client Portal Gateway on an always-on machine
-3. Switch `EXECUTION_MODE=ibkr` and configure gateway endpoint
-4. Keep all other skills unchanged — the Firestore docs have the same shape
+**Phase 2 — BT Trade demo (paper trading):**
+1. BT Trade account with demo access enabled
+2. Set env vars: `BT_USER`, `BT_PASS`, `BT_NTFY_TOPIC` (+ an ntfy.sh phone Shortcut for OTP), and `EXECUTION_MODE=demo`
+3. First run triggers 2FA → OTP via ntfy. Tokens persist to `bt_session/current` in Firestore; subsequent runs resume silently.
+
+**Phase 3 — Live trading (real RON):**
+1. Same BT Trade account, live profile
+2. Switch `EXECUTION_MODE=live` on the routine
+3. Keep all other skills unchanged — the Firestore docs have the same shape
 
 ## Status
 
