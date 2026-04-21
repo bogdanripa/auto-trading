@@ -61,9 +61,8 @@ Steps (strict order, no skipping):
 1. Run `npm install` at the repo root. The sandbox is ephemeral, so
    node_modules/ is always absent at start.
 
-2. Run:
-     node scripts/bt_executor.mjs refresh --live   (if EXECUTION_MODE=live)
-     node scripts/bt_executor.mjs refresh          (otherwise — demo)
+2. Run: `node scripts/bt_executor.mjs refresh`
+   (demo vs live is picked up from the `EXECUTION_MODE` env var — no CLI flag.)
 
 3. Interpret the exit code:
    - 0 → tokens rotated successfully. Print the JSON result and stop. Do
@@ -76,7 +75,6 @@ Steps (strict order, no skipping):
 Hard rules:
 - Never call any command other than `refresh`. This routine is not allowed
   to place orders, read holdings, or touch portfolio state.
-- Never pass `--live` unless EXECUTION_MODE=live on this routine.
 - Never attempt a fresh login. The `refresh` subcommand enforces this
   server-side (resume-only mode); don't try to work around it.
 - Never commit anything. This routine makes no git changes.

@@ -14,7 +14,7 @@ Track portfolio state, enforce allocation rules, and provide the decision-making
 Cash, positions, open orders, and fills change asynchronously (broker fills, manual trades, intraday price moves). The authoritative snapshot for any run comes from:
 
 - `simulation` mode → `node scripts/sim_executor.mjs status`
-- `demo` / `live` mode → `node scripts/bt_executor.mjs status` (adds `--live` only when `EXECUTION_MODE=live`)
+- `demo` / `live` mode → `node scripts/bt_executor.mjs status` (mode comes from `EXECUTION_MODE`; no CLI flag)
 
 Each command re-fetches live data and writes a refreshed snapshot to `portfolio_state/current` (Firestore, or the LocalStore fallback in dev) **as a side-effect**. That doc is a cache for downstream skills that don't need sub-second freshness — it is *not* a primary source. If an analysis skill only needs yesterday's snapshot for context, it may read `portfolio_state/current`; if anyone is answering a question about *current* cash or holdings, they MUST run the executor.
 

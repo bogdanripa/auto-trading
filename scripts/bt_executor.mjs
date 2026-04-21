@@ -23,9 +23,9 @@
  * IMPORTANT SAFETY RULES
  * ----------------------
  * - BT Trade demo and live share the same API surface, but orders placed in
- *   live mode move real RON. Demo is the default for this script. Pass
- *   --live to opt into real money. `trade-executor/SKILL.md` should never
- *   pass --live unless EXECUTION_MODE=live.
+ *   live mode move real RON. Mode is selected via the EXECUTION_MODE env var
+ *   ('demo' default, or 'live'). There is no CLI flag — the routine env is
+ *   the single source of truth so a misplaced arg can't flip modes.
  * - One login per process. We instantiate the client once in main() and
  *   reuse it across any work requested. Triggering multiple logins in quick
  *   succession risks being flagged by BT's 2FA / fraud heuristics.
@@ -96,6 +96,33 @@ function requireEnv(name) {
     process.exit(1);
   }
   return v;
+}
+
+// ---------- Telegram notifier ----------
+//
+// Only fires for SIGN-IN events (fresh login success/failure). Refreshes are
+// silent — the keeper runs every 45 min and we don't want 32 pings/day.
+// No-op if TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID aren't set, so dev runs
+// don't need them.
+async function notifyTelegram(text) {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+  if (!token || !chatId) return;
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      // Plain text (no parse_mode) — error strings may contain backticks,
+      // underscores, etc. that would break Markdown parsing.
+      body: JSON.stringify({ chat_id: chatId, text }),
+    });
+    if (!res.ok) {
+      console.error(`[bt_executor] telegram notify failed: HTTP ${res.status}`);
+    }
+  } catch (e) {
+    // Never let a notification failure bring the process down.
+    console.error(`[bt_executor] telegram notify failed: ${e.message}`);
+  }
 }
 
 // ---------- shared client lifecycle ----------
@@ -176,7 +203,16 @@ async function makeClient({ demo, resumeOnly = false }) {
   }
   const username = requireEnv('BT_USER');
   const password = requireEnv('BT_PASS');
-  await client.login({ username, password });
+
+  // Notify on sign-in attempts (success or failure). Refresh is silent by design.
+  const modeLabel = demo ? 'demo' : 'live';
+  try {
+    await client.login({ username, password });
+  } catch (e) {
+    await notifyTelegram(`❌ BT Trade sign-in FAILED (${modeLabel})\n${e.message}`);
+    throw e;
+  }
+  await notifyTelegram(`🔑 BT Trade sign-in OK (${modeLabel}) — session stored, keeper will extend it.`);
   return client;
 }
 
@@ -314,9 +350,8 @@ Commands:
   refresh          Rotate access+refresh tokens (for the keeper routine)
   logout           Revoke the server-side session and clear Firestore snapshot
 
-Global flags:
-  --live           Use real-money mode (default: demo/paper)
-                   trade-executor should only pass this when EXECUTION_MODE=live.
+Mode selection:
+  EXECUTION_MODE env var: 'demo' (default) or 'live'. No CLI flag.
 `;
 
 async function main() {
@@ -327,7 +362,15 @@ async function main() {
     process.exit(cmd ? 0 : 1);
   }
 
-  const demo = !args.flags.live;
+  // EXECUTION_MODE is the single source of truth for demo vs live. Set on
+  // the routine env, never on the CLI. `simulation` doesn't reach this
+  // script (the skill routes to sim_executor.mjs instead).
+  const mode = (process.env.EXECUTION_MODE || 'demo').toLowerCase();
+  if (mode !== 'demo' && mode !== 'live') {
+    console.error(`FATAL: EXECUTION_MODE must be 'demo' or 'live' (got '${mode}')`);
+    process.exit(1);
+  }
+  const demo = mode === 'demo';
 
   // `refresh` (the keeper routine) extends an existing session; it does not
   // establish one. If there's no snapshot or the stored refresh token is

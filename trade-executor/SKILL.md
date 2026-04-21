@@ -10,7 +10,7 @@ Three execution backends, one interface. The skill's contract is identical eithe
 | `EXECUTION_MODE` | Backend | Broker contact | Real money |
 |---|---|---|---|
 | `demo` (**current active mode**) | `scripts/bt_executor.mjs` (`demo: true`) | BT Trade demo environment | No (paper) |
-| `live` | `scripts/bt_executor.mjs` (`--live`) | BT Trade live environment | **Yes — real RON** |
+| `live` | `scripts/bt_executor.mjs` (`EXECUTION_MODE=live`) | BT Trade live environment | **Yes — real RON** |
 | `simulation` (legacy; dev-only) | `scripts/sim_executor.mjs` | None — Yahoo/stooq prices only | No |
 
 Read `EXECUTION_MODE` from the environment at the start of each run. **The routine runs in `demo`.** `simulation` is retained for offline development (no BT creds needed) but must not be used for scheduled routine runs — it gives fake fills that pollute the journal. If `EXECUTION_MODE` is unset, default to `simulation` only to prevent accidentally hitting a real broker when running ad-hoc scripts locally; the routine always sets it explicitly. Never upgrade modes implicitly — the routine's env is the only switch.
@@ -23,7 +23,7 @@ Cash balances, position quantities, open orders, and recent fills change asynchr
 - To answer "how much cash do I have" / "what do I own" / "what orders are open" — **run the executor script for the active EXECUTION_MODE and parse its fresh output**. Never `cat`/`grep`/`jq` `portfolio/state.json`, never read `portfolio_state/current` directly, never read `portfolio/state.seed.json` (that's a bootstrap template, not current state).
 - The single correct command is:
   - `simulation` → `node scripts/sim_executor.mjs status`
-  - `demo` / `live` → `node scripts/bt_executor.mjs status` (add `--live` only when `EXECUTION_MODE=live`)
+  - `demo` / `live` → `node scripts/bt_executor.mjs status` (mode comes from `EXECUTION_MODE`; no CLI flag)
 - These scripts re-fetch from the source of truth (Yahoo + stored sim state; or BT Trade's live API) and emit JSON. Parse that JSON. That is the only authoritative cash/holdings number.
 
 If an executor run fails, report the failure — do not fall back to reading the stored state, and do not answer with stale numbers.
@@ -245,7 +245,7 @@ Script: `scripts/bt_executor.mjs`. Vendored library: `vendor/bt-trade/` (`@bogda
 | `BT_NTFY_TOPIC` | ntfy.sh topic where BT's SMS OTPs are forwarded (the phone Shortcut you already run) |
 | `EXECUTION_MODE` | `simulation` \| `demo` \| `live` — selects backend |
 
-When `EXECUTION_MODE=live`, trade-executor passes `--live` to every `bt_executor.mjs` invocation. Without that flag the executor defaults to BT's demo/paper environment.
+`bt_executor.mjs` reads `EXECUTION_MODE` directly from the environment — there is no CLI flag for mode. Set it on the routine once; every invocation picks it up.
 
 ### CLI surface
 
@@ -253,7 +253,7 @@ When `EXECUTION_MODE=live`, trade-executor passes `--live` to every `bt_executor
 # Account + cash + holdings snapshot
 node scripts/bt_executor.mjs status
 
-# Place an order (demo or live based on --live flag)
+# Place an order (demo or live per EXECUTION_MODE)
 node scripts/bt_executor.mjs place \
     --symbol TGN --action BUY --quantity 2 --limit 89.00 --tif DAY \
     --trade-id 2026-04-19-TGN-01
