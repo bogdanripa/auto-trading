@@ -243,7 +243,6 @@ its own 45-minute cron.
 
 | Var | Purpose |
 |---|---|
-| `BT_GATEWAY_URL` | Gateway base URL, e.g. `https://bt-gateway-o2qixn6u6q-ey.a.run.app` |
 | `BT_GATEWAY_API_KEY` | API key from bt-gateway Settings → Access. Prefix encodes mode: `bvb_demo_...` or `bvb_live_...` |
 | `EXECUTION_MODE` | `simulation` \| `demo` \| `live` — selects backend |
 
