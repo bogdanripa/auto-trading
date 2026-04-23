@@ -269,4 +269,4 @@ await store.saveSnapshot(date, snapshot);
 
 Backend: bt-gateway's `/api/v1/snapshots/{date}` endpoint, tenant+mode-scoped. No local-file fallback; the gateway is the only path in and out. This feeds the retrospective ("what did the macro picture look like the week before the ALR trade went wrong?") and enables rulebook-change backtesting ("if REGIME-1 had weighted inflation at 0.30 instead of 0.25, how would the March regime reads have differed?").
 
-If macro-analyst also edits `THEMES.md`, that file must be committed and pushed to `main` at the end of the run — same rule as `LESSONS.md` in retrospective. An edit in the ephemeral sandbox that isn't pushed is lost.
+If macro-analyst also edits `THEMES.md`, that file must be committed and pushed to the **current branch** (`git push origin HEAD`) at the end of the run — same rule as `LESSONS.md` in retrospective. Do not hardcode `main`: demo and live each run against their own branch (`demo` / `live`) so themes evolve independently. An edit in the ephemeral sandbox that isn't pushed is lost.
