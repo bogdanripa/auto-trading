@@ -114,6 +114,30 @@ Financial Services: FP, BVB, EVER, SIF1-SIF5
 - Cash < 10% of portfolio → WARNING: Too fully invested
 - Cash < 5% → CRITICAL: Sell something or stop buying
 
+### Liquidity Risk (per position, BVB-calibrated)
+
+A position is only as good as the exit. On BVB, where even "liquid" mid-caps trade a few hundred thousand RON per day, position size relative to ADV determines how many sessions it takes to exit cleanly — and how much slippage a forced exit will cost.
+
+For every open position, the risk report computes:
+
+- **`adv20_ron`** — the symbol's 20-day average daily value traded (from `scripts/indicators.mjs`).
+- **`position_adv_pct`** = `position_value_ron / adv20_ron × 100` — position as % of a typical day's tape.
+- **`exit_days_at_20pct`** = `position_value_ron / (0.20 × adv20_ron)` — trading sessions needed to unwind at a reasonable 20% participation rate (a rate that does not by itself move the price materially on BVB).
+
+Flag thresholds:
+
+| Metric | Green | Yellow | Red |
+|---|---|---|---|
+| `exit_days_at_20pct` | ≤ 3 sessions | 3–5 sessions | > 5 sessions |
+| `adv20_ron` absolute | ≥ 500,000 RON | 100,000–500,000 RON | < 100,000 RON while holding |
+| ADV vs. entry-day ADV | ≥ 70% | 50–70% (`LIQUIDITY_DETERIORATION` watch) | < 50% (`LIQUIDITY_DETERIORATION` — tape is drying up under us) |
+
+Red on liquidity is distinct from red on P&L — a position can be green on stops and red on liquidity. Action when red on liquidity alone:
+
+1. Do not add to the position (pyramiding a position that's already hard to exit compounds the problem).
+2. Prefer a graceful trim (1/3 over 3 sessions) over a single-session full exit, unless a hard stop has also fired or an invalidation condition is live. When a hard stop and a liquidity red both fire, the stop wins — take the slippage and exit.
+3. In the **summer liquidity-collapse window** (Jul 15 – Aug 20, rule `CAL-2`), pre-emptively re-run the report; ADV drops 30–50% sector-wide and green positions can flip to yellow/red without any trade on our side.
+
 ## Portfolio-Level Risk Metrics
 
 Calculate and report:
@@ -135,6 +159,10 @@ EXPOSURE:
 - Largest position: [SYMBOL] at [X]%
 - Largest sector: [SECTOR] at [X]%
 - Cash ratio: [X]%
+
+LIQUIDITY:
+- Thinnest holding: [SYMBOL] — ADV20 [X] RON, exit at 20% participation ≈ [N] sessions
+- Any position with exit_days > 5 → listed here explicitly
 
 RISK FLAGS:
 [Any limits breached or approaching]

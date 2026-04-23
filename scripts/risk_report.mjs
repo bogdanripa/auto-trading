@@ -35,6 +35,16 @@ const MAX_SECTOR_PCT = 0.60;
 const MIN_CASH_PCT = 0.10;
 const MAX_CONCURRENT_POSITIONS = 5;
 
+// Liquidity thresholds, BVB-calibrated. See risk-monitor/SKILL.md for rationale.
+// BVB norms are orders of magnitude below US markets; thresholds reflect what a
+// Romanian mid-cap actually trades (hundreds of thousands of RON/day), not what
+// a NASDAQ name does.
+const EXIT_PARTICIPATION_RATE = 0.20;  // reasonable share of ADV for a non-impacting exit
+const EXIT_DAYS_YELLOW = 3;
+const EXIT_DAYS_RED = 5;
+const ADV_RON_THIN = 500_000;
+const ADV_RON_MARGINAL = 100_000;
+
 // Must mirror scripts/sim_executor.mjs. Keep in sync.
 const SECTOR_MAP = {
   'Energy':             new Set(['SNP', 'SNG', 'RRC', 'OIL']),
@@ -86,6 +96,42 @@ async function fetchPrice(symbol) {
   }
 }
 
+// Fetch 20-day ADV in RON for a BVB symbol. Mirrors the computation in
+// scripts/indicators.mjs so the two stay consistent; we re-implement here
+// rather than spawning a subprocess so the risk report stays a single fetch
+// per symbol and doesn't depend on indicators.mjs being on PATH.
+async function fetchAdv20Ron(symbol) {
+  const yahooSym = symbol.includes('.') ? symbol : `${symbol}.RO`;
+  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(yahooSym)}?interval=1d&range=60d`;
+  try {
+    const resp = await fetch(url, {
+      headers: { 'User-Agent': 'Mozilla/5.0' },
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    const r = data?.chart?.result || [];
+    if (!r.length) return null;
+    const quote = r[0]?.indicators?.quote?.[0] || {};
+    const closes = (quote.close || []);
+    const vols = (quote.volume || []);
+    const n = Math.min(closes.length, vols.length);
+    if (n < 20) return null;
+    let sum = 0;
+    let counted = 0;
+    for (let i = n - 20; i < n; i++) {
+      if (closes[i] == null || vols[i] == null) continue;
+      sum += closes[i] * vols[i];
+      counted++;
+    }
+    if (counted < 15) return null;  // need at least 15 of 20 valid bars
+    return sum / counted;
+  } catch (e) {
+    process.stderr.write(`[warn] ADV fetch failed for ${symbol}: ${e.message}\n`);
+    return null;
+  }
+}
+
 function daysHeld(openedAt) {
   if (!openedAt) return null;
   const dt = new Date(openedAt);
@@ -99,7 +145,52 @@ function round(n, d) {
   return Math.round(n * k) / k;
 }
 
-function analyzePosition(pos, trades) {
+function analyzeLiquidity(pos, adv20Ron) {
+  const price = pos.last_price ?? pos.avg_cost;
+  const positionValue = pos.quantity * price;
+  const entryAdv = pos.adv20_ron_at_entry ?? null;  // may be set by trade-executor at fill time
+
+  if (adv20Ron == null || adv20Ron <= 0) {
+    return {
+      adv20_ron: null,
+      position_adv_pct: null,
+      exit_days_at_20pct: null,
+      adv_vs_entry_pct: null,
+      liquidity_flags: ['LIQUIDITY_DATA_MISSING'],
+    };
+  }
+
+  const positionAdvPct = (positionValue / adv20Ron) * 100;
+  const exitDays = positionValue / (EXIT_PARTICIPATION_RATE * adv20Ron);
+  const advVsEntryPct = entryAdv && entryAdv > 0 ? (adv20Ron / entryAdv) * 100 : null;
+
+  const flags = [];
+  if (exitDays > EXIT_DAYS_RED) {
+    flags.push(`LIQUIDITY_RED (exit ≈ ${exitDays.toFixed(1)} sessions @ 20% participation)`);
+  } else if (exitDays > EXIT_DAYS_YELLOW) {
+    flags.push(`LIQUIDITY_YELLOW (exit ≈ ${exitDays.toFixed(1)} sessions @ 20% participation)`);
+  }
+  if (adv20Ron < ADV_RON_MARGINAL) {
+    flags.push(`ADV_MARGINAL (ADV20 ${Math.round(adv20Ron).toLocaleString('en-US')} RON < ${ADV_RON_MARGINAL.toLocaleString('en-US')})`);
+  } else if (adv20Ron < ADV_RON_THIN) {
+    flags.push(`ADV_THIN (ADV20 ${Math.round(adv20Ron).toLocaleString('en-US')} RON)`);
+  }
+  if (advVsEntryPct != null && advVsEntryPct < 50) {
+    flags.push(`LIQUIDITY_DETERIORATION (ADV now ${advVsEntryPct.toFixed(0)}% of entry-day ADV)`);
+  } else if (advVsEntryPct != null && advVsEntryPct < 70) {
+    flags.push(`LIQUIDITY_DETERIORATION_WATCH (ADV now ${advVsEntryPct.toFixed(0)}% of entry-day ADV)`);
+  }
+
+  return {
+    adv20_ron: round(adv20Ron, 0),
+    position_adv_pct: round(positionAdvPct, 2),
+    exit_days_at_20pct: round(exitDays, 2),
+    adv_vs_entry_pct: advVsEntryPct != null ? round(advVsEntryPct, 1) : null,
+    liquidity_flags: flags,
+  };
+}
+
+function analyzePosition(pos, trades, adv20Ron) {
   const price = pos.last_price ?? pos.avg_cost;
   const cost = pos.avg_cost;
   const peak = pos.peak_since_entry ?? cost;
@@ -126,6 +217,7 @@ function analyzePosition(pos, trades) {
     : (pos.invalidation_conditions || []);
 
   const effectiveStop = pos.stop_loss ?? hardStopPrice;
+  const liquidity = analyzeLiquidity(pos, adv20Ron);
 
   const flags = [];
   if (price <= effectiveStop) {
@@ -142,6 +234,7 @@ function analyzePosition(pos, trades) {
   if (timeInTradeRatio != null && timeInTradeRatio > 1.0) {
     flags.push(`PAST_EXPECTED_HOLD (${dh}d vs ${intended}d intended for ${tradeType})`);
   }
+  for (const lf of liquidity.liquidity_flags) flags.push(lf);
 
   return {
     symbol: pos.symbol,
@@ -164,6 +257,10 @@ function analyzePosition(pos, trades) {
     intended_days: intended,
     time_in_trade_ratio: timeInTradeRatio != null ? round(timeInTradeRatio, 2) : null,
     invalidation_conditions: invalidationConditions,
+    adv20_ron: liquidity.adv20_ron,
+    position_adv_pct: liquidity.position_adv_pct,
+    exit_days_at_20pct: liquidity.exit_days_at_20pct,
+    adv_vs_entry_pct: liquidity.adv_vs_entry_pct,
     flags,
   };
 }
@@ -234,6 +331,9 @@ function analyzePortfolio(state, positionRows) {
 }
 
 function classifyHealth(positionReports, portfolioReport) {
+  // RED is reserved for actionable breaches (stop hit, cap breach). Liquidity
+  // flags surface as YELLOW even at the "RED" band because the response is
+  // graceful-trim, not forced exit — see risk-monitor/SKILL.md.
   for (const r of positionReports) {
     for (const f of r.flags) {
       if (f.startsWith('HARD_STOP_HIT') || f.startsWith('TRAILING_STOP_HIT')) return 'RED';
@@ -268,20 +368,24 @@ function formatText(positionReports, portfolioReport, health) {
   lines.push('POSITIONS');
   lines.push(
     `${padRight('SYM', 6)} ${padLeft('QTY', 4)} ${padLeft('COST', 8)} ${padLeft('NOW', 8)} ` +
-    `${padLeft('P&L%', 6)} ${padLeft('WGT%', 6)} ${padLeft('STOP', 8)} ${padLeft('∆STOP%', 7)} ${padLeft('HELD', 5)}  FLAGS`
+    `${padLeft('P&L%', 6)} ${padLeft('WGT%', 6)} ${padLeft('STOP', 8)} ${padLeft('∆STOP%', 7)} ` +
+    `${padLeft('HELD', 5)} ${padLeft('EXIT_d', 7)} ${padLeft('ADV_kRON', 9)}  FLAGS`
   );
   for (const r of positionReports) {
     const wgt = portfolioReport.total_value_ron
       ? (r.position_value_ron / portfolioReport.total_value_ron) * 100
       : 0;
     const flagsStr = r.flags.length ? r.flags.join(' | ') : '-';
+    const advK = r.adv20_ron != null ? (r.adv20_ron / 1000).toFixed(0) : '-';
+    const exitD = r.exit_days_at_20pct != null ? r.exit_days_at_20pct.toFixed(1) : '-';
     lines.push(
       `${padRight(r.symbol, 6)} ${padLeft(r.quantity, 4)} ` +
       `${padLeft(r.avg_cost.toFixed(3), 8)} ${padLeft(r.price.toFixed(3), 8)} ` +
       `${padLeft(r.pnl_pct.toFixed(2), 6)} ${padLeft(wgt.toFixed(1), 6)} ` +
       `${padLeft((r.effective_stop_price ?? 0).toFixed(3), 8)} ` +
       `${padLeft((r.distance_to_hard_stop_pct ?? 0).toFixed(2), 7)} ` +
-      `${padLeft(r.days_held ?? '-', 5)}  ${flagsStr}`
+      `${padLeft(r.days_held ?? '-', 5)} ` +
+      `${padLeft(exitD, 7)} ${padLeft(advK, 9)}  ${flagsStr}`
     );
   }
 
@@ -344,7 +448,15 @@ async function main() {
     }
   }
 
-  const positionReports = state.positions.map(p => analyzePosition(p, trades));
+  // Liquidity data is always fetched fresh — it drives exit-risk judgements and
+  // we'd rather skip ADV-based flags than show a stale number.
+  const advBySymbol = {};
+  const advFetches = await Promise.all(
+    state.positions.map(async (pos) => [pos.symbol, await fetchAdv20Ron(pos.symbol)])
+  );
+  for (const [sym, adv] of advFetches) advBySymbol[sym] = adv;
+
+  const positionReports = state.positions.map(p => analyzePosition(p, trades, advBySymbol[p.symbol]));
   const portfolioReport = analyzePortfolio(state, positionReports);
   const health = classifyHealth(positionReports, portfolioReport);
 

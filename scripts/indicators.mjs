@@ -115,6 +115,20 @@ async function compute(symbol) {
   const todayVol = vols.length ? vols[vols.length - 1] : null;
   const volRatio = (avgVol20 && todayVol != null) ? (todayVol / avgVol20) : null;
 
+  // 20-day average daily value traded, in the instrument's currency (RON for BVB names).
+  // This is the liquidity metric PROJECT.md gates the universe on (ADV < 50,000 RON → skip)
+  // and the denominator downstream skills use for order-sizing and exit-velocity checks.
+  let adv20Ron = null;
+  if (vols.length >= 20 && cs.length >= 20) {
+    let sum = 0;
+    const n20 = 20;
+    for (let i = cs.length - n20; i < cs.length; i++) {
+      if (vols[i] == null || cs[i] == null) { sum = null; break; }
+      sum += vols[i] * cs[i];
+    }
+    if (sum != null) adv20Ron = sum / n20;
+  }
+
   const h20 = hs.length >= 20 ? Math.max(...hs.slice(-20)) : null;
   const l20 = ls.length >= 20 ? Math.min(...ls.slice(-20)) : null;
 
@@ -131,6 +145,7 @@ async function compute(symbol) {
     volume_today: todayVol,
     volume_avg20: avgVol20,
     volume_ratio: volRatio,
+    adv20_ron: adv20Ron,
     high_20d: h20,
     low_20d: l20,
     high_52w: meta.fiftyTwoWeekHigh ?? null,
@@ -154,10 +169,12 @@ function formatTable(rows) {
   const header =
     `${padRight('SYM', 6)} ${padLeft('PRICE', 9)} ${padLeft('CHG%', 6)} ${padLeft('RSI14', 6)} ` +
     `${padLeft('SMA20', 9)} ${padLeft('SMA50', 9)} ${padLeft('TREND', 7)} ${padLeft('VOL×', 5)} ` +
+    `${padLeft('ADV_kRON', 9)} ` +
     `${padLeft('20dH', 9)} ${padLeft('20dL', 9)} ${padLeft('52wH', 9)} ${padLeft('ATR%', 5)}`;
   const lines = [header, '-'.repeat(header.length)];
   for (const r of rows) {
     if (!r) continue;
+    const advK = r.adv20_ron != null ? r.adv20_ron / 1000 : null;
     lines.push(
       `${padRight(r.symbol, 6)} ` +
       `${fmtNum(r.price, 9, 3)} ` +
@@ -167,6 +184,7 @@ function formatTable(rows) {
       `${fmtNum(r.sma50, 9, 3)} ` +
       `${padLeft(r.trend, 7)} ` +
       `${fmtNum(r.volume_ratio, 5, 1)} ` +
+      `${fmtNum(advK, 9, 0)} ` +
       `${fmtNum(r.high_20d, 9, 3)} ` +
       `${fmtNum(r.low_20d, 9, 3)} ` +
       `${fmtNum(r.high_52w, 9, 3)} ` +

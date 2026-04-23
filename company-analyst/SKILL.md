@@ -54,6 +54,27 @@ WebSearch for `ASF [company] sanctiuni | investigatie` — catches regulatory ac
 
 ## Analysis Checklist
 
+### Liquidity Gate (run first, before any fundamental work)
+
+BVB is small — liquidity norms here are not NASDAQ norms. A US large-cap trades its whole float in hours; BVB mid-caps can go a full session with a few hundred thousand RON changing hands. Before investing analysis effort, re-verify the symbol clears our liquidity bar at the current price level (the universe was screened at index-composition time; a name can become illiquid between reshuffles).
+
+```
+node scripts/indicators.mjs --format=json <SYMBOL>
+```
+
+From the result, read `adv20_ron` (20-day average daily value traded, RON). BVB-calibrated bands:
+
+| Band | `adv20_ron` | Verdict | Sizing guidance |
+|---|---|---|---|
+| **Tradeable** | ≥ 500,000 RON | OK for any trade type | Standard sizing; normal stops |
+| **Thin** | 100,000 – 500,000 RON | OK with caveats | Cap position at min(15% of portfolio, 10% of ADV). Passive limits only (never cross the spread). Prefer swing/trend over event-driven (exit flexibility matters on catalysts). |
+| **Marginal** | 50,000 – 100,000 RON | Requires explicit conviction ≥ 8/10 | Cap position at min(5% of portfolio, 5% of ADV). Flag liquidity risk in thesis. No trend rides — 1-3 month holds are exposed to ADV deterioration we can't forecast. |
+| **Reject** | < 50,000 RON | STOP — do not proceed | PROJECT.md rule. Emit the scorecard with `TRADING RECOMMENDATION → Watch (illiquid)` and skip valuation work. |
+
+Also note the **Summer liquidity collapse window** (Jul 15 – Aug 20, rule `CAL-2`): historical ADV drops 30–50% across BVB in this window. If analysis is run inside this window, tighten each band one step (e.g. a stock normally in "Thin" is treated as "Marginal"). The 20-day window will catch this automatically, but the regime-shift is gradual enough that the raw ADV number understates the problem at the edges of the window.
+
+Include the raw `adv20_ron` number and the band verdict in the scorecard's SNAPSHOT section. If rejected, stop here.
+
 ### Financial Performance (from stockanalysis.com + Yahoo)
 - Revenue: 3-year CAGR, YoY trend
 - Net income: margin trend, earnings quality (is growth real or one-off?)
@@ -105,6 +126,7 @@ SNAPSHOT
   Price: [X] RON   52w: [lo] – [hi]   YTD: [±%]
   Market cap: [X] B RON   Free float: [X]%
   Div yield (TTM): [X]%   P/E: [X]   P/B: [X]   EV/EBITDA: [X]
+  Liquidity: ADV20 [X] RON — [Tradeable | Thin | Marginal | Reject]
 
 FUNDAMENTAL SCORE: [1-10]
   Financial health:    [1-10]  — [1 line reasoning]
@@ -135,11 +157,12 @@ TRADING RECOMMENDATION
   Action:        Buy | Hold | Sell | Watch
   Trade type:    Swing (3-15d) | Event-driven (2-8w) | Trend ride (1-3m)
   Entry zone:    [price range]
-  Size:          [% of portfolio, respecting allocation limits]
+  Size:          [% of portfolio, respecting allocation limits AND the liquidity band's ADV cap]
   Stop-loss:     [price] (-X%)
   Target:        [price] (+X%)
   Time horizon:  [days/weeks/months]
   Catalyst date: [if event-driven]
+  Liquidity note: [blank if Tradeable; else the band + the tighter cap actually applied]
 ```
 
 ## Sector-Specific Cheat Sheets
