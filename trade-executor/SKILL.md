@@ -181,9 +181,23 @@ Before calling `place`, validate:
 3. Limit price within ±10% of current market (guards against fat-finger)
 4. Symbol resolves on the price feed
 5. Allocation limits from `portfolio-manager` not breached (30% single-stock, 50% daily deployment, 5 concurrent positions)
+6. **Liquidity sizing (BVB-calibrated).** Fetch `adv20_ron` (20-day average daily value traded) for the symbol via `node scripts/indicators.mjs --format=json <SYMBOL>`. Compute `order_value_ron = quantity × limit_price` and `participation = order_value_ron / adv20_ron`. Gate:
+   - `adv20_ron < 50,000 RON` → **reject** (universe rule).
+   - `participation > 0.25` (order > 25% of one day's ADV) → **reject** unless the trade carries an explicit `override_participation: true` flag AND the reason is logged; a single-session fill at that size typically costs 1–2% of slippage on BVB mid-caps and is visible to other participants.
+   - `participation > 0.10` (10–25% band) → **warn** and force a passive limit: BUY at or below the current bid, SELL at or above the current ask. Never cross the spread in this band — BVB mid-cap spreads are 0.5–2% and crossing eats that on top of the market-impact drag.
+   - `participation ≤ 0.10` → OK, any reasonable limit price is fine.
+7. **Limit-price sanity vs spread.** If L1 quote is available from the broker response, verify the limit sits inside `[bid × 0.99, ask × 1.01]`. A BUY limit more than 1% through the ask, or a SELL limit more than 1% below the bid, is almost always a unit error (RON vs bani, quantity/price swap). Reject and ask synthesis to re-state the order.
 
 If any check fails, reject locally before even hitting the gateway, log
 the reason, and do not submit.
+
+### Why BVB needs these checks
+
+Liquidity on BVB is orders of magnitude below US markets. A "liquid" BVB mid-cap (say ALR, WINE, M) often trades 200k–600k RON per day — on NASDAQ that would be a micro-cap scenario. Three consequences for execution:
+
+- **Market impact scales fast.** A 50,000 RON order against a 300,000 RON ADV is ~17% participation — a size that will move the tape visibly and invite other participants to lean against it. On a 30M RON ADV NASDAQ mid-cap the same 50,000 RON is invisible; on BVB it is not.
+- **Spreads are wide and persistent.** 0.5–2% bid-ask is normal on BVB mid-caps even during active hours. Crossing that spread is a real execution cost, not a rounding error. Passive limits are the default posture, not the exception.
+- **No market orders** (PROJECT.md rule) — so every order already lives or dies on the limit price we pick. Getting it right matters more than on venues where a market order is a valid fallback.
 
 ## Output format (for the daily report)
 
