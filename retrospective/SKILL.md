@@ -166,18 +166,22 @@ Suggested edit: `Hard stop-loss at 10% per position (12% for sector=financials, 
 Pending user review.
 ```
 
-## Persistence — commit LESSONS.md and THEMES.md to main
+## Persistence — commit LESSONS.md and THEMES.md to the current branch
 
-`LESSONS.md` and `THEMES.md` are the only two pieces of long-term memory that live as files in git (everything else — journal, fills, portfolio state, considered candidates, market snapshots — is in Firestore via bt-gateway). The routine's sandbox is ephemeral; any edit made to these files during a run is lost unless it's pushed to the repo.
+`LESSONS.md` and `THEMES.md` are the only two pieces of long-term memory that live as files in git (everything else — journal, fills, portfolio state, considered candidates, market snapshots — is in Firestore via bt-gateway, scoped by the mode encoded in the API key). The routine's sandbox is ephemeral; any edit made to these files during a run is lost unless it's pushed to the repo.
 
-**Whenever this skill modifies `LESSONS.md` (or macro-analyst modifies `THEMES.md`), the run MUST commit and push the change to `main`:**
+Demo and live accounts run against **different branches** (`demo` and `live`) so their lessons and themes evolve independently — a demo-only failure mode should not feed live synthesis, and vice-versa. **Always push to the branch the sandbox was checked out from, never hardcode `main`.**
+
+**Whenever this skill modifies `LESSONS.md` (or macro-analyst modifies `THEMES.md`), the run MUST commit and push the change to the current branch:**
 
 ```bash
 cd <repo-root>
 git add LESSONS.md THEMES.md
 git commit -m "retrospective: <date> weekly lessons"
-git push
+git push origin HEAD
 ```
+
+`HEAD` resolves to whatever branch the sandbox is on (`demo` for demo runs, `live` for live runs) — so no env var or branch-name lookup is needed here.
 
 If the push fails (auth, conflict, network), surface it via telegram-reporter and do NOT silently carry on — the next run will start from stale lessons. Treat a failed push the same as a missed run.
 
