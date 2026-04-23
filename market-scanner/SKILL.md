@@ -39,7 +39,6 @@ Returns a JSON array, one object per symbol, with:
 - `price`, `daily_change_pct`
 - `rsi14`, `sma20`, `sma50`, `sma200`
 - `volume_today`, `volume_avg20`, `volume_ratio`
-- `adv20_ron` — 20-day average daily value traded in RON (shared liquidity denominator used by company-analyst's liquidity gate, trade-executor's participation check, and risk-monitor's exit-velocity metric)
 - `high_20d`, `low_20d`, `high_52w`, `low_52w`
 - `atr14_pct`
 - `trend` — one of `up | down | range`
