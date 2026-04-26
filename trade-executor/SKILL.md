@@ -48,6 +48,7 @@ cached numbers.
 | Var | Purpose |
 |---|---|
 | `BT_GATEWAY_API_KEY` | API key from bt-gateway Settings → Access. Prefix encodes mode: `bvb_demo_...` or `bvb_live_...` |
+| `BT_GATEWAY_URL` | Base URL of the bt-gateway Cloud Run service. No default — scripts abort if unset. |
 
 No `BT_USER`, `BT_PASS`, `BT_NTFY_TOPIC`, `FIRESTORE_PROJECT`, or
 `GCS_SA_KEY_JSON` needed — the gateway handles credentials, OTP, and

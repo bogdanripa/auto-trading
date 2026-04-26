@@ -52,6 +52,7 @@ bt-gateway (Cloud Run)        — Owns the BT Trade session, encrypted credentia
 3. Set env vars on the routine:
    - `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` (optional — bt-gateway can also notify directly)
    - `BT_GATEWAY_API_KEY=bvb_demo_...`
+   - `BT_GATEWAY_URL=https://...` (gateway base URL — required, no default)
 4. Schedule the routine for morning (07:30 EET) and evening (17:30 EET) runs.
 
 That's it. The gateway owns credentials, OTP (delivered via ntfy to your phone shortcut), token refresh (every 45 min via its own Cloud Scheduler cron), and storage. This repo's scripts are thin HTTP clients — no BT Trade SDK, no Firestore SDK, no `@google-cloud/*` dependencies.

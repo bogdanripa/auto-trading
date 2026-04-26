@@ -11,15 +11,13 @@
  *
  * Required env:
  *   BT_GATEWAY_API_KEY   bvb_demo_... or bvb_live_...
- *
- * Optional env:
- *   BT_GATEWAY_URL       override the hardcoded gateway URL (for local dev)
+ *   BT_GATEWAY_URL       gateway base URL (e.g. https://bt-gateway-...run.app)
  */
 
-const GATEWAY_URL = 'https://bt-gateway-o2qixn6u6q-ey.a.run.app';
-
 function gatewayBase() {
-  return (process.env.BT_GATEWAY_URL ?? GATEWAY_URL).replace(/\/+$/, '');
+  const v = process.env.BT_GATEWAY_URL;
+  if (!v) throw new Error('BT_GATEWAY_URL env var is required');
+  return v.replace(/\/+$/, '');
 }
 
 function apiKey() {
