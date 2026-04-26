@@ -14,9 +14,7 @@
  *
  * Required env vars:
  *   BT_GATEWAY_API_KEY — bvb_demo_... or bvb_live_...
- *
- * Optional env vars:
- *   BT_GATEWAY_URL — override the hardcoded gateway URL (useful for local dev)
+ *   BT_GATEWAY_URL     — gateway base URL (e.g. https://bt-gateway-...run.app)
  *
  * Exit codes: 0 success, 1 validation, 2 gateway/broker error, 3 runtime error
  */
@@ -49,9 +47,7 @@ function requireEnv(name) {
   return v;
 }
 
-const GATEWAY_URL = 'https://bt-gateway-o2qixn6u6q-ey.a.run.app';
-
-function gatewayBase() { return (process.env.BT_GATEWAY_URL ?? GATEWAY_URL).replace(/\/+$/, ''); }
+function gatewayBase() { return requireEnv('BT_GATEWAY_URL').replace(/\/+$/, ''); }
 function apiKey()       { return requireEnv('BT_GATEWAY_API_KEY'); }
 
 async function gw(path, { method = 'GET', body } = {}) {
