@@ -65,6 +65,8 @@ candidates, daily market snapshots) and all broker activity go through the
 
 - `BT_GATEWAY_API_KEY` — a `bvb_demo_...` or `bvb_live_...` key from
   the gateway's Settings → Access page.
+- `BT_GATEWAY_URL` — base URL of the gateway Cloud Run service. No
+  default; the scripts abort if it is unset.
 
 No `FIRESTORE_PROJECT`, no `GCS_SA_KEY_JSON`, no service-account JSON,
 no `@google-cloud/firestore` dep. `scripts/store.mjs` is a thin HTTP
