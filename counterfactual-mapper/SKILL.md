@@ -22,9 +22,9 @@ Query graphiti for `SkippedSetup` nodes where:
 - `date + invalidation_window_days <= today`
 
 ```
-mcp__graphiti__search_memory_nodes(
+mcp__graphiti__search_nodes(
   query: "SkippedSetup unscored invalidation_window_elapsed",
-  group_id: "trading",
+  group_id: "auto_trader",
   limit: 200
 )
 ```
@@ -95,7 +95,7 @@ mcp__graphiti__add_memory(
   }),
   source: "json",
   source_description: "Counterfactual scoring of skipped setup",
-  group_id: "trading",
+  group_id: "auto_trader",
   reference_time: <today's ISO timestamp>
 )
 ```
@@ -139,7 +139,7 @@ The original skip stands as a historical decision. The counterfactual is appende
 ## Failure handling
 
 - **Yahoo/Stooq down**: defer scoring to the next run. Skips don't expire — they sit unscored until data is available.
-- **Graphiti unreachable**: queue the counterfactual records via the same replay-queue pattern as other skills. `backfill-graphiti` will drain them next run.
+- **Graphiti unreachable**: skip the write — the `SkippedSetup` node still has no `Counterfactual` edge attached, so the next daily run picks it up again. No queue needed; the unscored state IS the retry signal.
 - **Skip has malformed `price_at_skip` or `date`**: log and skip. Do not estimate — bad data shouldn't produce false signals.
 
 ## Anti-patterns

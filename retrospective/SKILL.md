@@ -113,9 +113,9 @@ After `journal_stats.mjs` produces its JSON, run the following graphiti queries 
 #### A. Mechanism × outcome — diagnosis vs. execution failures
 
 ```
-mcp__graphiti__search_memory_facts(
+mcp__graphiti__search_facts(
   query: "mechanism failed catalyst occurred verdict wrong",
-  group_id: "trading",
+  group_id: "auto_trader",
   limit: 50
 )
 ```
@@ -127,9 +127,9 @@ Cluster the returned facts by `mechanism` field. Surface any mechanism that:
 #### B. Theme × outcome
 
 ```
-mcp__graphiti__search_memory_nodes(
+mcp__graphiti__search_nodes(
   query: "Theme evidenced_by Trade verdict",
-  group_id: "trading",
+  group_id: "auto_trader",
   limit: 30
 )
 ```
@@ -139,9 +139,9 @@ For each `Theme` node, count linked trades by verdict. A theme with ≥3 trades 
 #### C. News-to-trade lag — were entries grounded in recent news?
 
 ```
-mcp__graphiti__search_memory_facts(
+mcp__graphiti__search_facts(
   query: "Trade entry preceded_by News materiality:high",
-  group_id: "trading"
+  group_id: "auto_trader"
 )
 ```
 
@@ -152,9 +152,9 @@ For each trade, find the most recent material news on its ticker before entry. L
 #### D. Skipped-setup counterfactuals — what did we miss?
 
 ```
-mcp__graphiti__search_memory_nodes(
+mcp__graphiti__search_nodes(
   query: "SkippedSetup counterfactual move_pct",
-  group_id: "trading",
+  group_id: "auto_trader",
   limit: 100
 )
 ```
@@ -174,9 +174,9 @@ These produce a distinct kind of lesson: **non-action lessons**. Format them wit
 #### E. Retired-prior check — anything contradicted this week?
 
 ```
-mcp__graphiti__search_memory_nodes(
+mcp__graphiti__search_nodes(
   query: "prior superseded_by week",
-  group_id: "trading"
+  group_id: "auto_trader"
 )
 ```
 

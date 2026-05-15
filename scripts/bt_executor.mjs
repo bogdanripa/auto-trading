@@ -117,9 +117,28 @@ async function cmdStatus(mode, store) {
   const out = { mode, cash, holdings: holdingsData };
 
   try {
+    // BT cash comes back as an array of currency buckets: [{ currency: "RON", value: { amount: 1234.56 } }, ...].
+    // Fall back to flat shapes if the gateway ever normalizes differently.
+    let cashRon = 0;
+    if (Array.isArray(cash)) {
+      const ronEntry = cash.find((c) => c?.currency === 'RON' || c?.value?.currency === 'RON');
+      cashRon = ronEntry?.value?.amount ?? ronEntry?.amount ?? 0;
+    } else if (cash && typeof cash === 'object') {
+      cashRon = cash.available ?? cash.availableAmount ?? cash.cash ?? cash.total ?? 0;
+    }
+
+    // BT holdings come back as { Positions: { Items: [...] } }. Fall back to flat shapes.
     const positions = Array.isArray(holdingsData)
-      ? holdingsData : (holdingsData.positions ?? holdingsData.items ?? []);
-    const cashRon = cash.available ?? cash.availableAmount ?? cash.cash ?? cash.total ?? 0;
+      ? holdingsData
+      : (holdingsData?.Positions?.Items
+        ?? holdingsData?.positions
+        ?? holdingsData?.items
+        ?? []);
+
+    if (cashRon === 0 && positions.length === 0) {
+      console.error('[bt_executor] WARNING: savePortfolioState got 0 cash AND 0 positions — gateway shape may have changed; downstream skills will see empty state');
+    }
+
     await store.savePortfolioState({ mode, as_of: new Date().toISOString(), cash_ron: cashRon, positions });
   } catch (e) { console.error(`[bt_executor] savePortfolioState failed: ${e.message}`); }
 

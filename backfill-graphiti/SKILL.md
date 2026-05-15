@@ -34,7 +34,7 @@ for (const r of records) {
     episode_body: JSON.stringify(r),
     source: "json",
     source_description: `trade-journal ${r.type} record (backfill)`,
-    group_id: "trading",
+    group_id: "auto_trader",
     reference_time: r.timestamp
   });
 }
@@ -62,7 +62,7 @@ Graphiti's LLM extraction takes 1-5s per episode. For large backfills (thousands
 After ingestion, run sanity queries:
 
 ```
-mcp__graphiti__search_memory_nodes(query: "Trade", limit: 1, group_id: "trading")
+mcp__graphiti__search_nodes(query: "Trade", limit: 1, group_id: "auto_trader")
 ```
 
 Confirm the most recent record appears with a reasonable `valid_at` timestamp. If the graph looks empty after a successful run, something is wrong with the MCP wiring — escalate to the user, don't silently continue.

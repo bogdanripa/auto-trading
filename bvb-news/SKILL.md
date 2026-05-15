@@ -168,7 +168,7 @@ mcp__graphiti__add_memory(
   }),
   source: "json",
   source_description: "bvb-news item",
-  group_id: "trading",
+  group_id: "auto_trader",
   reference_time: <ISO timestamp of publication, NOT scan time>
 )
 ```
@@ -205,7 +205,7 @@ mcp__graphiti__add_memory(
   }),
   source: "json",
   source_description: "Daily BVB market context",
-  group_id: "trading",
+  group_id: "auto_trader",
   reference_time: <session start ISO timestamp>
 )
 ```

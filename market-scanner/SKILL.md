@@ -215,7 +215,7 @@ mcp__graphiti__add_memory(
   }),
   source: "json",
   source_description: "Market scanner skipped setup",
-  group_id: "trading",
+  group_id: "auto_trader",
   reference_time: <ISO timestamp of scan>
 )
 ```

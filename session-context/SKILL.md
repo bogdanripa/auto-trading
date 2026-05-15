@@ -20,21 +20,35 @@ The engine's working memory for one routine run. This skill is the **first reaso
 
 ### 1. Fetch current positions (bt-gateway)
 
+Use the actual store API in [scripts/store.mjs](../scripts/store.mjs):
+
 ```
-store.getPortfolio()      // open positions, cost basis, P&L, days held
-store.getCashState()      // available buying power, pending settlements
-store.getOpenOrders()     // anything still in the book
+const state = await store.getState();    // { cash_ron, positions: [...], as_of }
+// `positions` has cost basis and quantity. P&L and days-held are computed from
+// the matching journal entries (store.listJournal) and recent fills (store.listFills).
 ```
 
+If the cached state looks stale or empty (`cash_ron === 0 && positions.length === 0`), refresh it by running `node scripts/bt_executor.mjs status`, which fetches live cash + holdings from bt-gateway, normalizes the BT-shape (`cash[].value.amount`, `holdings.Positions.Items`) into `{ cash_ron, positions }`, and writes the normalized cache.
+
 These are facts, not inferences. Pull verbatim.
+
+### 1.5 Determine the last-session timestamp
+
+The brief filters "what's new since last session" — so we need the prior session's reference time. Query graphiti for the most recent `Session` node:
+
+```
+mcp__graphiti__search_nodes(query: "Session", limit: 1, group_id: "auto_trader")
+```
+
+Use that node's `reference_time` as `<last_session_ts>` below. If no Session node exists (first run after deploy), default to 24 hours ago.
 
 ### 2. Per-position memory recall (graphiti)
 
 For each open position from step 1:
 
 ```
-mcp__graphiti__search_memory_nodes(query: "Trade <ticker>", limit: 5, group_id: "trading")
-mcp__graphiti__search_memory_facts(query: "<ticker> thesis mechanism catalyst")
+mcp__graphiti__search_nodes(query: "Trade <ticker>", limit: 5, group_id: "auto_trader")
+mcp__graphiti__search_facts(query: "<ticker> thesis mechanism catalyst")
 ```
 
 Pull the verbatim entry thesis, catalyst, mechanism, invalidation conditions, and any mid-trade reaffirmations. **Full fidelity** — these positions are live, the reasoning needs to be intact.
@@ -42,7 +56,7 @@ Pull the verbatim entry thesis, catalyst, mechanism, invalidation conditions, an
 ### 3. Recent outcomes since last session (graphiti + bt-gateway)
 
 ```
-mcp__graphiti__search_memory_nodes(query: "exit verdict", since: <last_session_ts>)
+mcp__graphiti__search_nodes(query: "exit verdict", since: <last_session_ts>)
 ```
 
 What closed, with verdict (`correct` / `partially_correct` / `wrong` / `inconclusive`). 1-line each. Stops triggered, take-profits hit.
@@ -50,8 +64,8 @@ What closed, with verdict (`correct` / `partially_correct` / `wrong` / `inconclu
 ### 4. Active priors & themes (graphiti + repo files)
 
 ```
-mcp__graphiti__search_memory_nodes(query: "active prior regime <current_regime>", limit: 20)
-mcp__graphiti__search_memory_nodes(query: "active theme", limit: 10)
+mcp__graphiti__search_nodes(query: "active prior regime <current_regime>", limit: 20)
+mcp__graphiti__search_nodes(query: "active theme", limit: 10)
 ```
 
 Include from graphiti: title, evidence count, last-reinforced date, `valid_to=null`.
@@ -61,8 +75,8 @@ Flag any prior **retired in the last 7 days** prominently (new structural break)
 ### 5. Pending decisions (graphiti)
 
 ```
-mcp__graphiti__search_memory_nodes(query: "SkippedSetup invalidation_window open")
-mcp__graphiti__search_memory_nodes(query: "Reaffirm position open")
+mcp__graphiti__search_nodes(query: "SkippedSetup invalidation_window open")
+mcp__graphiti__search_nodes(query: "Reaffirm position open")
 ```
 
 - Skipped setups still inside their invalidation window — we may revisit them today.
@@ -72,7 +86,7 @@ mcp__graphiti__search_memory_nodes(query: "Reaffirm position open")
 ### 6. Prior news context (graphiti, last 14 days)
 
 ```
-mcp__graphiti__search_memory_facts(query: "News tone≠neutral", since: <now-14d>)
+mcp__graphiti__search_facts(query: "News tone≠neutral", since: <now-14d>)
 ```
 
 Filter:
@@ -138,7 +152,7 @@ mcp__graphiti__add_memory(
   episode_body: <the brief>,
   source: "session-context",
   source_description: "Session brief at start of routine run",
-  group_id: "trading"
+  group_id: "auto_trader"
 )
 ```
 
