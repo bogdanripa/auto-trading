@@ -142,3 +142,87 @@ SENTIMENT SCORE: [-5 to +5]
 ## Caching
 
 Within a single run, cache all fetched pages and search results. Don't hit the same URL twice (e.g., the same holding appears in multiple search queries). Cache is in-memory for the run; nothing persists between runs.
+
+## Graphiti Sync
+
+Every news item that clears the **materiality filter (`high` or `medium` only)** gets ingested into graphiti as a `News` episode. Low-materiality and dropped items are not ingested — they're noise, the graph doesn't need them.
+
+### Ingest format
+
+For each kept item, call:
+
+```
+mcp__graphiti__add_memory(
+  name: "News <symbol> <date> — <truncated headline>",
+  episode_body: JSON.stringify({
+    symbol: "SNG",
+    date: "2026-04-19",
+    headline: "Romgaz proposes 606M RON dividend, reduced from prior year",
+    summary: "<1-3 sentence pre-extracted summary, NOT full article body>",
+    materiality: "high",
+    direction: "negative",
+    timeframe: "immediate",
+    source: "bvb.ro",
+    url: "https://...",
+    rationale: "Dividend down 38% YoY — windfall tax absorption continues"
+  }),
+  source: "json",
+  source_description: "bvb-news item",
+  group_id: "trading",
+  reference_time: <ISO timestamp of publication, NOT scan time>
+)
+```
+
+**Critical: `reference_time` is the news publication time, not now.** Graphiti's temporal model needs the event time so retrospectives can correlate "news from 2026-04-19" with "trade opened 2026-04-20."
+
+### What gets extracted
+
+Graphiti's LLM will produce `News`, `Company`, `Catalyst` (for dated events like AGM/earnings), and `MacroEvent` (for regulatory/rate decisions) nodes. The `direction` and `materiality` become attributes on the `News` node so downstream queries can filter.
+
+### Pre-extraction over raw article bodies
+
+Do NOT pass full article text into `episode_body`. Passing the full body:
+- Wastes extraction LLM tokens on boilerplate (cookie banners, navigation, footers)
+- Produces noisy entities (random people quoted in the article)
+- Inflates ingestion latency
+
+Instead, summarize each item to 1-3 sentences during the bvb-news analysis pass (you're already producing the structured JSON above), and pass that. The full URL is preserved for any future retrieval.
+
+### Market context summary as its own episode
+
+At the end of the run, ingest a single rolled-up `MarketContext` episode covering the day's broad news flow:
+
+```
+mcp__graphiti__add_memory(
+  name: "Market context <date> <morning|evening>",
+  episode_body: JSON.stringify({
+    date: "2026-04-19",
+    session: "morning",
+    sentiment_score: 2,
+    summary: "Energy names up on TTF strength; BNR holds at 6.50%; foreign flows neutral",
+    notable_themes: ["Neptun Deep", "windfall tax watch"],
+    regime_signals: ["risk_on"]
+  }),
+  source: "json",
+  source_description: "Daily BVB market context",
+  group_id: "trading",
+  reference_time: <session start ISO timestamp>
+)
+```
+
+This lets the next session ask "what was the market mood when we opened ONE?"
+
+### Failure handling
+
+If the graphiti call fails, log to stderr + the Telegram report and continue. Do not abort the news pipeline — the briefing still has to go out.
+
+News items are **not mirrored to bt-gateway** — they exist only in graphiti. An outage during a single news run loses that batch. This is acceptable because:
+- The underlying sources (bvb.ro per-symbol pages, WebSearch hits) are still authoritative
+- Re-running this skill re-fetches and re-ingests
+- News from a few hours ago becoming visible to graphiti a day late is a minor loss of context, not a correctness problem
+
+If a multi-day graphiti outage occurs, manually re-run this skill with a wider lookback to catch up.
+
+### Caching applies to ingestion too
+
+If the same news item appears in both the BVB structured page and a WebSearch hit, ingest it ONCE. Dedupe by `url` within the run.

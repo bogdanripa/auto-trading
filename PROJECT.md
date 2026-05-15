@@ -80,27 +80,29 @@ API key is set.
 
 ### Morning Run (7:30 AM EET)
 Execute skills in this order:
-1. Read `LESSONS.md`, `THEMES.md`, and `macro-analyst/references/bvb-historical-patterns.md` — load active lessons, active themes, and the historical playbook before analysis
+1. `session-context` — Build the working brief: current positions from bt-gateway, per-position theses + priors + themes + recent outcomes + prior news (last 14 days) from graphiti, plus `LESSONS.md` / `THEMES.md` / `macro-analyst/references/bvb-historical-patterns.md` for human-curated content. Emits the brief that every downstream skill reads. **Always runs first.**
 2. `macro-analyst` — Populates `rules/market_snapshot.json` from live feeds, runs `scripts/evaluate_rules.mjs` against `rules/bvb_rules.json`, emits the firing rules + REGIME score + narrative context
-3. `bvb-news` — BVB announcements, Romanian news
-4. `market-scanner` — Technical scan of BET-Plus universe
+3. `bvb-news` — BVB announcements, Romanian news (also ingests fresh news into graphiti)
+4. `market-scanner` — Technical scan of BET-Plus universe (records skipped setups to graphiti)
 5. `company-analyst` — Deep dive on any flagged stocks
 6. `portfolio-manager` — Current state, cash available, position review
 7. `risk-monitor` — Check stops, exposure, override conditions
-8. **Synthesis** — Weigh all inputs against active lessons + active themes, decide today's actions
+8. **Synthesis** — Weigh all inputs against the session brief, active lessons + active themes, decide today's actions
 9. `trade-executor` — Place orders via bt-gateway against BT Trade
-10. `trade-journal` — Append entry record for every new fill (thesis + context, tag with theme if applicable)
+10. `trade-journal` — Append entry record for every new fill (thesis + context, tag with theme if applicable). Also ingests the entry into graphiti.
 11. `telegram-reporter` — Send morning briefing
 
 ### Evening Run (5:30 PM EET)
 Execute skills in this order:
-1. `portfolio-manager` — What filled, P&L update, detect closed positions
-2. `bvb-news` — Late-breaking news
-3. `risk-monitor` — End-of-day risk check
-4. `trade-journal` — Append exit record for every closed position (outcome + verdict + lessons)
-5. `tax-tracker` — Log any completed trades
-6. `retrospective` — On Fridays only: mine the journal, update `LESSONS.md`
-7. `telegram-reporter` — Send evening briefing (include retrospective summary on Fridays)
+1. `session-context` — Build the evening brief (same skill, same output shape as morning). **Always runs first.**
+2. `portfolio-manager` — What filled, P&L update, detect closed positions
+3. `bvb-news` — Late-breaking news (also ingests into graphiti)
+4. `risk-monitor` — End-of-day risk check
+5. `trade-journal` — Append exit record for every closed position (outcome + verdict + lessons). Also ingests exits into graphiti.
+6. `counterfactual-mapper` — For every skipped setup whose invalidation window has elapsed, fetch the price now and attach a Counterfactual edge in graphiti. Fires alerts on extreme misses or systematic skip-rule failures.
+7. `tax-tracker` — Log any completed trades
+8. `retrospective` — On Fridays only: mine the journal + graphiti (incl. counterfactuals), update `LESSONS.md`
+9. `telegram-reporter` — Send evening briefing (include retrospective summary on Fridays, counterfactual alerts whenever they fire)
 
 ## Learning Loop
 

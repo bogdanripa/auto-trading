@@ -170,3 +170,77 @@ Sector-specific priors the scanner should weight when grading setups. These over
 ## Caching
 
 Same pattern as news/macro — in-memory cache for the run only. Do not persist between runs; the next routine fires hours later and needs fresh data.
+
+## Graphiti Sync — Skipped Setups (the blind-spot fix)
+
+The scanner produces A-grade and B-grade candidates. The synthesis step picks which to act on. **Everything that gets considered but not acted on must be persisted to graphiti** — otherwise the engine has no record of the decisions it didn't make, and counterfactual learning is impossible ("a month ago we decided not to act, then the stock went up 20%").
+
+### What counts as a "skipped setup"
+
+After synthesis runs and produces the day's actual trade decisions, the scanner emits a `SkippedSetup` record for every A-grade or B-grade candidate that did NOT result in a fill, with the reason for the skip. This is a separate step that runs **after trade-executor**, when the actual-vs-considered diff is known.
+
+Categories of skip reason (use exactly these strings — they're the grouping keys for retrospective queries):
+- `competing_setup_higher_conviction` — another candidate ranked higher and consumed the cash
+- `liquidity_below_threshold` — ADV < 50,000 RON
+- `regime_risk_off` — REGIME-1 fired, cash floor hit
+- `cash_ceiling_hit` — REGIME-2 inverse: already at deployment limit
+- `sector_cap_reached` — 60% single-sector cap would be breached
+- `position_cap_reached` — 30% single-stock cap would be breached
+- `daily_deploy_cap_hit` — 50% of available cash already deployed today
+- `chased_price` — price moved >3% from signal before we could enter (the "never chase" rule)
+- `thesis_too_weak` — synthesis judged conviction <5 despite scanner grade
+- `pending_event_too_close` — earnings/AGM <24h away and synthesis preferred to wait for outcome
+- `other` — free-text reason in `reason_detail`
+
+### Ingest format
+
+For each skipped A/B-grade candidate:
+
+```
+mcp__graphiti__add_memory(
+  name: "SkippedSetup <ticker> <date>",
+  episode_body: JSON.stringify({
+    date: "2026-04-19",
+    ticker: "ONE",
+    setup_grade: "A",
+    setup_type: "breakout",
+    score: 7.2,
+    price_at_skip: 12.40,
+    rsi14: 62,
+    volume_ratio: 2.3,
+    reason: "competing_setup_higher_conviction",
+    reason_detail: "TLV ranked 8.4; cash only sufficient for one position",
+    thesis_at_skip: "Breakout above 12.30 on 2.3x volume; NBR first-cut theme",
+    invalidation_window_days: 30
+  }),
+  source: "json",
+  source_description: "Market scanner skipped setup",
+  group_id: "trading",
+  reference_time: <ISO timestamp of scan>
+)
+```
+
+`invalidation_window_days` is how long we consider the skip "live" for counterfactual purposes. Defaults:
+- breakout / pullback setups: 14 days
+- event-driven (earnings/AGM): until the dated event + 7 days
+- trend rides: 30 days
+- generic: 30 days
+
+### What does NOT get a SkippedSetup
+
+- C-grade watchlist names — they were never serious candidates today, no decision was made
+- Symbols filtered out before scoring (e.g., suspended, halted, no data) — these go in the existing `SKIPPED (illiquid or no data)` section, not graphiti
+- Setups taken and acted on — those become `Trade` nodes via trade-journal
+
+### Counterfactual closure
+
+A separate daily routine (`counterfactual-mapper`) walks open `SkippedSetup` nodes whose `invalidation_window` has elapsed, fetches the price now, and attaches a `Counterfactual` edge with the price move since skip. This skill does NOT do that — it only emits the original record.
+
+### Failure handling
+
+If a graphiti write fails, log to stderr + Telegram and continue. The scanner output to the synthesis step is never blocked.
+
+Skipped setups are **not mirrored to bt-gateway** — they exist only in graphiti. An outage during a scan loses that day's skip records. This is acceptable because:
+- A "skipped setup" represents a *moment-in-time* decision; the next scanner run will surface the same setup again if it's still valid, producing a new record
+- Counterfactual learning loses one day of evidence, not a long-term decision audit
+- Trade decisions themselves are unaffected — those still go through trade-journal → Firestore
