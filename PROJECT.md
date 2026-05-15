@@ -90,7 +90,8 @@ Execute skills in this order:
 8. **Synthesis** — Weigh all inputs against the session brief, active lessons + active themes, decide today's actions
 9. `trade-executor` — Place orders via bt-gateway against BT Trade
 10. `trade-journal` — Append entry record for every new fill (thesis + context, tag with theme if applicable). Also ingests the entry into graphiti.
-11. `telegram-reporter` — Send morning briefing
+11. `market-scanner` (skip-emission pass) — For every A/B-grade candidate from Step 4 that was NOT filled by trade-executor, emit a `SkippedSetup` to graphiti with the reason (inferred from synthesis output). This closes the counterfactual-learning loop.
+12. `telegram-reporter` — Send morning briefing
 
 ### Evening Run (5:30 PM EET)
 Execute skills in this order:

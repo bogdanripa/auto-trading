@@ -15,8 +15,8 @@ Append-only narrative log of every trade. Distinct from `tax-tracker` (which cap
   - Written via `store.appendJournal(record)` / read via `store.listJournal({ since, type, limit })`.
 - **Secondary (graph memory, derived):** the same record is ingested into graphiti via the `graphiti` MCP server immediately after a successful Firestore write.
   - Written via `mcp__graphiti__add_memory(...)` — see "Graphiti Sync" below.
-  - Read via `mcp__graphiti__search_memory_nodes` / `search_memory_facts` from the `session-context` skill.
-- **Invariant:** if the graphiti write fails, the Firestore write still succeeds, the run continues, and the record is queued for replay by `backfill-graphiti`. **Never block a trade journal write on graphiti.**
+  - Read via `mcp__graphiti__search_nodes` / `search_facts` from the `session-context` skill.
+- **Invariant:** if the graphiti write fails, the Firestore write still succeeds and the run continues. The Firestore journal IS the canonical replay source — `backfill-graphiti` re-ingests from `store.listJournal()` later. **Never block a trade journal write on graphiti.**
 - Never rewrite history. Corrections go in as new records with `"correction_of": "<trade_id>"`.
 
 ## Record Schema
@@ -177,7 +177,7 @@ mcp__graphiti__add_memory(
   episode_body: JSON.stringify(record),
   source: "json",
   source_description: "trade-journal entry record",
-  group_id: "trading",
+  group_id: "auto_trader",
   reference_time: record.timestamp
 )
 ```
@@ -190,7 +190,7 @@ mcp__graphiti__add_memory(
   episode_body: JSON.stringify(record),
   source: "json",
   source_description: "trade-journal exit record",
-  group_id: "trading",
+  group_id: "auto_trader",
   reference_time: record.timestamp
 )
 ```
