@@ -10,6 +10,8 @@ package-lock.json
 
 # Claude Code
 .claude/settings.local.json
+.claude/worktrees/
+.mcp.json
 
 # LocalStore dev fallback (used only when FIRESTORE_PROJECT is unset).
 # Authoritative state lives in Firestore; these files are scratch.

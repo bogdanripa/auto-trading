@@ -104,6 +104,84 @@ Mark lessons as:
 ### 7. Flag changes to PROJECT.md
 If a lesson reaches `[active]` status and conflicts with a rule in `PROJECT.md`, add an entry to the "Proposed Rule Changes" section at the bottom of `LESSONS.md` with the specific rule and suggested edit. Do NOT edit `PROJECT.md` directly — changes go through the user for review.
 
+### 7.5 Graph queries — causal patterns and skipped-setup counterfactuals
+
+The numerical clustering above (steps 2-4) tells us *what* worked and *what didn't* — sorted by trade_type, sector, exit_reason. The graph adds **why** queries that the journal alone can't answer.
+
+After `journal_stats.mjs` produces its JSON, run the following graphiti queries scoped to the same window:
+
+#### A. Mechanism × outcome — diagnosis vs. execution failures
+
+```
+mcp__graphiti__search_memory_facts(
+  query: "mechanism failed catalyst occurred verdict wrong",
+  group_id: "trading",
+  limit: 50
+)
+```
+
+Cluster the returned facts by `mechanism` field. Surface any mechanism that:
+- Failed (`mechanism_worked: no`) in ≥3 trades within the window → the *type of causal chain* is misdiagnosed, not just the trade
+- Reversed (`mechanism_worked: yes_but_price_reversed`) in ≥3 trades → entry was right, exit/sizing is the bug
+
+#### B. Theme × outcome
+
+```
+mcp__graphiti__search_memory_nodes(
+  query: "Theme evidenced_by Trade verdict",
+  group_id: "trading",
+  limit: 30
+)
+```
+
+For each `Theme` node, count linked trades by verdict. A theme with ≥3 trades and >70% `wrong`/`partially_correct` → theme is weaker than we believed; flag it for the next THEMES.md edit pass.
+
+#### C. News-to-trade lag — were entries grounded in recent news?
+
+```
+mcp__graphiti__search_memory_facts(
+  query: "Trade entry preceded_by News materiality:high",
+  group_id: "trading"
+)
+```
+
+For each trade, find the most recent material news on its ticker before entry. Look for two signals:
+- Trades where no `News` event preceded entry within 7 days → we entered on technicals alone. Check win rate of this subset vs. news-anchored trades.
+- Trades where high-materiality negative news preceded entry → check if those underperformed (we may be fading the wrong signals).
+
+#### D. Skipped-setup counterfactuals — what did we miss?
+
+```
+mcp__graphiti__search_memory_nodes(
+  query: "SkippedSetup counterfactual move_pct",
+  group_id: "trading",
+  limit: 100
+)
+```
+
+For every `SkippedSetup` in the window with an attached `Counterfactual` edge (i.e., the invalidation window has elapsed and `counterfactual-mapper` has scored it), cluster by `reason` and compute:
+- Count
+- Mean `move_pct_since_skip`
+- % that moved >10% in the same direction the setup predicted
+
+Surface reasons where skipped setups consistently moved >10% in the predicted direction — those skip rules are leaving money on the table. Examples:
+- If `liquidity_below_threshold` skips moved +12% average → the 50,000 RON ADV cutoff is too strict
+- If `competing_setup_higher_conviction` skips outperformed the chosen trade by >5% → conviction scoring is miscalibrated
+- If `regime_risk_off` skips moved up >8% → REGIME-1 cash floor is too aggressive
+
+These produce a distinct kind of lesson: **non-action lessons**. Format them with status `[active-skip-rule]` so they're visible alongside trade lessons but recognizable as decisions-about-decisions.
+
+#### E. Retired-prior check — anything contradicted this week?
+
+```
+mcp__graphiti__search_memory_nodes(
+  query: "prior superseded_by week",
+  group_id: "trading"
+)
+```
+
+If a prior in `LESSONS.md [active]` was contradicted by graphiti's automatic supersedence within the window, surface it. Either confirm the retirement in `LESSONS.md` (move to `[retired]`) or push back on the graph's call with the reason it should remain active.
+
 ### 8. Report via Telegram
 Send a concise summary via `telegram-reporter`:
 

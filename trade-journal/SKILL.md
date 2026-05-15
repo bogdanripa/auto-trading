@@ -9,8 +9,14 @@ Append-only narrative log of every trade. Distinct from `tax-tracker` (which cap
 
 ## Storage
 
-- Records live behind bt-gateway's `/api/v1/journal` endpoint (Firestore, tenant+mode-scoped, append-only). `scripts/store.mjs` is the thin HTTP client — never talk to the gateway directly.
-- Written via `store.appendJournal(record)` / read via `store.listJournal({ since, type, limit })`.
+**Two-tier write — bt-gateway is the source of truth, graphiti is a derived index.**
+
+- **Primary (audit, authoritative):** records live behind bt-gateway's `/api/v1/journal` endpoint (Firestore, tenant+mode-scoped, append-only). `scripts/store.mjs` is the thin HTTP client — never talk to the gateway directly.
+  - Written via `store.appendJournal(record)` / read via `store.listJournal({ since, type, limit })`.
+- **Secondary (graph memory, derived):** the same record is ingested into graphiti via the `graphiti` MCP server immediately after a successful Firestore write.
+  - Written via `mcp__graphiti__add_memory(...)` — see "Graphiti Sync" below.
+  - Read via `mcp__graphiti__search_memory_nodes` / `search_memory_facts` from the `session-context` skill.
+- **Invariant:** if the graphiti write fails, the Firestore write still succeeds, the run continues, and the record is queued for replay by `backfill-graphiti`. **Never block a trade journal write on graphiti.**
 - Never rewrite history. Corrections go in as new records with `"correction_of": "<trade_id>"`.
 
 ## Record Schema
@@ -158,3 +164,50 @@ Use `store.listJournal({ since, type, limit })` and filter in memory — the col
 - Every `entry` must eventually have a matching `exit` (or a `correction_of` record closing it out).
 - Every `exit` must reference an existing `entry` via `trade_id`.
 - If an entry record is missing context (e.g., trade-executor ran but trade-journal failed), write a record with `"backfilled": true` and note what's missing.
+
+## Graphiti Sync
+
+After every successful `store.appendJournal(record)` call, ingest the same record into graphiti:
+
+### Entry record
+
+```
+mcp__graphiti__add_memory(
+  name: "Trade entry <trade_id>",
+  episode_body: JSON.stringify(record),
+  source: "json",
+  source_description: "trade-journal entry record",
+  group_id: "trading",
+  reference_time: record.timestamp
+)
+```
+
+### Exit record
+
+```
+mcp__graphiti__add_memory(
+  name: "Trade exit <trade_id>",
+  episode_body: JSON.stringify(record),
+  source: "json",
+  source_description: "trade-journal exit record",
+  group_id: "trading",
+  reference_time: record.timestamp
+)
+```
+
+Graphiti's LLM extractor will produce `Trade`, `Thesis`, `Catalyst`, `Mechanism`, `Theme`, and `Company` nodes from the JSON, link them via temporal edges, and (for exits) resolve the `Trade` node by `trade_id` so entry-and-exit reasoning collapse into one connected subgraph.
+
+### Failure handling
+
+If the MCP call fails or times out (>10s):
+1. **Do not** retry inline (would delay the trade-executor pipeline).
+2. Log the failure (ticker + trade_id + error) to stderr and the Telegram report.
+3. Continue. The Firestore journal already has the record — `backfill-graphiti` will re-ingest from `store.listJournal()` on its next run. **The journal IS the replay queue.**
+
+### What NOT to write to graphiti
+
+- Numerical-only updates (price moves, P&L snapshots) — those belong in market data / portfolio state, not the reasoning graph.
+- Partial-exit accounting deltas — only the exit record's `exit_narrative` and verdict fields are reasoning-relevant.
+- Correction records that only fix numerical fields — write them to Firestore, skip graphiti.
+
+The rule: **if it has a `why`, it goes in graphiti. If it's a number with a timestamp, it stays in Firestore.**
