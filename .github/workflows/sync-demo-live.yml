@@ -17,8 +17,8 @@ jobs:
       matrix:
         branch: [demo, live]
     steps:
-      - name: Fast-forward ${{ matrix.branch }} to main
-        id: ff
+      - name: Merge main into ${{ matrix.branch }}
+        id: merge
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -27,37 +27,54 @@ jobs:
         run: |
           set -euo pipefail
           response=$(mktemp)
-          status=$(curl -sS -o "$response" -w '%{http_code}' -X PATCH \
+          payload=$(jq -n \
+            --arg base "$BRANCH" \
+            --arg head "$SHA" \
+            --arg msg "Auto-merge main ($SHA) into $BRANCH" \
+            '{base:$base, head:$head, commit_message:$msg}')
+          status=$(curl -sS -o "$response" -w '%{http_code}' -X POST \
             -H "Authorization: Bearer $GH_TOKEN" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/$REPO/git/refs/heads/$BRANCH" \
-            -d "{\"sha\":\"$SHA\",\"force\":false}")
+            "https://api.github.com/repos/$REPO/merges" \
+            -d "$payload")
           echo "status=$status"
           cat "$response"
-          if [ "$status" != "200" ]; then
-            echo "body<<EOF" >> "$GITHUB_OUTPUT"
-            cat "$response" >> "$GITHUB_OUTPUT"
-            echo "EOF" >> "$GITHUB_OUTPUT"
-            exit 1
-          fi
+          case "$status" in
+            201) echo "Merged main into $BRANCH" ;;
+            204) echo "$BRANCH already contains main — nothing to do" ;;
+            409)
+              echo "body<<EOF" >> "$GITHUB_OUTPUT"
+              cat "$response" >> "$GITHUB_OUTPUT"
+              echo "EOF" >> "$GITHUB_OUTPUT"
+              echo "Merge conflict — main cannot be auto-merged into $BRANCH"
+              exit 1
+              ;;
+            *)
+              echo "body<<EOF" >> "$GITHUB_OUTPUT"
+              cat "$response" >> "$GITHUB_OUTPUT"
+              echo "EOF" >> "$GITHUB_OUTPUT"
+              echo "Unexpected status $status from merges API"
+              exit 1
+              ;;
+          esac
 
-      - name: Open issue on fast-forward failure
-        if: failure() && steps.ff.outcome == 'failure'
+      - name: Open issue on merge failure
+        if: failure() && steps.merge.outcome == 'failure'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           SHA: ${{ github.sha }}
           BRANCH: ${{ matrix.branch }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          API_RESPONSE: ${{ steps.ff.outputs.body }}
+          API_RESPONSE: ${{ steps.merge.outputs.body }}
         run: |
           set -euo pipefail
-          title="Sync failed: cannot fast-forward $BRANCH to main"
+          title="Sync failed: cannot auto-merge main into $BRANCH"
           body=$(cat <<EOF
-          The auto-sync workflow could not fast-forward \`$BRANCH\` to \`main\` at \`$SHA\`.
+          The auto-sync workflow could not merge \`main\` (\`$SHA\`) into \`$BRANCH\` — the merge has conflicts that GitHub cannot resolve automatically.
 
-          This usually means \`$BRANCH\` has commits that are not on \`main\`. Resolve manually — e.g. open a PR from \`main\` into \`$BRANCH\`, or rebase \`$BRANCH\` onto \`main\` and force-push.
+          Resolve manually — e.g. open a PR from \`main\` into \`$BRANCH\` and resolve the conflicts there.
 
           - Run: $RUN_URL
           - Target SHA: \`$SHA\`
