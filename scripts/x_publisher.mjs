@@ -167,16 +167,19 @@ function greedyChunkSplit(text, budget) {
 
   while (weightedLength(remaining) > budget) {
     // Find the latest natural cut point whose prefix fits.
+    // Paragraph breaks (\n\n) are intentional content divisions — always
+    // preferred, no minimum-size floor. Lower-priority breaks (line, sentence,
+    // word) keep the 50% floor to avoid tiny shards mid-prose.
     let cut = -1;
     for (const sep of ['\n\n', '\n', '. ', '! ', '? ', ' ']) {
+      const floor = sep === '\n\n' ? 0 : budget * 0.5;
       let pos = remaining.length;
       while (pos > 0) {
         const idx = remaining.lastIndexOf(sep, pos - 1);
         if (idx === -1) break;
         const candidate = remaining.slice(0, idx + (sep === ' ' ? 0 : sep.length - 1));
         if (weightedLength(candidate) <= budget) {
-          // Avoid tiny shards (< 50% of budget) unless this is the last option.
-          if (weightedLength(candidate) >= budget * 0.5) {
+          if (weightedLength(candidate) >= floor) {
             cut = candidate.length;
             break;
           }
