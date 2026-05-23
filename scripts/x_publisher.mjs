@@ -96,10 +96,90 @@ function getMode() {
   return 'demo';  // safest default
 }
 
+/**
+ * Returns the hashtag preamble for the first tweet of the thread.
+ *
+ * Default set is opinionated for discoverability on FinTwit and Romanian
+ * market hashtag streams. Override via X_HASHTAGS env (space-separated, no
+ * leading '#' needed — they'll be prefixed if missing).
+ *
+ * The `#<mode>` tag is always appended last so the user can filter posts by
+ * demo / live without configuring anything per-environment.
+ */
 function getHashtags() {
-  const venue = process.env.X_VENUE_HASHTAG || 'BVB';
   const mode = getMode();
-  return `#${venue} #${mode}`;
+  const custom = process.env.X_HASHTAGS;
+  let tags;
+  if (custom && custom.trim()) {
+    tags = custom.trim().split(/\s+/).map(t => t.startsWith('#') ? t : `#${t}`);
+  } else {
+    const venue = process.env.X_VENUE_HASHTAG || 'BVB';
+    tags = [`#${venue}`, '#stocks', '#fintwit', '#Romania', '#algotrading'];
+  }
+  tags.push(`#${mode}`);
+  return tags.join(' ');
+}
+
+/**
+ * Returns optional @-mentions to prepend to the first tweet.
+ * Configure via X_MENTIONS env, comma- or space-separated list of handles
+ * (with or without leading '@'). Empty string / unset → no mentions.
+ *
+ * Example: X_MENTIONS="@BVBRomania @bnr_ro"
+ */
+function getMentions() {
+  const raw = process.env.X_MENTIONS;
+  if (!raw || !raw.trim()) return '';
+  const handles = raw.trim().split(/[,\s]+/).filter(Boolean)
+    .map(h => h.startsWith('@') ? h : `@${h}`);
+  return handles.join(' ');
+}
+
+// ---------- cashtag conversion ---------------------------------------------
+//
+// BET-Plus universe (incl. legacy + Tier B). Standalone occurrences are
+// converted to $TICKER form before splitting so X auto-links them to its
+// per-symbol pages and FinTwit aggregators (StockTwits, TradingView) index
+// the post under that symbol.
+//
+// Sorted longest-first so longer tickers match before shorter prefixes
+// (e.g. SIF1 before SIF). 'M' (Medlife) is treated specially because the
+// bare letter M shows up as a magnitude suffix ("EUR 60.4M") in briefings —
+// we exclude any 'M' preceded by a digit, dot, or already-prefixed $.
+//
+// 'BVB' is in this list but we apply conversion to the body BEFORE attaching
+// the hashtag preamble — so `#BVB` in the preamble is never mangled.
+
+const BVB_TICKERS = [
+  // Tier A — BET core
+  'TLV', 'SNP', 'SNG', 'H2O', 'TGN', 'BRD', 'DIGI', 'EL', 'M', 'SNN',
+  'TEL', 'PE', 'FP', 'ONE', 'AQ', 'TRP', 'TTS', 'ATB', 'SFG', 'CFH',
+  // Tier B — BET-Plus beyond BET
+  // Deliberately excluded:
+  //   'BVB' — the bare letters appear as part of "BVB ENGINE" in every briefing
+  //           title and as the #BVB hashtag. Engine doesn't currently trade
+  //           the exchange's own ticker; add back with stricter context if it does.
+  'WINE', 'COTE', 'ROCE', 'ALR', 'BIO', 'CMP', 'IMP', 'LION', 'OIL',
+  'PPL', 'RRC', 'SIF1', 'SIF3', 'SIF5', 'STZ', 'TRANSI', 'UCM', 'EVER',
+];
+
+function convertCashtags(body) {
+  // Longest first prevents "SIF" eating part of "SIF1".
+  const sorted = [...BVB_TICKERS].sort((a, b) => b.length - a.length);
+  let result = body;
+  for (const t of sorted) {
+    if (t === 'M') {
+      // Single-letter ticker — only convert when surrounded by clean word
+      // boundaries AND not preceded by a digit/dot/$ (rules out "60.4M",
+      // "$M" already done, etc.)
+      result = result.replace(/(?<![\d.$])\bM\b(?!\w)/g, '$$M');
+    } else {
+      // Standard case: word-boundary on both sides, not already cashtagged.
+      const re = new RegExp(`(?<!\\$)\\b${t}\\b`, 'g');
+      result = result.replace(re, `$$${t}`);
+    }
+  }
+  return result;
 }
 
 function readBody() {
@@ -382,13 +462,23 @@ async function main() {
     process.exit(2);
   }
 
-  const body = readBody();
+  let body = readBody();
   if (!body.trim()) {
     console.error('[x_publisher] Empty body — nothing to post.');
     process.exit(4);
   }
 
-  const tweets = withPreamble(body, getHashtags());
+  // Apply cashtag conversion before splitting so the character counts reflect
+  // the final form. Cashtag '$' adds 1 char per ticker — must be in the budget.
+  body = convertCashtags(body);
+
+  // Preamble = optional @-mentions + hashtags. Mentions, if any, lead so they
+  // show up cleanly above the tag cloud.
+  const mentions = getMentions();
+  const hashtags = getHashtags();
+  const preamble = mentions ? `${mentions}\n${hashtags}` : hashtags;
+
+  const tweets = withPreamble(body, preamble);
   console.error(`[x_publisher] Composed ${tweets.length} tweet(s) for thread.`);
 
   if (tweets.length > 10) {

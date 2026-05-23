@@ -26,10 +26,29 @@ Mode detection (one of these must be set):
 - `EXECUTION_MODE` — `demo` or `live` (preferred)
 - `BT_GATEWAY_API_KEY` — falls back to inferring from the `bvb_demo_` / `bvb_live_` prefix
 
-Optional:
+Optional — discoverability tuning:
 
-- `X_VENUE_HASHTAG` — override the venue tag (default `BVB`)
-- `X_DRY_RUN=1` — log the composed tweets but don't actually post (useful for testing)
+- `X_HASHTAGS` — full custom hashtag set (space-separated, with or without `#`). When set, replaces the default `#BVB #stocks #fintwit #Romania #algotrading`. The `#<mode>` tag (`#demo` / `#live`) is always appended regardless.
+- `X_VENUE_HASHTAG` — only the venue tag (default `BVB`). Ignored when `X_HASHTAGS` is set.
+- `X_MENTIONS` — comma- or space-separated list of @-handles to prepend to the first tweet (with or without `@`). Example: `X_MENTIONS="@BVBRomania @bnr_ro"`. Empty / unset → no mentions.
+
+Optional — testing:
+
+- `X_DRY_RUN=1` — log the composed tweets but don't actually post
+
+## Cashtag auto-conversion
+
+BVB-Plus tickers in the body are automatically converted to FinTwit-style `$TICKER` cashtags before the body is split. This makes posts indexable by per-symbol pages on X, StockTwits, TradingView, etc.
+
+Handled tickers (BET-Plus universe):
+- **Tier A:** TLV, SNP, SNG, H2O, TGN, BRD, DIGI, EL, M, SNN, TEL, PE, FP, ONE, AQ, TRP, TTS, ATB, SFG, CFH
+- **Tier B:** WINE, COTE, ROCE, ALR, BIO, CMP, IMP, LION, OIL, PPL, RRC, SIF1, SIF3, SIF5, STZ, TRANSI, UCM, EVER
+
+Special cases:
+- **`M`** (Medlife) — only matched when not preceded by digit/dot, so `EUR 60.4M` is NOT converted but `M (Medlife) RSI 25` IS.
+- **`BVB`** — excluded from auto-conversion because every briefing title is "BVB ENGINE…" and the venue hashtag is `#BVB`. If the engine ever trades the exchange's own ticker, add it back with stricter context.
+
+Body content writers don't need to manually $-prefix anything — the publisher does it on the way out.
 
 ## Where the body comes from
 
