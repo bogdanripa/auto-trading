@@ -47,6 +47,18 @@ curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
 ### Handling long messages
 Telegram caps messages at 4096 characters. If the briefing exceeds that, split at paragraph boundaries and send sequentially. Prefix the second+ messages with `(2/N)`, `(3/N)` etc.
 
+### Save body for the x-poster skill
+
+After (or right before) sending to Telegram, write the EXACT same body to `/tmp/last_telegram_message.md` so the `x-poster` skill — which runs next in the workflow — can mirror the identical content to X without re-deriving it from upstream skills:
+
+```bash
+cat > /tmp/last_telegram_message.md <<'EOF'
+<message body>
+EOF
+```
+
+If the briefing was split into multiple Telegram messages, write the **concatenated** body (joined with blank lines) so the X thread mirrors the full content. Always overwrite — only the most recent briefing matters for x-poster.
+
 ### Failure handling
 - Log the full API response on any non-200
 - If the response body contains `"chat not found"` — the chat ID is wrong or the user hasn't messaged the bot yet

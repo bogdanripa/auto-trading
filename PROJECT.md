@@ -91,7 +91,8 @@ Execute skills in this order:
 9. `trade-executor` — Place orders via bt-gateway against BT Trade
 10. `trade-journal` — Append entry record for every new fill (thesis + context, tag with theme if applicable). Also ingests the entry into graphiti.
 11. `market-scanner` (skip-emission pass) — For every A/B-grade candidate from Step 4 that was NOT filled by trade-executor, emit a `SkippedSetup` to graphiti with the reason (inferred from synthesis output). This closes the counterfactual-learning loop.
-12. `telegram-reporter` — Send morning briefing
+12. `telegram-reporter` — Send morning briefing (and write the body to `/tmp/last_telegram_message.md` for x-poster)
+13. `x-poster` — Mirror the same body to X as a thread with `#BVB #demo` / `#BVB #live` preamble
 
 ### Evening Run (5:30 PM EET)
 Execute skills in this order:
@@ -103,7 +104,8 @@ Execute skills in this order:
 6. `counterfactual-mapper` — For every skipped setup whose invalidation window has elapsed, fetch the price now and attach a Counterfactual edge in graphiti. Fires alerts on extreme misses or systematic skip-rule failures.
 7. `tax-tracker` — Log any completed trades
 8. `retrospective` — On Fridays only: mine the journal + graphiti (incl. counterfactuals), update `LESSONS.md`
-9. `telegram-reporter` — Send evening briefing (include retrospective summary on Fridays, counterfactual alerts whenever they fire)
+9. `telegram-reporter` — Send evening briefing (include retrospective summary on Fridays, counterfactual alerts whenever they fire). Writes the body to `/tmp/last_telegram_message.md` for x-poster.
+10. `x-poster` — Mirror the same body to X as a thread with `#BVB #demo` / `#BVB #live` preamble
 
 ## Learning Loop
 
