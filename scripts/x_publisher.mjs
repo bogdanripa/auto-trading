@@ -39,10 +39,53 @@ import fs from 'node:fs';
 // ---------- config ----------------------------------------------------------
 
 const TWEET_MAX = 280;
-// Leave a little safety margin so a stray emoji doesn't blow the limit.
-// (Twitter counts most emoji as 2 chars; the JS .length is UTF-16 code-units.)
+// 10-char buffer below the hard limit to absorb any miscount drift (combining
+// marks, zero-width joiners in emoji sequences, etc.).
 const SAFE_TWEET_MAX = 270;
 const ENDPOINT = 'https://api.twitter.com/2/tweets';
+
+// ---------- weighted character counting ------------------------------------
+//
+// Twitter's character counter weights most emoji and CJK characters as 2,
+// not 1. The JS .length property returns UTF-16 code units, which gets the
+// wrong answer for both (emoji are usually 2 code units, count as 2; CJK
+// chars are 1 code unit, count as 2). This is a faithful-enough approximation
+// — handles single emoji, ZWJ sequences (e.g. 👨‍👩‍👧 = one weighted unit of
+// 2), and CJK. Won't perfectly match X's twitter-text reference impl on
+// every exotic input, but for a trading briefing it's reliable.
+
+const EMOJI_RE = /\p{Extended_Pictographic}/u;
+
+function weightedLength(s) {
+  let len = 0;
+  let inEmojiSequence = false;
+  for (const ch of s) {
+    const cp = ch.codePointAt(0);
+    // ZWJ (0x200D) glues code points into one emoji sequence — already counted.
+    // Variation selector (0xFE0F) modifies the previous code point — free.
+    if (cp === 0x200D || cp === 0xFE0F) continue;
+    if (EMOJI_RE.test(ch)) {
+      if (!inEmojiSequence) {
+        len += 2;
+        inEmojiSequence = true;
+      }
+      // Continuation of a ZWJ sequence — no extra cost.
+      continue;
+    }
+    inEmojiSequence = false;
+    // CJK Unified Ideographs, Hiragana, Katakana, Hangul → 2.
+    if (
+      (cp >= 0x3000 && cp <= 0x9FFF) ||
+      (cp >= 0xAC00 && cp <= 0xD7AF) ||
+      (cp >= 0xFF00 && cp <= 0xFFEF)
+    ) {
+      len += 2;
+    } else {
+      len += 1;
+    }
+  }
+  return len;
+}
 
 function getMode() {
   const explicit = process.env.EXECUTION_MODE?.toLowerCase();
@@ -71,56 +114,183 @@ function readBody() {
 // ---------- threading -------------------------------------------------------
 
 /**
- * Greedy split into ≤SAFE_TWEET_MAX chunks. Splits prefer (in order):
- * paragraph break (\n\n), single newline, sentence end (. / ! / ?), word break.
- * Never splits mid-word.
+ * A "section" is a logical chunk of a briefing — typically introduced by an
+ * emoji-headed header line like:
+ *
+ *   📊 MACRO 🟢
+ *   📈 PORTFOLIO
+ *   🎯 TODAY'S ACTIONS
+ *
+ * Pattern: line starts with one or more pictographic characters, then space,
+ * then either an uppercase letter or another pictographic. This recognizes
+ * the briefing template in telegram-reporter/SKILL.md.
  */
-function splitIntoTweets(body) {
-  body = body.trim();
-  if (body.length === 0) return [];
+// Header pattern: one-or-more pictographic chars (with optional variation
+// selector) + space + UPPERCASE LETTER. The uppercase-letter requirement is
+// what distinguishes a real header ("📊 MACRO", "📈 PORTFOLIO") from a body
+// line that happens to start with emoji+space ("💰 25,915 RON", "📊 24,012").
+const SECTION_HEADER_RE = /^(?:\p{Extended_Pictographic}️?)+ +[A-Z]/u;
 
-  const tweets = [];
-  let remaining = body;
+function isSectionHeader(line) {
+  if (!line || !line.trim()) return false;
+  return SECTION_HEADER_RE.test(line);
+}
 
-  while (remaining.length > 0) {
-    if (remaining.length <= SAFE_TWEET_MAX) {
-      tweets.push(remaining.trim());
-      break;
+/** Split body into sections (each = header line + content until next header). */
+function parseSections(body) {
+  const lines = body.split('\n');
+  const sections = [];
+  let current = [];
+  for (const line of lines) {
+    if (isSectionHeader(line) && current.length > 0) {
+      sections.push(current.join('\n').trim());
+      current = [line];
+    } else {
+      current.push(line);
     }
-    const slice = remaining.slice(0, SAFE_TWEET_MAX);
-    let cut = -1;
-    for (const sep of ['\n\n', '\n', '. ', '! ', '? ', ' ']) {
-      const idx = slice.lastIndexOf(sep);
-      if (idx > SAFE_TWEET_MAX * 0.5) {
-        cut = idx + (sep === ' ' ? 0 : sep.length - 1);
-        break;
-      }
-    }
-    if (cut === -1) cut = SAFE_TWEET_MAX;  // last-resort: hard chop
-    tweets.push(remaining.slice(0, cut).trim());
-    remaining = remaining.slice(cut).trim();
   }
-
-  return tweets;
+  if (current.length > 0) sections.push(current.join('\n').trim());
+  return sections.filter(s => s.length > 0);
 }
 
 /**
- * Prepend the hashtag preamble to the first tweet only.
- * If adding the preamble pushes the first tweet over the limit, the body is
- * re-split with a reduced budget on the first chunk.
+ * Greedy fallback splitter — used when a single section is on its own bigger
+ * than SAFE_TWEET_MAX. Splits prefer paragraph > line > sentence > word.
+ * Never splits mid-word. Returns chunks under the weighted-length budget.
  */
-function withPreamble(tweets, preamble) {
-  if (tweets.length === 0) return [];
-  const first = `${preamble}\n\n${tweets[0]}`;
-  if (first.length <= SAFE_TWEET_MAX) {
-    return [first, ...tweets.slice(1)];
+function greedyChunkSplit(text, budget) {
+  text = text.trim();
+  if (weightedLength(text) <= budget) return [text];
+
+  const chunks = [];
+  let remaining = text;
+
+  while (weightedLength(remaining) > budget) {
+    // Find the latest natural cut point whose prefix fits.
+    let cut = -1;
+    for (const sep of ['\n\n', '\n', '. ', '! ', '? ', ' ']) {
+      let pos = remaining.length;
+      while (pos > 0) {
+        const idx = remaining.lastIndexOf(sep, pos - 1);
+        if (idx === -1) break;
+        const candidate = remaining.slice(0, idx + (sep === ' ' ? 0 : sep.length - 1));
+        if (weightedLength(candidate) <= budget) {
+          // Avoid tiny shards (< 50% of budget) unless this is the last option.
+          if (weightedLength(candidate) >= budget * 0.5) {
+            cut = candidate.length;
+            break;
+          }
+          pos = idx;
+        } else {
+          pos = idx;
+        }
+      }
+      if (cut !== -1) break;
+    }
+    if (cut === -1) {
+      // No natural break found — hard-chop at the largest prefix that fits.
+      // Iterate by code point (not UTF-16) to avoid splitting surrogate pairs.
+      let acc = '';
+      for (const ch of remaining) {
+        if (weightedLength(acc + ch) > budget) break;
+        acc += ch;
+      }
+      cut = acc.length;
+    }
+    chunks.push(remaining.slice(0, cut).trim());
+    remaining = remaining.slice(cut).trim();
   }
-  // First chunk doesn't fit with the preamble — re-split with a smaller budget.
-  const budget = SAFE_TWEET_MAX - preamble.length - 2;  // -2 for "\n\n"
-  const overflow = tweets[0].slice(budget).trim();
-  const head = `${preamble}\n\n${tweets[0].slice(0, budget).trim()}`;
-  const rest = [overflow, ...tweets.slice(1)].filter(Boolean);
-  return [head, ...rest];
+  if (remaining) chunks.push(remaining);
+  return chunks;
+}
+
+/**
+ * Section-aware splitter. Each section is its own tweet (or starts one).
+ * Adjacent short sections may merge into a single tweet if both fit.
+ * Sections too large for one tweet fall back to greedy split internally.
+ *
+ * `firstBudget` lets the caller reserve room for a hashtag preamble on the
+ * first chunk only.
+ */
+function splitIntoTweets(body, { firstBudget = SAFE_TWEET_MAX } = {}) {
+  body = body.trim();
+  if (!body) return [];
+
+  const sections = parseSections(body);
+
+  // Body doesn't look like a sectioned briefing → treat it as one big section
+  // and let the greedy splitter handle it.
+  if (sections.length < 2) {
+    return greedySplitWithFirstBudget(body, firstBudget, SAFE_TWEET_MAX);
+  }
+
+  const tweets = [];
+  let current = '';
+  let budget = firstBudget;
+
+  const flush = () => {
+    if (current.trim()) tweets.push(current.trim());
+    current = '';
+    budget = SAFE_TWEET_MAX;
+  };
+
+  for (const section of sections) {
+    if (weightedLength(section) > budget) {
+      // Section by itself is too big to fit in the remaining budget.
+      flush();
+      if (weightedLength(section) > SAFE_TWEET_MAX) {
+        // Even on its own it overflows — internal greedy split.
+        const sub = greedyChunkSplit(section, SAFE_TWEET_MAX);
+        // First sub-chunk may be subject to firstBudget if this is also the
+        // first tweet overall.
+        if (tweets.length === 0 && firstBudget < SAFE_TWEET_MAX) {
+          const headSub = greedyChunkSplit(section, firstBudget);
+          tweets.push(headSub[0]);
+          const tail = section.slice(headSub[0].length).trim();
+          if (tail) tweets.push(...greedyChunkSplit(tail, SAFE_TWEET_MAX));
+        } else {
+          tweets.push(...sub);
+        }
+      } else {
+        current = section;
+      }
+      continue;
+    }
+    if (current && weightedLength(current + '\n\n' + section) <= budget) {
+      current = current + '\n\n' + section;
+    } else if (!current) {
+      current = section;
+    } else {
+      flush();
+      current = section;
+    }
+  }
+  flush();
+  return tweets;
+}
+
+function greedySplitWithFirstBudget(body, firstBudget, restBudget) {
+  if (weightedLength(body) <= firstBudget) return [body];
+  // Take a first-tweet-sized chunk via the greedy splitter, then split the
+  // remainder against the full budget.
+  const head = greedyChunkSplit(body, firstBudget)[0];
+  const tail = body.slice(head.length).trim();
+  return [head, ...greedyChunkSplit(tail, restBudget)];
+}
+
+/**
+ * Prepend the hashtag preamble to the first tweet only. Done by reserving the
+ * preamble's weighted-length budget UPFRONT when splitting, so the first tweet
+ * is composed at the right size on the first pass — no re-splitting required.
+ */
+function withPreamble(body, preamble) {
+  const preambleCost = weightedLength(preamble) + 2;  // +2 for "\n\n"
+  const tweets = splitIntoTweets(body, {
+    firstBudget: SAFE_TWEET_MAX - preambleCost,
+  });
+  if (tweets.length === 0) return [];
+  tweets[0] = `${preamble}\n\n${tweets[0]}`;
+  return tweets;
 }
 
 // ---------- OAuth 1.0a ------------------------------------------------------
@@ -215,12 +385,18 @@ async function main() {
     process.exit(4);
   }
 
-  const tweets = withPreamble(splitIntoTweets(body), getHashtags());
+  const tweets = withPreamble(body, getHashtags());
   console.error(`[x_publisher] Composed ${tweets.length} tweet(s) for thread.`);
+
+  if (tweets.length > 10) {
+    console.error(`[x_publisher] WARNING: thread is ${tweets.length} tweets — readers typically drop off after 7-10.`);
+  }
 
   if (process.env.X_DRY_RUN === '1') {
     tweets.forEach((t, i) => {
-      console.error(`---- tweet ${i + 1}/${tweets.length} (${t.length} chars) ----`);
+      const weighted = weightedLength(t);
+      const flag = weighted > TWEET_MAX ? ' ❌ OVER LIMIT' : '';
+      console.error(`---- tweet ${i + 1}/${tweets.length} (${weighted} weighted / ${t.length} raw chars)${flag} ----`);
       console.error(t);
     });
     console.error('[x_publisher] DRY RUN — no tweets sent.');
