@@ -17,19 +17,23 @@ Closes the feedback loop on **non-action**. Every `SkippedSetup` ingested by `ma
 
 ### 1. Pull skipped setups due for scoring
 
-Query graphiti for `SkippedSetup` nodes where:
-- An attached `Counterfactual` edge does NOT yet exist
-- `date + invalidation_window_days <= today`
+**Use `get_episodes`, not `search_nodes`.** Semantic search times out under OpenAI latency; `get_episodes` hits FalkorDB directly. This skill's critical path is structural, not semantic.
 
 ```
-mcp__graphiti__search_nodes(
-  query: "SkippedSetup unscored invalidation_window_elapsed",
-  group_id: "auto_trader",
-  limit: 200
-)
+episodes = mcp__graphiti__get_episodes(group_ids: ["auto_trader"], max_episodes: 500)
+
+skipped = episodes where name starts with "SkippedSetup "
+counterfactuals = episodes where name starts with "Counterfactual "
+
+scored_skip_refs = set of (ticker, skip_date) tuples extracted from each counterfactual's content
+                   (the Counterfactual record carries skip_ref, ticker, skip_date)
+
+due = each skip where:
+  - parse(content).date + parse(content).invalidation_window_days <= today
+  - (ticker, date) NOT IN scored_skip_refs
 ```
 
-(Filter in-skill: for each returned node, check whether a `Counterfactual` edge already exists by inspecting linked facts; skip if it does.)
+One `get_episodes` call covers both lookups — no LLM dependency, fast, no timeout risk. Cluster-skip records (`name == "SkippedSetup <date> <cluster_name>"`) carry a list of tickers in their content; treat each (ticker, date) pair as a separate scoring target.
 
 ### 2. Fetch price history per ticker
 
@@ -139,7 +143,8 @@ The original skip stands as a historical decision. The counterfactual is appende
 ## Failure handling
 
 - **Yahoo/Stooq down**: defer scoring to the next run. Skips don't expire — they sit unscored until data is available.
-- **Graphiti unreachable**: skip the write — the `SkippedSetup` node still has no `Counterfactual` edge attached, so the next daily run picks it up again. No queue needed; the unscored state IS the retry signal.
+- **Graphiti `get_episodes` unreachable / times out (>30s)**: skip the entire counterfactual pass this run and log to Telegram. No state needed — the next daily run re-fetches and re-evaluates from scratch; unscored skips remain unscored until then.
+- **Graphiti `add_memory` fails for one counterfactual**: log and continue to the next skip. That specific skip stays unscored (no Counterfactual episode written), so the next run picks it up again. The unscored state IS the retry signal — no queue needed.
 - **Skip has malformed `price_at_skip` or `date`**: log and skip. Do not estimate — bad data shouldn't produce false signals.
 
 ## Anti-patterns

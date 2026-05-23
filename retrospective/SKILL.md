@@ -108,7 +108,9 @@ If a lesson reaches `[active]` status and conflicts with a rule in `PROJECT.md`,
 
 The numerical clustering above (steps 2-4) tells us *what* worked and *what didn't* — sorted by trade_type, sector, exit_reason. The graph adds **why** queries that the journal alone can't answer.
 
-After `journal_stats.mjs` produces its JSON, run the following graphiti queries scoped to the same window:
+After `journal_stats.mjs` produces its JSON, run the following graphiti queries scoped to the same window.
+
+> **Timeout policy for this step:** the queries below are intentionally semantic (`search_nodes` / `search_facts`) — they call OpenAI under the hood for query expansion + reranking and can take 10-30 seconds each. **Use a 60-second timeout** on each call. If any individual query times out, log it and continue to the next — partial results are still useful (better to surface 3 of 5 patterns than abort the whole retrospective). This step runs Fridays only, so the latency cost is amortized.
 
 #### A. Mechanism × outcome — diagnosis vs. execution failures
 

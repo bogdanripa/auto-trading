@@ -32,70 +32,96 @@ If the cached state looks stale or empty (`cash_ron === 0 && positions.length ==
 
 These are facts, not inferences. Pull verbatim.
 
+### Critical: prefer `get_episodes` over `search_nodes`
+
+`search_nodes` / `search_facts` use semantic LLM-driven search (OpenAI under the hood) and **routinely time out** when OpenAI is slow or rate-limiting. The daily critical path of this skill must NOT depend on them — it uses structural `get_episodes` calls with in-skill filtering instead. Those hit FalkorDB directly, no LLM dependency, fast and reliable.
+
+Pattern used everywhere below:
+
+```
+all = mcp__graphiti__get_episodes(group_ids: ["auto_trader"], max_episodes: 500)
+filtered = filter(all, by name prefix / by content fields / by reference_time)
+```
+
+`max_episodes: 500` is enough for ~3 months of activity at the engine's volume. Increase only if filtering returns less than expected. Filter in-skill — the MCP server returns episodes newest-first, so for "since timestamp" queries you can short-circuit as soon as you see an older one.
+
 ### 1.5 Determine the last-session timestamp
 
-The brief filters "what's new since last session" — so we need the prior session's reference time. Query graphiti for the most recent `Session` node:
-
 ```
-mcp__graphiti__search_nodes(query: "Session", limit: 1, group_id: "auto_trader")
+episodes = mcp__graphiti__get_episodes(group_ids: ["auto_trader"], max_episodes: 50)
+session = first episode where name starts with "Session "
+last_session_ts = session.reference_time (or episode.created_at if reference_time absent)
 ```
 
-Use that node's `reference_time` as `<last_session_ts>` below. If no Session node exists (first run after deploy), default to 24 hours ago.
+If no Session episode exists (first run after deploy), default to 24 hours ago.
 
 ### 2. Per-position memory recall (graphiti)
 
-For each open position from step 1:
+Engine-managed positions carry a `trade_id` (from `store.getState().positions[i].trade_id` or matched via `store.listJournal()`). For each, look up the entry record by **exact name match** — no semantic search needed:
 
 ```
-mcp__graphiti__search_nodes(query: "Trade <ticker>", limit: 5, group_id: "auto_trader")
-mcp__graphiti__search_facts(query: "<ticker> thesis mechanism catalyst")
+episodes = mcp__graphiti__get_episodes(group_ids: ["auto_trader"], max_episodes: 500)
+for each open position:
+  entry = first episode where name == "Trade entry <trade_id>"
+  reaffirms = all episodes where name == "Trade reaffirm <trade_id>" (date-sorted)
+  parse entry.content JSON → thesis, catalyst, mechanism, invalidation_conditions
 ```
 
-Pull the verbatim entry thesis, catalyst, mechanism, invalidation conditions, and any mid-trade reaffirmations. **Full fidelity** — these positions are live, the reasoning needs to be intact.
+For backfilled / manual positions without a clean `trade_id`, look up by symbol + date:
+- `name == "Trade backfilled <SYMBOL> <YYYY-MM-DD>"`
 
-### 3. Recent outcomes since last session (graphiti + bt-gateway)
+Pull the verbatim entry thesis, catalyst, mechanism, invalidation conditions, and any mid-trade reaffirmations. **Full fidelity** — these positions are live.
 
-```
-mcp__graphiti__search_nodes(query: "exit verdict", since: <last_session_ts>)
-```
+### 3. Recent outcomes since last session (get_episodes)
 
-What closed, with verdict (`correct` / `partially_correct` / `wrong` / `inconclusive`). 1-line each. Stops triggered, take-profits hit.
-
-### 4. Active priors & themes (graphiti + repo files)
+From the same `episodes` list (single fetch supports all steps):
 
 ```
-mcp__graphiti__search_nodes(query: "active prior regime <current_regime>", limit: 20)
-mcp__graphiti__search_nodes(query: "active theme", limit: 10)
+exits = episodes where name starts with "Trade exit "
+       AND (reference_time or created_at) > last_session_ts
 ```
 
-Include from graphiti: title, evidence count, last-reinforced date, `valid_to=null`.
-Include from `LESSONS.md`: `[active]` entries (titles only — full text on-demand).
-Flag any prior **retired in the last 7 days** prominently (new structural break).
+For each exit, parse content JSON → trade_id, exit_price, pnl_pct, thesis_verdict, exit_reason. 1-line each.
 
-### 5. Pending decisions (graphiti)
+### 4. Active priors & themes (files only — no graphiti)
+
+`LESSONS.md` and `THEMES.md` are the authoritative source. Graphiti only mirrors them as derived nodes that are stale until the next retrospective.
 
 ```
-mcp__graphiti__search_nodes(query: "SkippedSetup invalidation_window open")
-mcp__graphiti__search_nodes(query: "Reaffirm position open")
+- Read LESSONS.md → extract [active] and [candidate-skip-rule] entries (title + n + last-reinforced)
+- Read THEMES.md → extract active themes
+- Flag entries promoted to [active] or moved to [retired] in the last 7 days
+```
+
+No graphiti call in this step. Faster, simpler, no failure mode.
+
+### 5. Pending decisions (get_episodes)
+
+```
+skipped = episodes where name starts with "SkippedSetup "
+        AND parse(content).date + invalidation_window_days >= today
+        AND no companion "Counterfactual ..." episode exists for the same skip
+reaffirms_open = match each open position to its most recent "Trade reaffirm <trade_id>"
+               flag positions where days_held >= expected_exit_by - 3
 ```
 
 - Skipped setups still inside their invalidation window — we may revisit them today.
 - Positions approaching planned exits (time-based or target-based).
-- Regime tripwires close to firing (from `rules/bvb_rules.json` evaluation).
+- Regime tripwires close to firing (read from `rules/bvb_rules.json` evaluation in this run's macro-analyst output — not graphiti).
 
-### 6. Prior news context (graphiti, last 14 days)
+### 6. Prior news context (get_episodes, last 14 days)
 
 ```
-mcp__graphiti__search_facts(query: "News tone≠neutral", since: <now-14d>)
+news = episodes where name starts with "News "
+     AND (reference_time or created_at) >= today - 14 days
+filter: parse content JSON → keep where
+  - symbol matches an open position ticker (always include), OR
+  - symbol matches a watchlist ticker AND direction != "neutral", OR
+  - tagged regime/macro
+drop: low-materiality items (materiality != "high" / "medium")
 ```
 
-Filter:
-- Always include: news touching any **open position** ticker
-- Include: news touching any **watchlist** ticker with tone ≠ neutral
-- Include: news tagged `regime` or `macro`
-- Drop: pure noise, neutral coverage of unrelated names
-
-1-line each: `[date] [ticker] [headline] [tone] [source]`. Do **not** pull article bodies — pre-extracted summaries only.
+1-line each: `[date] [ticker] [headline] [direction] [source]`. Do **not** pull article bodies — pre-extracted summaries only.
 
 > Note: this is *prior* news (what graphiti already has). The `bvb-news` skill runs **after** this one to add today's fresh news to the graph.
 
@@ -160,12 +186,20 @@ This is what lets us answer *"what did we know when we opened ONE?"* a month lat
 
 ## Failure mode — graphiti unreachable
 
-If any `mcp__graphiti__*` call fails or times out (>10s), **do not abort the run**. Emit a degraded brief:
+Only one call now depends on graphiti's MCP being responsive: the single `get_episodes` fetch in steps 1.5 / 2 / 3 / 5 / 6. That call hits FalkorDB directly with no LLM dependency — orders of magnitude more reliable than the old `search_nodes` queries this skill used to make.
+
+If `get_episodes` fails or times out (**>30s**), **do not abort the run**. Emit a degraded brief:
 
 - Portfolio + cash from bt-gateway (still works — different service)
 - Active lessons from `LESSONS.md` (file read, no network)
 - Active themes from `THEMES.md` (file read, no network)
 - Banner at top: `⚠️ GRAPHITI UNAVAILABLE — operating with reduced context. No prior-news, no per-position thesis recall, no skipped-setup tracking.`
+
+Send the banner to Telegram in the morning briefing so the user knows the engine ran "blind" today. **If `get_episodes` returns successfully but yields no matches in any step, that's NOT a failure** — it just means the engine is freshly deployed or the relevant slice is empty. Continue without the banner.
+
+### What about the Session ingest at the end (step 8)?
+
+`add_memory` is a write call — also unrelated to semantic search. If it fails, log to stderr; the brief was still produced and sent. Next session-context will simply use a slightly older `last_session_ts`. Non-blocking.
 
 Send the banner to Telegram in the morning briefing so the user knows the engine ran "blind" today.
 
