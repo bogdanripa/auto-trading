@@ -127,12 +127,73 @@ function getHashtags() {
  *
  * Example: X_MENTIONS="@BVBRomania @bnr_ro"
  */
-function getMentions() {
+function getStaticMentions() {
   const raw = process.env.X_MENTIONS;
-  if (!raw || !raw.trim()) return '';
-  const handles = raw.trim().split(/[,\s]+/).filter(Boolean)
+  if (!raw || !raw.trim()) return [];
+  return raw.trim().split(/[,\s]+/).filter(Boolean)
     .map(h => h.startsWith('@') ? h : `@${h}`);
-  return handles.join(' ');
+}
+
+/**
+ * Loads the ticker → X handle map from scripts/ticker_x_handles.json (next to
+ * this script). Returns {} if the file is missing or malformed — non-fatal.
+ * Empty handles in the file are filtered out.
+ */
+function loadTickerHandles() {
+  try {
+    const url = new URL('./ticker_x_handles.json', import.meta.url);
+    const raw = fs.readFileSync(url, 'utf8');
+    const json = JSON.parse(raw);
+    const out = {};
+    for (const [ticker, handle] of Object.entries(json)) {
+      if (ticker.startsWith('_')) continue;        // comments / section markers
+      if (typeof handle !== 'string') continue;
+      const h = handle.trim();
+      if (!h) continue;
+      out[ticker] = h.startsWith('@') ? h : `@${h}`;
+    }
+    return out;
+  } catch (e) {
+    console.error(`[x_publisher] ticker_x_handles.json not loaded (${e.message}); no ticker @-mentions this run.`);
+    return {};
+  }
+}
+
+/**
+ * Detects BVB tickers referenced in `body` and returns their @-handles, in
+ * the order they first appear. Capped at `max` to avoid spammy posts. Tickers
+ * without a verified handle in the JSON are skipped silently.
+ *
+ * Uses the same word-boundary regex as cashtag conversion. The 'M' (Medlife)
+ * single-letter ticker is matched only with strict context (not after digit
+ * or dot), same as cashtag conversion.
+ */
+function getTickerMentions(body, max = 5) {
+  const handles = loadTickerHandles();
+  if (Object.keys(handles).length === 0) return [];
+  // Order tickers by first occurrence in body so mentions appear in the order
+  // the post discusses them.
+  const occurrences = [];
+  for (const t of Object.keys(handles)) {
+    const re = t === 'M'
+      ? /(?<![\d.$])\bM\b(?!\w)/
+      : new RegExp(`(?<!\\$)\\b${t}\\b`);
+    const match = re.exec(body);
+    if (match) occurrences.push({ ticker: t, idx: match.index });
+  }
+  occurrences.sort((a, b) => a.idx - b.idx);
+  // Dedup handles (two tickers could share a handle in rare cases, e.g.
+  // group entities) and cap at max.
+  const seen = new Set();
+  const result = [];
+  for (const { ticker } of occurrences) {
+    const h = handles[ticker];
+    if (seen.has(h)) continue;
+    seen.add(h);
+    result.push(h);
+    if (result.length >= max) break;
+  }
+  return result;
 }
 
 // ---------- cashtag conversion ---------------------------------------------
@@ -468,15 +529,24 @@ async function main() {
     process.exit(4);
   }
 
-  // Apply cashtag conversion before splitting so the character counts reflect
-  // the final form. Cashtag '$' adds 1 char per ticker — must be in the budget.
-  body = convertCashtags(body);
-
-  // Preamble = optional @-mentions + hashtags. Mentions, if any, lead so they
-  // show up cleanly above the tag cloud.
-  const mentions = getMentions();
+  // Detect ticker @-mentions on the RAW body, BEFORE cashtag conversion.
+  // (After conversion, BRD becomes $BRD and the ticker-detection regex —
+  // which has a (?<!\$) lookbehind — would no longer match.)
+  const STATIC_MAX = 3;
+  const TICKER_MAX = 5;
+  const TOTAL_MAX = 6;
+  const staticMentions = getStaticMentions().slice(0, STATIC_MAX);
+  const tickerMentions = getTickerMentions(body, TICKER_MAX);
+  const seen = new Set(staticMentions);
+  const dedupedTicker = tickerMentions.filter(h => !seen.has(h));
+  const allMentions = [...staticMentions, ...dedupedTicker].slice(0, TOTAL_MAX);
+  const mentionsLine = allMentions.join(' ');
   const hashtags = getHashtags();
-  const preamble = mentions ? `${mentions}\n${hashtags}` : hashtags;
+  const preamble = mentionsLine ? `${mentionsLine}\n${hashtags}` : hashtags;
+
+  // Now apply cashtag conversion so the character counts reflect the final
+  // form. Cashtag '$' adds 1 char per ticker — must be in the budget.
+  body = convertCashtags(body);
 
   const tweets = withPreamble(body, preamble);
   console.error(`[x_publisher] Composed ${tweets.length} tweet(s) for thread.`);

@@ -30,7 +30,8 @@ Optional — discoverability tuning:
 
 - `X_HASHTAGS` — full custom hashtag set (space-separated, with or without `#`). When set, replaces the default `#BVB #stocks #fintwit #Romania #algotrading`. The `#<mode>` tag (`#demo` / `#live`) is always appended regardless.
 - `X_VENUE_HASHTAG` — only the venue tag (default `BVB`). Ignored when `X_HASHTAGS` is set.
-- `X_MENTIONS` — comma- or space-separated list of @-handles to prepend to the first tweet (with or without `@`). Example: `X_MENTIONS="@BVBRomania @bnr_ro"`. Empty / unset → no mentions.
+- `X_MENTIONS` — comma- or space-separated list of @-handles to prepend to **every** post (with or without `@`). Use for accounts that should be tagged regardless of which tickers the post discusses — e.g. the exchange itself, the central bank, regulator. Example: `X_MENTIONS="@BVBRomania @bnr_ro"`. Empty / unset → no static mentions.
+- **`scripts/ticker_x_handles.json`** — ticker → handle map for per-post **dynamic** mentions. When a post discusses TLV, x-poster auto-adds the @ from this file's `"TLV"` entry. Empty string = no @ for that ticker. **Fill in handles only after verifying them yourself.** See "Dynamic ticker mentions" below.
 
 Optional — testing:
 
@@ -49,6 +50,46 @@ Special cases:
 - **`BVB`** — excluded from auto-conversion because every briefing title is "BVB ENGINE…" and the venue hashtag is `#BVB`. If the engine ever trades the exchange's own ticker, add it back with stricter context.
 
 Body content writers don't need to manually $-prefix anything — the publisher does it on the way out.
+
+## Dynamic ticker mentions
+
+After detecting tickers in the body, the publisher looks up each one in `scripts/ticker_x_handles.json` and prepends the corresponding @-handle to the first tweet. This means a post discussing TLV automatically tags `@TLVbank` (or whatever's in the JSON), surfacing it to that account's followers.
+
+Detection runs **before** cashtag conversion, so the regex sees the original `BRD` not `$BRD` — handles are looked up correctly regardless of cashtagging.
+
+### Composition + caps
+
+The first tweet's mentions line is composed as:
+
+```
+<static mentions from X_MENTIONS>  +  <ticker mentions from JSON, ordered by first appearance in body>
+```
+
+Caps (to prevent spammy posts):
+
+- Max 3 static mentions
+- Max 5 ticker mentions
+- Max 6 total (after dedup — a static handle that's also in the JSON only appears once)
+
+Excess handles beyond the cap are dropped silently. If a post mentions 7 tickers, only the first 5 (by body order) get @-tagged.
+
+### Filling in handles
+
+Open `scripts/ticker_x_handles.json` and replace empty strings with verified handles:
+
+```json
+{
+  "TLV": "@TLVbank",
+  "BRD": "",                       ← still unverified, no @ will be added
+  "ONE": "@OneUnitedProp"
+}
+```
+
+Don't guess. Wrong @ is worse than no @.
+
+### When the JSON is empty / missing
+
+`getTickerMentions()` logs a warning and returns no mentions. Static mentions (from `X_MENTIONS`) still work. The post goes out, just without ticker-specific tagging. Safe default.
 
 ## Where the body comes from
 
