@@ -243,6 +243,27 @@ function convertCashtags(body) {
   return result;
 }
 
+/**
+ * X enforces max 1 cashtag per tweet (anti-spam rule introduced 2024).
+ * Posts with 2+ $TICKER references return HTTP 403 from POST /2/tweets.
+ *
+ * Run this AFTER splitting into tweets — per-tweet, keep the first $TICKER
+ * intact and revert all subsequent $TICKER occurrences back to plain TICKER.
+ * Doesn't recover from a tweet that needed 4 cashtags to all be discoverable,
+ * but those same tickers usually appear cashtagged in OTHER tweets of the
+ * same thread (news section, watching list, conviction) so they stay
+ * indexable somewhere.
+ */
+function limitCashtagsPerTweet(tweets) {
+  return tweets.map(t => {
+    let kept = 0;
+    return t.replace(/\$([A-Z]+\d?)\b/g, (match, ticker) => {
+      kept += 1;
+      return kept === 1 ? match : ticker;
+    });
+  });
+}
+
 function readBody() {
   const fileIdx = process.argv.indexOf('--file');
   if (fileIdx !== -1 && process.argv[fileIdx + 1]) {
@@ -548,7 +569,9 @@ async function main() {
   // form. Cashtag '$' adds 1 char per ticker — must be in the budget.
   body = convertCashtags(body);
 
-  const tweets = withPreamble(body, preamble);
+  let tweets = withPreamble(body, preamble);
+  // X enforces max 1 cashtag per tweet — strip excess to avoid 403s.
+  tweets = limitCashtagsPerTweet(tweets);
   console.error(`[x_publisher] Composed ${tweets.length} tweet(s) for thread.`);
 
   if (tweets.length > 10) {

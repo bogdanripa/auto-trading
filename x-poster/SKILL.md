@@ -51,6 +51,12 @@ Special cases:
 
 Body content writers don't need to manually $-prefix anything — the publisher does it on the way out.
 
+### X enforces max 1 cashtag per tweet
+
+X's anti-spam policy (introduced 2024) rejects any tweet with 2+ `$TICKER` references — HTTP 403 from POST /2/tweets. Our publisher handles this AFTER splitting the thread: per tweet, the first `$TICKER` is kept intact; every subsequent cashtag in the same tweet is reverted to plain `TICKER`. The same ticker usually appears cashtagged in another tweet of the same thread (different section), so discoverability is preserved across the thread even if a single tweet only carries one cashtag.
+
+The relevant tradeoff: a portfolio-section tweet listing 4 holdings will only auto-link the first one to X's per-symbol page. Acceptable because the ticker @-handles (see "Dynamic ticker mentions" below) already notify each company's account anyway, and the same tickers are usually cashtagged in news/conviction sections.
+
 ## Dynamic ticker mentions
 
 After detecting tickers in the body, the publisher looks up each one in `scripts/ticker_x_handles.json` and prepends the corresponding @-handle to the first tweet. This means a post discussing TLV automatically tags `@TLVbank` (or whatever's in the JSON), surfacing it to that account's followers.
