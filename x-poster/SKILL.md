@@ -59,13 +59,17 @@ The relevant tradeoff: a portfolio-section tweet listing 4 holdings will only au
 
 ## Dynamic ticker mentions
 
-After detecting tickers in the body, the publisher looks up each one in `scripts/ticker_x_handles.json` and prepends the corresponding @-handle to the first tweet. This means a post discussing TLV automatically tags `@TLVbank` (or whatever's in the JSON), surfacing it to that account's followers.
+After detecting tickers in the body, the publisher looks up each one in `scripts/ticker_x_handles.json` and appends a **trailing reply tweet** carrying the corresponding @-handles. This means a post discussing TLV automatically tags `@TLVbank` (or whatever's in the JSON), surfacing it to that account's followers — without burying the whole thread under "Replies" on the user's profile.
 
 Detection runs **before** cashtag conversion, so the regex sees the original `BRD` not `$BRD` — handles are looked up correctly regardless of cashtagging.
 
+### Why mentions go in a trailing reply, not the first tweet
+
+X classifies a tweet that **starts with `@username`** as a reply, not an original post — it gets routed to the "Replies" tab on the author's profile and is downranked in followers' main timelines. Putting our `@`-mentions in a trailing reply (chained via `in_reply_to_tweet_id` so it stays in the thread) keeps the first tweet a proper top-level post while still notifying every tagged account.
+
 ### Composition + caps
 
-The first tweet's mentions line is composed as:
+The trailing mentions tweet is composed as:
 
 ```
 <static mentions from X_MENTIONS>  +  <ticker mentions from JSON, ordered by first appearance in body>
@@ -77,7 +81,7 @@ Caps (to prevent spammy posts):
 - Max 5 ticker mentions
 - Max 6 total (after dedup — a static handle that's also in the JSON only appears once)
 
-Excess handles beyond the cap are dropped silently. If a post mentions 7 tickers, only the first 5 (by body order) get @-tagged.
+Excess handles beyond the cap are dropped silently. If a post mentions 7 tickers, only the first 5 (by body order) get @-tagged. If there are no handles to tag, the trailing tweet is omitted entirely.
 
 ### Filling in handles
 

@@ -561,9 +561,7 @@ async function main() {
   const seen = new Set(staticMentions);
   const dedupedTicker = tickerMentions.filter(h => !seen.has(h));
   const allMentions = [...staticMentions, ...dedupedTicker].slice(0, TOTAL_MAX);
-  const mentionsLine = allMentions.join(' ');
-  const hashtags = getHashtags();
-  const preamble = mentionsLine ? `${mentionsLine}\n${hashtags}` : hashtags;
+  const preamble = getHashtags();
 
   // Now apply cashtag conversion so the character counts reflect the final
   // form. Cashtag '$' adds 1 char per ticker — must be in the budget.
@@ -572,6 +570,12 @@ async function main() {
   let tweets = withPreamble(body, preamble);
   // X enforces max 1 cashtag per tweet — strip excess to avoid 403s.
   tweets = limitCashtagsPerTweet(tweets);
+  // Append a trailing reply tweet carrying the @-mentions. Keeping the FIRST
+  // tweet free of leading @ is what makes X classify it as an original post
+  // (appears on the profile's Tweets tab) instead of a reply (Replies tab).
+  if (allMentions.length > 0) {
+    tweets.push(allMentions.join(' '));
+  }
   console.error(`[x_publisher] Composed ${tweets.length} tweet(s) for thread.`);
 
   if (tweets.length > 10) {
