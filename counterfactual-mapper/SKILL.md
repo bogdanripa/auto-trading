@@ -17,23 +17,23 @@ Closes the feedback loop on **non-action**. Every `SkippedSetup` ingested by `ma
 
 ### 1. Pull skipped setups due for scoring
 
-**Use `get_episodes`, not `search_nodes`.** Semantic search times out under OpenAI latency; `get_episodes` hits FalkorDB directly. This skill's critical path is structural, not semantic.
+> ⚠️ **This step is currently degraded — read this before trusting the output.** It needs to enumerate **every** `SkippedSetup` and `Counterfactual` episode, but the `graphiti` MCP cannot do that at the current graph size: `get_episodes` has no time filter, no pagination, and **times out above ~8 episodes** (verified live — `500`/`50`/`10` all fail; only `≤ 5` return). It also returns episodes in **UUID order, not time order**, so a capped pull is not even "the most recent N." `search_nodes` times out too. **The old claim that `get_episodes(max_episodes: 500)` is "fast, no timeout risk" was wrong** — do not reintroduce it; raising the cap just guarantees a timeout.
+
+The conceptual logic (what we'd run if the store could answer it):
 
 ```
-episodes = mcp__graphiti__get_episodes(group_ids: ["auto_trader"], max_episodes: 500)
-
-skipped = episodes where name starts with "SkippedSetup "
-counterfactuals = episodes where name starts with "Counterfactual "
-
-scored_skip_refs = set of (ticker, skip_date) tuples extracted from each counterfactual's content
-                   (the Counterfactual record carries skip_ref, ticker, skip_date)
-
+skipped         = all "SkippedSetup " episodes
+counterfactuals = all "Counterfactual " episodes
+scored_skip_refs = set of (ticker, skip_date) from each counterfactual's content
 due = each skip where:
   - parse(content).date + parse(content).invalidation_window_days <= today
   - (ticker, date) NOT IN scored_skip_refs
 ```
+Cluster-skip records (`name == "SkippedSetup <date> <cluster_name>"`) carry a list of tickers; treat each (ticker, date) pair as a separate scoring target.
 
-One `get_episodes` call covers both lookups — no LLM dependency, fast, no timeout risk. Cluster-skip records (`name == "SkippedSetup <date> <cluster_name>"`) carry a list of tickers in their content; treat each (ticker, date) pair as a separate scoring target.
+**Until skips are persisted to a queryable store, run this step best-effort:** attempt `get_episodes(group_ids: ["auto_trader"], max_episodes: 5)` inside a try/timeout, score whatever due skips you can see, and **report how many you could not enumerate** rather than implying the pass was complete. Do not silently claim "0 skips due" when the real answer is "could not read the skip set."
+
+**Fix (tracked, not yet done):** persist SkippedSetup + Counterfactual records to Firestore behind bt-gateway (`store.listSkips({since})` / `store.appendCounterfactual(...)`), mirroring the trade journal. Then this step reads the authoritative store — reliable, time-filterable, complete — and graphiti stays a derived index. This is the same KNOWN GAP documented in `session-context`.
 
 ### 2. Fetch price history per ticker
 
@@ -143,7 +143,7 @@ The original skip stands as a historical decision. The counterfactual is appende
 ## Failure handling
 
 - **Yahoo/Stooq down**: defer scoring to the next run. Skips don't expire — they sit unscored until data is available.
-- **Graphiti `get_episodes` unreachable / times out (>30s)**: skip the entire counterfactual pass this run and log to Telegram. No state needed — the next daily run re-fetches and re-evaluates from scratch; unscored skips remain unscored until then.
+- **Graphiti `get_episodes` times out**: this is the *expected* case at the current graph size, not an exception (see step 1). Score whatever the best-effort `max_episodes: 5` pull surfaced, note in the daily digest how many skips could not be enumerated, and move on. The next run retries; unscored skips stay unscored. Do **not** retry with a larger cap — it will just time out. The real remedy is the Firestore skip store in step 1.
 - **Graphiti `add_memory` fails for one counterfactual**: log and continue to the next skip. That specific skip stays unscored (no Counterfactual episode written), so the next run picks it up again. The unscored state IS the retry signal — no queue needed.
 - **Skip has malformed `price_at_skip` or `date`**: log and skip. Do not estimate — bad data shouldn't produce false signals.
 

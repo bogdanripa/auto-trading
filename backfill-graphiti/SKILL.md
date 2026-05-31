@@ -59,13 +59,13 @@ Graphiti's LLM extraction takes 1-5s per episode. For large backfills (thousands
 
 ### 5. Verify
 
-After ingestion, run sanity queries:
+After ingestion, run a **structural** sanity check — do NOT use `search_nodes` (semantic search times out at the current graph size):
 
 ```
-mcp__graphiti__search_nodes(query: "Trade", limit: 1, group_id: "auto_trader")
+mcp__graphiti__get_episodes(group_ids: ["auto_trader"], max_episodes: 3)
 ```
 
-Confirm the most recent record appears with a reasonable `valid_at` timestamp. If the graph looks empty after a successful run, something is wrong with the MCP wiring — escalate to the user, don't silently continue.
+Confirm episodes come back at all (a non-empty result proves the write path + DB are live). Note that `get_episodes` returns **UUID order, not newest-first**, so the 3 you get back are *not* necessarily the records you just wrote — this check confirms liveness, not that a specific record landed. To confirm a specific backfilled record, the reliable cross-check is the Firestore journal you replayed *from* (`store.listJournal`), not the graph. If `get_episodes` returns empty or errors, something is wrong with the MCP wiring — escalate to the user, don't silently continue.
 
 ### 6. Report
 

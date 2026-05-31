@@ -15,7 +15,7 @@ Append-only narrative log of every trade. Distinct from `tax-tracker` (which cap
   - Written via `store.appendJournal(record)` / read via `store.listJournal({ since, type, limit })`.
 - **Secondary (graph memory, derived):** the same record is ingested into graphiti via the `graphiti` MCP server immediately after a successful Firestore write.
   - Written via `mcp__graphiti__add_memory(...)` — see "Graphiti Sync" below.
-  - Read via `mcp__graphiti__search_nodes` / `search_facts` from the `session-context` skill.
+  - **Not the read path.** `session-context` recalls theses/exits from `store.listJournal()` (authoritative, reliable HTTP), not from graphiti — the graph's query tools time out at scale and return UUID-ordered (not time-ordered) results. graphiti remains a write-only derived index for now; treat it as enrichment, not a source of truth for reads.
 - **Invariant:** if the graphiti write fails, the Firestore write still succeeds and the run continues. The Firestore journal IS the canonical replay source — `backfill-graphiti` re-ingests from `store.listJournal()` later. **Never block a trade journal write on graphiti.**
 - Never rewrite history. Corrections go in as new records with `"correction_of": "<trade_id>"`.
 

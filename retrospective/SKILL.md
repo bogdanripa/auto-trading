@@ -110,7 +110,9 @@ The numerical clustering above (steps 2-4) tells us *what* worked and *what didn
 
 After `journal_stats.mjs` produces its JSON, run the following graphiti queries scoped to the same window.
 
-> **Timeout policy for this step:** the queries below are intentionally semantic (`search_nodes` / `search_facts`) — they call OpenAI under the hood for query expansion + reranking and can take 10-30 seconds each. **Use a 60-second timeout** on each call. If any individual query times out, log it and continue to the next — partial results are still useful (better to surface 3 of 5 patterns than abort the whole retrospective). This step runs Fridays only, so the latency cost is amortized.
+> **Reality check before you run these:** the queries below are semantic (`search_nodes` / `search_facts`) and **frequently time out entirely** at the current graph size (verified live — `search_nodes` returns "Query timed out"; `get_episodes` also times out above ~8 episodes). Treat this whole sub-section as **optional graph enrichment, never load-bearing.** The retrospective's actual substance comes from `journal_stats.mjs` (step 0, reliable) — these graph queries only add causal color when they happen to return.
+>
+> **Timeout policy:** use a **60-second timeout** per call. If a query times out (the common case), log it and continue. If *all* of A–E time out, that is fine — produce the retrospective from `journal_stats` alone and note "graph causal-query pass unavailable this week (MCP timeouts)." Do **not** block, retry in a loop, or raise `max_episodes`/`limit` to compensate — larger queries just time out harder. The durable fix is to move the underlying data (skips, counterfactuals) into the Firestore store so these become reliable journal-style reads (see the KNOWN GAP in `session-context` / `counterfactual-mapper`).
 
 #### A. Mechanism × outcome — diagnosis vs. execution failures
 
