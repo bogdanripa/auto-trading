@@ -117,23 +117,77 @@ async function cmdStatus(mode, store) {
   const out = { mode, cash, holdings: holdingsData };
 
   try {
-    // BT cash comes back as an array of currency buckets: [{ currency: "RON", value: { amount: 1234.56 } }, ...].
-    // Fall back to flat shapes if the gateway ever normalizes differently.
+    // BT cash comes back as { mode, portfolioKey, cash: [{ title, value: { amount, currency }, balanceId }, ...] }.
+    // The "Disponibil tranzactionare" RON entry (balanceId 10) is the actual buying power.
     let cashRon = 0;
-    if (Array.isArray(cash)) {
-      const ronEntry = cash.find((c) => c?.currency === 'RON' || c?.value?.currency === 'RON');
-      cashRon = ronEntry?.value?.amount ?? ronEntry?.amount ?? 0;
+    const cashArr = Array.isArray(cash) ? cash : (cash?.cash ?? []);
+    if (Array.isArray(cashArr) && cashArr.length) {
+      const ronAvail = cashArr.find((c) => c?.value?.currency === 'RON' && c?.balanceId === 10);
+      const ronAny = cashArr.find((c) => c?.value?.currency === 'RON' || c?.currency === 'RON');
+      const pick = ronAvail ?? ronAny;
+      cashRon = pick?.value?.amount ?? pick?.amount ?? 0;
     } else if (cash && typeof cash === 'object') {
-      cashRon = cash.available ?? cash.availableAmount ?? cash.cash ?? cash.total ?? 0;
+      cashRon = cash.available ?? cash.availableAmount ?? cash.total ?? 0;
     }
 
-    // BT holdings come back as { Positions: { Items: [...] } }. Fall back to flat shapes.
-    const positions = Array.isArray(holdingsData)
-      ? holdingsData
-      : (holdingsData?.Positions?.Items
-        ?? holdingsData?.positions
-        ?? holdingsData?.items
+    // BT holdings come back as { mode, portfolioKey, holdings: { Positions: { Items: [...] }, Total, SubscriptionKey } }.
+    const innerHoldings = holdingsData?.holdings ?? holdingsData;
+    const rawItems = Array.isArray(innerHoldings)
+      ? innerHoldings
+      : (innerHoldings?.Positions?.Items
+        ?? innerHoldings?.positions
+        ?? innerHoldings?.items
         ?? []);
+
+    // Normalize raw BT items into the lowercase shape downstream skills expect
+    // (symbol/quantity/avg_cost/last_price/currency). Merge per-symbol metadata
+    // from the most recent matching open `entry` journal record so risk-monitor
+    // / trade-executor have trade_id, stop_loss, invalidation_conditions, etc.
+    let openEntries = [];
+    try {
+      const journal = await store.listJournal({ limit: 500 });
+      // Build: for each symbol, the latest entry that has NOT been exited.
+      const exits = new Set(journal.filter(r => r.type === 'exit').map(r => r.trade_id));
+      // listJournal returns ascending; iterate reverse for newest-first per symbol.
+      const seen = new Set();
+      for (let i = journal.length - 1; i >= 0; i--) {
+        const r = journal[i];
+        if (r.type !== 'entry' || !r.symbol) continue;
+        if (exits.has(r.trade_id)) continue;
+        if (seen.has(r.symbol)) continue;
+        seen.add(r.symbol);
+        openEntries.push(r);
+      }
+    } catch (e) {
+      console.error(`[bt_executor] WARN: journal lookup for position merge failed: ${e.message}`);
+    }
+
+    const positions = rawItems.map((it) => {
+      const symbol = it.Code ?? it.symbol ?? it.code;
+      const quantity = Number(it.SecurityBalance ?? it.quantity ?? it.qty ?? 0);
+      const avgCost = Number(it.AvgPrice ?? it.avg_cost ?? it.avgCost ?? 0);
+      const lastPrice = Number(it.Close ?? it.last_price ?? it.lastPrice ?? avgCost);
+      const meta = openEntries.find(e => e.symbol === symbol) || {};
+      return {
+        symbol,
+        quantity,
+        avg_cost: avgCost,
+        last_price: lastPrice,
+        currency: it.Currency ?? 'RON',
+        market: it.Market ?? null,
+        // metadata from journal (may be undefined for unjournaled/manual positions)
+        trade_id: meta.trade_id ?? null,
+        opened_at: meta.timestamp ?? null,
+        trade_type: meta.trade_type ?? null,
+        theme_tag: meta.theme_tag ?? null,
+        stop_loss: meta.stop_loss ?? null,
+        take_profit: meta.take_profit ?? null,
+        expected_exit_by: meta.expected_exit_by ?? null,
+        invalidation_conditions: meta.invalidation_conditions ?? [],
+        engine_managed: meta.trade_id ? true : false,
+        raw: it,
+      };
+    });
 
     if (cashRon === 0 && positions.length === 0) {
       console.error('[bt_executor] WARNING: savePortfolioState got 0 cash AND 0 positions — gateway shape may have changed; downstream skills will see empty state');
