@@ -158,6 +158,10 @@ the paper trail:
   engine's capital. **The engine manages only the BVB RON cash it was given and
   the positions its own journal records.** Everything else is the owner's — hard
   rule 11 applies.
+- Defense in depth: the gateway API key behind the BT Trade MCP is filtered to
+  markets=[BVB], currencies=[RON], and excludes TVBETETF/BTBETRETF. A FORBIDDEN
+  error on an out-of-mandate order is the filter doing its job — never try to
+  route around it.
 
 ## 8. Amendment log
 

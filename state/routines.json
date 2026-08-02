@@ -1,6 +1,6 @@
 {
-  "comment": "Claude Routine trigger IDs for this engine. Runs may retune schedules/prompts via update_trigger (ENGINE.md §6). Cron is UTC; Bucharest is UTC+3 in summer, UTC+2 in winter.",
-  "environment_id": "env_017UjwQLp2qAZjZtak9Rpfi8",
+  "comment": "Claude Routine trigger IDs for this engine. Runs may retune schedules/prompts via update_trigger (ENGINE.md §6). Cron is UTC; Bucharest is UTC+3 in summer, UTC+2 in winter. All three triggers run in the 'Auto Trader' environment with the BT-Trade MCP connector attached (configured by the owner via the claude.ai Routines UI on 2026-08-02).",
+  "environment_id": "env_01Jpfp7qRMukGVeD7XqsdYRa",
   "routines": {
     "daily": {
       "trigger_id": "trig_012Vorn15MwKD4puWpLEkZgm",
@@ -18,5 +18,8 @@
       "playbook": "routines/monthly.md"
     }
   },
-  "known_issue": "Triggers created 2026-08-02 could not store MCP connectors (org limitation). If a fired session lacks mcp__BT_Trade__* tools (check via ToolSearch at run start), do not trade; journal it, alert the owner via Telegram, and ask the owner to recreate the routines from the claude.ai Routines UI with the BT Trade connector attached."
+  "notes": [
+    "The BT Trade API key is axis-filtered at the gateway: markets=[BVB], currencies=[RON], symbols exclude TVBETETF and BTBETRETF. This enforces ENGINE.md hard rules 1-2 at infrastructure level; a FORBIDDEN error on an order is the filter working, not a bug to route around.",
+    "A paused legacy trigger from the deleted spring-2026 engine still exists (trig_01WPYnUx2ctWLDqxcjE2ByHX 'Auto Trader', references PROJECT.md/demo branch). If it ever fires it will find no PROJECT.md and should be deleted; do not confuse it with this engine's routines."
+  ]
 }
