@@ -29,9 +29,12 @@ on material news, with journaled rationale).
   ~2027 since cuts got pushed out).
 - Caveats: above stale analyst targets (29.9–33.8); 4% bank turnover tax
   through 2026; melt-up beta.
+- Support: issuer buyback running (up to 5M shares, max price 38 RON,
+  executed weekly via BTCP — board decision Feb 26, 2026).
 - Fair-value band: 38–44 on 2026E (~11–12x)
 - Entry: T1 ≤36.9 (~3,000 RON, deliberately modest); T2 at 33–34.5 or after
-  H1 confirms guidance. Full position ≤8,000 RON.
+  H1 (Aug 21, call Aug 24; Investor Day Oct 1) confirms guidance. Full
+  position ≤8,000 RON.
 - Kill criteria: guidance cut below 4bn; bank tax extended AND raised for 2027;
   credit-quality deterioration (NPL inflection) in H1/Q3 reports.
 - Expected holding: 1–3+ years.
@@ -59,8 +62,8 @@ on material news, with journaled rationale).
 |---|---|---|
 | TTS 6.58 | Next week's cap slot opens; or H1 (Aug 31) confirms turnaround; or ≤6.0 | T1 ~2,500 at ≤6.6 |
 | ONE 34.45 | H1 (Aug 26) shows revenue-recognition catch-up; or ≤30 with thesis intact | T1 ~2,500 |
-| ARS 18.10 | Post-H1 (mid-Aug) reset toward ≤15.5; or convincing H1 + pullback | T1 ~2,000 |
-| H2O 200.0 | Post ex-div (Sep 8, −9.57) weakness toward ≤175 | T1 ~3,000 |
+| ARS 18.10 | Post-H1 (Aug 14) reset toward ≤15.5; or convincing H1 + pullback | T1 ~2,000 |
+| H2O 200.0 | The state's planned 5–10% ABB placement (prices at a discount — the entry event); or post-ex-div (Sep 8, special 2.2232 only — main 7.3484 went ex Jun 3) weakness toward ≤175 | T1 ~3,000 |
 | TRP 0.4405 | H1 Aug 5: if capitulation ≤0.40 AND guidance keeps FY profit positive | speculative T1 ≤2,000, else drop from list |
 | PBK 0.147 | After diligence pass (weekly run) validates FY26 target credibility | size then |
 | BENTO 8.70 | After AeRO liquidity check + diligence | ≤8% portfolio cap |

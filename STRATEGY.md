@@ -117,8 +117,10 @@ previews):**
   crushed Q1 optics; wait for H1 (Aug 26) to confirm catch-up. Investor Day
   Sep 11. Enter only on confirmation or sub-30 dip with intact thesis.
 - **H2O (Hidroelectrica)** — the quality asset on BVB, but 26.7x trailing.
-  9.5716 RON/share dividend, ex-date Sep 8 (~4.8%): the post-ex reset plus any
-  autumn weakness is the entry window to study, not before. H1 results Aug 11.
+  Main 7.3484 dividend went ex Jun 3; the Sep 8 ex-date is only the special
+  2.2232 (verify amount — single source). The real entry event to wait for:
+  the state's planned **5–10% ABB placement** (Apr 2026 gov note, Q2–Q3
+  target slipping) — placements price at a discount. H1 results Aug 11.
 - **BRD** — 17x vs single-digit history, profit +2.5% under the doubled bank
   tax; only interesting well below 34.
 - **M (MedLife)** — consolidation story, no earnings support (180x 2026E),
@@ -158,8 +160,10 @@ previews):**
    validity, re-check news each morning); watch TRP H1 (Aug 5) for
    capitulation pricing; no new names without a journaled thesis.
 3. **Sun Aug 9 (weekly run)**: review fills; pre-read NBR Aug 10 and CPI
-   ~Aug 11–13 setups; prepare H1-earnings-week plan (H2O 11th, AQ 13th,
-   SNN/TGN/TEL/DIGI/FP 14th); grade this week's assumptions (below).
+   ~Aug 11–13 setups; prepare H1-earnings-week plan (H2O 11th, MSCI review
+   announcement 12th, AQ 13th, SNN/SNG/TGN/TEL/DIGI/ARS 14th; TLV 21st);
+   grade this week's assumptions (below). Full verified earnings/dividend/
+   AGM calendar: research/2026-08-02-bootstrap/catalysts.md.
 4. **No selling** exists to plan — portfolio starts empty.
 
 **Assumption ledger (inception — grade in weekly runs):**
@@ -171,7 +175,7 @@ previews):**
 - A2b (check ~Aug 31): IARV H1 confirms the defense-demand step-up (profit
   ≥1.5x YoY half-on-half) — if it prints lumpy-down instead, the thesis
   timing was wrong: stop adding, reassess.
-- A3 (check Aug 31): TLV H1 keeps FY guidance ≥4.3bn and the special-dividend
+- A3 (check Aug 23): TLV H1 (reports Aug 21) keeps FY guidance ≥4.3bn and the special-dividend
   option alive.
 - A4 (check Sep 30): the political/PNRR window (government formation, Aug 31
   milestones) produces at least one tradeable dislocation OR resolves benignly
