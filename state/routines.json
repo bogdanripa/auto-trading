@@ -1,0 +1,22 @@
+{
+  "comment": "Claude Routine trigger IDs for this engine. Runs may retune schedules/prompts via update_trigger (ENGINE.md §6). Cron is UTC; Bucharest is UTC+3 in summer, UTC+2 in winter.",
+  "environment_id": "env_017UjwQLp2qAZjZtak9Rpfi8",
+  "routines": {
+    "daily": {
+      "trigger_id": "trig_012Vorn15MwKD4puWpLEkZgm",
+      "cron_utc": "15 6 * * 1-5",
+      "playbook": "routines/daily.md"
+    },
+    "weekly": {
+      "trigger_id": "trig_01HucP2PNqsTaKfk6WQsKtdq",
+      "cron_utc": "0 14 * * 0",
+      "playbook": "routines/weekly.md"
+    },
+    "monthly": {
+      "trigger_id": "trig_01J4sRYs76Xfg7EnPZMaMfk9",
+      "cron_utc": "0 7 1 * *",
+      "playbook": "routines/monthly.md"
+    }
+  },
+  "known_issue": "Triggers created 2026-08-02 could not store MCP connectors (org limitation). If a fired session lacks mcp__BT_Trade__* tools (check via ToolSearch at run start), do not trade; journal it, alert the owner via Telegram, and ask the owner to recreate the routines from the claude.ai Routines UI with the BT Trade connector attached."
+}
