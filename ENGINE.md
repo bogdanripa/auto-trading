@@ -104,7 +104,9 @@ planned trade against this list — if a trade maps to none of these, it is chur
 5. **Act** (maybe): only actions that follow from written reasoning, within the
    hard rules, previewed before placement.
 6. **Record**: journal entry (§5), benchmark row, updated docs as needed.
-7. **Report**: short Telegram briefing (see `routines/` playbooks for format).
+7. **Report**: short Telegram briefing (see `routines/` playbooks for format);
+   then, if the run produced something worth reporting publicly, an X thread
+   per `routines/x-posting.md` — the project runs as a public experiment.
 8. **Persist**: commit and push. A run that does not push did not happen —
    memory lives in git, and an unpushed journal is amnesia.
 

@@ -20,6 +20,7 @@
   },
   "notes": [
     "The BT Trade API key is axis-filtered at the gateway: markets=[BVB], currencies=[RON], symbols exclude TVBETETF and BTBETRETF. This enforces ENGINE.md hard rules 1-2 at infrastructure level; a FORBIDDEN error on an order is the filter working, not a bug to route around.",
-    "A paused legacy trigger from the deleted spring-2026 engine still exists (trig_01WPYnUx2ctWLDqxcjE2ByHX 'Auto Trader', references PROJECT.md/demo branch). If it ever fires it will find no PROJECT.md and should be deleted; do not confuse it with this engine's routines."
+    "X posting: runs post public-experiment threads per routines/x-posting.md via scripts/x_publisher.mjs. Requires X_API_KEY / X_API_SECRET / X_ACCESS_TOKEN / X_ACCESS_TOKEN_SECRET env vars in the Auto Trader environment; script exits 2 (non-fatal) when absent — report it in the briefing so the owner can add them.",
+    "The legacy 'Auto Trader' trigger from the deleted spring-2026 engine was removed by the owner on 2026-08-02."
   ]
 }

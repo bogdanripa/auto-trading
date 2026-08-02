@@ -42,6 +42,9 @@ Take your time — this run is allowed to be long and thorough. Ultrathink.
    routine prompts and scripts may be edited, with rationale.)
 9. **Journal, report, push**. Telegram briefing: ~15–25 lines — performance vs
    mandate, portfolio, what changed in thinking this week, next week's plan.
+10. **X post**: the weekly summary is nearly always worth a thread
+    (routines/x-posting.md) — performance vs mandate, what changed, the plan
+    in broad strokes.
 
 ## Guardrails specific to this run
 
