@@ -147,10 +147,11 @@ the paper trail:
 
 - Owner: Bogdan Ripa. Telegram briefings via the `telegram` skill; if it fails,
   continue the run and note the failure in the journal.
-- Trading hours (Bucharest local, EEST in summer): opening auction ~09:45–10:00,
-  continuous trading 10:00–17:40, closing auction ~17:40–18:00. Verify against
-  `STRATEGY.md` notes if acting near the edges. Romania: UTC+3 summer / UTC+2
-  winter; cron triggers are UTC and drift 1h across DST — acceptable.
+- Trading hours (Bucharest local, EEST in summer; verified 2026-08-02):
+  opening auction 09:45–10:00, continuous trading 10:00–17:45, closing auction
+  17:45–17:50, trading-at-last until 18:00. GTC orders expire after max 62
+  days. Romania: UTC+3 summer / UTC+2 winter; cron triggers are UTC and drift
+  1h across DST — acceptable.
 - The engine's home branch is `main`; if `ENGINE.md` is absent from `origin/main`,
   the engine lives on `claude/bvb-trading-engine-9vbppa` (pre-merge state) — work
   there and push there.

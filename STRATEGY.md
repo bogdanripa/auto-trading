@@ -56,9 +56,28 @@ trim/exit unless the thesis has genuinely improved. Displacement: a clearly
 better opportunity may replace the weakest holding. **No mechanical stop-loss**
 — positions are sized to survive volatility and each carries explicit kill
 criteria instead; a price drop without thesis-relevant news is a buying
-question, not a selling trigger. Tax-aware: prefer holding winners ≥1 year
-(lower CGT band — verify exact 2026 rates in a weekly run) when the thesis is
-intact.
+question, not a selling trigger.
+
+**Costs & taxes (verified 2026-08-02, Law 239/2025 + BT fee annex + live
+previews):**
+- Commission: live previews show **0.30%, min 2 RON** per order for this
+  account (published online grid says 0.65% <100k — account has better terms;
+  confirm against the first real fill). Round trip ≈0.6–0.7% incl. spread on
+  liquid names. Orders ≥700 RON keep the minimum irrelevant.
+- CGT withheld at source, **final**: **3% of gain if held >365 days, 6% if
+  ≤365** — and **losses are NOT deductible, ever** (no netting, no carry).
+  A round trip with mixed outcomes pays full tax on winners with no shelter
+  from losers: churn is structurally penalized. A swap within 365 days needs
+  expected edge > ~1% friction + the 3-point tax delta to make sense.
+- Dividends: **16% withheld** + **10 RON/ISIN collection fee per payment** —
+  prefer fewer, larger positions in dividend payers; a 2,000 RON position
+  yielding 5% loses ~26% of its dividend to tax+fee.
+- **CASS cliff**: 10% health contribution via Declarația Unică when annual
+  investment income (gross gains + dividends) crosses 24,300 RON → 2,430 RON
+  due (next cliffs 48,600/97,200). Track realized income vs the threshold in
+  Q4; timing a sale into January can defer the cliff a full year.
+- GTC orders expire after max 62 days on BVB; the engine reviews resting
+  orders every run anyway (ENGINE.md §2).
 
 ## 4. Current candidate map (from 2026-08-02 research)
 
@@ -180,11 +199,16 @@ intact.
 - Defense theme tracking: SAFE contract awards (21 projects, €9.6bn), ARS/IARV
   H1 prints, any Romarm/Cugir listing news.
 - ALR: event-only — CISAF state-aid decision would change the math; not before.
-- Verify 2026 tax rates (CGT 1%/3% holding-period bands, 16% dividend tax) and
-  encode the net-return math here.
+- Confirm the 0.30% commission against the first real fill (assumption A6).
+- Track realized gains + dividends vs the 24,300 RON CASS cliff (Q4 check).
 - Track weekly: government formation, July CPI (mid-Aug), PNRR Aug 31, Moody's
-  ~Sep, FTSE + BET reviews Sep, H2O ex-div Sep 8, S&P ~Oct, Fidelis yields
-  (retail cash competition), EUR/RON (5.24; >5.30 = stress signal).
+  ~Sep, **BET index committee ~Sep 4 / effective Sep 21** (add/remove risk for
+  borderline names incl. TTS/ATB/TRP/SFG), FTSE review Sep, H2O ex-div Sep 8,
+  S&P ~Oct, Fidelis yields (retail cash competition; 10Y RON retail 7.55%
+  tax-free in July), EUR/RON (5.24; >5.30 = stress signal).
+- Market hours (verified): open auction 09:45–10:00, continuous 10:00–17:45,
+  closing auction 17:45–17:50, trading-at-last to 18:00. No BVB holidays
+  Aug–Oct 2026; closed Nov 30, Dec 1, Dec 25 (+expect Dec 24/31).
 
 ## Changelog
 
