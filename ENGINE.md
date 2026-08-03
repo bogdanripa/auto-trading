@@ -154,9 +154,11 @@ the paper trail:
   17:45–17:50, trading-at-last until 18:00. GTC orders expire after max 62
   days. Romania: UTC+3 summer / UTC+2 winter; cron triggers are UTC and drift
   1h across DST — acceptable.
-- The engine's home branch is `main`; if `ENGINE.md` is absent from `origin/main`,
-  the engine lives on `claude/bvb-trading-engine-9vbppa` (pre-merge state) — work
-  there and push there.
+- The engine's home branch is `main`. Routine sessions start from a fresh
+  clone; still run `git pull` before reading anything — decisions must be made
+  against the journal at HEAD (a stale journal could re-place orders a newer
+  entry records as filled), and pushes from other sessions can land between
+  container provisioning and run start.
 - The BT account may show aggregated family portfolios worth far more than the
   engine's capital. **The engine manages only the BVB RON cash it was given and
   the positions its own journal records.** Everything else is the owner's — hard
