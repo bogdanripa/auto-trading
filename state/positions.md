@@ -16,4 +16,9 @@ Format per position:
 - Expected holding: ...
 ```
 
-_No positions yet. Inception 2026-08-02._
+## IARV — IAR SA Brasov
+- Opened: 2026-08-04 (fill; order placed 2026-08-03) (journal: journal/2026-08.md entries of 2026-08-03 and 2026-08-04)
+- Tranches: 1/2 filled, 64 sh @ avg 38.8161 (incl. fees), cost basis 2,484.23 RON. T2 planned only after H1 print (~Aug 31) confirms defense step-up.
+- Thesis (one line): near-monopoly helicopter MRO for a SAFE-funded (€16.68bn) defense demand step-up, 15x for doubled earnings power. Full thesis: WATCHLIST.md.
+- Fair-value band: 48–60 RON.  Kill criteria: H1 profit flat-or-down YoY; SAFE awards bypassing IAR; governance action hostile to minorities.
+- Expected holding: 1–3 years (theme duration), reviewed each earnings.
