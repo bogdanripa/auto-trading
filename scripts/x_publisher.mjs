@@ -450,10 +450,18 @@ function greedySplitWithFirstBudget(body, firstBudget, restBudget) {
  */
 function withPreamble(body, preamble) {
   const preambleCost = weightedLength(preamble) + 2;  // +2 for "\n\n"
-  const tweets = splitIntoTweets(body, {
-    firstBudget: SAFE_TWEET_MAX - preambleCost,
-  });
+  const firstBudget = SAFE_TWEET_MAX - preambleCost;
+  const tweets = splitIntoTweets(body, { firstBudget });
   if (tweets.length === 0) return [];
+  // splitIntoTweets doesn't guarantee tweets[0] itself fits firstBudget in
+  // every code path (e.g. a section that fits SAFE_TWEET_MAX but not the
+  // smaller firstBudget still gets assigned to tweets[0] as-is when it's the
+  // very first section). Re-split defensively before prepending the preamble
+  // so the combined tweet never exceeds SAFE_TWEET_MAX.
+  if (weightedLength(tweets[0]) > firstBudget) {
+    const headChunks = greedyChunkSplit(tweets[0], firstBudget);
+    tweets.splice(0, 1, ...headChunks);
+  }
   tweets[0] = `${preamble}\n\n${tweets[0]}`;
   return tweets;
 }
