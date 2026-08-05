@@ -64,7 +64,6 @@ on material news, with journaled rationale).
 | ONE 34.45 | H1 (Aug 26) shows revenue-recognition catch-up; or ≤30 with thesis intact | T1 ~2,500 |
 | ARS 18.10 | Post-H1 (Aug 14) reset toward ≤15.5; or convincing H1 + pullback | T1 ~2,000 |
 | H2O 200.0 | The state's planned 5–10% ABB placement (prices at a discount — the entry event); or post-ex-div (Sep 8, special 2.2232 only — main 7.3484 went ex Jun 3) weakness toward ≤175 | T1 ~3,000 |
-| TRP 0.4405 | H1 Aug 5: if capitulation ≤0.40 AND guidance keeps FY profit positive | speculative T1 ≤2,000, else drop from list |
 | PBK 0.147 | After diligence pass (weekly run) validates FY26 target credibility | size then |
 | BENTO 8.70 | After AeRO liquidity check + diligence | ≤8% portfolio cap |
 | BET index | −5% from ATH (~34,680) / −10% (~32,850) | Dislocation playbook, STRATEGY §6 |
@@ -81,3 +80,9 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
 
 - 2026-08-02: File created at inception (bootstrap session). Sources: 7-agent
   research sweep, journal/2026-08.md inception entry.
+- 2026-08-05: TRP trigger resolved — dropped from triggered-watch per its own
+  "else drop from list" clause. Pre-open book 0.442/0.444 (vs 0.4405
+  reference), no capitulation; no H1/S1 2026 report found via web search as
+  of this run (only stale Q1 2026 and prior-year S1 2025 results indexed).
+  Capitulation leg of the AND condition failed regardless of guidance, so no
+  further check was needed. Detail: journal/2026-08.md 2026-08-05 entry.
