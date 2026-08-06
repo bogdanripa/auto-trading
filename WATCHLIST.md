@@ -7,18 +7,33 @@ on material news, with journaled rationale).
 
 ## Active buy plan (tranche 1 pending — see STRATEGY.md §5)
 
-### SNN — Nuclearelectrica (core)
+### SNN — Nuclearelectrica (core) — ⚠ ORDER PAUSED 2026-08-06, see note below
 - Close 64.60 | P/E 8.3 | P/B 1.2 | div 3.9107 gross paid 2026-07-13 (~6%)
 - Thesis: cheapest large-cap energy on BVB by far; record Q1 (+72.8% net) on
   merchant prices; nuclear base load is the structural winner of electrification
   and (eventually) datacenter demand; paying ~8x while the rest of state energy
   trades 21–37x.
-- Fair-value band: 75–90 (≈10–12x current earnings power, conservative)
-- Entry: T1 ≤64.6 (~3,000 RON); T2 after H1 (Aug 14) if thesis confirmed,
-  or ≤58 on market weakness. Full position ≤6,500 RON.
+- Fair-value band: 75–90 (≈10–12x current earnings power, conservative) —
+  **under review**, see 2026-08-06 note.
+- Entry: T1 ≤64.6 (~3,000 RON) — **paused, not re-placed 2026-08-06**; T2 after
+  H1 (Aug 14) if thesis confirmed, or ≤58 on market weakness. Full position
+  ≤6,500 RON.
 - Kill criteria: windfall-tax reintroduction on nuclear; SMR Doicești turning
   into a forced capital drain (state overruling minority holders on a dilutive
   raise); H1 profit collapse >30% vs Q1 run-rate.
+- **2026-08-06 (daily run)**: Cernavodă drought/force-majeure crisis (Unit 1
+  shut down since 2026-07-28, ~20% of national electricity capacity at risk,
+  government declared major-force status 2026-07-31, BVB filings through
+  2026-08-04 show Unit 2 fragile but still connected via emergency Danube
+  water-diversion works). Missed by the Aug 3/4/5 daily scans — a process
+  gap, see LESSONS.md. Not a kill-criteria hit (criteria are H1-profit- and
+  tax/governance-specific, and H1 = Jan–Jun predates the Jul 28 shutdown),
+  but clearly thesis-relevant to H2 production/earnings power the fair-value
+  band assumes. Tranche-1 order **not re-placed today** pending clarity —
+  resume re-offering at 64.6 once either (a) Reactor 2 is confirmed stable /
+  the drought crisis resolves, or (b) the Aug 14 H1 report + management
+  commentary quantifies the H2 impact. Full reasoning: journal/2026-08.md
+  2026-08-06 entry.
 - Expected holding: 1–3+ years.
 
 ### TLV — Banca Transilvania (core)

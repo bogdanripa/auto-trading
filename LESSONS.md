@@ -11,6 +11,22 @@ _None yet — the engine started on 2026-08-02. Earn them._
 
 ## Process lessons
 
+### P-3: The overnight scan can miss a live, multi-day crisis (2026-08-06, journal/2026-08.md)
+The Aug 3, 4, and 5 daily runs each concluded "no negative news" for SNN while
+Cernavodă Unit 1 had been shut down since Jul 28 (drought/low Danube levels),
+the government had declared force majeure Jul 31, and Unit 2 was under
+day-to-day shutdown risk with emergency Danube diversion works ongoing — front
+page in ZF/Profit.ro/G4Media/Newsweek RO the entire week, and disclosed by SNN
+itself via BVB current reports (Jul 29, Jul 30, Aug 4). The Aug 6 run only
+found it via broader, less name-anchored search queries. Likely cause: the
+prior scans' queries were narrowly "recent news [ticker]"-shaped and a slow-
+building, multi-day operational crisis doesn't always surface under a same-day
+framing. Fix going forward: for held/watchlist names with state/climate/
+regulatory exposure (energy, utilities), include at least one broader query
+without a tight date qualifier ("[company] [sector-risk keyword]") alongside
+the ticker-anchored one, and cross-check the company's own BVB current-report
+filing list directly, not just press search results.
+
 ### P-1: Infrastructure is not progress (inception, 2026-08-02)
 A previous incarnation of this engine (built spring 2026, since deleted) grew a
 gateway service, a database, a token-rotation routine, a 30-rule JSON engine,
