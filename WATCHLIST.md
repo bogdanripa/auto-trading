@@ -34,6 +34,37 @@ on material news, with journaled rationale).
   the drought crisis resolves, or (b) the Aug 14 H1 report + management
   commentary quantifies the H2 impact. Full reasoning: journal/2026-08.md
   2026-08-06 entry.
+- **2026-08-12 (daily run, after a 4-trading-day monitoring gap — see
+  journal)**: two new developments, both pause-reinforcing, neither a fresh
+  kill-criteria hit:
+  1. **Cernavodă escalated, not resolved**: Unit 2 now faces a possible full
+     controlled shutdown the morning of **2026-08-13** (tomorrow) on
+     declining Danube levels — Unit 1 has been down since Jul 27/28; a Unit 2
+     shutdown would take the entire plant offline (~700MW, ~1/5 of national
+     generation) one day before the Aug 14 H1 report. Stock itself shows no
+     capitulation (bid/ask 65.6/65.7 today, actually *above* the original
+     64.6 entry band) — no dislocation-buying case, market isn't pricing the
+     risk.
+  2. **SMR Doicești governance friction confirmed live**: the "Corpul de
+     Control al Prim-Ministrului" finished its Oct 2025–Mar 2026 audit of
+     SNN's Doicești SMR project and found process problems — a partnership
+     entered without the mandatory legal procedure, no comparative analysis
+     for why the (2nd-ranked) Doicești site beat the top-ranked alternative,
+     and the project land parcel that Nova Power & Gas paid ~€2.8m for in
+     Dec 2021 was transferred to joint venture RoPower for ~€46.39m (incl.
+     VAT) in Jun 2025. SNN management disputes it ("no quantifiable
+     prejudice," decisions within the law). The Ministry of Energy
+     (majority/state shareholder) has now compelled an EGM for **2026-09-10**
+     (2nd call 09-11) solely to formally inform shareholders of the report's
+     conclusions (agenda item 2) — no capital-raise or dilution item on this
+     agenda, but this is exactly the "SMR Doicești governance friction with
+     the state" kill-criteria language from inception, now substantiated
+     with a real land-pricing red flag. Watch for the materials published
+     2026-08-06 and any AGEA agenda addition (deadline to add points:
+     2026-08-21) that could bring a capital or governance action into scope.
+  SNN order stays **paused**; do not re-offer at 64.6 until the Aug 14 H1
+  report + management commentary quantify both the production hit and the
+  Doicești fallout. Full reasoning: journal/2026-08.md 2026-08-12 entry.
 - Expected holding: 1–3+ years.
 
 ### TLV — Banca Transilvania (core)
