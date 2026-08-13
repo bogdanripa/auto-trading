@@ -65,6 +65,19 @@ on material news, with journaled rationale).
   SNN order stays **paused**; do not re-offer at 64.6 until the Aug 14 H1
   report + management commentary quantify both the production hit and the
   Doicești fallout. Full reasoning: journal/2026-08.md 2026-08-12 entry.
+- **2026-08-13 (daily run)**: Cernavodă Unit 2 shutdown, flagged Aug 12 as
+  possible "tomorrow," **happened today** — controlled shutdown began 07:00,
+  fully decoupled from the grid ~11:00, force-majeure certificates issued
+  Aug 10. **Both Cernavodă units are now offline simultaneously for the
+  first time** (Unit 1 since Jul 28), removing ~1,400MW (~20% of national
+  generation); Unit 2 expected offline ≥10 days pending Danube levels.
+  Government covering the gap via imports + reactivating Rovinari 4. Not a
+  fresh kill-criteria hit (no position held), but confirms the pause was
+  correctly timed: H1 (through Jun 30) won't reflect any of this, so Aug
+  14's management commentary — not the headline H1 number — is what
+  actually matters. SNN quote 65.70/66.00 pre-open, still no capitulation,
+  still above the 64.6 band; no dislocation-buying case. Order stays
+  **paused**. Full reasoning: journal/2026-08.md 2026-08-13 entry.
 - Expected holding: 1–3+ years.
 
 ### TLV — Banca Transilvania (core)
