@@ -78,6 +78,26 @@ on material news, with journaled rationale).
   actually matters. SNN quote 65.70/66.00 pre-open, still no capitulation,
   still above the 64.6 band; no dislocation-buying case. Order stays
   **paused**. Full reasoning: journal/2026-08.md 2026-08-13 entry.
+- **2026-08-14 (daily run)**: H1 2026 report released 8:00 a.m. as
+  scheduled. Individual net profit 1,183,970k RON (+36.6% YoY); consolidated
+  1,079,630k RON (+30.6% YoY); merchant price tailwind confirmed (average
+  selling price +12.7% YoY, offsetting an 11.7% production decline). But the
+  production decline is entirely a **May 2026** outage (U1 1,237h from May
+  10, U2 624h from May 4) — the report covers through Jun 30 and **does not
+  reflect the Jul 28–present crisis at all**, exactly as anticipated.
+  Q2-alone profit was down ~16% YoY (~296m) — the outage-sensitivity risk
+  is already visible quarter-by-quarter, not hypothetical. No management
+  commentary found anywhere (report or press) quantifying the H2 impact of
+  the current outage; no FY2026 guidance revision; no Doicești mention.
+  Separately, worse news from the government side: state secretary Cristian
+  Bușoi says Unit 2 "will not be able to remain operational throughout
+  August" (sediment buildup defeated the dredging fix) — worse than the
+  "≥10 days" estimate carried since Aug 12. Neither of the two standing
+  re-offer conditions (Reactor 2 confirmed stable, or H1+management
+  quantifying H2) was met — if anything the government update moves the
+  first condition further away. SNN quote 65.50/66.20, still above the 64.6
+  band, no capitulation. Order stays **paused**. Full reasoning:
+  journal/2026-08.md 2026-08-14 entry.
 - Expected holding: 1–3+ years.
 
 ### TLV — Banca Transilvania (core)
