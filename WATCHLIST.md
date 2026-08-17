@@ -98,6 +98,18 @@ on material news, with journaled rationale).
   first condition further away. SNN quote 65.50/66.20, still above the 64.6
   band, no capitulation. Order stays **paused**. Full reasoning:
   journal/2026-08.md 2026-08-14 entry.
+- **2026-08-17 (daily run)**: no resolution either direction. Danube level at
+  Cernavodă forecast essentially flat and still below the −230cm critical
+  threshold through today (−235/−236cm Aug 15–17); the first credible
+  restart-relevant datapoint found is hydrological forecasts showing a
+  significant flow increase only from **~Aug 24–26** (for Unit 1, down since
+  Jul 28) — consistent with, and slightly more specific than, the Aug 14
+  government statement that Unit 2 "will not remain operational throughout
+  August." No management quantification of the H2 earnings hit has surfaced
+  yet. Live quote SNN 65.9/67.0 (auction), still no capitulation, still
+  above the 64.6 band. Neither re-offer condition (stable restart, or
+  quantified H2 guidance) is met. Order stays **paused**, no change from
+  Aug 14. Full reasoning: journal/2026-08.md 2026-08-17 entry.
 - Expected holding: 1–3+ years.
 
 ### TLV — Banca Transilvania (core)
