@@ -110,6 +110,18 @@ on material news, with journaled rationale).
   above the 64.6 band. Neither re-offer condition (stable restart, or
   quantified H2 guidance) is met. Order stays **paused**, no change from
   Aug 14. Full reasoning: journal/2026-08.md 2026-08-17 entry.
+- **2026-08-18 (daily run)**: broader search surfaced a specific hoped-for
+  restart timeline — Unit 1 by end of day Aug 23, Unit 2 by Aug 30 23:59
+  (explicitly described as "hoped," contingent on Danube hydrology, not
+  confirmed). Consistent with, slightly more specific than, the Aug 17
+  ~Aug 24–26 flow-increase estimate. Danube discharge at Baziaș still at
+  historic lows (~1,400 m³/s vs ~3,900 m³/s August average). No management
+  quantification of the H2 earnings hit has surfaced. Quote 65.1/65.7,
+  still above the 64.6 band, no capitulation. Neither re-offer condition
+  met. Order stays **paused**. Next real checkpoint: Aug 23 (Unit 1 hoped
+  restart) — even if it happens, a confirmed-stable restart or quantified
+  H2 guidance is still required before re-offering. Full reasoning:
+  journal/2026-08.md 2026-08-18 entry.
 - Expected holding: 1–3+ years.
 
 ### TLV — Banca Transilvania (core)
