@@ -122,6 +122,31 @@ on material news, with journaled rationale).
   restart) — even if it happens, a confirmed-stable restart or quantified
   H2 guidance is still required before re-offering. Full reasoning:
   journal/2026-08.md 2026-08-18 entry.
+- **2026-08-19 (daily run)**: two developments, both pause-reinforcing:
+  1. **Found the Aug 14 H1 earnings-call transcript** (indexed late, not
+     visible in the Aug 14/17/18 scans). Management **explicitly declined**
+     to quantify the drought's H2 profit/cash-flow impact ("not certain
+     enough to disclose"), said "some expectation things will improve
+     towards the end of August or beginning of September, but we shall
+     see," and pushed the actual quantified analysis to the **Q3 update**
+     (~November). This effectively closes the "quantified H2 guidance"
+     re-offer leg for the next ~2.5 months — confirmed directly from
+     management now, not just inferred from a search-scan gap.
+  2. Mixed, unresolved hydrology signal: an Aug 16 piece ("no chance of
+     reopening," INHGA-sourced) forecasts Danube flow at Baziaș falling to
+     ~1,300 m³/s by ~Aug 21–23 (vs ~3,900 m³/s August average) — more
+     pessimistic than, and predating, the Aug 18 "hoped Aug 23/30 restart"
+     estimate; no way to tell which view is more current. Net: still no
+     confirmed stable restart.
+  Price ticked down to 64.0/64.9 pre-open (vs 65.1/65.7 yesterday) —
+  closer to the 64.6 band but not a >5% capitulation gap, and a price move
+  alone is not a trigger per the daily guardrail. Neither re-offer
+  condition is met — if anything, condition 2 (quantified guidance) just
+  got pushed further out. Order stays **paused**. Practical implication:
+  the realistic re-offer path is now "confirmed stable restart" alone,
+  since quantified guidance won't exist before Q3 — worth the weekly run's
+  attention once it finally fires. Full reasoning: journal/2026-08.md
+  2026-08-19 entry.
 - Expected holding: 1–3+ years.
 
 ### TLV — Banca Transilvania (core)
@@ -165,7 +190,7 @@ on material news, with journaled rationale).
 |---|---|---|
 | TTS 6.58 | Next week's cap slot opens; or H1 (Aug 31) confirms turnaround; or ≤6.0 | T1 ~2,500 at ≤6.6 |
 | ONE 34.45 | H1 (Aug 26) shows revenue-recognition catch-up; or ≤30 with thesis intact | T1 ~2,500 |
-| ARS 18.10 | Post-H1 (Aug 14) reset toward ≤15.5; or convincing H1 + pullback | T1 ~2,000 |
+| ARS 18.10 | Post-H1 (Aug 14) reset toward ≤15.5; or convincing H1 + pullback | T1 ~2,000 — **no trigger 2026-08-19**: H1 beat (net profit +87.9% YoY to 86.7m RON), stock rose ~3.6% on the print instead of resetting down; quote 19.6/19.65 today, above both 18.10 and 15.5 — richer, not cheaper. Stays watch-only. |
 | H2O 200.0 | The state's planned 5–10% ABB placement (prices at a discount — the entry event); or post-ex-div (Sep 8, special 2.2232 only — main 7.3484 went ex Jun 3) weakness toward ≤175 | T1 ~3,000 |
 | PBK 0.147 | After diligence pass (weekly run) validates FY26 target credibility | size then |
 | BENTO 8.70 | After AeRO liquidity check + diligence | ≤8% portfolio cap |
