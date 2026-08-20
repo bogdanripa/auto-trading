@@ -147,6 +147,15 @@ on material news, with journaled rationale).
   since quantified guidance won't exist before Q3 — worth the weekly run's
   attention once it finally fires. Full reasoning: journal/2026-08.md
   2026-08-19 entry.
+- **2026-08-20 (daily run)**: no new BVB filing since Aug 14 (checked SNN's
+  own announcement list directly, not just press search). No web coverage
+  found dated after Aug 13/14; the Aug 13 "not within 10 days" director
+  quote (→ ~Aug 23) remains the most current restart estimate. Quote
+  64.5/65.1 pre-open — bid has drifted to/through the 64.6 band for the
+  first time since the pause, but on no news (~1% overnight move, not a
+  capitulation gap) — not a trigger per the daily guardrail. Order stays
+  **paused**. Next real checkpoint ~Aug 23. Full reasoning:
+  journal/2026-08.md 2026-08-20 entry.
 - Expected holding: 1–3+ years.
 
 ### TLV — Banca Transilvania (core)
