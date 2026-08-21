@@ -156,6 +156,15 @@ on material news, with journaled rationale).
   capitulation gap) — not a trigger per the daily guardrail. Order stays
   **paused**. Next real checkpoint ~Aug 23. Full reasoning:
   journal/2026-08.md 2026-08-20 entry.
+- **2026-08-21 (daily run)**: no new BVB filing since Aug 14. Danube
+  discharge at Baziaș still forecast at ~1,300–1,350 m³/s through today
+  (vs ~3,900 m³/s average) — no improvement signal for today; the Aug
+  24–26 flow-increase estimate carried since Aug 17/18 remains the
+  earliest dated restart-relevant hydrology datapoint. No confirmed
+  restart, no quantified H2 guidance (closed off until Q3 per Aug 19).
+  Quote 64.9/65.2 pre-open — back above the 64.6 band. Order stays
+  **paused**. Next real checkpoint: Aug 24–26. Full reasoning:
+  journal/2026-08.md 2026-08-21 entry.
 - Expected holding: 1–3+ years.
 
 ### TLV — Banca Transilvania (core)
@@ -174,6 +183,16 @@ on material news, with journaled rationale).
   position ≤8,000 RON.
 - Kill criteria: guidance cut below 4bn; bank tax extended AND raised for 2027;
   credit-quality deterioration (NPL inflection) in H1/Q3 reports.
+- **2026-08-21 (daily run)**: H1/S1 2026 results are officially scheduled
+  today (call Aug 24) but not yet published as of this pre-open scan
+  (BVB/investor-relations filing lists checked directly, most recent item
+  dated Aug 17). T2 evaluation deferred to the next run that can read the
+  actual numbers. Separately confirmed the Jul 17/20/29/Aug 17 BVB filings
+  are the free-share capital increase (record date Jul 17, ~14 free shares
+  per 100 held) approved at the Apr 28 AGM — our position opened Aug 6,
+  after the record date, so no free shares are owed; holdings correctly
+  unchanged at 81 shares. Quote 37.40/37.54 pre-open. Full reasoning:
+  journal/2026-08.md 2026-08-21 entry.
 - Expected holding: 1–3+ years.
 
 ### IARV — IAR Brașov (satellite, defense)
