@@ -5,198 +5,138 @@ here with a thesis (ENGINE.md §2.10). Prices referenced to 2026-07-31 closes;
 re-verify live quotes before every order. Updated by weekly runs (or daily runs
 on material news, with journaled rationale).
 
-## Active buy plan (tranche 1 pending — see STRATEGY.md §5)
+## Active buy plan
 
-### SNN — Nuclearelectrica (core) — ⚠ ORDER PAUSED 2026-08-06, see note below
-- Close 64.60 | P/E 8.3 | P/B 1.2 | div 3.9107 gross paid 2026-07-13 (~6%)
-- Thesis: cheapest large-cap energy on BVB by far; record Q1 (+72.8% net) on
-  merchant prices; nuclear base load is the structural winner of electrification
-  and (eventually) datacenter demand; paying ~8x while the rest of state energy
-  trades 21–37x.
-- Fair-value band: 75–90 (≈10–12x current earnings power, conservative) —
-  **under review**, see 2026-08-06 note.
-- Entry: T1 ≤64.6 (~3,000 RON) — **paused, not re-placed 2026-08-06**; T2 after
-  H1 (Aug 14) if thesis confirmed, or ≤58 on market weakness. Full position
-  ≤6,500 RON.
-- Kill criteria: windfall-tax reintroduction on nuclear; SMR Doicești turning
-  into a forced capital drain (state overruling minority holders on a dilutive
-  raise); H1 profit collapse >30% vs Q1 run-rate.
-- **2026-08-06 (daily run)**: Cernavodă drought/force-majeure crisis (Unit 1
-  shut down since 2026-07-28, ~20% of national electricity capacity at risk,
-  government declared major-force status 2026-07-31, BVB filings through
-  2026-08-04 show Unit 2 fragile but still connected via emergency Danube
-  water-diversion works). Missed by the Aug 3/4/5 daily scans — a process
-  gap, see LESSONS.md. Not a kill-criteria hit (criteria are H1-profit- and
-  tax/governance-specific, and H1 = Jan–Jun predates the Jul 28 shutdown),
-  but clearly thesis-relevant to H2 production/earnings power the fair-value
-  band assumes. Tranche-1 order **not re-placed today** pending clarity —
-  resume re-offering at 64.6 once either (a) Reactor 2 is confirmed stable /
-  the drought crisis resolves, or (b) the Aug 14 H1 report + management
-  commentary quantifies the H2 impact. Full reasoning: journal/2026-08.md
-  2026-08-06 entry.
-- **2026-08-12 (daily run, after a 4-trading-day monitoring gap — see
-  journal)**: two new developments, both pause-reinforcing, neither a fresh
-  kill-criteria hit:
-  1. **Cernavodă escalated, not resolved**: Unit 2 now faces a possible full
-     controlled shutdown the morning of **2026-08-13** (tomorrow) on
-     declining Danube levels — Unit 1 has been down since Jul 27/28; a Unit 2
-     shutdown would take the entire plant offline (~700MW, ~1/5 of national
-     generation) one day before the Aug 14 H1 report. Stock itself shows no
-     capitulation (bid/ask 65.6/65.7 today, actually *above* the original
-     64.6 entry band) — no dislocation-buying case, market isn't pricing the
-     risk.
-  2. **SMR Doicești governance friction confirmed live**: the "Corpul de
-     Control al Prim-Ministrului" finished its Oct 2025–Mar 2026 audit of
-     SNN's Doicești SMR project and found process problems — a partnership
-     entered without the mandatory legal procedure, no comparative analysis
-     for why the (2nd-ranked) Doicești site beat the top-ranked alternative,
-     and the project land parcel that Nova Power & Gas paid ~€2.8m for in
-     Dec 2021 was transferred to joint venture RoPower for ~€46.39m (incl.
-     VAT) in Jun 2025. SNN management disputes it ("no quantifiable
-     prejudice," decisions within the law). The Ministry of Energy
-     (majority/state shareholder) has now compelled an EGM for **2026-09-10**
-     (2nd call 09-11) solely to formally inform shareholders of the report's
-     conclusions (agenda item 2) — no capital-raise or dilution item on this
-     agenda, but this is exactly the "SMR Doicești governance friction with
-     the state" kill-criteria language from inception, now substantiated
-     with a real land-pricing red flag. Watch for the materials published
-     2026-08-06 and any AGEA agenda addition (deadline to add points:
-     2026-08-21) that could bring a capital or governance action into scope.
-  SNN order stays **paused**; do not re-offer at 64.6 until the Aug 14 H1
-  report + management commentary quantify both the production hit and the
-  Doicești fallout. Full reasoning: journal/2026-08.md 2026-08-12 entry.
-- **2026-08-13 (daily run)**: Cernavodă Unit 2 shutdown, flagged Aug 12 as
-  possible "tomorrow," **happened today** — controlled shutdown began 07:00,
-  fully decoupled from the grid ~11:00, force-majeure certificates issued
-  Aug 10. **Both Cernavodă units are now offline simultaneously for the
-  first time** (Unit 1 since Jul 28), removing ~1,400MW (~20% of national
-  generation); Unit 2 expected offline ≥10 days pending Danube levels.
-  Government covering the gap via imports + reactivating Rovinari 4. Not a
-  fresh kill-criteria hit (no position held), but confirms the pause was
-  correctly timed: H1 (through Jun 30) won't reflect any of this, so Aug
-  14's management commentary — not the headline H1 number — is what
-  actually matters. SNN quote 65.70/66.00 pre-open, still no capitulation,
-  still above the 64.6 band; no dislocation-buying case. Order stays
-  **paused**. Full reasoning: journal/2026-08.md 2026-08-13 entry.
-- **2026-08-14 (daily run)**: H1 2026 report released 8:00 a.m. as
-  scheduled. Individual net profit 1,183,970k RON (+36.6% YoY); consolidated
-  1,079,630k RON (+30.6% YoY); merchant price tailwind confirmed (average
-  selling price +12.7% YoY, offsetting an 11.7% production decline). But the
-  production decline is entirely a **May 2026** outage (U1 1,237h from May
-  10, U2 624h from May 4) — the report covers through Jun 30 and **does not
-  reflect the Jul 28–present crisis at all**, exactly as anticipated.
-  Q2-alone profit was down ~16% YoY (~296m) — the outage-sensitivity risk
-  is already visible quarter-by-quarter, not hypothetical. No management
-  commentary found anywhere (report or press) quantifying the H2 impact of
-  the current outage; no FY2026 guidance revision; no Doicești mention.
-  Separately, worse news from the government side: state secretary Cristian
-  Bușoi says Unit 2 "will not be able to remain operational throughout
-  August" (sediment buildup defeated the dredging fix) — worse than the
-  "≥10 days" estimate carried since Aug 12. Neither of the two standing
-  re-offer conditions (Reactor 2 confirmed stable, or H1+management
-  quantifying H2) was met — if anything the government update moves the
-  first condition further away. SNN quote 65.50/66.20, still above the 64.6
-  band, no capitulation. Order stays **paused**. Full reasoning:
-  journal/2026-08.md 2026-08-14 entry.
-- **2026-08-17 (daily run)**: no resolution either direction. Danube level at
-  Cernavodă forecast essentially flat and still below the −230cm critical
-  threshold through today (−235/−236cm Aug 15–17); the first credible
-  restart-relevant datapoint found is hydrological forecasts showing a
-  significant flow increase only from **~Aug 24–26** (for Unit 1, down since
-  Jul 28) — consistent with, and slightly more specific than, the Aug 14
-  government statement that Unit 2 "will not remain operational throughout
-  August." No management quantification of the H2 earnings hit has surfaced
-  yet. Live quote SNN 65.9/67.0 (auction), still no capitulation, still
-  above the 64.6 band. Neither re-offer condition (stable restart, or
-  quantified H2 guidance) is met. Order stays **paused**, no change from
-  Aug 14. Full reasoning: journal/2026-08.md 2026-08-17 entry.
-- **2026-08-18 (daily run)**: broader search surfaced a specific hoped-for
-  restart timeline — Unit 1 by end of day Aug 23, Unit 2 by Aug 30 23:59
-  (explicitly described as "hoped," contingent on Danube hydrology, not
-  confirmed). Consistent with, slightly more specific than, the Aug 17
-  ~Aug 24–26 flow-increase estimate. Danube discharge at Baziaș still at
-  historic lows (~1,400 m³/s vs ~3,900 m³/s August average). No management
-  quantification of the H2 earnings hit has surfaced. Quote 65.1/65.7,
-  still above the 64.6 band, no capitulation. Neither re-offer condition
-  met. Order stays **paused**. Next real checkpoint: Aug 23 (Unit 1 hoped
-  restart) — even if it happens, a confirmed-stable restart or quantified
-  H2 guidance is still required before re-offering. Full reasoning:
-  journal/2026-08.md 2026-08-18 entry.
-- **2026-08-19 (daily run)**: two developments, both pause-reinforcing:
-  1. **Found the Aug 14 H1 earnings-call transcript** (indexed late, not
-     visible in the Aug 14/17/18 scans). Management **explicitly declined**
-     to quantify the drought's H2 profit/cash-flow impact ("not certain
-     enough to disclose"), said "some expectation things will improve
-     towards the end of August or beginning of September, but we shall
-     see," and pushed the actual quantified analysis to the **Q3 update**
-     (~November). This effectively closes the "quantified H2 guidance"
-     re-offer leg for the next ~2.5 months — confirmed directly from
-     management now, not just inferred from a search-scan gap.
-  2. Mixed, unresolved hydrology signal: an Aug 16 piece ("no chance of
-     reopening," INHGA-sourced) forecasts Danube flow at Baziaș falling to
-     ~1,300 m³/s by ~Aug 21–23 (vs ~3,900 m³/s August average) — more
-     pessimistic than, and predating, the Aug 18 "hoped Aug 23/30 restart"
-     estimate; no way to tell which view is more current. Net: still no
-     confirmed stable restart.
-  Price ticked down to 64.0/64.9 pre-open (vs 65.1/65.7 yesterday) —
-  closer to the 64.6 band but not a >5% capitulation gap, and a price move
-  alone is not a trigger per the daily guardrail. Neither re-offer
-  condition is met — if anything, condition 2 (quantified guidance) just
-  got pushed further out. Order stays **paused**. Practical implication:
-  the realistic re-offer path is now "confirmed stable restart" alone,
-  since quantified guidance won't exist before Q3 — worth the weekly run's
-  attention once it finally fires. Full reasoning: journal/2026-08.md
-  2026-08-19 entry.
-- **2026-08-20 (daily run)**: no new BVB filing since Aug 14 (checked SNN's
-  own announcement list directly, not just press search). No web coverage
-  found dated after Aug 13/14; the Aug 13 "not within 10 days" director
-  quote (→ ~Aug 23) remains the most current restart estimate. Quote
-  64.5/65.1 pre-open — bid has drifted to/through the 64.6 band for the
-  first time since the pause, but on no news (~1% overnight move, not a
-  capitulation gap) — not a trigger per the daily guardrail. Order stays
-  **paused**. Next real checkpoint ~Aug 23. Full reasoning:
-  journal/2026-08.md 2026-08-20 entry.
-- **2026-08-21 (daily run)**: no new BVB filing since Aug 14. Danube
-  discharge at Baziaș still forecast at ~1,300–1,350 m³/s through today
-  (vs ~3,900 m³/s average) — no improvement signal for today; the Aug
-  24–26 flow-increase estimate carried since Aug 17/18 remains the
-  earliest dated restart-relevant hydrology datapoint. No confirmed
-  restart, no quantified H2 guidance (closed off until Q3 per Aug 19).
-  Quote 64.9/65.2 pre-open — back above the 64.6 band. Order stays
-  **paused**. Next real checkpoint: Aug 24–26. Full reasoning:
-  journal/2026-08.md 2026-08-21 entry.
-- **2026-08-24 (daily run)**: the Aug 24–26 hydrology checkpoint arrived
-  more negative than hoped, not more positive. Energy Ministry state
-  secretary (reported Aug 21, after Friday's run): "slim chances" of
-  restart before Sep 1; a Recorder.ro Aug 21 piece headlines the plant
-  "closed until September"; the extended energy alert is expected to be
-  prolonged past August. This supersedes the "hoped Aug 23/30" restart
-  estimate carried since Aug 18 — still a forecast, not a confirmed
-  restart, but the forecast direction moved later, not sooner. Neither
-  re-offer condition (confirmed stable restart, or quantified H2
-  guidance — closed off until Q3 per Aug 19) is met; if anything the
-  bar moved further away. Quote 64.7/64.9 pre-open. Order stays
-  **paused**. Next real checkpoint: any confirmed (not forecast) restart
-  announcement, or the Q3 update (~November) for quantified guidance.
-  Full reasoning: journal/2026-08.md 2026-08-24 entry.
-- Expected holding: 1–3+ years.
+### ONE — One United Properties (core-value) — ⚡ ARMED CONDITIONAL, Wed 2026-08-26
+- Price 34.95 (bid 34.70/ask 34.95, 2026-08-24) | P/E 8.85 | ~1.0x book |
+  div yield 1.27% | market cap 3.78bn RON
+- Thesis: Romania's largest listed residential/mixed-use developer at ~8.85x
+  earnings and ~1.0x book while the BVB median has re-rated hard. Q1 2026's
+  optical collapse (revenue −51%, net profit −78% YoY) was an **IFRS-15 timing
+  artifact** — a Dec-2025 legal change requires cadastral "pre-apartment"
+  subdivision before pre-sale contracts book as revenue, so transactions land
+  as reservations first. Underlying activity is strong: H1 residential
+  transactions €106.1m over 229 units at +24% YoY price/sqm, **€445m contracted
+  cash collections (company record)**, 75% of units under construction already
+  contracted, commercial portfolio ~152,000 sqm GLA at 95% leased.
+- Which edge (ENGINE.md §3): §3.2 small/mid-cap access + §3.1 concentration in
+  the cheap residue of a re-rated market.
+- Fair-value band: 40–46 (≈10–12x on normalized recognition)
+- **Entry condition (Wed 2026-08-26, H1 report)**: H1 revenue AND net profit
+  materially recovered vs Q1's −51%/−78%, contracted collections intact, no new
+  cadastral/permitting blocker disclosed. **Then**: T1 **72 sh at limit 34.45**
+  (~2,488 net incl. fee), day order, re-offer at the same band if unfilled.
+  T2 only after the Sep 11 Investor Day or a dip toward 30. Full position
+  ≤5,000 RON.
+- **If the condition fails**: no order; drop to price-only leg ≤30.00 and mark
+  the thesis at risk.
+- Kill criteria: H1 shows no catch-up and management cannot date it; contracted
+  collections decline materially; new regulatory blocker on subdivision/
+  permitting; net debt materially up while deliveries slip.
+- Expected holding: 2–3+ years.
+- Calendar: H1 **Aug 26**, teleconference Aug 27, Investor Day **Sep 11**.
 
-### TLV — Banca Transilvania (core)
-- Close 36.90 (bid 36.90/ask 36.98) | P/E 9.9 | P/B 2.0 | div 1.2840 paid June
-- Thesis: Romania's dominant retail/SME bank compounding at ~25–30%; 2026
-  guidance >4.3bn; possible ~700m special dividend in autumn; 9.9x for the
-  market's quality compounder while rates stay high (NII tailwind persists to
-  ~2027 since cuts got pushed out).
-- Caveats: above stale analyst targets (29.9–33.8); 4% bank turnover tax
-  through 2026; melt-up beta.
-- Support: issuer buyback running (up to 5M shares, max price 38 RON,
-  executed weekly via BTCP — board decision Feb 26, 2026).
+## Triggered-watch — re-banded names
+
+### SNN — Nuclearelectrica — ⚠ ACTIVE BUY PLAN WITHDRAWN 2026-08-24, RE-BANDED
+- Price 65.10/65.30 (2026-08-24) | H1 2026 individual net profit 1,184m RON
+  (+36.6% YoY) but Q2 alone ~296m (−16% YoY)
+- **Status change (2026-08-24 weekly run)**: the tranche-1 order paused since
+  2026-08-06 is **withdrawn**, not merely paused again. It had been re-affirmed
+  unchanged in eleven consecutive daily entries without anyone re-asking whether
+  64.60 was still the right price. It was not. See LESSONS.md P-5.
+- **Fair-value band revised 75–90 → 55–70** (indicative, pending the Q3 update
+  ~November when management said they will actually quantify the H2 hit).
+  Derivation: Q2-2026 alone was ~296m RON (−16% YoY) on the *May* outage; Jul 28
+  onward has had both units down through at least August in peak-price season,
+  with depreciation still accruing and force majeure shielding penalties but not
+  lost revenue. A plausible FY26 landing of ~1,600–1,800m RON on ~301.7m shares
+  (approximate) is ~5.3–6.0 EPS; at 10–12x → ~55–70. Independently consistent
+  with sell-side: consensus **56.21**, BT Capital 60.91 (Hold), Ipopema 51.50
+  (Sell) — i.e. the market at 65.10 trades ~14% *above* consensus, offering no
+  margin of safety.
+- **New entry condition — BOTH legs required, not either**:
+  1. Price **≤56.00**, AND
+  2. **At least one reactor confirmed restarted and sustained** (a confirmed
+     restart announcement, not a hydrology forecast or a "hoped" date).
+- **No resting GTC order is placed at 56.** It would sit ~14% below market —
+  outside ENGINE.md §2.8's ±10% price-sanity rule — and would fill automatically
+  during exactly the panic in which a fresh look is required. Conditional in the
+  plan, not resting in the book.
+- **A price drift into the low 60s on no news is explicitly NOT a trigger.**
+- Kill criteria (unchanged in substance): windfall-tax reintroduction on
+  nuclear; SMR Doicești becoming a forced capital drain (state overruling
+  minorities on a dilutive raise); H1 profit collapse >30% vs Q1 run-rate.
+- Status as of 2026-08-24: **both units still offline** (Unit 1 since Jul 28,
+  Unit 2 since Aug 13). Danube discharge at Baziaș **stationary at 1,300 m³/s
+  vs the 3,900 August average** (INHGA bulletin Aug 22), forecast to rise only
+  toward ~1,550 — still deeply insufficient. Officials: restart before Aug 31
+  unlikely. **Governance escalation**: the Ministry of Energy (majority
+  shareholder) forced onto the Sep 10 EGM agenda a resolution to publish the
+  Prime Minister's Control Body report in full (request registered Aug 14);
+  **SNN publishes the completed agenda materials Aug 27, 18:00**. Reported
+  findings: Doicești ranked 2nd of 9 sites with no documented comparative
+  analysis; Nova Power & Gas selected without competitive tender; land at ~€46m
+  vs a ~€24.45m cited valuation; FEED2 ~20 months late; project cost estimate up
+  ~$3.8bn to ~$6.5bn by Dec 2025. SNN disputes the conclusions.
+- Open question tracked as assumption **A9** (check Sep 30): is this outage
+  weather-cyclical, or the first instance of a recurring structural Danube
+  constraint on Romanian nuclear baseload? That decides whether SNN is a cheap
+  asset having a bad summer or a permanently de-rated one.
+- **Daily monitoring trail 2026-08-06 → 2026-08-24 (condensed 2026-08-24)**:
+  eleven consecutive daily entries tracked the crisis and re-affirmed the
+  pause without changing the band — Unit 1 shutdown (Aug 6 finding, missed by
+  the Aug 3/4/5 scans → LESSONS.md P-3), Unit 2 full shutdown (Aug 13), the H1
+  report read in full (Aug 14), the earnings-call transcript confirming
+  management would not quantify H2 before Q3 (Aug 19), and successive
+  hydrology forecasts that kept moving the restart later (Aug 17/18/21/24).
+  Full reasoning for each is preserved in journal/2026-08.md under those
+  dates; condensed here because all of it is superseded by the 2026-08-24
+  re-band above. The pattern itself became LESSONS.md P-5.
+- Expected holding if re-entered: 1–3+ years.
+
+### TLV — Banca Transilvania (core) — HELD 81 sh, T2 band unchanged
+- Price 37.56/37.60 (2026-08-24) | P/E ~10.0 | P/B 2.0 | div 1.2840 paid June
+- Thesis: Romania's dominant retail/SME bank compounding at ~25–30%; 9.9x for
+  the market's quality compounder while rates stay high (NII tailwind persists
+  to ~2027 since cuts got pushed out); possible ~700m special dividend in
+  autumn (**still conditional and unconfirmed** — traces only to a May 28, 2026
+  Tetik quote, "*if* performance continues... we could ask shareholders"; not
+  addressed either way in H1 coverage).
+- Caveats: analyst targets 29.9–33.8 and **still not revised upward after the
+  H1 beat** — the freshest anchor found is a crowd-sourced 33.88 (Aug 9), i.e.
+  every visible external valuation sits 10–20% *below* spot; 4% bank turnover
+  tax through 2026 (C/I 44.6% incl. it vs 38.3% ex-it); melt-up beta.
+- ⚠ **CORRECTION 2026-08-24 — the issuer buyback is CLOSED, not running.** This
+  file previously listed it as live support ("up to 5M shares, max 38 RON,
+  weekly via BTCP"). TLV's board **finalized and closed** that programme on
+  **2026-05-22** (BVB current report `TLV_20260522160244`, verified directly);
+  the repurchased shares went to a staff loyalty allocation on 2026-05-28, so
+  they are not float overhang either. **There is no issuer bid under this price.**
+  The 38 level is now only chart resistance near the 38.28 52-week high. See
+  LESSONS.md M-2.
 - Fair-value band: 38–44 on 2026E (~11–12x)
-- Entry: T1 ≤36.9 (~3,000 RON, deliberately modest); T2 at 33–34.5 or after
-  H1 (Aug 21, call Aug 24; Investor Day Oct 1) confirms guidance. Full
-  position ≤8,000 RON.
+- **H1 2026 (published ~Aug 21) — thesis confirmed**: group net profit **2.5bn
+  RON (+26.8% YoY)**, bank 2.1bn (+20.7%); **cost of risk 0.63% (−20bp YoY)**;
+  **NPL 2.41% (−0.24pp YoY)**; solvency 21.96%; ROE 21.98%; gross loans 113.7bn
+  (+7.6% YTD); ~25bn RON new financing, 250k+ new clients. No guidance cut; the
+  board-approved 5.11bn RON gross-profit budget stands. **No kill criterion hit
+  — NPL and cost of risk both moved the right way.**
+- Entry: T1 ≤36.9 **(filled 2026-08-06, 81 sh @ 37.0107 incl. fees)**.
+  **T2 stays 33.00–34.50** — deliberately NOT re-banded upward on the good H1
+  (2026-08-24 weekly decision). **Accepted explicitly: this band may never fill,
+  and that is the cost of the discipline** — tracked as falsifiable assumption
+  **A10** (check Oct 31).
+  - **Dislocation-linked secondary leg**: if BET falls ≥5% from the ATH
+    (36,576.55 → ≈34,748), triggering STRATEGY §6's first reserve slice, then
+    TLV at **≤35.50** with thesis intact qualifies for T2 (~81 sh, ~2,850 RON).
+    This ties any higher entry to a market-wide event rather than to a good
+    headline. Full position ≤8,000 RON.
 - Kill criteria: guidance cut below 4bn; bank tax extended AND raised for 2027;
   credit-quality deterioration (NPL inflection) in H1/Q3 reports.
+- Calendar: Investor Day **Oct 1**. Administrative: ASF registration certificate
+  for the already-approved bonus-share capital increase due ~Aug 29 (mechanical
+  follow-through, not new news).
 - **2026-08-21 (daily run)**: H1/S1 2026 results are officially scheduled
   today (call Aug 24) but not yet published as of this pre-open scan
   (BVB/investor-relations filing lists checked directly, most recent item
@@ -230,34 +170,110 @@ on material news, with journaled rationale).
   journal/2026-08.md 2026-08-24 entry.
 - Expected holding: 1–3+ years.
 
-### IARV — IAR Brașov (satellite, defense)
-- Close 38.70 (spread ~38.7/38.9) | P/E ~15 | div 2.35 approved (~6%)
+### IARV — IAR Brașov (satellite, defense) — HELD 64 sh, ⚡ T2 ARMED Fri 2026-08-28
+- Price 38.90/39.00 (2026-08-24) | P/E ~15 | div 1.342 gross paid 2026-07-16
 - Thesis: near-monopoly helicopter MRO for a state whose defense budget is
-  SAFE-funded (€16.68bn, signed 2026-05-21, ~50% local-content pledge); Q1
-  profit 2x YoY; Airbus H225M local-production optionality; 15x for a funded
-  structural demand step-up.
+  SAFE-funded (€16.68bn, signed 2026-05-21, ~50% local-content pledge); Q1 2026
+  net profit 30.65m RON vs 15.50m (≈2x YoY), pre-tax +85.6%, operating revenue
+  +41%; Airbus H225M local-production optionality; ~15x for a funded structural
+  demand step-up.
+- ⚠ **Correction 2026-08-24**: the 12-helicopter H225M Special Forces contract
+  is **signed (2026-07-17) at a final €757m** — the ~€852m figure carried since
+  inception was the SAFE-approved allocation ceiling, not the contract price.
+  The follow-on carrying the local-production thesis is **30 further units**
+  (not 32), still **conditional and unsigned**; the Economy Ministry ties IAR's
+  Ghimbav investment (maintenance centre, engine repair, eventual assembly
+  line) to that firm order being assumed in the Defence plan by 2030.
 - Caveats: state control 64.9%; lumpy contract accounting (FY25 −44%); +56%
-  YTD; Standard-segment liquidity — patient limit orders only.
+  YTD; thin book (~103k RON traded by 11:00 on 2026-08-24) — patient limit
+  orders only, split across days if depth is poor.
 - Fair-value band: 48–60 if H1 confirms the step-up (~12–15x on doubled
   earnings power)
-- Entry: T1 ≤38.7 (~2,500 RON); T2 only after H1 print (~Aug 31) confirms.
-  Full position ≤5,500 RON (satellite cap).
+- Entry: T1 ≤38.7 **(filled 2026-08-04, 64 sh @ 38.8161 incl. fees)**.
+- **⚡ T2 conditional — H1 report Fri 2026-08-28** (date corrected from "~Aug 31";
+  verified directly against BVB's IARV financial calendar, which also lists Q3
+  on 2026-11-13):
+  - **Pre-check first**: verify the **2026-08-11/12 AGOA resolutions** on BVB —
+    they could not be retrieved during the Aug 24 research (iar.ro PDFs
+    unreachable). If they contain a capital action, **halt and reassess** rather
+    than add.
+  - **Condition**: H1 2026 net profit **≥1.5x H1-2025** (assumption A7), no
+    adverse governance item, no SAFE award bypassing IAR.
+  - **Then**: T2 up to **70 sh at limit ≤41.00** (≤3,000 RON net incl. fee),
+    keeping total cost basis ≤5,500 (satellite cap).
+  - **Band rationale (fresh journaled thesis, satisfies STRATEGY §3's no-chase
+    rule)**: ≤38.7 was a *pre-earnings* entry price. A confirming H1 is exactly
+    the de-risking event STRATEGY §3 says to prefer entering around; on a
+    confirmed ≥1.5x step-up the 48–60 band stands and 41 is still a ~15–30%
+    discount to it. Paying up to 41 *after* confirmation is a different decision
+    from chasing 41 before it, and is written here in advance.
+  - **If profit is flat-or-down YoY**: that is the written kill criterion —
+    **do not add**, hold the 64 shares, mark the thesis at risk, hand the
+    hold/exit call to the next weekly run with real numbers.
 - Kill criteria: H1 profit flat-or-down YoY (lumpiness dominating = thesis
   timing wrong); SAFE awards bypassing IAR; governance action hostile to
   minorities.
+- Governance note (2026-08-19 BVB disclosure): Rasaliu reconfirmed Director
+  General, Vaiso appointed CFO under OUG 109/2011 — reads routine, not a
+  governance event.
 - Expected holding: 1–3 years (theme duration), reviewed each earnings.
 
 ## Triggered watch (defined events, no orders until they fire)
 
-| Name | Trigger | Then |
-|---|---|---|
-| TTS 6.58 | Next week's cap slot opens; or H1 (Aug 31) confirms turnaround; or ≤6.0 | T1 ~2,500 at ≤6.6 |
-| ONE 34.45 | H1 (Aug 26) shows revenue-recognition catch-up; or ≤30 with thesis intact | T1 ~2,500 |
-| ARS 18.10 | Post-H1 (Aug 14) reset toward ≤15.5; or convincing H1 + pullback | T1 ~2,000 — **no trigger 2026-08-19**: H1 beat (net profit +87.9% YoY to 86.7m RON), stock rose ~3.6% on the print instead of resetting down; quote 19.6/19.65 today, above both 18.10 and 15.5 — richer, not cheaper. Stays watch-only. |
-| H2O 200.0 | The state's planned 5–10% ABB placement (prices at a discount — the entry event); or post-ex-div (Sep 8, special 2.2232 only — main 7.3484 went ex Jun 3) weakness toward ≤175 | T1 ~3,000 |
-| PBK 0.147 | After diligence pass (weekly run) validates FY26 target credibility | size then |
-| BENTO 8.70 | After AeRO liquidity check + diligence | ≤8% portfolio cap |
-| BET index | −5% from ATH (~34,680) / −10% (~32,850) | Dislocation playbook, STRATEGY §6 |
+Updated 2026-08-24 after a full diligence pass. **Three names were downgraded on
+inspection** — recorded plainly, because avoiding them is ENGINE.md §3.5 alpha.
+
+| Name | Price (2026-08-24) | Trigger | Then |
+|---|---|---|---|
+| **TTS** | 7.28 (bid 7.30/ask 7.36) | ⬇ **DOWNGRADED — earnings leg REMOVED.** Price-only **≤6.00**. | T1 ~2,500. See drought note below. |
+| **ARS** | 19.6 | Post-H1 reset toward ≤15.5 | No trigger 2026-08-19: H1 beat (+87.9% YoY to 86.7m RON), stock rose ~3.6% instead of resetting — richer, not cheaper. Watch-only. |
+| **H2O** | 184.60 | ⬇ **NARROWED**: the state ABB **actually launching** at its discount. A drift lower is no longer sufficient. | T1 ~3,000 |
+| **PBK** | 0.157 | ⬇ **DEMOTED off active candidacy.** Revisit only if H1 shows core (ex-one-off) acceleration AND the NPL trend reverses. | — |
+| **BENTO** | 9.30 | ⬇ **DROPPED from active consideration.** Revisit after H1 on Sep 15. | — |
+| **SMTL** | 44.20 | Watch H1 (**Aug 25**) only; no position contemplated. Note: **not AeRO** — moved to the Main market 2024-08-12. | — |
+| **BET index** | 36,543 | −5% from the **corrected ATH 36,576.55** ≈ **34,748**; −10% ≈ **32,919**; −15% ≈ **31,090** | Dislocation playbook, STRATEGY §6. Priority: TLV ≤35.50, ONE ≤34.45, IARV within satellite cap. |
+
+**TTS — why the earnings leg was removed (2026-08-24).** The same Danube drought
+that shut Cernavodă is cutting Danube navigation hard: vessel loads down from
+~1,000t to ~500t on the Romania/Bulgaria stretch, Serbia at ~1/3 capacity,
+rising grain tariffs, all in peak agricultural season (Bursa.ro, Aug 5). TTS is a
+Danube river-transport and Constanța port operator sitting directly in that
+corridor and **has issued no filing quantifying any impact**. Its H1 (Aug 31)
+covers Jan–Jun and is largely *pre-drought* — so a clean H1 would be actively
+misleading about Q3. Price has also run to 7.28, at/above the 7.36 consensus the
+original thesis cited, i.e. it now trades at fair value with a new unpriced
+headwind. Also note Q1 agricultural cargo volumes were **−28.6% YoY**, which does
+not square with the "+9.6% river volumes" in the inception thesis — reconcile
+before any future entry. Buy only on deep value (≤6.00), with the drought logged
+as an open risk.
+
+**PBK — why demoted.** The FY26 target of 85m RON (+69%) carrying the whole
+"5–6x forward P/E" case is **~30% a one-off**: the SAI Patria Asset Management
+sale to BRD AM (closed 2026-08-05, ~26m RON gross gain). Core Q1 growth was
+**+12%**, not +69%. Meanwhile NPL rose 4.4% → **5.2%** while coverage *fell*
+56.3% → 52.7% — roughly 2x the sector's 2.69%. Capital is fine (21.36%). But a
+sub-scale bank with deteriorating asset quality, **85.1% held by one holder**
+(EEAF), unverified float liquidity, and an M&A-speculation-driven rally fails
+the "which edge is this?" test (ENGINE.md §3).
+
+**BENTO — why dropped.** The +48% Q1 growth is a rebound off a **halved 2025**
+(net profit 16.4m in 2024 → 6.4m in 2025) and is concentrated in one lumpy
+~34m RON energy contract in its implementation phase. 20.6x trailing. Free float
+~47% of a 132m RON cap with 51.6% insider-held — AeRO liquidity would bind well
+below where valuation suggests. Claimed 3.4% dividend yield unverified (BVB
+shows 3.09% trailing).
+
+**H2O — why narrowed.** The ABB entry-event thesis is materially weaker than
+assumed: it was only ever a *contingent backup* if the EC rejects Romania's
+alternative route to PNRR milestone 443 (deadline Aug 31), and the government
+that proposed it fell on 2026-05-05 with that very share-sale plan cited among
+the censure grievances (assumption **A11**). **Do not mistake Fondul
+Proprietatea's own ~10% stake sale** (announced June 2026) for the state ABB —
+different seller, different transaction. Swiss Capital carries a **strong sell,
+127.2 target vs 184.60 spot**. Ex-dividend **Sep 8** (special 2.2232 only; main
+7.3484 went ex Jun 3) appears on track per the AGA resolution. H1 2026 was
+strong on normalized hydrology (revenue +40%, net profit +62% to 2,571m RON) —
+the issue is price and placement risk, not the asset.
 
 ## Explicitly avoided (re-test quarterly, not daily)
 
@@ -277,3 +293,18 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   of this run (only stale Q1 2026 and prior-year S1 2025 results indexed).
   Capitulation leg of the AND condition failed regardless of guidance, so no
   further check was needed. Detail: journal/2026-08.md 2026-08-05 entry.
+- **2026-08-24 (first weekly run since inception)**: major revision.
+  **SNN** active buy plan withdrawn and re-banded (≤56.00 AND confirmed
+  restart; fair value 75–90 → 55–70) — see LESSONS.md P-5. **ONE** promoted to
+  an armed conditional for Aug 26. **IARV** T2 armed for **Aug 28** (date
+  corrected from ~Aug 31) at ≤41.00 with a fresh journaled band rationale.
+  **TLV** T2 held at 33.00–34.50 despite a confirmed-good H1, plus a
+  dislocation-linked ≤35.50 leg; **buyback "support" corrected — it closed
+  2026-05-22** (LESSONS.md M-2). **TTS** earnings leg removed on the Danube
+  drought read-across; **PBK/BENTO** demoted; **H2O** trigger narrowed; **SMTL**
+  noted as not-AeRO. Dislocation levels recomputed off the corrected ATH
+  (36,576.55). FTSE Sep review (announced Aug 21, effective Sep 21) adds AQ and
+  CFH, promotes EL, **removes SMTL**; TRP/TTS merely reconfirmed — no inclusion
+  catalyst for us. The **BVB BET committee still meets in the first week of
+  September** — that is the one that matters for domestic flows.
+  Detail: journal/2026-08.md 2026-08-24 weekly entry.

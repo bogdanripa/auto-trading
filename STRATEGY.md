@@ -1,4 +1,4 @@
-# STRATEGY.md — v1.0
+# STRATEGY.md — v1.1
 
 Living strategy. Any run may amend it with a version bump, changelog entry, and
 journaled rationale (ENGINE.md §6). The constitution (ENGINE.md) always wins on
@@ -29,6 +29,35 @@ window. The May 5 episode (government fell, market closed +1.2% same day and
 +27% since) showed dips get bought violently — a prepared buyer with cash and
 a watchlist is the single best-positioned actor in this regime.
 
+### Regime update — 2026-08-24 (v1.1)
+
+Core read unchanged; four corrections and one shift worth carrying:
+
+- **ATH is 36,576.55 (2026-08-04)**, not 36,503 (Jul 23). All dislocation levels
+  in §6 are recomputed off this.
+- **The melt-up is no longer one-directional**: the week of **Aug 17–21 closed
+  −2.9%** on reduced volume, the first genuine retreat from the highs. Today's
+  36,543 is back near the top. Not a dislocation — but "this market only goes
+  up" is no longer an accurate premise, which matters for assumption A1.
+- **The political tail is fatter than v1.0 assumed.** Not merely "caretaker
+  since May 5": **two investitures have already failed** (Tomac; Veștea voted
+  down 2026-06-22), so parliamentary dissolution and snap elections have been
+  legally available since ~Aug 20. No premier is designated (Grindeanu vs
+  Mureșan); President Dan requires a signed 233-vote guarantee first. 110+ days
+  of caretaker government.
+- **Disinflation is real**: July CPI printed **8.16%** (from June's 10.42%),
+  though NBR revised its own FY26 forecast *up* to 5.5% the same week. Rate held
+  6.50%; no cut expected before 2027.
+- **PNRR is this week's live event**, not background: Parliament sits in
+  extraordinary session **Aug 24–26** to pass the hydrogen and integrity/ANI
+  laws before the **Aug 31** milestone deadline. Amounts at stake are reported
+  inconsistently (~€2.84bn for payment request #5, ~€10bn for #5+#6, €6.3bn of
+  projects "at risk") — **do not anchor risk sizing to a single figure**; v1.0's
+  "~€4.5bn" was one estimate among several.
+- Ratings all affirmed on Negative: Fitch BBB− (Jul 31), Moody's Baa3 (Aug 7),
+  S&P BBB− (unscheduled, ~May 15–18). **S&P's next date is unconfirmed** — v1.0's
+  "~Oct" is not established; treat as event-driven.
+
 ## 2. Portfolio construction
 
 - **5–9 positions** at full deployment. Initial tranches 2,500–3,500 RON
@@ -37,11 +66,32 @@ a watchlist is the single best-positioned actor in this regime.
   identifiable catalysts.
 - **Satellite (30–50% of invested)**: turnarounds, special situations, small/mid
   caps within liquidity caps (ENGINE.md §2.7).
-- **Cash policy**: start 100%. Target ~30–40% invested by Aug 31, ~55–70% by
-  end-September *if no regime crack and entries meet price discipline*. Keep
-  ≥25–30% reserve through the October rating reviews unless the dislocation
-  playbook (§5) triggers. Accepting short-term lag vs a continuing melt-up is a
-  deliberate, journaled choice — do not panic-chase; the mandate is long-term.
+- **Cash policy (revised v1.1, 2026-08-24)**: the v1.0 targets — ~30–40%
+  invested by Aug 31, ~55–70% by end-September — are **abandoned as written**,
+  because they were calendar-driven while every entry rule is price-driven. With
+  three weeks elapsed the engine sits at **11.8% invested** against a 30–40%
+  Aug-31 target it cannot reach without violating its own bands. A plan whose
+  bands all sit below market is a plan to hold cash indefinitely; pretending
+  otherwise produces a target that is silently missed every week and teaches
+  nothing.
+
+  **Replacement policy — deployment is event-driven, not calendar-driven:**
+  1. Capital deploys only when a **written condition fires** (a confirming
+     earnings print at a pre-set band, or a dislocation trigger). No date obliges
+     a purchase.
+  2. **Directional target**: ~25–35% invested by end-September *if conditions
+     fire*; explicitly acceptable to end September below that if they do not.
+  3. **Reserve floor**: keep ≥25–30% cash through the October rating window
+     regardless — unchanged from v1.0 and now the binding constraint rather than
+     an afterthought.
+  4. **The reserve is a position, not idle cash**, and in the current setup it is
+     a well-justified one: a caretaker government past the snap-election
+     threshold, an Aug 31 PNRR milestone, and all three agencies on Negative.
+  5. **But an under-deployed portfolio is a real cost, not a free option** — it
+     is the entire reason the engine trails mandate today. Every weekly run must
+     state the invested percentage and say plainly whether the shortfall is
+     *chosen* (conditions genuinely unmet) or *drifted into* (bands never
+     re-examined). The second is a failure; see LESSONS.md P-5.
 
 ## 3. Entry & exit discipline
 
@@ -80,6 +130,17 @@ previews):**
   orders every run anyway (ENGINE.md §2).
 
 ## 4. Current candidate map (from 2026-08-02 research)
+
+> ⚠ **STALE as of 2026-08-24 — WATCHLIST.md is authoritative.** This section is
+> preserved as the inception record of how each name was first underwritten.
+> Materially superseded since: **SNN**'s buy plan withdrawn and re-banded
+> (≤56.00 + confirmed restart; fair value 75–90 → 55–70); **IARV**'s H225M
+> contract signed at €757m (not €852m) with a 30-unit (not 32) follow-on still
+> unsigned, H1 on Aug 28 (not ~Aug 31); **TLV**'s buyback closed 2026-05-22 and
+> its H1 confirmed the thesis; **TTS**'s earnings trigger removed on the Danube
+> drought read-across; **PBK/BENTO** demoted after diligence; **H2O**'s ABB
+> trigger narrowed; **ONE** promoted to an armed conditional; **SMTL** is not
+> AeRO-listed. Read WATCHLIST.md for anything actionable.
 
 **Buy zone (initial tranches, week of Aug 3):**
 - **SNN (Nuclearelectrica)** — cheapest large energy: P/E 8.3, P/B 1.2, ~5–6%
@@ -145,77 +206,106 @@ previews):**
 - **AQ, TRP, CFH, SFG** — priced far ahead of current earnings; TRP H1 (Aug 5)
   may create a capitulation entry — watch, don't anticipate.
 
-## 5. Week of Aug 3 plan (inaugural — this section is rewritten weekly)
+## 5. Week of Aug 24 plan (rewritten weekly — v1.1)
 
-1. **Mon Aug 3 (daily run)**: verify toolset (BT MCP present, Telegram works).
-   Place tranche-1 limit **day** orders, sized ~2,500–3,000 RON each:
-   - SNN: limit ≤ 64.6
-   - TLV: limit ≤ 36.9 (Fri bid 36.90 / ask 36.98)
-   - IARV: limit ≤ 38.7 (satellite; spread ~0.5%, use patient limits)
-   Each at or slightly below Friday's close / inside the spread; verify live
-   bid/ask first; skip any name that opens >2% above the band (do not chase —
-   re-offer next day at the band). Total new exposure ≤ ~9,000 RON (~19%).
-   If fills happen: journal theses are in this file + the inception journal.
-2. **Tue–Fri (daily runs)**: re-place unfilled orders within bands (day
-   validity, re-check news each morning); watch TRP H1 (Aug 5) for
-   capitulation pricing; no new names without a journaled thesis.
-3. **Sun Aug 9 (weekly run)**: review fills; pre-read NBR Aug 10 and CPI
-   ~Aug 11–13 setups; prepare H1-earnings-week plan (H2O 11th, MSCI review
-   announcement 12th, AQ 13th, SNN/SNG/TGN/TEL/DIGI/ARS 14th; TLV 21st);
-   grade this week's assumptions (below). Full verified earnings/dividend/
-   AGM calendar: research/2026-08-02-bootstrap/catalysts.md.
-4. **No selling** exists to plan — portfolio starts empty.
+Full theses and conditions live in WATCHLIST.md; the authoritative reasoning is
+journal/2026-08.md's 2026-08-24 weekly entry. Activity cap: ≤3 new positions
+this week; this plan can open at most **one** (ONE).
 
-**Assumption ledger (inception — grade in weekly runs):**
-- A1 (check Aug 9): staged entry beats immediate full deployment over the
-  Aug–Oct window — i.e., there will be at least one ≥3% BET pullback or
-  better prices in target names before Oct 31.
-- A2 (check Aug 14): SNN H1 confirms Q1's earnings strength (merchant-price
-  tailwind persists; no windfall-tax surprise).
-- A2b (check ~Aug 31): IARV H1 confirms the defense-demand step-up (profit
-  ≥1.5x YoY half-on-half) — if it prints lumpy-down instead, the thesis
-  timing was wrong: stop adding, reassess.
-- A3 (check Aug 23): TLV H1 (reports Aug 21) keeps FY guidance ≥4.3bn and the special-dividend
-  option alive.
-- A4 (check Sep 30): the political/PNRR window (government formation, Aug 31
-  milestones) produces at least one tradeable dislocation OR resolves benignly
-  with ratings affirmed — either outcome validates holding a reserve.
-- A5 (check Aug 9): the engine's first unattended runs execute cleanly
-  (tools present in the Auto Trader environment, pushes work, Telegram works).
+1. **Mon Aug 24 (weekly run)** — no orders. Nothing triggers today.
+2. **Tue Aug 25** — SMTL H1 published; read only, no position contemplated.
+3. **Wed Aug 26 — ONE H1 (first live trigger).** If H1 shows the IFRS-15
+   revenue-recognition catch-up (revenue AND net profit materially recovered vs
+   Q1's −51%/−78%, contracted collections intact, no new permitting blocker):
+   place T1 **72 sh at limit 34.45** (~2,488 net), day order, re-offer at the
+   band if unfilled. If it fails: no order, drop to price-only ≤30.00.
+4. **Thu Aug 27** — SNN Control Body report materials publish 18:00. Read and
+   log to WATCHLIST.md (feeds A9 and the Sep 10 EGM). **No order either way.**
+5. **Fri Aug 28 — IARV H1 (main event).** Pre-check the Aug 11–12 AGOA
+   resolutions on BVB first; halt if they contain a capital action. If H1 net
+   profit ≥1.5x H1-2025 with no adverse governance item: T2 up to **70 sh at
+   limit ≤41.00** (≤3,000 net), total cost basis ≤5,500. If profit is
+   flat-or-down YoY: **kill criterion — do not add**, hold, mark at risk, hand
+   to next weekly run.
+6. **Standing all week**: TLV no add unless BET −5% from ATH *and* TLV ≤35.50.
+   SNN no order short of ≤56.00 **and** a confirmed sustained restart — a price
+   drift on no news is explicitly not a trigger.
+7. **If nothing fires, the week ends with no trades — that is the correct
+   outcome, not a failure.**
 
 ## 6. Dislocation playbook (standing orders to future runs)
 
-- BET −5% from its ATH (≈34,680): deploy one reserve slice (~10% of portfolio)
-  into the highest-conviction WATCHLIST names at their bands.
-- BET −10% (≈32,850): second slice (~10–15%); re-underwrite every thesis first.
-- BET −15%+ with theses intact and no junk-downgrade: move toward 85–90%
-  invested. A downgrade to junk changes the playbook: reassess everything
-  before buying — forced-seller flows take weeks, not hours.
+**Levels corrected 2026-08-24** to the true ATH **36,576.55 (2026-08-04)**; the
+v1.0 levels were computed off a stale 36,503.
+
+- BET **−5% ≈ 34,748**: deploy one reserve slice (~10% of portfolio) into the
+  highest-conviction WATCHLIST names at their bands. Priority order: **TLV
+  ≤35.50, ONE ≤34.45, IARV** within the satellite cap.
+- BET **−10% ≈ 32,919**: second slice (~10–15%); re-underwrite every thesis
+  first.
+- BET **−15%+ ≈ 31,090** with theses intact and no junk downgrade: move toward
+  85–90% invested. A downgrade to junk changes the playbook — reassess
+  everything before buying; forced-seller flows take weeks, not hours.
 - Single-name −8%+ gap on a WATCHLIST name without thesis-relevant news:
-  buying question for that day's run (ENGINE.md §3.4 edge).
+  buying question for that day's run (ENGINE.md §3.4 edge). **A drift of 1–2%
+  on no news is not a gap and not a trigger** (learned the hard way on SNN).
 
 ## 7. Research agenda for coming weekly runs
 
-- H1 earnings season: read actual reports (bvb.ro) for held + watchlist names.
-- Diligence passes: PBK (asset quality, FY26 target credibility), BENTO
-  (contract durability, AeRO exit liquidity), SMTL (margins, dilution), TBM
-  (invoicing catch-up H2), ATB (payout question).
-- Defense theme tracking: SAFE contract awards (21 projects, €9.6bn), ARS/IARV
-  H1 prints, any Romarm/Cugir listing news.
-- ALR: event-only — CISAF state-aid decision would change the math; not before.
-- Confirm the 0.30% commission against the first real fill (assumption A6).
+**Immediate (this week / next):**
+- Read the actual H1 reports as they land: SMTL (Aug 25), ONE (Aug 26), IARV
+  (Aug 28), TTS (Aug 31). Read the reports, not the headlines.
+- SNN Control Body report materials (Aug 27, 18:00) → Sep 10 EGM. Track whether
+  a capital/dilution item enters scope.
+- **Verify whether the weekly cron trigger fires on its own Sunday Aug 30** —
+  this run was invoked as a scheduled task; the trigger's self-healing is
+  unproven (LESSONS.md P-4).
+- Confirm the Aug 31 PNRR milestone outcome and the EC's milestone-443 decision
+  (bears on A11 / the H2O ABB).
+
+**Standing:**
+- **BVB BET index committee, first week of September** — the domestic-flow
+  event that matters; FTSE's Sep 21 changes (AQ, CFH added; EL promoted; SMTL
+  removed) carry no inclusion catalyst for our names.
+- Government formation: two investitures have already failed (Tomac; Veștea
+  voted down 2026-06-22), so dissolution/snap elections are legally available
+  from ~Aug 20. Track any premier designation.
+- Ratings: Fitch BBB−/Negative (Jul 31), Moody's Baa3/Negative (Aug 7), S&P
+  BBB−/Negative (unscheduled review ~May 15–18). **S&P's next date is
+  unconfirmed — do not assume October**; its 2026 pattern has been event-driven.
+- **NBR next meeting reported as Oct 8 — single-sourced, verify against bnr.ro**
+  before treating as a calendar anchor. Rate held 6.50% since Aug 2024.
+- EUR/RON (5.2581 on Aug 22; >5.30 = stress). 2026 max was 5.2688 on May 6.
+- **Fidelis retail competition**: the August issue paid up to 7.50% RON
+  tax-free; a September tranche advertising **up to 8.20%** is flagged on
+  mfinante.gov.ro but its window was unconfirmed as of Aug 24 — verify, because
+  8.20% tax-free is a materially harder hurdle for equity allocation.
+- IPO/SPO pipeline (H2O 5–10%, SNG 5–7%, CEC Bank Q4): all still *roadmap*, none
+  launched. Standing rule: evaluate every BVB main-market IPO/SPO as a candidate.
+- Re-verify, each weekly run, that any **standing support or structural fact** a
+  thesis leans on is still live (LESSONS.md M-2), and that each held/watchlist
+  name's **next reporting date** matches the issuer's own BVB calendar.
 - Track realized gains + dividends vs the 24,300 RON CASS cliff (Q4 check).
-- Track weekly: government formation, July CPI (mid-Aug), PNRR Aug 31, Moody's
-  ~Sep, **BET index committee ~Sep 4 / effective Sep 21** (add/remove risk for
-  borderline names incl. TTS/ATB/TRP/SFG), FTSE review Sep, H2O ex-div Sep 8,
-  S&P ~Oct, Fidelis yields (retail cash competition; 10Y RON retail 7.55%
-  tax-free in July), EUR/RON (5.24; >5.30 = stress signal).
-- Market hours (verified): open auction 09:45–10:00, continuous 10:00–17:45,
-  closing auction 17:45–17:50, trading-at-last to 18:00. No BVB holidays
-  Aug–Oct 2026; closed Nov 30, Dec 1, Dec 25 (+expect Dec 24/31).
+- Deferred diligence: PBK and BENTO H1 prints; TTS book value and a fresh
+  consensus target (the 1.16x book / 7.36 consensus in the inception thesis are
+  stale after the run to 7.28).
 
 ## Changelog
 
+- **v1.1 — 2026-08-24** — First weekly run since inception (three missed;
+  LESSONS.md P-4). Rationale in journal/2026-08.md's 2026-08-24 weekly entry.
+  Changes: (1) **cash policy rewritten** from calendar-driven targets to
+  event-driven deployment with an explicit reserve floor, after the v1.0 targets
+  proved unreachable without violating the engine's own price discipline;
+  (2) §5 rewritten for the week of Aug 24 with conditional orders daily runs can
+  execute mechanically; (3) **dislocation levels corrected** to the true ATH
+  36,576.55; (4) research agenda refreshed and given two new standing checks
+  (re-verify standing-support facts; re-verify reporting dates against issuer
+  calendars) after this run found a closed buyback still listed as live support
+  and a three-day error in IARV's H1 date. Regime read is materially unchanged
+  from v1.0 except that the political tail is fatter (two failed investitures,
+  snap elections legally available) and BET has had its first real pullback
+  (−2.9% in the week of Aug 17–21).
 - **v1.0 — 2026-08-02** — Inception. Written by the bootstrap session from
   first principles + fresh research (7-agent sweep: macro regime, BET large
   caps, small caps, mechanics/tax, catalysts, recent news, prior-engine

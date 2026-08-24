@@ -19,6 +19,21 @@ Take your time — this run is allowed to be long and thorough. Ultrathink.
 4. **Portfolio review**: for each held position — thesis still intact? kill
    criteria approached? valuation vs fair-value band? Decide: hold / add /
    trim / exit, each with reasoning. Update `state/positions.md`.
+   **Two mandatory verification steps** (added 2026-08-24 after this run found a
+   closed buyback still listed as live support and a three-day error in an H1
+   date — see LESSONS.md M-2 and the 2026-08-24 journal entry):
+   - **Re-verify reporting dates**: for every held and watchlist name, check the
+     next reporting date against the *issuer's own BVB financial calendar*, not
+     against a date inherited from an earlier run.
+   - **Re-verify standing facts**: any thesis leaning on a standing support or
+     structural fact — a buyback, a state programme, a signed contract, an index
+     inclusion — must have that fact re-confirmed against a primary source.
+     Facts with expiry dates decay silently; the thesis document does not warn
+     you.
+   - **Resolve stale pauses**: a paused order re-affirmed without change across
+     **two consecutive weekly reviews** must be resolved into either an active
+     plan with a freshly-derived band or a triggered-watch with explicit
+     conditions. It may not simply be paused a third time (LESSONS.md P-5).
 5. **Research** (the bulk of the run): work the research agenda in STRATEGY.md.
    Typical content: earnings reports released this week for held/watchlist names
    (read the actual reports on bvb.ro, not just headlines), upcoming week's
