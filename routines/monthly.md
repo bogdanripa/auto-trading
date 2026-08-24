@@ -38,7 +38,7 @@ run where the engine is allowed to change its mind about how it operates.
 9. **Journal, report, push**. Telegram briefing: the monthly letter — honest,
    numbers-first, in the voice of a fund manager writing to their single LP:
    performance vs mandate, what was learned, what changes, what would make next
-   month a failure.
+   month a failure. Send via `scripts/telegram_notify.mjs` (ENGINE.md §7).
 10. **X post**: publish the monthly letter as a thread (routines/x-posting.md) —
     the flagship public artifact of the experiment.
 

@@ -21,6 +21,7 @@
   "notes": [
     "The BT Trade API key is axis-filtered at the gateway: markets=[BVB], currencies=[RON], symbols exclude TVBETETF and BTBETRETF. This enforces ENGINE.md hard rules 1-2 at infrastructure level; a FORBIDDEN error on an order is the filter working, not a bug to route around.",
     "X posting: runs post public-experiment threads per routines/x-posting.md via scripts/x_publisher.mjs. Requires X_API_KEY / X_API_SECRET / X_ACCESS_TOKEN / X_ACCESS_TOKEN_SECRET env vars in the Auto Trader environment; script exits 2 (non-fatal) when absent — report it in the briefing so the owner can add them.",
+    "Telegram reporting: runs send the briefing via scripts/telegram_notify.mjs (ENGINE.md §7). Requires TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID env vars in the Auto Trader environment; script exits 2 (non-fatal) when absent — fall back to PushNotification and note it in the journal. Added 2026-08-24 after the prior `telegram` skill (session-scoped config file) failed 8 consecutive daily runs.",
     "The legacy 'Auto Trader' trigger from the deleted spring-2026 engine was removed by the owner on 2026-08-02."
   ]
 }

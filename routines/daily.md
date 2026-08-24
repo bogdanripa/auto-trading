@@ -33,7 +33,8 @@ a strategist. Its default and most common outcome is **NO ACTION**.
    thesis *today*. The bar is high. A price move alone is not news.
 8. **Journal, report, push** (ENGINE.md §4.6–4.8). Telegram briefing: 5–10 lines —
    portfolio value & vs-BET ratio, any fills/orders, one-line market tone,
-   today's decision (usually "no action — <reason>").
+   today's decision (usually "no action — <reason>"). Send via
+   `scripts/telegram_notify.mjs` (ENGINE.md §7).
 9. **X post** (public experiment): if today produced something to report per
    routines/x-posting.md, post the thread. A quiet no-action day ⇒ no post.
 

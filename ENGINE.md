@@ -147,8 +147,16 @@ the paper trail:
 
 ## 7. Practical constants
 
-- Owner: Bogdan Ripa. Telegram briefings via the `telegram` skill; if it fails,
-  continue the run and note the failure in the journal.
+- Owner: Bogdan Ripa. Telegram briefings: write the briefing text to a temp
+  file, then `node scripts/telegram_notify.mjs --file <path>`. Credentials
+  (`TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`) come from env vars on the Auto
+  Trader environment, so every run's container has them — this replaces the
+  `telegram` skill, whose config file lived inside one specific session and
+  caused 8 consecutive daily-run reporting failures (2026-08-07 through
+  2026-08-24; see journal/2026-08.md). If the script exits non-zero (missing
+  env vars, API rejection), fall back to `PushNotification`, note the failure
+  in the journal, and continue the run — reporting mechanics never block a
+  run's decisions or its push.
 - Trading hours (Bucharest local, EEST in summer; verified 2026-08-02):
   opening auction 09:45–10:00, continuous trading 10:00–17:45, closing auction
   17:45–17:50, trading-at-last until 18:00. GTC orders expire after max 62
