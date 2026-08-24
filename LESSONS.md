@@ -43,6 +43,28 @@ that runs daily therefore drifts toward trading daily. The constitution makes
 this bias in yourself: if the week's journal shows trades without triggers from
 the weekly plan, that is the bias winning.
 
+### P-4: A scheduled routine can silently never fire — daily runs must not assume weekly/monthly cadence works (2026-08-24, journal/2026-08.md)
+The weekly run (cron `0 14 * * 0`, trigger `trig_01HucP2PNqsTaKfk6WQsKtdq`) has not
+fired even once since inception (2026-08-02) — missing Aug 9, 16, and 23, a full
+three weeks and counting, while the daily trigger fired reliably in the same
+environment the entire time. Six consecutive daily runs (Aug 17–21) flagged this
+in their handoff notes with escalating urgency; the routine-level fix (checking
+the Routines UI trigger config) is outside the engine's own tool access and
+requires the owner. Compounding effect: A1–A5 (the inception assumption ledger)
+went ungraded for three weeks, STRATEGY.md §5 stayed titled "Week of Aug 3"
+long after it was stale, and no fresh weekly research/watchlist refresh happened
+— the engine ran on autopilot reading the same static plan daily. Fix going
+forward: (1) a daily run is not the weekly strategist and should not routinely
+do the weekly run's job, but per the Aug 20/21 handoff precedent, if the weekly
+trigger has silently failed for multiple consecutive expected firings, a daily
+run should grade overdue assumptions and log the failure itself rather than let
+the ledger go stale indefinitely — this is a deliberate, journaled exception,
+not a new default. (2) Never assume a configured cron trigger is running just
+because it was configured once; a run that depends on another run's cadence
+(assumption grading, weekly strategy refresh) should check for evidence of that
+run's actual execution (a journal entry in the expected window), not just trust
+the schedule exists.
+
 ## Assumption-grading notes
 
 _Grades accumulate in journal entries; patterns worth keeping get promoted here._

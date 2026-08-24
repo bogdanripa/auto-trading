@@ -165,6 +165,20 @@ on material news, with journaled rationale).
   Quote 64.9/65.2 pre-open — back above the 64.6 band. Order stays
   **paused**. Next real checkpoint: Aug 24–26. Full reasoning:
   journal/2026-08.md 2026-08-21 entry.
+- **2026-08-24 (daily run)**: the Aug 24–26 hydrology checkpoint arrived
+  more negative than hoped, not more positive. Energy Ministry state
+  secretary (reported Aug 21, after Friday's run): "slim chances" of
+  restart before Sep 1; a Recorder.ro Aug 21 piece headlines the plant
+  "closed until September"; the extended energy alert is expected to be
+  prolonged past August. This supersedes the "hoped Aug 23/30" restart
+  estimate carried since Aug 18 — still a forecast, not a confirmed
+  restart, but the forecast direction moved later, not sooner. Neither
+  re-offer condition (confirmed stable restart, or quantified H2
+  guidance — closed off until Q3 per Aug 19) is met; if anything the
+  bar moved further away. Quote 64.7/64.9 pre-open. Order stays
+  **paused**. Next real checkpoint: any confirmed (not forecast) restart
+  announcement, or the Q3 update (~November) for quantified guidance.
+  Full reasoning: journal/2026-08.md 2026-08-24 entry.
 - Expected holding: 1–3+ years.
 
 ### TLV — Banca Transilvania (core)
@@ -193,6 +207,27 @@ on material news, with journaled rationale).
   after the record date, so no free shares are owed; holdings correctly
   unchanged at 81 shares. Quote 37.40/37.54 pre-open. Full reasoning:
   journal/2026-08.md 2026-08-21 entry.
+- **2026-08-24 (daily run)**: H1 2026 results now published (press
+  coverage, filed Aug 21 or over the weekend). Group net profit **2.5bn
+  RON, +26.8% YoY**; bank-level 2.1bn, +20.7% YoY; ~25bn RON financing
+  originated, 250k+ new clients; **cost of risk improved to 0.63%
+  (−20bp YoY)** — no NPL inflection, kill criteria not hit. No guidance
+  cut found anywhere; the 2026 budget (board-approved earlier this year)
+  targets 5.11bn RON gross profit, and H1 run-rate is consistent with
+  that. CEO Tetik's tone is cautious on the macro backdrop but not
+  negative on execution. No explicit special-dividend reaffirmation
+  found in H1 coverage (not denied either — just not addressed). Net:
+  **H1 confirms the guidance/quality thesis** (T2's "confirms guidance"
+  leg is satisfied) — but price has moved well past both the T1 band
+  (≤36.9) and the T2 band (33–34.5): quote 37.32/37.50 pre-open, ~8–13%
+  above the T2 band. STRATEGY.md §3's chase-discipline rule (never chase
+  >3% above the entry band without a new journaled thesis) blocks adding
+  here — a confirmed-good H1 does not by itself license paying up past a
+  pre-set band. **No T2 order placed today.** Flagging for the weekly
+  run (still not fired — see journal) to decide: hold T1-only until price
+  retraces toward 33–34.5, or explicitly re-band T2 with fresh
+  journaled rationale given the confirmed fundamentals. Full reasoning:
+  journal/2026-08.md 2026-08-24 entry.
 - Expected holding: 1–3+ years.
 
 ### IARV — IAR Brașov (satellite, defense)
