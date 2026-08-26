@@ -240,7 +240,8 @@ v1.0 levels were computed off a stale 36,503.
 
 - BET **−5% ≈ 34,748**: deploy one reserve slice (~10% of portfolio) into the
   highest-conviction WATCHLIST names at their bands. Priority order: **TLV
-  ≤35.50, ONE ≤34.45, IARV** within the satellite cap.
+  ≤35.50, ONE ≤30.00** (re-banded 2026-08-26 — H1 condition failed, see
+  WATCHLIST.md), **IARV** within the satellite cap.
 - BET **−10% ≈ 32,919**: second slice (~10–15%); re-underwrite every thesis
   first.
 - BET **−15%+ ≈ 31,090** with theses intact and no junk downgrade: move toward

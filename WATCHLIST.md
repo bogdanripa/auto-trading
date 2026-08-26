@@ -7,36 +7,67 @@ on material news, with journaled rationale).
 
 ## Active buy plan
 
-### ONE — One United Properties (core-value) — ⚡ ARMED CONDITIONAL, Wed 2026-08-26
-- Price 34.95 (bid 34.70/ask 34.95, 2026-08-24) | P/E 8.85 | ~1.0x book |
-  div yield 1.27% | market cap 3.78bn RON
-- Thesis: Romania's largest listed residential/mixed-use developer at ~8.85x
-  earnings and ~1.0x book while the BVB median has re-rated hard. Q1 2026's
-  optical collapse (revenue −51%, net profit −78% YoY) was an **IFRS-15 timing
-  artifact** — a Dec-2025 legal change requires cadastral "pre-apartment"
-  subdivision before pre-sale contracts book as revenue, so transactions land
-  as reservations first. Underlying activity is strong: H1 residential
-  transactions €106.1m over 229 units at +24% YoY price/sqm, **€445m contracted
-  cash collections (company record)**, 75% of units under construction already
-  contracted, commercial portfolio ~152,000 sqm GLA at 95% leased.
-- Which edge (ENGINE.md §3): §3.2 small/mid-cap access + §3.1 concentration in
-  the cheap residue of a re-rated market.
-- Fair-value band: 40–46 (≈10–12x on normalized recognition)
-- **Entry condition (Wed 2026-08-26, H1 report)**: H1 revenue AND net profit
-  materially recovered vs Q1's −51%/−78%, contracted collections intact, no new
-  cadastral/permitting blocker disclosed. **Then**: T1 **72 sh at limit 34.45**
-  (~2,488 net incl. fee), day order, re-offer at the same band if unfilled.
-  T2 only after the Sep 11 Investor Day or a dip toward 30. Full position
-  ≤5,000 RON.
-- **If the condition fails**: no order; drop to price-only leg ≤30.00 and mark
-  the thesis at risk.
-- Kill criteria: H1 shows no catch-up and management cannot date it; contracted
-  collections decline materially; new regulatory blocker on subdivision/
-  permitting; net debt materially up while deliveries slip.
-- Expected holding: 2–3+ years.
-- Calendar: H1 **Aug 26**, teleconference Aug 27, Investor Day **Sep 11**.
+_(no armed conditionals remain live as of 2026-08-26 — ONE's condition failed today; see Triggered-watch below. IARV's T2 remains armed for Fri 2026-08-28.)_
 
 ## Triggered-watch — re-banded names
+
+### ONE — One United Properties (core-value) — ⛔ CONDITION FAILED 2026-08-26, price-only ≤30.00
+- Price 34.20/34.80 (2026-08-26 pre-open) | market cap 3.78bn RON
+- **H1 2026 results (published 2026-08-26 08:00, BVB current report no. 42-2026)
+  read in full (primary source, not headlines):**
+  - Consolidated revenue **440.3m RON, −47% YoY** (Q1 alone was −51% — a
+    marginal, not material, improvement). On a comparable basis excluding the
+    IFRS-15 timing effect, revenue would have been **742.5m RON, −10% YoY**
+    (the "underlying business" figure) — but the entry condition was written
+    against the *reported* figures precisely because the underlying story was
+    never in doubt; the reported numbers are what the market prices.
+  - Residential segment revenue **230.5m RON, −64% YoY** (532.6m / −17% on the
+    comparable basis).
+  - **Gross profit 96.5m RON (−68% YoY); net profit 79.2m RON (−68% YoY)**
+    (Q1 alone was −78%). Backing out Q1 (net profit 21.5m, −78%), **Q2 alone
+    was ~57.7m RON, roughly −61.5% YoY** — still down by more than half, a
+    marginal improvement on Q1's rate of decline, not a recovery.
+  - Contracted future collections: **445m EUR through 2029** (150m in 2026
+    alone), "the highest level of contracted future collections the Company
+    has ever recorded" — this leg of the condition (collections intact) is
+    genuinely satisfied and the strongest datapoint in the report.
+  - **New blocker disclosed, not previously known**: on 2026-07-14 ANCPI
+    (the national cadastral agency) suffered a ransomware attack that took
+    down the e-Terra cadastral/land-registry system nationwide, suspending
+    registration of newly completed units, signing of pre-sale contracts,
+    closing of final sale contracts, and property-transfer registration —
+    i.e. it hit exactly the administrative pipeline the whole ONE thesis
+    depends on (cadastral subdivision → pre-contract → revenue recognition).
+    e-Terra resumed mid-August but left a processing backlog still being
+    worked through; the company states this "may temporarily affect the
+    timing of certain deliveries, property transfers, cash collections and
+    revenue recognition" going forward. This is a new, material,
+    thesis-relevant fact the 2026-08-24 band was written without.
+- **Verdict against the written condition** (WATCHLIST.md pre-Aug-26 text:
+  "H1 revenue AND net profit materially recovered vs Q1's −51%/−78%,
+  contracted collections intact, no new cadastral/permitting blocker
+  disclosed"): **FAILS on two of three legs.** Revenue/profit did not
+  materially recover (47%/68% declines vs 51%/78% — directionally better,
+  not materially so), and a new cadastral blocker was disclosed. Collections
+  were the one leg that held.
+- **Decision: no order placed.** Per the pre-written fallback: **dropped to
+  price-only leg ≤30.00**; thesis marked at risk, not abandoned — the
+  underlying comparable-basis business (−10% revenue) and record contracted
+  collections keep this a name worth re-underwriting, not a name to drop.
+  Current market 34.20/34.80 is ~14–16% above the new fallback price.
+- Fair-value band: unchanged 40–46 pending a cleaner (post-ANCPI-backlog)
+  quarter, but treat with caution until the backlog's real impact on H2
+  deliveries is visible — the band itself is not re-derived today.
+- **New assumption A12** (check-by 2026-09-11, the Investor Day): the ANCPI
+  backlog is a temporary administrative delay that clears within one quarter
+  without materially pushing H2 2026 revenue recognition into 2027; if
+  management cannot date resolution at the Investor Day, treat as broken.
+- Kill criteria (updated): no catch-up and management cannot date one;
+  contracted collections decline materially; ANCPI backlog still unresolved
+  or worsening by the Investor Day; net debt materially up while deliveries
+  slip.
+- Expected holding if entered: 2–3+ years.
+- Calendar: teleconference **Aug 27**, Investor Day **Sep 11**.
 
 ### SNN — Nuclearelectrica — ⚠ ACTIVE BUY PLAN WITHDRAWN 2026-08-24, RE-BANDED
 - Price 65.10/65.30 (2026-08-24) | H1 2026 individual net profit 1,184m RON
@@ -231,7 +262,7 @@ inspection** — recorded plainly, because avoiding them is ENGINE.md §3.5 alph
 | **PBK** | 0.157 | ⬇ **DEMOTED off active candidacy.** Revisit only if H1 shows core (ex-one-off) acceleration AND the NPL trend reverses. | — |
 | **BENTO** | 9.30 | ⬇ **DROPPED from active consideration.** Revisit after H1 on Sep 15. | — |
 | **SMTL** | 44.20 | Watch H1 (**Aug 25**) only; no position contemplated. Note: **not AeRO** — moved to the Main market 2024-08-12. | — |
-| **BET index** | 36,543 | −5% from the **corrected ATH 36,576.55** ≈ **34,748**; −10% ≈ **32,919**; −15% ≈ **31,090** | Dislocation playbook, STRATEGY §6. Priority: TLV ≤35.50, ONE ≤34.45, IARV within satellite cap. |
+| **BET index** | 36,543 | −5% from the **corrected ATH 36,576.55** ≈ **34,748**; −10% ≈ **32,919**; −15% ≈ **31,090** | Dislocation playbook, STRATEGY §6. Priority: TLV ≤35.50, ONE ≤30.00 (re-banded 2026-08-26, condition failed), IARV within satellite cap. |
 
 **TTS — why the earnings leg was removed (2026-08-24).** The same Danube drought
 that shut Cernavodă is cutting Danube navigation hard: vessel loads down from
@@ -308,3 +339,11 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   catalyst for us. The **BVB BET committee still meets in the first week of
   September** — that is the one that matters for domestic flows.
   Detail: journal/2026-08.md 2026-08-24 weekly entry.
+- **2026-08-26 (daily run)**: **ONE's H1 entry condition failed** — reported
+  revenue/net profit −47%/−68% YoY (vs Q1's −51%/−78%), a marginal not
+  material improvement, plus a newly disclosed ANCPI cadastral-system
+  ransomware attack (Jul 14) that hit the exact administrative pipeline the
+  thesis depends on. Contracted collections (445m EUR, record) were the one
+  leg that held. No order placed; dropped to the pre-written price-only
+  fallback ≤30.00; thesis marked at risk, new assumption A12 (check
+  2026-09-11 Investor Day). Detail: journal/2026-08.md 2026-08-26 entry.
