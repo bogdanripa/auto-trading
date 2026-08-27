@@ -62,6 +62,22 @@ _(no armed conditionals remain live as of 2026-08-26 — ONE's condition failed 
   backlog is a temporary administrative delay that clears within one quarter
   without materially pushing H2 2026 revenue recognition into 2027; if
   management cannot date resolution at the Investor Day, treat as broken.
+- **2026-08-27 (daily run) — update relevant to A12, not yet graded**: a
+  same-day (2026-08-26 08:45) follow-up statement guides consolidated 2026
+  net profit **15–20% below the initial budget**, and explicitly frames the
+  ANCPI backlog impact as revenue/profit recognition shifting **"primarily
+  to 2027"** — new legislation (effective Dec 2025) requires completed
+  cadastral subdivision before contract signing, and management chose to
+  finish 2026 physical deliveries over that paperwork, so One High District,
+  One Lake Club and One Lake District Phase 1 book only 5% reservation fees
+  now instead of full revenue on contracted units. This is management's own
+  voice already describing close to the outcome A12 was written to catch as
+  broken, three weeks before the formal Sep 11 check-by. Not graded early —
+  the Investor Day is the deliberate re-underwrite point and may add a dated
+  resolution commitment the Aug 26 statement lacks — but the fair-value band
+  (40–46) should be treated as under more pressure than the 2026-08-26 note
+  implied. No order implication: price 33.6/34.5 vs the ≤30.00 fallback, no
+  position held. Source: ZF, reporting the company's own statement.
 - Kill criteria (updated): no catch-up and management cannot date one;
   contracted collections decline materially; ANCPI backlog still unresolved
   or worsening by the Investor Day; net debt materially up while deliveries
@@ -224,10 +240,16 @@ _(no armed conditionals remain live as of 2026-08-26 — ONE's condition failed 
 - **⚡ T2 conditional — H1 report Fri 2026-08-28** (date corrected from "~Aug 31";
   verified directly against BVB's IARV financial calendar, which also lists Q3
   on 2026-11-13):
-  - **Pre-check first**: verify the **2026-08-11/12 AGOA resolutions** on BVB —
-    they could not be retrieved during the Aug 24 research (iar.ro PDFs
-    unreachable). If they contain a capital action, **halt and reassess** rather
-    than add.
+  - **Pre-check CLEARED 2026-08-27**: the 2026-08-11/12 AGOA resolutions
+    (Hotărârea AGOA nr. 06/11.08.2026, iar.ro, read in full) contain **no
+    capital action**. Agenda: director indemnities (postponed), empowering
+    the Ministry of Economy's AGA representative to sign administrators'
+    mandate addenda (postponed), the addendum's form (postponed), the
+    Sep 9/Sep 8 registration/ex-date for these resolutions' effects (approved
+    — mechanical, Law 24/2017), rectified budget (not further discussed).
+    Quorum 64.89%, unanimous on the one item voted. **Tomorrow's run can
+    proceed straight to the H1 profit condition below without re-checking
+    this.**
   - **Condition**: H1 2026 net profit **≥1.5x H1-2025** (assumption A7), no
     adverse governance item, no SAFE award bypassing IAR.
   - **Then**: T2 up to **70 sh at limit ≤41.00** (≤3,000 RON net incl. fee),
@@ -347,3 +369,9 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   leg that held. No order placed; dropped to the pre-written price-only
   fallback ≤30.00; thesis marked at risk, new assumption A12 (check
   2026-09-11 Investor Day). Detail: journal/2026-08.md 2026-08-26 entry.
+- **2026-08-27 (daily run)**: **ONE** logged a same-day guidance follow-up
+  (2026 net profit 15–20% below budget, recognition shifting "primarily to
+  2027") — context for A12, not yet graded. **IARV**'s Aug 11/12 AGOA
+  pre-check cleared (no capital action) — tomorrow's T2 trigger can proceed
+  straight to the H1 profit condition. No orders; no other trigger close.
+  Detail: journal/2026-08.md 2026-08-27 entry.
