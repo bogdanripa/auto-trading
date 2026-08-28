@@ -7,7 +7,7 @@ on material news, with journaled rationale).
 
 ## Active buy plan
 
-_(no armed conditionals remain live as of 2026-08-26 — ONE's condition failed today; see Triggered-watch below. IARV's T2 remains armed for Fri 2026-08-28.)_
+_(2026-08-28: IARV's T2 condition FIRED — H1 net profit 3.98x YoY, well clear of the ≥1.5x bar, no adverse governance/SAFE item — but the order could not be placed today because the BT Trade MCP was unreachable all run. T2 (up to 70 sh, limit ≤41.00, ≤3,000 RON net) is armed and pending execution at the next run with working broker access; see IARV section and journal/2026-08.md 2026-08-28 entry. No other armed conditionals live — ONE's condition failed 2026-08-26.)_
 
 ## Triggered-watch — re-banded names
 
@@ -263,6 +263,24 @@ _(no armed conditionals remain live as of 2026-08-26 — ONE's condition failed 
   - **If profit is flat-or-down YoY**: that is the written kill criterion —
     **do not add**, hold the 64 shares, mark the thesis at risk, hand the
     hold/exit call to the next weekly run with real numbers.
+- **2026-08-28 (daily run) — H1 2026 published, condition MET, order BLOCKED
+  by infrastructure, not by the trigger**: semester report (filed 08:07,
+  read in full from iar.ro primary source) shows **net profit 32.23m RON vs
+  8.10m H1-2025 = 3.98x YoY** (gross profit 38.36m vs 13.32m = 2.88x) —
+  comfortably clears the ≥1.5x A7 bar. No adverse governance item (board/
+  management roster unchanged), no SAFE award bypassing IAR. Revenue mix
+  caveat: net turnover actually fell 19.6% YoY; the operating-revenue growth
+  is almost entirely "producție stocată" (WIP) build, consistent with the
+  known lumpy contract-cycle pattern — noted, not disqualifying, since the
+  condition was written against net profit. **The BT Trade MCP was
+  unreachable for the entire run (502 from the gateway, retried three times
+  over ~20 minutes) — no live cash/holdings/quote could be fetched, so per
+  ENGINE.md §2.4/§2.12 no order was placed despite the condition firing.**
+  T2 (up to 70 sh, limit ≤41.00, ≤3,000 RON net, total cost basis ≤5,500)
+  stays **armed** for the next run with working broker access, subject to a
+  fresh live quote (last reference before this report: 38.20/38.60,
+  2026-08-27 close 38.30 — stale, re-verify). Full detail:
+  journal/2026-08.md 2026-08-28 entry.
 - Kill criteria: H1 profit flat-or-down YoY (lumpiness dominating = thesis
   timing wrong); SAFE awards bypassing IAR; governance action hostile to
   minorities.
@@ -375,3 +393,10 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   pre-check cleared (no capital action) — tomorrow's T2 trigger can proceed
   straight to the H1 profit condition. No orders; no other trigger close.
   Detail: journal/2026-08.md 2026-08-27 entry.
+- **2026-08-28 (daily run)**: **IARV H1 2026 published, T2 condition MET**
+  (net profit 32.23m RON vs 8.10m H1-2025, 3.98x YoY, no adverse governance/
+  SAFE item) — assumption A7 graded held. **Order NOT placed: BT Trade MCP
+  unreachable the entire run** (502 gateway error, retried three times over
+  ~20 minutes). T2 (≤70 sh, limit ≤41.00, ≤3,000 RON net) stays armed for
+  the next run with working broker access. Detail: journal/2026-08.md
+  2026-08-28 entry.
