@@ -7,7 +7,7 @@ on material news, with journaled rationale).
 
 ## Active buy plan
 
-_(2026-08-28: IARV's T2 condition FIRED — H1 net profit 3.98x YoY, well clear of the ≥1.5x bar, no adverse governance/SAFE item — but the order could not be placed today because the BT Trade MCP was unreachable all run. T2 (up to 70 sh, limit ≤41.00, ≤3,000 RON net) is armed and pending execution at the next run with working broker access; see IARV section and journal/2026-08.md 2026-08-28 entry. No other armed conditionals live — ONE's condition failed 2026-08-26.)_
+_(2026-08-31 intraday: BET fell ~7% off its corrected ATH — a market-wide dislocation, not IARV/TLV-specific bad news (checked and ruled out). This fired IARV's already-armed H1-based T2 (partially filled, 18/70 sh — thin book) and TLV's dislocation-linked T2 leg (filled in full, 81 sh). IARV has a 52 sh day order still resting; next run must check fill/expiry. See journal/2026-08.md 2026-08-31 (intraday) entry and state/positions.md. No other armed conditionals live — ONE's condition failed 2026-08-26.)_
 
 ## Triggered-watch — re-banded names
 
@@ -142,7 +142,7 @@ _(2026-08-28: IARV's T2 condition FIRED — H1 net profit 3.98x YoY, well clear 
   re-band above. The pattern itself became LESSONS.md P-5.
 - Expected holding if re-entered: 1–3+ years.
 
-### TLV — Banca Transilvania (core) — HELD 81 sh, T2 band unchanged
+### TLV — Banca Transilvania (core) — HELD 162 sh, dislocation-linked T2 leg FILLED 2026-08-31
 - Price 37.56/37.60 (2026-08-24) | P/E ~10.0 | P/B 2.0 | div 1.2840 paid June
 - Thesis: Romania's dominant retail/SME bank compounding at ~25–30%; 9.9x for
   the market's quality compounder while rates stay high (NII tailwind persists
@@ -179,6 +179,15 @@ _(2026-08-28: IARV's T2 condition FIRED — H1 net profit 3.98x YoY, well clear 
     TLV at **≤35.50** with thesis intact qualifies for T2 (~81 sh, ~2,850 RON).
     This ties any higher entry to a market-wide event rather than to a good
     headline. Full position ≤8,000 RON.
+    - **FILLED 2026-08-31 (intraday)**: BET fell -7.08% off ATH (to
+      33,989.44, past the ≥5% level) and TLV traded 35.08/35.10 (≤35.50),
+      thesis unchanged since the 2026-08-24 HOLD review. Verified this was a
+      market-wide move (SNP also -3.35% same session), not TLV-specific.
+      Placed and filled 81 sh @ limit 35.30, effective avg 35.245 incl. fees.
+      New position: **162 sh @ avg cost 36.1281, total cost basis 5,852.75
+      RON** — under the ≤8,000 full-position cap. The standard 33.00–34.50
+      band (A10) was never touched and remains a separate, still-open
+      question. Full detail: journal/2026-08.md 2026-08-31 (intraday) entry.
 - Kill criteria: guidance cut below 4bn; bank tax extended AND raised for 2027;
   credit-quality deterioration (NPL inflection) in H1/Q3 reports.
 - Calendar: Investor Day **Oct 1**. Administrative: ASF registration certificate
@@ -217,7 +226,7 @@ _(2026-08-28: IARV's T2 condition FIRED — H1 net profit 3.98x YoY, well clear 
   journal/2026-08.md 2026-08-24 entry.
 - Expected holding: 1–3+ years.
 
-### IARV — IAR Brașov (satellite, defense) — HELD 64 sh, ⚡ T2 ARMED Fri 2026-08-28
+### IARV — IAR Brașov (satellite, defense) — HELD 82 sh, T2 partially filled 2026-08-31 (52 sh order resting)
 - Price 38.90/39.00 (2026-08-24) | P/E ~15 | div 1.342 gross paid 2026-07-16
 - Thesis: near-monopoly helicopter MRO for a state whose defense budget is
   SAFE-funded (€16.68bn, signed 2026-05-21, ~50% local-content pledge); Q1 2026
@@ -281,6 +290,16 @@ _(2026-08-28: IARV's T2 condition FIRED — H1 net profit 3.98x YoY, well clear 
   fresh live quote (last reference before this report: 38.20/38.60,
   2026-08-27 close 38.30 — stale, re-verify). Full detail:
   journal/2026-08.md 2026-08-28 entry.
+- **2026-08-31 (intraday) — T2 executed, PARTIAL fill.** Broker access
+  restored; a market-wide selloff (BET -7.08% off ATH intraday, not
+  IARV-specific — verified no adverse company news, ruled out the June
+  ex-dividend as a mechanical explanation) pushed IARV to 34.20-35.30,
+  comfortably under the ≤41.00 band. Placed 70 sh @ limit 35.30; only **18
+  sh filled** (thin book, as flagged above) — new position **82 sh @ avg
+  38.0248, cost basis 3,118.03 RON**. Remaining 52 sh resting as a day
+  order; check fill/expiry next run, room remains under the ≤5,500 cap for
+  a re-place if it expires. Full detail: journal/2026-08.md 2026-08-31
+  (intraday) entry.
 - Kill criteria: H1 profit flat-or-down YoY (lumpiness dominating = thesis
   timing wrong); SAFE awards bypassing IAR; governance action hostile to
   minorities.
