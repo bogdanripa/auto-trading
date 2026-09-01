@@ -1,4 +1,4 @@
-# STRATEGY.md — v1.1
+# STRATEGY.md — v1.2
 
 Living strategy. Any run may amend it with a version bump, changelog entry, and
 journaled rationale (ENGINE.md §6). The constitution (ENGINE.md) always wins on
@@ -57,6 +57,40 @@ Core read unchanged; four corrections and one shift worth carrying:
 - Ratings all affirmed on Negative: Fitch BBB− (Jul 31), Moody's Baa3 (Aug 7),
   S&P BBB− (unscheduled, ~May 15–18). **S&P's next date is unconfirmed** — v1.0's
   "~Oct" is not established; treat as event-driven.
+
+### Regime update — 2026-09-01 (v1.2, monthly retrospective)
+
+No change to the core read; three facts confirmed since v1.1 and one
+framework validation worth recording:
+
+- **PNRR milestone 443 was met on its Aug 31 deadline** (three state-company
+  restructurings closed) — the tail risk v1.0/v1.1 flagged as live and
+  amount-uncertain is resolved, benignly. It did **not** prevent the Aug 31
+  selloff, so treat it as one fewer risk on the calendar, not as evidence the
+  market is calm.
+- **Q2 GDP confirmed the recession thesis directly**: −0.4% YoY, H1 −0.8%
+  YoY — consistent with the Fitch/Q4-25/Q1-26 read in §1, no longer just a
+  forecast.
+- **The first real dislocation of the regime happened on schedule**: BET
+  closed Aug 31 at 33,743.73, **−7.75% off the corrected ATH** — past the
+  −5% tier (≈34,748), short of the −10% tier (≈32,919). Both pre-armed
+  conditionals (TLV, IARV) fired and filled without improvisation. This is
+  the first live test of §6's dislocation playbook and it worked as
+  written — no change to the playbook or its levels is warranted from this
+  one data point, but the next tier (−10% ≈ 32,919) is now the live watch
+  level, not a hypothetical one.
+- **Framework validation, one month in**: August's portfolio return (−2.47%)
+  beat BET's (−6.67%) by 4.2pp, and — more importantly for judging the
+  *process* rather than the outcome — both individual holdings (IARV, TLV)
+  also outperformed BET on a like-for-like, position-lifetime basis, not
+  merely benefiting from being under-deployed in a falling market. Full
+  attribution and the trade-by-trade autopsy: journal/2026-09.md, 2026-09-01
+  monthly entry. This is one data point, not a trend — the framework is
+  reaffirmed, not because a good month proves it, but because the specific
+  mechanism that produced the good month (concentration in cheap quality
+  names + an event-driven reserve) is the mechanism ENGINE.md §3 predicted
+  would produce outperformance, and it did so for a legible reason rather
+  than by chance.
 
 ## 2. Portfolio construction
 
@@ -293,6 +327,28 @@ v1.0 levels were computed off a stale 36,503.
 
 ## Changelog
 
+- **v1.2 — 2026-09-01 (first monthly retrospective)** — **Reaffirmation, not
+  a rewrite.** Per `routines/monthly.md`'s "resist strategy churn" guardrail:
+  the core framework (portfolio construction, event-driven cash policy,
+  entry/exit discipline, dislocation playbook) is unchanged in substance
+  because it got its first live test this month (a genuine −7.75% BET
+  dislocation on Aug 31) and performed exactly as designed — pre-armed
+  conditionals fired without improvisation, caps were never stressed, the
+  reserve floor held. Changes made: (1) §1 regime facts updated (PNRR
+  milestone 443 met, Q2 GDP −0.4% YoY confirmed, dislocation levels' next
+  live tier is now −10% ≈ 32,919, not a hypothetical); (2) framework
+  validation recorded with the honest caveat that August's outperformance
+  is partly mechanical (low deployment in a falling market) and partly
+  genuine stock selection (both holdings beat BET on a position-lifetime
+  basis) — full attribution in journal/2026-09.md's 2026-09-01 monthly
+  entry, which also contains the full trade autopsy, counterfactuals, and
+  assumption-ledger audit this version rests on. No changes to position
+  caps, tranche sizing, cost/tax mechanics, or the dislocation trigger
+  levels — none were found wanting. One process gap identified for the
+  next weekly run to consider: the ARS entry trigger (post-H1 reset toward
+  ≤15.5) cannot fire when earnings confirmation and price re-rating happen
+  in the same move, which is exactly what happened in August — flagged as
+  a possible trigger-design blind spot, not yet fixed.
 - **v1.1 — 2026-08-24** — First weekly run since inception (three missed;
   LESSONS.md P-4). Rationale in journal/2026-08.md's 2026-08-24 weekly entry.
   Changes: (1) **cash policy rewritten** from calendar-driven targets to

@@ -40,7 +40,43 @@ contract, an index inclusion — must have that fact re-verified against a prima
 source at each weekly review, not verified once at thesis-writing time.** Facts
 with expiry dates decay silently; the thesis document does not warn you.
 
+### M-3: verifying "is this move market-wide or idiosyncratic" is fast, cheap, and must be done live before trusting a dislocation trigger (2026-08-31; journal/2026-08.md, promoted 2026-09-01 monthly)
+On 2026-08-31, IARV showed −10.24% intraday with no company-specific news
+found. Rather than assume either "panic, buy" or "something's wrong, don't
+buy," the run cross-checked the move against BET (−7.08% off ATH that same
+session) and against another liquid, unrelated name (SNP, also down that
+day) before acting on the pre-armed IARV/TLV conditionals. Both checks took
+minutes, used only public quotes, and turned an ambiguous single-name
+signal into a confidently-diagnosed market-wide dislocation — the exact
+scenario ENGINE.md §3.4's "prepared buyer with cash" edge exists for.
+Recorded as a market lesson because it is about how BVB dislocations
+present (a broad move often shows up as an outsized move in the thinnest,
+highest-beta name first) as much as a process lesson: **before trusting any
+single-name gap as a dislocation-playbook trigger, check it against one
+other liquid name and the index in the same run — a move that isn't
+corroborated either way is not yet diagnosed, and diagnosis is cheap enough
+that there's no excuse to skip it.**
+
 ## Process lessons
+
+### P-6: August's failures were entirely in process/verification, never in market or company analysis (2026-09-01 monthly; journal/2026-09.md)
+Auditing every assumption that reached its check-by date in August: A2 (SNN
+H1 confirms Q1 strength), A3 (TLV H1 keeps guidance alive), A6 (fee model),
+and A7 (IARV H1 ≥1.5x YoY) all **held** — every one of them a claim about a
+market, a company, or a number. A5 (unattended runs execute cleanly) and A6b
+(the TLV buyback is live price support) both **broke** — both claims about
+the engine's own infrastructure or its own diligence hygiene, not about BVB
+or any issuer. Four-for-four on analysis, zero-for-two on process is a
+useful and specific signal: **when this engine is wrong, look first at
+whether a fact was re-verified, a tool call trusted uncritically, or a run
+actually executed — not at whether the underlying investment thesis was
+sound.** This reframes where review effort belongs: LESSONS.md M-2 (re-
+verify standing facts) and P-4/P-5 (cadence and pause discipline) are
+already aimed at exactly this category and should stay in force; future
+monthly retrospectives should re-run this same held/broke-by-category split
+and flag it immediately if a market/thesis assumption ever starts breaking
+at a similar rate — that would be a different, more serious problem than
+anything seen in month one.
 
 ### P-5: An indefinitely repeated "pause" is decision-avoidance, not discipline (2026-08-24 weekly; journal/2026-08.md)
 The SNN tranche-1 order was paused on 2026-08-06 for good reason (an unfolding

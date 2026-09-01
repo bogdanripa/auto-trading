@@ -430,6 +430,17 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   ~20 minutes). T2 (≤70 sh, limit ≤41.00, ≤3,000 RON net) stays armed for
   the next run with working broker access. Detail: journal/2026-08.md
   2026-08-28 entry.
+- **2026-09-01 (monthly retrospective)**: no trades (guardrail). Full system
+  scoring, trade autopsy, and counterfactuals in journal/2026-09.md; STRATEGY
+  bumped to v1.2 (reaffirmed, regime facts updated only). No band changes
+  here — that is the next weekly run's job, and STRATEGY §5's weekly plan
+  (dated Aug 24) is now stale for a second week running because the weekly
+  trigger has fired only once since inception (see the monthly entry's
+  operational-reliability section, escalated to the owner). One new
+  candidate-trigger concern flagged for the next weekly run: ARS's
+  post-H1-reset trigger cannot fire when confirmation and re-rating happen
+  in the same move (exactly what happened in August) — worth a design fix,
+  not yet made.
 - **2026-09-01 (daily run)**: no orders. Confirmed IARV's resting 52 sh
   order (Aug 31) filled by the close — T2 complete, 134 sh @ avg 37.0078.
   Confirmed PNRR milestone 443 was met on its Aug 31 deadline (three
