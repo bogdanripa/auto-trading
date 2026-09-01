@@ -7,7 +7,7 @@ on material news, with journaled rationale).
 
 ## Active buy plan
 
-_(2026-08-31 intraday: BET fell ~7% off its corrected ATH — a market-wide dislocation, not IARV/TLV-specific bad news (checked and ruled out). This fired IARV's already-armed H1-based T2 (partially filled, 18/70 sh — thin book) and TLV's dislocation-linked T2 leg (filled in full, 81 sh). IARV has a 52 sh day order still resting; next run must check fill/expiry. See journal/2026-08.md 2026-08-31 (intraday) entry and state/positions.md. No other armed conditionals live — ONE's condition failed 2026-08-26.)_
+_(2026-08-31 intraday: BET fell ~7% off its corrected ATH — a market-wide dislocation, not IARV/TLV-specific bad news (checked and ruled out). This fired IARV's already-armed H1-based T2 (filled in full: 18 sh intraday + 52 sh by the close, confirmed 2026-09-01) and TLV's dislocation-linked T2 leg (filled in full, 81 sh). BET closed the day even lower, at 33,743.73 (-7.75% off ATH) — past the -5% dislocation level but short of the -10% level (≈32,919). See journal/2026-08.md 2026-08-31 (intraday) entry, journal/2026-09.md 2026-09-01 entry, and state/positions.md. No armed conditionals live as of 2026-09-01 — ONE's condition failed 2026-08-26, IARV's T2 is now complete.)_
 
 ## Triggered-watch — re-banded names
 
@@ -126,6 +126,10 @@ _(2026-08-31 intraday: BET fell ~7% off its corrected ATH — a market-wide disl
   analysis; Nova Power & Gas selected without competitive tender; land at ~€46m
   vs a ~€24.45m cited valuation; FEED2 ~20 months late; project cost estimate up
   ~$3.8bn to ~$6.5bn by Dec 2025. SNN disputes the conclusions.
+- **2026-09-01 (daily run)**: restart guidance has shifted from "before
+  Aug 31 unlikely" to authorities "aiming for the first part of September"
+  (press search, not an SNN filing) — still not a confirmed restart, both
+  legs of the entry condition remain unmet. No order.
 - Open question tracked as assumption **A9** (check Sep 30): is this outage
   weather-cyclical, or the first instance of a recurring structural Danube
   constraint on Romanian nuclear baseload? That decides whether SNN is a cheap
@@ -226,7 +230,7 @@ _(2026-08-31 intraday: BET fell ~7% off its corrected ATH — a market-wide disl
   journal/2026-08.md 2026-08-24 entry.
 - Expected holding: 1–3+ years.
 
-### IARV — IAR Brașov (satellite, defense) — HELD 82 sh, T2 partially filled 2026-08-31 (52 sh order resting)
+### IARV — IAR Brașov (satellite, defense) — HELD 134 sh, T2 filled in full (confirmed 2026-09-01)
 - Price 38.90/39.00 (2026-08-24) | P/E ~15 | div 1.342 gross paid 2026-07-16
 - Thesis: near-monopoly helicopter MRO for a state whose defense budget is
   SAFE-funded (€16.68bn, signed 2026-05-21, ~50% local-content pledge); Q1 2026
@@ -300,6 +304,13 @@ _(2026-08-31 intraday: BET fell ~7% off its corrected ATH — a market-wide disl
   order; check fill/expiry next run, room remains under the ≤5,500 cap for
   a re-place if it expires. Full detail: journal/2026-08.md 2026-08-31
   (intraday) entry.
+- **2026-09-01 (daily run) — resting 52 sh order confirmed FILLED by the
+  Aug 31 close.** Broker-verified holdings now show 134 sh @ avg 37.0078,
+  cost basis 4,959.04 RON, exactly matching 82 sh @ 38.0248 plus 52 sh @
+  the 35.30 limit incl. fees. T2 is complete; no order placed today, no
+  further conditional armed for IARV — position now near the top of its
+  ≤5,500 satellite cap (392 RON of room left). Journal: journal/2026-09.md
+  2026-09-01 entry.
 - Kill criteria: H1 profit flat-or-down YoY (lumpiness dominating = thesis
   timing wrong); SAFE awards bypassing IAR; governance action hostile to
   minorities.
@@ -419,3 +430,11 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   ~20 minutes). T2 (≤70 sh, limit ≤41.00, ≤3,000 RON net) stays armed for
   the next run with working broker access. Detail: journal/2026-08.md
   2026-08-28 entry.
+- **2026-09-01 (daily run)**: no orders. Confirmed IARV's resting 52 sh
+  order (Aug 31) filled by the close — T2 complete, 134 sh @ avg 37.0078.
+  Confirmed PNRR milestone 443 was met on its Aug 31 deadline (three
+  state-company restructurings closed) — removes that tail risk, though it
+  did not prevent Monday's selloff. SNN restart guidance shifted to "first
+  half of September" (still unconfirmed, still no trigger). No material
+  news on TLV/IARV; EUR/RON 5.2589, Brent stable — no macro alarm. Detail:
+  journal/2026-09.md 2026-09-01 entry.
