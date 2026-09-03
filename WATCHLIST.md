@@ -130,6 +130,18 @@ _(2026-08-31 intraday: BET fell ~7% off its corrected ATH — a market-wide disl
   Aug 31 unlikely" to authorities "aiming for the first part of September"
   (press search, not an SNN filing) — still not a confirmed restart, both
   legs of the entry condition remain unmet. No order.
+- **2026-09-03 (daily run)**: restart timeline now has an official dated
+  floor, not just directional guidance — Ministry of Energy Secretary of
+  State Cristian Bușoi stated Cernavodă **cannot restart before Sep 10**,
+  and even then only if Danube discharge sustains (not a one-day blip) at a
+  safe-operation level; forecasts show discharge rising but not yet
+  sustained. Unit 1 refurbishment is separately reported to begin next
+  year (2+ year shutdown) — already known, not new to the thesis. Still
+  **no confirmed restart** — neither leg of the ≤56.00-AND-confirmed-restart
+  condition is met, and price (62.80/63.30) sits ~12–13% above the band
+  regardless. No order. Sep 10 now coincides with the already-tracked SNN
+  EGM date (control-body report) — worth flagging together for the next
+  weekly run.
 - Open question tracked as assumption **A9** (check Sep 30): is this outage
   weather-cyclical, or the first instance of a recurring structural Danube
   constraint on Romanian nuclear baseload? That decides whether SNN is a cheap
@@ -449,3 +461,12 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   half of September" (still unconfirmed, still no trigger). No material
   news on TLV/IARV; EUR/RON 5.2589, Brent stable — no macro alarm. Detail:
   journal/2026-09.md 2026-09-01 entry.
+- **2026-09-02 (daily run)**: no orders. BET partial recovery (+1.03% to
+  34,090.29, −6.80% off ATH). No material news; SNN EGM Sep 10 confirmed on
+  calendar. Detail: journal/2026-09.md 2026-09-02 entry.
+- **2026-09-03 (daily run)**: no orders. BET continued recovering (34,344.32,
+  −6.10% off ATH, second consecutive up session). SNN restart timeline now
+  has an official dated floor (not before Sep 10, Ministry of Energy) —
+  still unconfirmed, still no trigger; coincides with the SNN EGM date. No
+  material news on TLV/IARV/ONE; EUR/RON 5.2555, no macro alarm. Detail:
+  journal/2026-09.md 2026-09-03 entry.
