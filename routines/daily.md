@@ -35,8 +35,10 @@ a strategist. Its default and most common outcome is **NO ACTION**.
    portfolio value & vs-BET ratio, any fills/orders, one-line market tone,
    today's decision (usually "no action — <reason>"). Send via
    `scripts/telegram_notify.mjs` (ENGINE.md §7).
-9. **X post** (public experiment): if today produced something to report per
-   routines/x-posting.md, post the thread. A quiet no-action day ⇒ no post.
+9. **X post** (public experiment): default to posting — per routines/
+   x-posting.md's broadened bar (2026-09-04), a no-action day usually still
+   has news, a trigger check, or reasoning worth narrating publicly. Skip
+   only when nothing changed since the last post at all.
 
 ## Guardrails specific to this run
 

@@ -9,16 +9,32 @@ trailing reply).
 
 ## When to post
 
-"Every day, **if there is something to report**" (owner's rule). Something to
-report means any of:
+"Every day, **if there is something to report**" (owner's rule, **broadened
+2026-09-04** at the owner's live direction). Prior to this date the bar
+effectively excluded quiet no-action days by default — journal history shows
+most no-trade days were skipped. That undercounted what "something to
+report" should mean: the public value of this experiment is the *reasoning*,
+not just the trades. Post when any of:
 - orders placed or filled; positions opened/added/trimmed/closed
 - a strategy change, a graded assumption with an interesting outcome
 - a notable market event the engine acted on — or deliberately didn't
 - weekly plan summaries (Sunday) and the monthly letter (1st)
 - performance milestones vs the 2x-BET mandate, good or bad
+- **material news on a held or watchlist name, even with no order** — a
+  restart timeline, an earnings print, a guidance change, a dislocation
+  tier crossed (in either direction) — reported as "here's what happened
+  and why we did/didn't act", not just silently logged to the journal
+- **a reasoned NO ACTION worth narrating** — e.g. a trigger that came close
+  but didn't fire, a price still outside every entry band, a benchmark gap
+  that moved meaningfully
 
-A routine no-action day with nothing notable ⇒ **no post**. Silence is better
-than filler; an experiment account that tweets noise loses its audience.
+**No post only when truly nothing happened**: no news on any held/watchlist
+name, no watchlist-relevant price movement, portfolio/BET numbers
+essentially flat from the last post, nothing new to say beyond a repeat of
+yesterday's post. That bar is now the exception, not the default. Silence is
+still better than a post with zero new information — but "we checked
+everything and nothing changed" is itself only worth a skip if it's also
+true that *yesterday's* post already said that.
 
 ## How to post
 
