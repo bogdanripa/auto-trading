@@ -142,6 +142,17 @@ _(2026-08-31 intraday: BET fell ~7% off its corrected ATH — a market-wide disl
   regardless. No order. Sep 10 now coincides with the already-tracked SNN
   EGM date (control-body report) — worth flagging together for the next
   weekly run.
+- **2026-09-04 (daily run)**: restart timeline confirmed at "not before
+  Sep 10" across multiple outlets (same Ministry of Energy briefing as
+  Sep 3), with Bușoi's own framing that a single day of higher Danube flow
+  is not sufficient — the rise must be sustained. **New wrinkle**: the same
+  reporting shows Danube discharge forecast to rise short-term but then
+  **decrease again starting around Sep 10** — i.e. the earliest possible
+  restart-decision date may land right as flow turns back down, not on a
+  confirmed sustained rise. Makes a clean Sep 10 restart-and-confirm less
+  likely than the bare floor-date reading suggests; relevant to A9's Sep 30
+  check-by. Price 63.70/65.00 (BVB-wide recovery lifted it further above
+  the ≤56.00 band than Sep 3). Still no confirmed restart, no order.
 - Open question tracked as assumption **A9** (check Sep 30): is this outage
   weather-cyclical, or the first instance of a recurring structural Danube
   constraint on Romanian nuclear baseload? That decides whether SNN is a cheap
@@ -470,3 +481,9 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   still unconfirmed, still no trigger; coincides with the SNN EGM date. No
   material news on TLV/IARV/ONE; EUR/RON 5.2555, no macro alarm. Detail:
   journal/2026-09.md 2026-09-03 entry.
+- **2026-09-04 (daily run)**: no orders. BET closed back **above** the −5%
+  dislocation tier (34,771.20, −4.94% off ATH, third consecutive up
+  session) — that tier is no longer live. SNN restart still unconfirmed;
+  new Danube-forecast wrinkle (flow may turn back down right around Sep 10)
+  logged against A9. No material news on TLV/IARV/ONE; EUR/RON confirmed
+  5.2555, no macro alarm. Detail: journal/2026-09.md 2026-09-04 entry.
