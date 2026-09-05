@@ -154,6 +154,28 @@ because it was configured once; a run that depends on another run's cadence
 run's actual execution (a journal entry in the expected window), not just trust
 the schedule exists.
 
+### P-7: a rejection deserves the same verification rigor as an acceptance (2026-09-05 weekly; journal/2026-09.md)
+PBK was demoted off active candidacy on 2026-08-24 with specific cited
+figures: "NPL rose 4.4% → 5.2%, coverage fell 56.3% → 52.7%." A 2026-09-05
+reconciliation against Patria Bank's own FY2025 IR presentation and H1 press
+coverage found the 5.2%/52.7% endpoint did not match any primary or
+press-sourced figure found — the real pattern was a one-quarter wobble
+(NPE 3.6%→4.38%, coverage 56%→53%, Dec 2025→Mar 2026) that had already
+reversed by H1 (NPE 3.93%, coverage 57%, Jun 2026). The demotion's
+directional call (stay cautious pending FY26 confirmation, given the
+~30%-one-off-reliant profit target) still holds up, but the specific numbers
+used to justify it did not survive a second look. **The engine's diligence
+discipline (STRATEGY §3's "which edge is this" test, liquidity checks, fresh
+primary-source reads) has so far been applied mainly to candidates being
+*added* — SNN's re-band, ONE's H1 condition, ALRO's screen. A name being
+*rejected* is just as much a real-money-adjacent decision (it forecloses an
+opportunity cost) and deserves the same rigor, not a one-time cite that then
+goes unchecked indefinitely.** Practical rule adopted: when a demoted/avoided
+name resurfaces with data that looks contrary to the original demotion
+(as PBK's H1 did), re-verify the *original* demotion's own figures against
+primary sources before either reversing or reaffirming — do not assume the
+first pass was right just because it came first.
+
 ## Assumption-grading notes
 
 _Grades accumulate in journal entries; patterns worth keeping get promoted here._

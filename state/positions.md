@@ -31,6 +31,17 @@ portfolio at cost, TLV ~12.8%, combined ~18.7% invested (mark) — both still
 far under the 20% single-name / 40% sector caps. Detail:
 journal/2026-08.md 2026-08-31 (intraday) entry.
 
+**Weekly review 2026-09-05** (second weekly run): both positions reviewed
+against thesis, kill criteria and fair-value band — **both HOLD, no
+changes.** IARV: no thesis-changing news since the Aug 28 H1; T2 complete,
+392 RON of room left under the ≤5,500 satellite cap (the cap, not price, is
+now the binding constraint on adding more). TLV: no thesis-changing news;
+price (35.98/36.08 live) sits above both the standing T2 band (33.00–34.50)
+and the already-filled dislocation band (≤35.50) — no add. Neither kill
+criterion approached. No trades this week. Portfolio ~23.4% invested at
+cost, cash reserve ~76.6% — comfortably above the ≥25–30% STRATEGY §2
+floor. Detail: journal/2026-09.md 2026-09-05 weekly entry.
+
 ## IARV — IAR SA Brasov
 - Opened: 2026-08-04 (fill; order placed 2026-08-03) (journal: journal/2026-08.md entries of 2026-08-03 and 2026-08-04)
 - Tranches: T1 64 sh @ avg 38.8161 (incl. fees). **T2 filled in full — completed 2026-08-31 close (confirmed 2026-09-01 daily run)**: the 52 sh remainder of the day order (limit 35.30) filled by end of day Aug 31 (blocked cash matched exactly). Combined with the 18 sh filled intraday, the full 70 sh T2 tranche is done. Broker-verified position as of 2026-09-01 pre-open: **134 sh @ avg cost 37.0078, total cost basis 4,959.04 RON** — 10.8% of portfolio at cost, just under the ≤5,500 satellite cap. Journal: journal/2026-08.md 2026-08-31 (intraday) entry; journal/2026-09.md 2026-09-01 entry.

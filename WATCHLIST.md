@@ -7,7 +7,9 @@ on material news, with journaled rationale).
 
 ## Active buy plan
 
-_(2026-08-31 intraday: BET fell ~7% off its corrected ATH — a market-wide dislocation, not IARV/TLV-specific bad news (checked and ruled out). This fired IARV's already-armed H1-based T2 (filled in full: 18 sh intraday + 52 sh by the close, confirmed 2026-09-01) and TLV's dislocation-linked T2 leg (filled in full, 81 sh). BET closed the day even lower, at 33,743.73 (-7.75% off ATH) — past the -5% dislocation level but short of the -10% level (≈32,919). See journal/2026-08.md 2026-08-31 (intraday) entry, journal/2026-09.md 2026-09-01 entry, and state/positions.md. No armed conditionals live as of 2026-09-01 — ONE's condition failed 2026-08-26, IARV's T2 is now complete.)_
+_(2026-08-31 intraday: BET fell ~7% off its corrected ATH — a market-wide dislocation, not IARV/TLV-specific bad news (checked and ruled out). This fired IARV's already-armed H1-based T2 (filled in full: 18 sh intraday + 52 sh by the close, confirmed 2026-09-01) and TLV's dislocation-linked T2 leg (filled in full, 81 sh). BET closed the day even lower, at 33,743.73 (-7.75% off ATH) — past the -5% dislocation level but short of the -10% level (≈32,919). See journal/2026-08.md 2026-08-31 (intraday) entry, journal/2026-09.md 2026-09-01 entry, and state/positions.md.)_
+
+_(2026-09-05 weekly update: BET recovered for three sessions (Sep 1-3) then fell back below the -5% tier on Sep 4 close (34,414.30, -5.91% off ATH) — that tier's slice is already spent and does not re-arm. IARV's T2 is complete (392 RON of satellite-cap room left); TLV has ~2,147 RON of room left under its full-position cap but no armed leg at current prices. ONE's price-only ≤30.00 fallback remains unexecuted. ARS gained a freshly-derived two-leg conditional this week (see Triggered watch below) — the only newly-armed name. No conditional is currently in-range for any name.)_
 
 ## Triggered-watch — re-banded names
 
@@ -78,6 +80,22 @@ _(2026-08-31 intraday: BET fell ~7% off its corrected ATH — a market-wide disl
   (40–46) should be treated as under more pressure than the 2026-08-26 note
   implied. No order implication: price 33.6/34.5 vs the ≤30.00 fallback, no
   position held. Source: ZF, reporting the company's own statement.
+- **2026-09-05 (weekly run)**: no new ONE-specific news found since Sep 4.
+  Investor Day (Sep 11) confirmed as a "5 Years Back, 5 Years Forward"
+  IPO-anniversary event with an afternoon guided-site-tour format (One
+  Gallery, One Lake District, One High District, One Athénée) — no
+  session-by-session agenda or pre-released materials found, nothing
+  suggests results or ANCPI content will be pre-announced ahead of the day
+  itself. ANCPI/e-Terra: still no firm date for full backlog clearance;
+  one administrative deadline (proof-of-fee-payment validity for requests
+  filed before Jul 15) lapsed today, 2026-09-05 — a minor operational
+  detail, not thesis-moving. A12 remains correctly ungraded — no evidence
+  yet, positive or negative, on whether management will date backlog
+  resolution at the Investor Day. One unverified data point: a consensus
+  aggregator shows a 41.90 RON target ("Strong Buy", 2 analysts) — an
+  oddly wide gap versus the H1 guidance cut with no identifiable
+  analyst/outlet/date behind the figure; treat as unconfirmed. Live price
+  (BT Trade MCP) 32.55/33.00 — still above the ≤30.00 fallback. No order.
 - Kill criteria (updated): no catch-up and management cannot date one;
   contracted collections decline materially; ANCPI backlog still unresolved
   or worsening by the Investor Day; net debt materially up while deliveries
@@ -153,6 +171,35 @@ _(2026-08-31 intraday: BET fell ~7% off its corrected ATH — a market-wide disl
   likely than the bare floor-date reading suggests; relevant to A9's Sep 30
   check-by. Price 63.70/65.00 (BVB-wide recovery lifted it further above
   the ≤56.00 band than Sep 3). Still no confirmed restart, no order.
+- **2026-09-05 (weekly run)**: no restart yet (no source found reporting
+  either unit back online); INHGA's latest bulletin (~Aug 30, covering
+  Aug 30–Sep 6) shows discharge stationary near 1,600 m³/s then easing to
+  ~1,450–1,500 m³/s — vs 3,800–3,900 m³/s seasonal averages — and confirms
+  the forecast decrease starting ~Sep 10, corroborating the Sep 4 wrinkle
+  from an independent source (INHGA via economedia/stirileprotv/antena3).
+  Cernavodă gauge rose only marginally (-253cm → -249cm, Aug 25–Sep 1) —
+  still near historic lows. **New, materially reassuring on governance**:
+  the full Sep 10/11 EGM agenda is now confirmed via a primary BVB filing
+  (report dated 25.08.2026, PDF verified) — six points: elect EGM
+  secretary; informational note on the Control Body report's conclusions;
+  approve publishing that report in full; approve 06.10.2026 as the
+  shareholder record date; approve 05.10.2026 as the ex-date; empower the
+  Board chairman to execute resolutions. **Points 4–5 are ordinary
+  dividend-distribution registration/ex-dates, not a capital increase —
+  no capital-raise, share issuance, or dilution item appears on the
+  disclosed agenda**, and the deadline for the Ministry to add further
+  items already passed (Aug 21). Lowers, without eliminating, the
+  governance-surprise tail risk flagged since Aug 24 (the Ministry could
+  still act outside the EGM). One fresher-but-unverified data point: a
+  live consensus aggregator (MarketScreener) shows 3 analysts, Sell
+  rating, average target 44.80 RON (range 38.10–51.50) — well below the
+  56.21 figure already on file, but a Simply Wall St community estimate in
+  the same range traces to December 2025, so this may not reflect any
+  genuine September update. Treat 44.80 as directionally consistent with
+  "market trades well above what modelers think it's worth" but not as a
+  confirmed fresh revision. Live price (BT Trade MCP) 64.00/64.30 — ~14%
+  above the ≤56.00 band regardless. No order; both legs of the entry
+  condition remain unmet.
 - Open question tracked as assumption **A9** (check Sep 30): is this outage
   weather-cyclical, or the first instance of a recurring structural Danube
   constraint on Romanian nuclear baseload? That decides whether SNN is a cheap
@@ -230,6 +277,23 @@ _(2026-08-31 intraday: BET fell ~7% off its corrected ATH — a market-wide disl
   after the record date, so no free shares are owed; holdings correctly
   unchanged at 81 shares. Quote 37.40/37.54 pre-open. Full reasoning:
   journal/2026-08.md 2026-08-21 entry.
+- **2026-09-05 (weekly run)**: no new company-specific BVB filing found
+  since the Aug 21 H1 report. Special-dividend chatter remains unconfirmed
+  and undenied — no update beyond the CEO's original May 28 quote.
+  Background (not new, previously unlogged): CEO Tetik told ZF (Jun 8) he
+  does not expect the 4% bank turnover tax to lapse in 2027 despite the
+  ordinance's sunset clause, and doesn't see removal before 2028 — relevant
+  context for the "bank tax extended AND raised for 2027" kill criterion
+  (extension now looks likely per the CEO's own read; "raised" is the
+  still-unmet second leg, so the kill criterion is not hit). Investor Day
+  (Oct 1) logistics-only confirmed (10:00–16:00, BT premises), no agenda
+  leak. FTSE Russell's Sep review revision deadline was Sep 4, changes
+  effective ~Sep 18/21 — TLV stays in FTSE Global All Cap with no
+  reclassification, a minor liquidity/rebalancing flow event around
+  implementation, not a new development. Analyst consensus ticked up to
+  ~34.66 RON (from ~33.88, exact update date unclear) — still 4% below the
+  live ask. Live price (BT Trade MCP) 35.98/36.08 — above both the standing
+  T2 band (33.00–34.50) and the filled dislocation band (≤35.50). No order.
 - **2026-08-24 (daily run)**: H1 2026 results now published (press
   coverage, filed Aug 21 or over the weekend). Group net profit **2.5bn
   RON, +26.8% YoY**; bank-level 2.1bn, +20.7% YoY; ~25bn RON financing
@@ -334,6 +398,18 @@ _(2026-08-31 intraday: BET fell ~7% off its corrected ATH — a market-wide disl
   further conditional armed for IARV — position now near the top of its
   ≤5,500 satellite cap (392 RON of room left). Journal: journal/2026-09.md
   2026-09-01 entry.
+- **2026-09-05 (weekly run)**: no thesis-changing news since Aug 28. The
+  30-unit H225M follow-on order (the leg carrying the local-production/
+  Ghimbav-investment thesis) remains conditional and unsigned — confirmed
+  via an independent industry-analysis source, no September signing news.
+  No new SAFE-program awards found that bypass IAR. **New, needs
+  follow-up**: a BVB current report filed 2026-09-02 convenes an AGOA for
+  Oct 6/7/10, 2026 — the actual agenda items could not be verified this
+  run (PDF unretrieved); a future daily/weekly run should confirm no
+  capital action is on it before the meeting, per the same discipline
+  applied to the Aug 11/12 AGOA. Live price (BT Trade MCP) 35.80/36.00.
+  T2 complete, 392 RON of room left under the ≤5,500 satellite cap — no
+  basis to add. No order.
 - Kill criteria: H1 profit flat-or-down YoY (lumpiness dominating = thesis
   timing wrong); SAFE awards bypassing IAR; governance action hostile to
   minorities.
@@ -347,15 +423,94 @@ _(2026-08-31 intraday: BET fell ~7% off its corrected ATH — a market-wide disl
 Updated 2026-08-24 after a full diligence pass. **Three names were downgraded on
 inspection** — recorded plainly, because avoiding them is ENGINE.md §3.5 alpha.
 
-| Name | Price (2026-08-24) | Trigger | Then |
+| Name | Price (2026-09-05 live/last) | Trigger | Then |
 |---|---|---|---|
-| **TTS** | 7.28 (bid 7.30/ask 7.36) | ⬇ **DOWNGRADED — earnings leg REMOVED.** Price-only **≤6.00**. | T1 ~2,500. See drought note below. |
-| **ARS** | 19.6 | Post-H1 reset toward ≤15.5 | No trigger 2026-08-19: H1 beat (+87.9% YoY to 86.7m RON), stock rose ~3.6% instead of resetting — richer, not cheaper. Watch-only. |
-| **H2O** | 184.60 | ⬇ **NARROWED**: the state ABB **actually launching** at its discount. A drift lower is no longer sufficient. | T1 ~3,000 |
-| **PBK** | 0.157 | ⬇ **DEMOTED off active candidacy.** Revisit only if H1 shows core (ex-one-off) acceleration AND the NPL trend reverses. | — |
-| **BENTO** | 9.30 | ⬇ **DROPPED from active consideration.** Revisit after H1 on Sep 15. | — |
-| **SMTL** | 44.20 | Watch H1 (**Aug 25**) only; no position contemplated. Note: **not AeRO** — moved to the Main market 2024-08-12. | — |
-| **BET index** | 36,543 | −5% from the **corrected ATH 36,576.55** ≈ **34,748**; −10% ≈ **32,919**; −15% ≈ **31,090** | Dislocation playbook, STRATEGY §6. Priority: TLV ≤35.50, ONE ≤30.00 (re-banded 2026-08-26, condition failed), IARV within satellite cap. |
+| **TTS** | 7.10 (2026-09-04 close) | ⬇ **DOWNGRADED — earnings leg REMOVED.** Price-only **≤6.00**. | T1 ~2,500. See drought note below. |
+| **ARS** | 18.70 (2026-09-04 close) | ⬆ **RE-UNDERWRITTEN 2026-09-05**: normalized-earnings floor ≤16–17x FX-adjusted P/E, full-size at **≤14.5–16.5 RON**. | Half-size tranche (~1,250–1,750) on the multiple floor; full T1 (~2,500–3,000) at ≤16.5. See re-underwrite note below. |
+| **H2O** | 184.80 (2026-09-04 close) | ⬇ **NARROWED**: the state ABB **actually launching** at its discount. A drift lower is no longer sufficient. | T1 ~3,000 |
+| **PBK** | — | ⚠ **STAYS DEMOTED, pending FY26 confirmation** — see reconciliation note below. Revisit if Q3/FY26 shows the ex-SAI growth trajectory holding AND NPE stays ≤4%. | — |
+| **BENTO** | 9.22 (2026-09-04 close) | ⬇ **DROPPED from active consideration.** Revisit after H1 on Sep 15 (unchanged, calendar confirmed). | — |
+| **SMTL** | 39.90 (2026-09-04 close) | Watch only — H1 (Aug 25) published, margin-quality concern **confirmed, not resolved** (see note below). No position contemplated. | — |
+| **BET index** | 34,414.30 (2026-09-04 close) | −5% from the **corrected ATH 36,576.55** ≈ **34,748** (BET is back **below** this tier, −5.91% off ATH, as of Sep 4); −10% ≈ **32,919**; −15% ≈ **31,090** | Dislocation playbook, STRATEGY §6. First tier's slice (TLV + IARV T2) already fully executed 2026-08-31 — re-crossing back below −5% does not re-arm it; only ONE ≤30.00 remains unexecuted from the original priority list. |
+
+**TTS — 2026-09-05 update.** H1 2026 published on schedule and, contrary to
+the Aug-24 concern that a clean H1 would be misleadingly pre-drought,
+management **addressed the drought directly**: IR confirmed low Danube levels
+"affected all bulk-transport businesses" but says TTS mitigated damage by
+repositioning shallow-draft barges downstream of Cernavodă before the upper
+river became impassable — unlike a comparable 2024 episode. Reported:
+transported volume −3.2% YoY, revenue roughly flat (+0.5%/+1.6m RON),
+operating profit **+~22m RON**, full-year guidance maintained; management
+calls the recovery "structural, not cyclical" (Financial Market, Sep 4).
+Price has pulled back to 7.10 (from 7.28–7.36), now at/slightly below the old
+7.36 consensus but still ~18% above the ≤6.00 trigger. No fresh book-value
+multiple or updated consensus target found (the one located analyst target,
+Erste 28.06 RON, is a stale pre-2024-adjustment figure, unusable). The
+Q1-volumes-vs-inception-thesis discrepancy (−28.6% vs a claimed +9.6%) remains
+unreconciled. **Verdict: modestly encouraging (management engaged with the
+risk instead of ignoring it, guidance held), but not enough to move the
+≤6.00 band this week** — a discipline call, not new evidence the band is
+wrong; a proper re-underwrite with fresh book value and consensus data is
+carried to a future weekly run.
+
+**ARS — re-underwritten 2026-09-05 (a genuine trigger fix, not just a price
+check).** The original "post-H1 reset toward ≤15.5" trigger never fired
+because ARS confirmed and re-rated in the same move (H1 net profit +87.9% YoY
+to 86.7m RON, published ~Aug 19; stock rose ~3.6% instead of dipping) —
+flagged in the 2026-09-01 monthly retrospective as a designed blind spot.
+Since then price has pulled back to 18.70 (below even the pre-H1 19.6),
+prompting this week's proper re-underwrite rather than another deferral.
+**Quality of earnings**: of the ~48.7m RON pre-tax profit increase, ~74% is
+genuine operating leverage (margin 15%→21%, opex growing slower than
+revenue) and ~26% is a reversible FX tailwind (the company collects ~88% of
+revenue in export currencies; H1 2025's comparable FX swing went the other
+way) — a real improvement on Q1, where the profit jump was FX-dominated, but
+the FX sensitivity has not disappeared. **Valuation**: at 18.70, TTM P/E
+≈20.5x (down from a stale ~28x), P/B ≈4.0x, EV/EBITDA ≈16–17x (debt-free) —
+a full multiple for a cyclical industrial even with a defense tailwind.
+**Business quality vs IARV**: Aerostar is only an *indirect*, subcontractor-
+tier beneficiary of SAFE-driven European defense demand (per sector analysis)
+— a materially weaker catalyst than IARV's direct, funded prime-contractor
+position on the same H225M program. Two Lockheed Martin MOUs (radar-program
+cooperation, signed Farnborough Jul 2026) are pipeline, not revenue. No
+usable post-H1 analyst consensus exists (the one aggregator target predates
+the 2026 re-rating). **Fair-value re-derivation**: applying 16–18x to a
+normalized (FX-adjusted) EPS of ~0.75–0.80 RON (vs 0.91 TTM) yields
+**≈14.5–16.5 RON** — current price sits ~15–25% above that band; no clean
+margin of safety exists at 18.70. **Trigger redesign adopted**: replacing the
+pure price-reset trigger with two legs — (a) a half-size tranche
+(~1,250–1,750 RON) on a **normalized-earnings multiple floor** (≤16–17x
+FX-adjusted P/E, i.e. roughly ≤14–15 RON on today's normalized EPS,
+regardless of the path price took to get there), and (b) full first-tranche
+size (~2,500–3,000) at an **absolute floor of ≤16.5 RON**. Re-check at the Q3
+print (~Nov) for whether the FX tailwind reverses and whether the Lockheed
+MOUs convert. This directly implements the fix the monthly retrospective
+flagged as needed — the blind spot (confirmation and re-rating happening
+together) is now covered by leg (a), which does not require a price dip at
+all.
+
+**PBK — reconciliation update 2026-09-05, stays demoted pending FY26
+confirmation.** This week's research surfaced an apparent contradiction with
+the Aug-24 demotion (NPL 4.4%→5.2%, coverage falling) against fresher H1 data
+(NPE 4.38%→3.93%, coverage rising to 57%). Reconciled against Patria Bank's
+own FY2025 IR presentation and H1 press coverage: **both readings are
+partially right** — NPE did rise and coverage did fall from FY2025 (3.6%/56%)
+into Q1 2026 (4.38%/53%), a real one-quarter wobble, but it reversed by H1
+(30 Jun: 3.93%/57%) — net effect Dec 2025→Jun 2026 is roughly **flat, not a
+clean deterioration or improvement**. Separately confirmed: the SAI Patria
+Asset Management sale closed **Aug 5, 2026** — after the H1 (Jun 30) cutoff —
+and the bank's own budget document books that ~25m RON gain to **Q3 2026**,
+not H1. So **H1's 27.3m RON profit (+6% YoY) is fully recurring, containing
+no one-off** — the Aug-24 one-off concern applies only to the FY26 full-year
+85m RON target (still ~29–30% reliant on the SAI gain; ex-SAI FY26 growth is
+closer to +18% than the headline +69%). Q1→Q2 profit accelerated (11.3m →
+16m, the best quarter in six). **Net**: this is genuinely a "demote pending
+confirmation" case, not a hard bear thesis — the specific NPL/coverage
+endpoint figures behind the original demotion don't fully hold up, but
+neither does a clean bull case yet. Revisit at Q3/FY26 if the ex-SAI growth
+trajectory holds and NPE stays ≤4%. No order; not promoted back to active
+candidacy this week — one recovering quarter is not enough evidence after a
+demotion this recent.
 
 **TTS — why the earnings leg was removed (2026-08-24).** The same Danube drought
 that shut Cernavodă is cutting Danube navigation hard: vessel loads down from
@@ -386,6 +541,54 @@ the "which edge is this?" test (ENGINE.md §3).
 ~47% of a 132m RON cap with 51.6% insider-held — AeRO liquidity would bind well
 below where valuation suggests. Claimed 3.4% dividend yield unverified (BVB
 shows 3.09% trailing).
+
+**H2O — 2026-09-05 update: milestone 443's resolution is orthogonal to the ABB
+thesis, not proof it's dead.** PNRR milestone 443 was met Aug 31, but via
+restructuring/merging three unrelated state entities (Electrocentrale Grup,
+Tipografica Filaret, Telecomunicații CFR into SAPE/CFR) — **not** via
+Hidroelectrica. The "EC rejects Romania's alternative → forced ABB" premise
+never actually applied here, so its benign resolution neither confirms nor
+kills the ABB. The broader state-privatization intent (5–10% Hidroelectrica
++ 5–7% Romgaz via ABB, per an April 2026 VPM note) remains on record with no
+confirmed execution or cancellation — still a live, undated event risk.
+Ex-dividend for the special 2.2232 RON confirmed on track for **Sep 8**
+(BVB dividend page, combined 9.571562 RON this year, yield 5.18%). Price
+184.80, flat vs the 184.60 reference. No order — trigger (an actually
+launching, discounted ABB) still not met.
+
+**SMTL — 2026-09-05 update: margin-quality concern confirmed, not resolved.**
+H1 2026 published on schedule Aug 25: revenue 354.0m RON (+84–86% YoY) but
+**EBITDA fell to 5.1m (from 9.1m) and net profit fell to 1.6m (from 2.0m)** —
+Q1 alone was an outright net loss (−3.8m), so H2 recovered the loss but
+full-period profitability still declined YoY despite the revenue surge. This
+is exactly the open question flagged at inception (margin quality amid a
+revenue surge) resolving unfavorably, not favorably. Market reaction was
+muted (39.90 vs ~39.50 pre-report, no repeat of an earlier crash). Watch
+only, not AeRO (confirmed Main market since 2024-08-12); no position
+contemplated.
+
+**ALRO (ALR) — screened 2026-09-05, conditional fail, not added to
+WATCHLIST.** A first-pass screen (H1 2026 EBITDA +3.5x YoY to 326.7m RON,
+revenue +19.9% to 2.41bn RON) looked like a genuine new candidate, so it got
+a full diligence pass before any WATCHLIST addition, per STRATEGY.md's rule
+that a new name must clear liquidity + the "which edge" test in writing
+first. Results: **liquidity likely clears the caps but isn't cleanly
+certified** — daily turnover over the last week ranged wildly (~11k to
+~775k RON), no authoritative 20-day BVB dataset was retrievable, and the
+book is thin some days (bid 488 / ask 19,051 shares on Sep 4) — usable with
+limit orders only, not certified as consistently deep. Valuation: P/E 27.8
+trailing (distorted by a FY2025 loss year) vs a much cheaper forward multiple
+if H1's 100.75m RON profit annualizes, P/B 0.96. **The earnings jump reads as
+predominantly cyclical** (weak FY2025 comp + LME aluminum crossing $3,000/t,
+no disclosed hedging program) rather than a durable re-rating. Ownership is
+heavily concentrated (Vimetco 54.19% + Paval Holding 23.21% + state Fondul
+Proprietatea 10.21%, free float thin) with recurring related-party
+transactions — no active dispute found, but debt/leverage was **not
+verified** at all this pass. **Verdict: not ready for WATCHLIST.md.** Two
+concrete gaps to close before reconsidering: (1) actual leverage/net-debt
+position, (2) a real 20-day BVB turnover series rather than an estimate.
+Carried to the research agenda below rather than added on an incomplete
+picture.
 
 **H2O — why narrowed.** The ABB entry-event thesis is materially weaker than
 assumed: it was only ever a *contingent backup* if the EC rejects Romania's
@@ -487,3 +690,35 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   new Danube-forecast wrinkle (flow may turn back down right around Sep 10)
   logged against A9. No material news on TLV/IARV/ONE; EUR/RON confirmed
   5.2555, no macro alarm. Detail: journal/2026-09.md 2026-09-04 entry.
+- **2026-09-05 (weekly run) — second weekly since inception.** BET closed
+  Sep 4 at 34,414.30 (−1.03% day, breaking the 3-day recovery streak),
+  **−5.91% off ATH — back below the −5% dislocation tier**; that tier's
+  reserve slice (TLV + IARV T2) was already fully executed 2026-08-31 and
+  does not re-arm on a re-cross. No held-position kill criteria approached;
+  no watchlist trigger fired; **no trades this week.** Six parallel research
+  agents plus three follow-up diligence passes (macro/political, SNN, ONE,
+  TLV+IARV, watchlist refresh, new-candidate screen, then ALRO liquidity/
+  governance, ARS re-underwrite, PBK reconciliation) ran this session.
+  Substantive changes: **SNN** EGM agenda confirmed via primary BVB source —
+  no capital-raise item, lowering (not eliminating) governance tail risk;
+  restart still unconfirmed, Danube forecast still choppy around Sep 10.
+  **ARS re-underwritten** with a genuine trigger-design fix (normalized-
+  multiple half-size leg + an absolute 16.5 floor) replacing the broken
+  pure-price-reset trigger flagged in the monthly retrospective — first
+  concrete fix of a self-identified process gap. **PBK** reconciled: stays
+  demoted, but the specific NPL/coverage figures behind the Aug demotion
+  don't fully hold up; genuinely a "wait for more evidence" case now, not a
+  clean bear thesis. **TTS** addressed the drought directly in H1 and held
+  guidance — modestly encouraging, band held anyway (discipline, not new
+  contrary evidence). **H2O**: PNRR milestone 443's benign resolution is
+  orthogonal to the ABB thesis (met via unrelated entities), not proof the
+  ABB is off; ex-div Sep 8 on track. **SMTL**: margin-quality concern
+  confirmed (EBITDA/profit fell YoY despite the revenue surge). **ALRO**
+  screened as a new candidate, conditional fail — liquidity uncertified,
+  earnings look cyclical, leverage unverified; not added, carried to the
+  research agenda. **Macro**: no new PM named (Sep 3-4 "coming days" still
+  pending); BET index committee met but outcome not yet published (market
+  speculation: EAI added, possibly replacing SFG — unconfirmed); NBR next
+  meeting confirmed Oct 8; Fidelis IX launched (real max 7.50%, not the
+  previously-flagged unverified 8.20%); EUR/RON flat at 5.2524. Full
+  reasoning: journal/2026-09.md 2026-09-05 weekly entry.
