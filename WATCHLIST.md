@@ -722,3 +722,11 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   meeting confirmed Oct 8; Fidelis IX launched (real max 7.50%, not the
   previously-flagged unverified 8.20%); EUR/RON flat at 5.2524. Full
   reasoning: journal/2026-09.md 2026-09-05 weekly entry.
+- **2026-09-07 (daily run)**: no orders — every conditional above still out
+  of range (TLV 35.98/36.08, IARV 35.80/36.00, SNN 64.00/64.30, ARS
+  18.30/18.70, ONE 32.55/33.00, TTS 6.94/7.12). Assumption A13 graded
+  **unclear** (BET chopped −5% to −7.75% off ATH all week, no clean
+  resolution). New watch items, not triggers: Brent oil spiked to ~$97/bbl
+  (+11% month) on reported US–Iran strikes (no direct BVB read-through
+  found); Nicușor Dan may name a PM candidate today (unconfirmed
+  pre-open). Detail: journal/2026-09.md 2026-09-07 entry.
