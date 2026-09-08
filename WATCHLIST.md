@@ -730,3 +730,11 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   (+11% month) on reported US–Iran strikes (no direct BVB read-through
   found); Nicușor Dan may name a PM candidate today (unconfirmed
   pre-open). Detail: journal/2026-09.md 2026-09-07 entry.
+- **2026-09-08 (daily run)**: no orders — every conditional still out of
+  range (TLV 35.90/36.30, IARV 35.60/35.80, SNN 63.10/63.60, ARS
+  18.40/18.65, ONE 32.50/33.40, TTS 6.98/7.10). **H2O ex-dividend (special
+  2.2232 RON) confirmed on schedule** via BVB's price-correction-factor
+  notice — routine, no position held, no order. Brent/EUR-RON downgraded
+  to a steady watch item (no further escalation; EUR/RON eased to 5.2508).
+  PM designation still not named. Detail: journal/2026-09.md 2026-09-08
+  entry.
