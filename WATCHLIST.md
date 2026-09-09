@@ -200,10 +200,30 @@ _(2026-09-05 weekly update: BET recovered for three sessions (Sep 1-3) then fell
   confirmed fresh revision. Live price (BT Trade MCP) 64.00/64.30 — ~14%
   above the ≤56.00 band regardless. No order; both legs of the entry
   condition remain unmet.
+- **2026-09-09 (daily run)**: restart timeline **pushed materially later** —
+  multiple outlets (g4media, spotmedia, observatorconstanta,
+  stirileprotv.ro dated today) now report officials shifting guidance from
+  "not before Sep 10" to **"toward the end of September,"** with a "more
+  precise evaluation" only expected after Sep 15. This is a real
+  deterioration versus the Sep 3/4/5 floor-date reading, not just another
+  restatement of it — relevant context for **A9** (Sep 30 check-by, not yet
+  due) and for tomorrow's Sep 10-11 EGM read. Separately, the EGM's Corp de
+  Control / Doicești SMR item has one new wrinkle: SNN's own management has
+  publicly **rejected** the Control Body's conclusions ("no decision by SNN
+  bodies generated a quantifiable loss"), confirming an adversarial
+  SNN-vs-Ministry posture ahead of the vote — still reads as a
+  governance/reputational fight over publishing a report, not a capital
+  item, consistent with the confirmed agenda (no capital-raise line).
+  Price 62.00/62.80 — ~11% above the ≤56.00 band regardless; neither leg of
+  the entry condition (price AND confirmed restart) is met. No order.
 - Open question tracked as assumption **A9** (check Sep 30): is this outage
   weather-cyclical, or the first instance of a recurring structural Danube
   constraint on Romanian nuclear baseload? That decides whether SNN is a cheap
-  asset having a bad summer or a permanently de-rated one.
+  asset having a bad summer or a permanently de-rated one. **2026-09-09
+  update: the restart slipping toward end-September, right up against A9's
+  own Sep 30 check-by date, raises the odds this reads as "unclear" rather
+  than "held" when graded — flagging for the next weekly/monthly run, not
+  pre-judging it today.**
 - **Daily monitoring trail 2026-08-06 → 2026-08-24 (condensed 2026-08-24)**:
   eleven consecutive daily entries tracked the crisis and re-affirmed the
   pause without changing the band — Unit 1 shutdown (Aug 6 finding, missed by
@@ -431,7 +451,7 @@ inspection** — recorded plainly, because avoiding them is ENGINE.md §3.5 alph
 | **PBK** | — | ⚠ **STAYS DEMOTED, pending FY26 confirmation** — see reconciliation note below. Revisit if Q3/FY26 shows the ex-SAI growth trajectory holding AND NPE stays ≤4%. | — |
 | **BENTO** | 9.22 (2026-09-04 close) | ⬇ **DROPPED from active consideration.** Revisit after H1 on Sep 15 (unchanged, calendar confirmed). | — |
 | **SMTL** | 39.90 (2026-09-04 close) | Watch only — H1 (Aug 25) published, margin-quality concern **confirmed, not resolved** (see note below). No position contemplated. | — |
-| **BET index** | 34,414.30 (2026-09-04 close) | −5% from the **corrected ATH 36,576.55** ≈ **34,748** (BET is back **below** this tier, −5.91% off ATH, as of Sep 4); −10% ≈ **32,919**; −15% ≈ **31,090** | Dislocation playbook, STRATEGY §6. First tier's slice (TLV + IARV T2) already fully executed 2026-08-31 — re-crossing back below −5% does not re-arm it; only ONE ≤30.00 remains unexecuted from the original priority list. |
+| **BET index** | 34,337.91 (2026-09-08 close) | −5% from the **corrected ATH 36,576.55** ≈ **34,748** (BET −6.12% off ATH, as of Sep 8 close); −10% ≈ **32,919**; −15% ≈ **31,090** | Dislocation playbook, STRATEGY §6. First tier's slice (TLV + IARV T2) already fully executed 2026-08-31 — re-crossing back below −5% does not re-arm it; only ONE ≤30.00 remains unexecuted from the original priority list. |
 
 **TTS — 2026-09-05 update.** H1 2026 published on schedule and, contrary to
 the Aug-24 concern that a clean H1 would be misleadingly pre-drought,
@@ -737,4 +757,18 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   notice — routine, no position held, no order. Brent/EUR-RON downgraded
   to a steady watch item (no further escalation; EUR/RON eased to 5.2508).
   PM designation still not named. Detail: journal/2026-09.md 2026-09-08
+  entry.
+- **2026-09-09 (daily run)**: no orders — every conditional still out of
+  range (TLV 35.86/36.22, IARV 34.70/36.20, SNN 62.00/62.80, ARS
+  18.40/18.65, ONE 32.70/33.20, TTS 7.00/7.10). **BET index committee
+  outcome confirmed**: EAI replaces SFG in BET/BET-TR/BET-TRN, decided at
+  the Sep 7 committee meeting, new weights effective the Sep 21 session —
+  neither name is held or on watchlist, no direct portfolio effect;
+  resolves the item carried since Sep 5. **SNN restart timeline pushed
+  materially later** (see SNN section) — "toward end of September" now,
+  not "not before Sep 10"; no order (price/restart condition both still
+  unmet). Brent ticked up further (~$97.5–99.35, a six-week+ high) but
+  EUR/RON flat at 5.2523 — no BVB stress signal; stays a steady watch
+  item. PM designation still not named. No news found on TLV/IARV/ONE
+  beyond what is already on file. Detail: journal/2026-09.md 2026-09-09
   entry.
