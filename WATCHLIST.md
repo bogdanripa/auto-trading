@@ -216,6 +216,23 @@ _(2026-09-05 weekly update: BET recovered for three sessions (Sep 1-3) then fell
   item, consistent with the confirmed agenda (no capital-raise line).
   Price 62.00/62.80 — ~11% above the ≤56.00 band regardless; neither leg of
   the entry condition (price AND confirmed restart) is met. No order.
+- **2026-09-10 (daily run) — EGM day itself; outcome not yet public.**
+  Press (Bursa.ro, Business24, Economica.net) confirms the agenda
+  unchanged: vote to publish the Control Body report in full, critical of
+  Doicești site selection, the Nova Power & Gas land deal (bought €2.8m
+  Dec 2021, sold to RoPower Nuclear €46m Jun 2025, ~1,540% markup, plus a
+  separate €19.5m refacturare agreement), and expense monitoring — the one
+  re-surfacing detail (Nuclearelectrica reportedly analyzing whether to
+  cancel/adjust the Nova Power payments) traces to an **2026-08-07** article,
+  already-known context, not new. **No capital increase or dilutive item**
+  in it — the €39.886m figure cited is each shareholder's existing equal
+  capital contribution to the RoPower JV, not a new call. Consistent with
+  the already-confirmed six-point agenda. **The EGM's actual vote outcome
+  is not yet published as of this pre-open run** — a later run must read it
+  directly, not assume the agenda-only read still holds. Restart: no
+  confirmation found; guidance unchanged from Sep 9 (end-of-September,
+  firmer estimate after Sep 15). Price 61.50/62.00 — ~10% above the ≤56.00
+  band regardless; neither leg of the entry condition met. No order.
 - Open question tracked as assumption **A9** (check Sep 30): is this outage
   weather-cyclical, or the first instance of a recurring structural Danube
   constraint on Romanian nuclear baseload? That decides whether SNN is a cheap
@@ -451,7 +468,7 @@ inspection** — recorded plainly, because avoiding them is ENGINE.md §3.5 alph
 | **PBK** | — | ⚠ **STAYS DEMOTED, pending FY26 confirmation** — see reconciliation note below. Revisit if Q3/FY26 shows the ex-SAI growth trajectory holding AND NPE stays ≤4%. | — |
 | **BENTO** | 9.22 (2026-09-04 close) | ⬇ **DROPPED from active consideration.** Revisit after H1 on Sep 15 (unchanged, calendar confirmed). | — |
 | **SMTL** | 39.90 (2026-09-04 close) | Watch only — H1 (Aug 25) published, margin-quality concern **confirmed, not resolved** (see note below). No position contemplated. | — |
-| **BET index** | 34,337.91 (2026-09-08 close) | −5% from the **corrected ATH 36,576.55** ≈ **34,748** (BET −6.12% off ATH, as of Sep 8 close); −10% ≈ **32,919**; −15% ≈ **31,090** | Dislocation playbook, STRATEGY §6. First tier's slice (TLV + IARV T2) already fully executed 2026-08-31 — re-crossing back below −5% does not re-arm it; only ONE ≤30.00 remains unexecuted from the original priority list. |
+| **BET index** | 33,751.28 (2026-09-09 close) | −5% from the **corrected ATH 36,576.55** ≈ **34,748** (BET −7.72% off ATH, as of Sep 9 close, the closest approach to the −10% tier since it was defined); −10% ≈ **32,919** (~2.3% away); −15% ≈ **31,090** | Dislocation playbook, STRATEGY §6. First tier's slice (TLV + IARV T2) already fully executed 2026-08-31 — re-crossing back below −5% does not re-arm it; only ONE ≤30.00 remains unexecuted from the original priority list. −10% tier requires re-underwriting every thesis first if reached, not a mechanical repeat. |
 
 **TTS — 2026-09-05 update.** H1 2026 published on schedule and, contrary to
 the Aug-24 concern that a clean H1 would be misleadingly pre-drought,
@@ -772,3 +789,15 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   item. PM designation still not named. No news found on TLV/IARV/ONE
   beyond what is already on file. Detail: journal/2026-09.md 2026-09-09
   entry.
+- **2026-09-10 (daily run)**: no orders — every conditional still out of
+  range (TLV 35.20/35.40, IARV 34.90/36.00, SNN 61.50/62.00, ARS
+  18.35/18.50, ONE 32.55/32.90, TTS 6.88/6.96). **SNN EGM convened today**
+  (Control Body report publication vote, second call Sep 11) — agenda
+  confirmed unchanged (no capital item), actual vote outcome not yet
+  public as of this pre-open run. Cernavodă restart still unconfirmed,
+  guidance unchanged (end of September). **BET closed Sep 9 at 33,751.28,
+  −7.72% off ATH** — the closest approach to the −10% dislocation tier
+  (≈32,919, ~2.3% away) since it was defined; TLV's dislocation-linked
+  ≤35.50 leg is back in price range but does not re-arm (fired once,
+  2026-08-31). PM designation still not named. Detail: journal/2026-09.md
+  2026-09-10 entry.
