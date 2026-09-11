@@ -233,6 +233,21 @@ _(2026-09-05 weekly update: BET recovered for three sessions (Sep 1-3) then fell
   confirmation found; guidance unchanged from Sep 9 (end-of-September,
   firmer estimate after Sep 15). Price 61.50/62.00 — ~10% above the ≤56.00
   band regardless; neither leg of the entry condition met. No order.
+- **2026-09-11 (daily run) — EGM FAILED for lack of quorum, rescheduled to
+  today.** Press (multiple outlets) confirms the Sep 10 first convocation
+  did not reach quorum: the Ministry of Energy (~82.5% holder) did not
+  attend its own convened EGM — only 54 shareholders present/represented
+  with 10.5% of voting rights against a 25% quorum requirement. Second
+  convocation reconvenes **today, Sep 11, 10:00 (same agenda, no quorum
+  threshold on second call)** — outcome not yet known as of this pre-open
+  run; a later run must read the actual result. The Ministry's own absence
+  from a meeting it forced onto the agenda is a new governance data point
+  (reads as delay/friction, not obviously as either side "winning" — no
+  read found on the reason for the no-show) but does not itself change the
+  disclosed agenda (still no capital item). Restart: no new information
+  beyond the existing end-of-September guidance. Price 60.00/60.40 — ~7%
+  above the ≤56.00 band regardless; neither leg of the entry condition
+  met. No order.
 - Open question tracked as assumption **A9** (check Sep 30): is this outage
   weather-cyclical, or the first instance of a recurring structural Danube
   constraint on Romanian nuclear baseload? That decides whether SNN is a cheap
@@ -331,6 +346,31 @@ _(2026-09-05 weekly update: BET recovered for three sessions (Sep 1-3) then fell
   ~34.66 RON (from ~33.88, exact update date unclear) — still 4% below the
   live ask. Live price (BT Trade MCP) 35.98/36.08 — above both the standing
   T2 band (33.00–34.50) and the filled dislocation band (≤35.50). No order.
+- **2026-09-11 (daily run) — standard T2 band (33.00–34.50) FIRED, order
+  placed.** BET closed Sep 10 at 33,218.54 (−1.58% day), **−9.18% off the
+  corrected ATH** — the closest approach yet to the −10% dislocation tier
+  (≈32,919, ~0.9% away), on a broad-based BVB selloff (all major indices
+  down together, biggest single-name mover was Rompetrol Rafinare −12%, no
+  identifiable market-wide catalyst found — reads as continued risk-off,
+  not idiosyncratic TLV news). Live quote (BT Trade MCP, re-verified
+  immediately before the order) **34.48/34.50** — ask sitting exactly at
+  the top of the standing 33.00–34.50 band that was deliberately left
+  unfilled since 2026-08-24 and tracked as assumption A10. This is a
+  distinct leg from the already-fired dislocation conditional (WATCHLIST
+  explicitly notes the standard band "was never touched and remains a
+  separate, still-open question" after the Aug 31 fill) — no re-arming
+  question here, this band simply had never fired before today. Thesis
+  intact: no kill criterion hit, no new company-specific news since the
+  Aug 21 H1. Sized to the **remaining room under the ≤8,000 full-position
+  cap** (5,852.75 RON already committed → 2,147.25 RON left), not a fresh
+  2,500–3,500 tranche: **62 sh @ limit 34.50** (previewed: commission 6.42
+  RON, net value 2,145.42 RON, resulting cost basis 7,998.17 RON, 62 RON
+  under cap). Order placed (day order) — **PENDING FILL**, not yet
+  confirmed; next run must verify via fresh `get_holdings`/`list_orders`
+  before treating this as filled. If filled, this resolves assumption A10
+  (band did eventually fill) and effectively completes the TLV position at
+  its full-position cap — grade explicitly next run. Full reasoning:
+  journal/2026-09.md 2026-09-11 entry.
 - **2026-08-24 (daily run)**: H1 2026 results now published (press
   coverage, filed Aug 21 or over the weekend). Group net profit **2.5bn
   RON, +26.8% YoY**; bank-level 2.1bn, +20.7% YoY; ~25bn RON financing
@@ -468,7 +508,7 @@ inspection** — recorded plainly, because avoiding them is ENGINE.md §3.5 alph
 | **PBK** | — | ⚠ **STAYS DEMOTED, pending FY26 confirmation** — see reconciliation note below. Revisit if Q3/FY26 shows the ex-SAI growth trajectory holding AND NPE stays ≤4%. | — |
 | **BENTO** | 9.22 (2026-09-04 close) | ⬇ **DROPPED from active consideration.** Revisit after H1 on Sep 15 (unchanged, calendar confirmed). | — |
 | **SMTL** | 39.90 (2026-09-04 close) | Watch only — H1 (Aug 25) published, margin-quality concern **confirmed, not resolved** (see note below). No position contemplated. | — |
-| **BET index** | 33,751.28 (2026-09-09 close) | −5% from the **corrected ATH 36,576.55** ≈ **34,748** (BET −7.72% off ATH, as of Sep 9 close, the closest approach to the −10% tier since it was defined); −10% ≈ **32,919** (~2.3% away); −15% ≈ **31,090** | Dislocation playbook, STRATEGY §6. First tier's slice (TLV + IARV T2) already fully executed 2026-08-31 — re-crossing back below −5% does not re-arm it; only ONE ≤30.00 remains unexecuted from the original priority list. −10% tier requires re-underwriting every thesis first if reached, not a mechanical repeat. |
+| **BET index** | 33,218.54 (2026-09-10 close) | −5% from the **corrected ATH 36,576.55** ≈ **34,748** (BET −9.18% off ATH, as of Sep 10 close, the closest approach to the −10% tier since it was defined); −10% ≈ **32,919** (~0.9% away); −15% ≈ **31,090** | Dislocation playbook, STRATEGY §6. First tier's slice (TLV + IARV T2) already fully executed 2026-08-31 — re-crossing back below −5% does not re-arm it; only ONE ≤30.00 remains unexecuted from the original priority list. −10% tier requires re-underwriting every thesis first if reached, not a mechanical repeat. |
 
 **TTS — 2026-09-05 update.** H1 2026 published on schedule and, contrary to
 the Aug-24 concern that a clean H1 would be misleadingly pre-drought,
@@ -801,3 +841,21 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   ≤35.50 leg is back in price range but does not re-arm (fired once,
   2026-08-31). PM designation still not named. Detail: journal/2026-09.md
   2026-09-10 entry.
+- **2026-09-11 (daily run) — first order since Aug 31, TLV standard T2
+  band fired.** **BET closed Sep 10 at 33,218.54 (−1.58% day), −9.18% off
+  ATH** — closest approach yet to the −10% tier
+  (≈32,919, ~0.9% away), on a broad market-wide selloff with no
+  identifiable single catalyst. **TLV's separate standing 33.00–34.50 T2
+  band (open since 2026-08-24, assumption A10) fired**: live quote
+  34.48/34.50 confirmed twice before acting; thesis intact, no kill
+  criterion hit. Bought **62 sh @ limit 34.50** (day order, PENDING FILL,
+  not yet broker-confirmed), sized to the remaining ~2,147 RON room under
+  the ≤8,000 full-position cap rather than a fresh tranche — this
+  effectively completes the TLV position at cap if it fills. **SNN EGM
+  failed for lack of quorum on Sep 10** (Ministry of Energy, ~82.5%
+  holder, did not attend its own convened meeting) — rescheduled to
+  second convocation today, Sep 11, 10:00, same agenda; outcome unknown
+  as of this pre-open run. IARV, ARS, ONE, TTS all remain out of range.
+  ONE Investor Day is today (A12 check-by) — no pre-event agenda leak
+  found; outcome to be read by a later run. Detail: journal/2026-09.md
+  2026-09-11 entry.
