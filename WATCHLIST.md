@@ -268,7 +268,7 @@ _(2026-09-05 weekly update: BET recovered for three sessions (Sep 1-3) then fell
   re-band above. The pattern itself became LESSONS.md P-5.
 - Expected holding if re-entered: 1–3+ years.
 
-### TLV — Banca Transilvania (core) — HELD 162 sh, dislocation-linked T2 leg FILLED 2026-08-31
+### TLV — Banca Transilvania (core) — HELD 224 sh, AT FULL-POSITION CAP (both T2 legs filled)
 - Price 37.56/37.60 (2026-08-24) | P/E ~10.0 | P/B 2.0 | div 1.2840 paid June
 - Thesis: Romania's dominant retail/SME bank compounding at ~25–30%; 9.9x for
   the market's quality compounder while rates stay high (NII tailwind persists
@@ -371,6 +371,15 @@ _(2026-09-05 weekly update: BET recovered for three sessions (Sep 1-3) then fell
   (band did eventually fill) and effectively completes the TLV position at
   its full-position cap — grade explicitly next run. Full reasoning:
   journal/2026-09.md 2026-09-11 entry.
+- **2026-09-12 (weekly run) — FILL CONFIRMED, TLV now AT FULL-POSITION
+  CAP.** `get_holdings` shows **224 sh @ avg cost 35.7005, total cost basis
+  7,996.92 RON** — 1.83 RON under the ≤8,000 cap. Assumption A10 graded
+  **held**: the standard band was never re-banded upward despite a
+  confirmed-good H1 and price trading well above it for over two weeks
+  (2026-08-24 → 2026-09-10); the market came to the pre-set price via a
+  broad-based selloff rather than the engine chasing it up. No further add
+  to TLV is possible under the current cap regardless of price — the
+  position is complete. No kill criterion approached; thesis intact.
 - **2026-08-24 (daily run)**: H1 2026 results now published (press
   coverage, filed Aug 21 or over the weekend). Group net profit **2.5bn
   RON, +26.8% YoY**; bank-level 2.1bn, +20.7% YoY; ~25bn RON financing

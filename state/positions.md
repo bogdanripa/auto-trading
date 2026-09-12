@@ -42,6 +42,17 @@ criterion approached. No trades this week. Portfolio ~23.4% invested at
 cost, cash reserve ~76.6% — comfortably above the ≥25–30% STRATEGY §2
 floor. Detail: journal/2026-09.md 2026-09-05 weekly entry.
 
+**Weekly review 2026-09-12** (third weekly run): TLV's standard T2 band
+fired 2026-09-11 (broker-confirmed this run: 224 sh @ avg 35.7005, cost
+basis 7,996.92 RON) — TLV is now **at its full-position cap** (≤8,000).
+Both positions reviewed against thesis/kill criteria/fair-value band —
+**both HOLD, no further changes.** IARV: no thesis-changing news; T2
+complete, 392 RON of satellite-cap room unchanged. TLV: thesis intact, no
+kill criterion approached; the position is now capped, so no further add is
+possible regardless of price. Portfolio ~27.0% invested at market, cash
+reserve ~73.0% — still comfortably above the ≥25–30% floor. Detail:
+journal/2026-09.md 2026-09-12 weekly entry.
+
 ## IARV — IAR SA Brasov
 - Opened: 2026-08-04 (fill; order placed 2026-08-03) (journal: journal/2026-08.md entries of 2026-08-03 and 2026-08-04)
 - Tranches: T1 64 sh @ avg 38.8161 (incl. fees). **T2 filled in full — completed 2026-08-31 close (confirmed 2026-09-01 daily run)**: the 52 sh remainder of the day order (limit 35.30) filled by end of day Aug 31 (blocked cash matched exactly). Combined with the 18 sh filled intraday, the full 70 sh T2 tranche is done. Broker-verified position as of 2026-09-01 pre-open: **134 sh @ avg cost 37.0078, total cost basis 4,959.04 RON** — 10.8% of portfolio at cost, just under the ≤5,500 satellite cap. Journal: journal/2026-08.md 2026-08-31 (intraday) entry; journal/2026-09.md 2026-09-01 entry.
@@ -54,7 +65,7 @@ floor. Detail: journal/2026-09.md 2026-09-05 weekly entry.
 ## TLV — Banca Transilvania
 - Opened: 2026-08-06 (fill; order first placed 2026-08-03, re-placed daily until filled) (journal: journal/2026-08.md entries of 2026-08-03 through 2026-08-06). Note: this position was missing from this file until the 2026-08-14 daily run caught the gap during account reconciliation — a process miss, not a broker discrepancy; broker holdings matched the journal throughout.
 - Tranches: T1 81 sh @ avg 37.0107 (incl. fees). **T2 dislocation-linked leg FILLED IN FULL 2026-08-31** (intraday): BET fell ≥5% from ATH (−7.08%, to 33,989.44) and TLV traded ≤35.50 (bid/ask 35.08/35.10) with thesis intact — both legs of the pre-written condition (STRATEGY §6 / this file's prior entry) fired. 81 sh @ effective avg 35.245 (incl. fees). New broker-verified position: **162 sh @ avg cost 36.1281, total cost basis 5,852.75 RON** (well under the ≤8,000 full-position cap). Journal: journal/2026-08.md 2026-08-31 (intraday) entry. The standard 33.00–34.50 T2 band was not used (price never traded there); assumption A10 (whether the standard band ever fills) stays open, tracked separately from this dislocation fill.
-- **2026-09-11: standard 33.00–34.50 T2 band fired.** Live quote 34.48/34.50 (BET −9.18% off ATH on a broad market-wide selloff, closest approach yet to the −10% tier). Order placed: 62 sh @ limit 34.50, day order, sized to the remaining room under the ≤8,000 full-position cap. **PENDING FILL** — not yet broker-confirmed; next run must verify via fresh `get_holdings` before treating this as filled or updating the avg cost/basis here. If filled: new position 224 sh, cost basis ≈7,998.17 RON, effectively at the full-position cap. Journal: journal/2026-09.md 2026-09-11 entry.
+- **2026-09-11: standard 33.00–34.50 T2 band fired and FILLED — broker-confirmed 2026-09-12.** Live quote 34.48/34.50 (BET −9.18% off ATH on a broad market-wide selloff, closest approach yet to the −10% tier). Order placed 62 sh @ limit 34.50, day order; `get_holdings` (2026-09-12 weekly run) confirms **224 sh @ avg cost 35.7005, total cost basis 7,996.92 RON** — 1.83 RON under the ≤8,000 full-position cap, effectively completing the TLV position at cap. Assumption A10 graded **held** (see journal/2026-09.md 2026-09-12 weekly entry): the standard band was deliberately never re-banded upward through a confirmed-good H1 and three-plus weeks of trading above it, and the market eventually came to it via a broad selloff rather than the engine chasing price — the discipline of "waiting for price, not re-banding to meet it" was vindicated, not merely un-falsified. TLV is now at its full-position cap; no further add possible without a cap increase (not contemplated) or a trim elsewhere. Journal: journal/2026-09.md 2026-09-11 and 2026-09-12 entries.
 - 2026-08-24 review: **HOLD, no add at 37.56.** H1 confirmed the thesis outright — group net profit 2.5bn RON (+26.8% YoY), cost of risk 0.63% (−20bp), NPL 2.41% (−0.24pp), solvency 21.96%, ROE 21.98%, no guidance cut. No kill criterion hit; credit quality moved the *right* way. Not adding because every visible external valuation anchor (targets 29.9–33.88) sits 10–20% below spot, and ⚠ **the issuer buyback previously recorded as live price support closed 2026-05-22** (BVB report TLV_20260522160244) — there is no issuer bid under this price. See LESSONS.md M-2.
 - Thesis (one line): dominant retail/SME bank compounding ~25–30%, 9.9x for the market's quality compounder while rates stay high. Full thesis: WATCHLIST.md.
 - Fair-value band: 38–44 RON.  Kill criteria: guidance cut below 4bn; bank tax extended AND raised for 2027; NPL inflection in H1/Q3.
