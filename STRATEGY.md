@@ -1,4 +1,4 @@
-# STRATEGY.md — v1.3
+# STRATEGY.md — v1.4
 
 Living strategy. Any run may amend it with a version bump, changelog entry, and
 journaled rationale (ENGINE.md §6). The constitution (ENGINE.md) always wins on
@@ -141,6 +141,92 @@ positions this week:
   "I couldn't verify enough," rather than "the numbers say no." Two
   concrete gaps (a real 20-day BVB turnover series, actual leverage/net-debt
   data) are carried to the research agenda rather than guessed at.
+
+### Regime update — 2026-09-12 (v1.4, third weekly run)
+
+No change to the core read; TLV's position completes, ONE is demoted, and a
+structural gap in dislocation-readiness surfaces:
+
+- **BET closed Sep 11 at 33,016.75, −9.73% off the corrected ATH** — within
+  ~0.3% (≈98 pts) of the −10% dislocation tier (≈32,919), the closest
+  approach since the tiers were defined. TLV's standard 33.00–34.50 T2 band
+  fired and filled in full Sep 11 (224 sh, cost basis 7,996.92 RON) —
+  **TLV is now at its ≤8,000 full-position cap**, resolving assumption A10
+  (graded held: the discipline of never re-banding upward was vindicated
+  when the market came to the pre-set price via a broad selloff rather
+  than the engine chasing it). IARV remains capped from its own T2 (392
+  RON of satellite-cap room, unchanged). **Net effect: the two
+  highest-conviction names in the book have no room left to absorb a
+  −10%-tier reserve slice** — see LESSONS.md P-9, a new structural gap
+  this run surfaced rather than resolved.
+- **ONE demoted, price-only fallback withdrawn.** Its Sep 11 Investor Day
+  — a five-hour, granular event covering NAV targets, a new rental-income
+  vehicle, and US expansion — never once mentioned the ANCPI/e-Terra
+  backlog that the entire near-term thesis depended on resolving.
+  Assumptions A8 and A12 both grade broken by their own pre-written
+  falsification rules (LESSONS.md P-8); the "no catch-up and management
+  cannot date one" kill criterion is met. No active entry price stands
+  for ONE pending a fresh quarterly report and a re-derived fair-value
+  band — this is the same discipline SNN's Aug 24 re-band applied to a
+  confirmed thesis break.
+- **SNN's Sep 10–11 EGM saga resolved procedurally, not substantively.**
+  First convocation failed for lack of quorum (the Ministry of Energy, the
+  meeting's own requester, did not attend); second convocation passed
+  93.01% present, Control Body report published in full same day. The
+  report's sharper detail: a ~€19.5m "cost-refactoring agreement" with
+  Nova Power & Gas that ran outside SNN's normal monitoring, no
+  competitive tender for the private partner, total project cost now put
+  at ~$6.5bn (up ~$3.8bn from 2022), calls for personal-accountability
+  review "including whether just cause exists to remove management/
+  governance bodies." **New, separately: CEO Cosmin Ghiță has given
+  notice (effective Oct 2), an interim CEO takes over Oct 3, and the
+  Ministry wants a competitive Board selection process** — a leadership
+  transition mid-crisis, plausibly but not confirmedly connected to the
+  report. Restart still unconfirmed ("toward end of September," firmer
+  estimate promised after Sep 15); price 58.80 (Sep 11), ~5% above the
+  ≤56.00 band — the closest approach yet, but neither leg of the entry
+  condition is met.
+- **IARV's Oct 6/7/10 AGOA agenda verified clean** (ordinary meeting,
+  board-compensation items only, no capital action) — closes a task open
+  since Sep 5.
+- **ALRO re-confirmed not ready, on sharper grounds**: a second
+  consecutive semester's loan-covenant breach (waived, but recurring), an
+  unresolved November 2026 refinancing, bottom-tier BVB liquidity (0.22%
+  LQD score, ~108k RON/day), and a genuine but entirely unhedged
+  commodity-price earnings driver (LME aluminum, five consecutive
+  quarters of gains). Two new re-trigger conditions set: the refinancing
+  actually closing, and LME aluminum holding above ~$3,000/t through Q3.
+- **TTS's long-owed valuation refresh landed**: book value ≈4.85 RON/share
+  (P/B ≈1.4x at spot, richer than the ~1.16x carried since inception), and
+  the only genuine 2026-relevant analyst anchor found (Erste, post-split,
+  Jul 2, 2026, RON 4.46, "Hold") sits well *below* spot — a materially
+  more cautious read than the stale pre-split 7.36 "consensus" the
+  inception thesis leaned on. The ≤6.00 band is unchanged (discipline, not
+  new thesis-breaking news), but TTS is not obviously cheap on the one
+  credible external anchor available.
+- **Two new candidates screened**: AROBS Transilvania Software (IT/
+  software, real profit growth, decent liquidity, pending one final
+  ownership/consolidation-accounting verification before any WATCHLIST
+  addition) and Impact Developer & Contractor (real estate, statistically
+  cheap at 0.45x book but carrying a related-party loan from its 58.5%
+  controlling shareholder and live land-title litigation — not ready).
+  Neither is added to WATCHLIST this run pending further diligence (AROBS)
+  or resolution of the governance flags (IMP).
+- **Macro/political**: PM naming pushed to "not before Sep 19" (President
+  Dan traveling for the Arctic Summit then UNGA); snap-election rhetoric
+  now coming openly from both PSD's Grindeanu and PNL's Mureșan, with a
+  constitutional-law commentator flagging a possible deadlock "with no
+  constitutional way out" if two more investiture attempts fail within 60
+  days of the first. No new rating action from any of the three agencies.
+  NBR unchanged at 6.50%, next meeting Oct 8. EUR/RON stable at 5.2557, no
+  stress. Brent cooled from a $106–108 US–Iran-strike peak to ~$104–105 —
+  still well above the pre-spike ~$97 baseline, with a partial
+  de-escalation narrative (Iran–GCC talks) emerging Sep 11–12; no
+  confirmed Romanian energy-name read-through found. New calendar item:
+  PNRR Payment Request #6 (151 milestones/targets) is due **Sep 30**, with
+  supporting documentation due **Sep 15** — a fresh, dated risk item for
+  the research agenda. BET index committee's EAI-replaces-SFG change is
+  confirmed on track, effective the Sep 21 session.
 
 ## 2. Portfolio construction
 
