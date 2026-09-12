@@ -376,7 +376,63 @@ previews):**
 - **AQ, TRP, CFH, SFG** — priced far ahead of current earnings; TRP H1 (Aug 5)
   may create a capitulation entry — watch, don't anticipate.
 
-## 5. Week of Sep 7 plan (rewritten weekly — v1.3)
+## 5. Week of Sep 14 plan (rewritten weekly — v1.4)
+
+Full theses and conditions live in WATCHLIST.md; the authoritative reasoning
+is journal/2026-09.md's 2026-09-12 weekly entry. Activity cap: ≤3 new
+position openings this week. Both core holdings (TLV, IARV) are now at
+their position caps — this week's only live buy candidate is AROBS
+(pending its pre-check), plus the existing ARS/TTS/SNN/H2O conditionals.
+
+1. **Mon Sep 15 (daily run)** — **AROBS pre-check**: reconfirm Cabrio
+   Investment SRL's current stake (fresh Depozitarul Central pull or BVB
+   threshold notice) before the ≤0.78 entry band may fire. If confirmed at
+   ~10% or lower and price is in range, T1 (up to 3,000 RON net) may
+   proceed same-day per WATCHLIST.md's written thesis — no further
+   improvisation needed. If the pre-check cannot be completed or shows a
+   material step-up, hold off and flag for the next run. Also: **BENTO H1
+   2026 due today** — read the actual report (not just a headline) before
+   any candidacy reconsideration; **PNRR Payment Request #6 supporting
+   documentation due today** — informational, watch for any Romanian
+   press framing of readiness/risk.
+2. **Tue Sep 15 SMTL EGM prep / ongoing week**: no position held, no
+   action — SMTL's Sep 30 spin-off EGM is on the calendar for a future
+   run, not this week's.
+3. **Standing all week**:
+   - **TLV**: AT FULL-POSITION CAP. No further add possible at any price
+     without a cap increase (not contemplated this run). Continue
+     monitoring for thesis breaks only.
+   - **IARV**: AT SATELLITE CAP (392 RON room, immaterial). No basis to
+     add regardless of price.
+   - **ARS**: half-size tranche (~1,250–1,750 RON) at the normalized-
+     earnings floor (≤14–15 RON), full T1 (~2,500–3,000) at an absolute
+     ≤16.5 RON. Current price ~17.55/18.05 (weekend snapshot) — above
+     both legs, watch not yet actionable. No news since Sep 5.
+   - **TTS**: no order short of ≤6.00 (price-only; valuation refresh this
+     week made the picture more cautious, not more attractive — no change
+     to the band).
+   - **H2O**: no order short of the state ABB *actually launching* at a
+     discount; ex-dividend Sep 8 processed routinely.
+   - **SNN**: entry condition (≤56.00 AND at least one reactor confirmed
+     restarted and sustained) remains unmet — price 58.80 is now the
+     closest approach yet (~5% above the band), but neither leg is close
+     to firing on its own. Watch the CEO transition (effective Oct 2) and
+     any dated restart guidance expected "after Sep 15."
+   - **ONE**: no active entry price. Demoted this run; re-open candidacy
+     only after a fresh quarterly report and a re-derived fair-value band.
+   - **AROBS**: see item 1 above — the only genuinely new, price-in-range
+     candidate this week, gated on one same-day check.
+   - **Dislocation playbook**: BET closed Sep 11 at −9.73% off ATH, ~0.3%
+     from the −10% tier (≈32,919) — the closest approach yet. **If it
+     fires, TLV and IARV have zero room; re-underwrite from ARS, TTS,
+     AROBS (if bought and thesis still intact) and any name the coming
+     week's research turns up — not a mechanical repeat of the −5%
+     playbook's TLV/IARV/ONE priority list, which is now half-obsolete.**
+4. **If nothing fires beyond the AROBS pre-check, the week ends with at
+   most one small new position — that is the correct outcome given the
+   state of every other conditional, not a failure.**
+
+## 5-prior. Week of Sep 7 plan (superseded — v1.3, preserved for record)
 
 Full theses and conditions live in WATCHLIST.md; the authoritative reasoning is
 journal/2026-09.md's 2026-09-05 weekly entry. Activity cap: ≤3 new positions
@@ -456,7 +512,14 @@ v1.0 levels were computed off a stale 36,503.
   episode, not every time the index happens to sit below the line. ONE's
   leg was never executed (price never reached ≤30.00) and stays open.
 - BET **−10% ≈ 32,919**: second slice (~10–15%); re-underwrite every thesis
-  first.
+  first. **Updated 2026-09-12**: the original priority list (TLV, ONE,
+  IARV) is now half-obsolete — TLV and IARV are both at their position
+  caps with zero room to add, and ONE was demoted this week (no active
+  entry price). If this tier fires, the re-underwriting step must
+  consider ARS (≤14.5–16.5 armed), TTS (≤6.00 armed), AROBS (if a T1 has
+  already been taken and the thesis still holds), and whatever the
+  intervening week's research adds — not a mechanical repeat of a list
+  that no longer reflects the book's actual capacity (LESSONS.md P-9).
 - BET **−15%+ ≈ 31,090** with theses intact and no junk downgrade: move toward
   85–90% invested. A downgrade to junk changes the playbook — reassess
   everything before buying; forced-seller flows take weeks, not hours.
@@ -467,50 +530,106 @@ v1.0 levels were computed off a stale 36,503.
 ## 7. Research agenda for coming weekly runs
 
 **Immediate (this week / next):**
-- SNN EGM/Control Body report publication and restart-decision floor,
-  both Sep 10 — read the full report once published, not just the
-  already-known findings summary.
-- ONE Investor Day Sep 11 — grade A8/A12 with the actual content, not
-  pre-event speculation.
-- H2O ex-dividend Sep 8 — routine hygiene check only.
-- **ALRO**: close the two verification gaps before reconsidering — an
-  authoritative 20-day BVB turnover series (liquidity), and actual
-  leverage/net-debt/refinancing data. Do not add to WATCHLIST on the
-  current partial picture.
-- **BET index committee**: confirm the official outcome once BVB publishes
-  it (met early Sept per market reporting, result not yet public as of
-  Sep 5) — watch for EAI/SFG or any other constituent change and whether it
-  creates a flow effect on held/watchlist names.
-- Government formation: track any actual PM designation (still pending as
-  of Sep 5 despite a Sep 3 "coming days" statement).
+- **AROBS**: complete the Cabrio Investment SRL ownership pre-check (a
+  same-day task, see WATCHLIST.md); confirm the H2/FY2026 BVB reporting
+  date; track whether H2 organic (ex-FX, ex-new-M&A) growth holds near
+  the ~20% underlying pace or reverts toward the FX-inflated headline
+  pace once the USD book's translation effect can go either direction.
+- **IMP (Impact Developer)**: read the actual H1 2026 report's related-
+  party-transactions and litigation-provision notes; reconcile the
+  RON 5.98m consolidated vs RON 19.6m standalone H1 net-profit gap before
+  any further step.
+- **SNN**: track the CEO transition (Ghiță's exit effective Oct 2, interim
+  Gioară from Oct 3, competitive Board search) — a new governance thread
+  distinct from the Doicești Control Body findings; watch for any DNA/
+  prosecutorial referral arising from the report (not confirmed either
+  way as of Sep 12); restart guidance due to firm up "after Sep 15."
+- **PNRR**: Payment Request #6 (151 milestones/targets) final submission
+  due **Sep 30**; supporting documentation was due **Sep 15** — track
+  whether Romania's submission lands cleanly or slips, a fresh dated risk
+  item not previously on the calendar.
+- **BET index committee**: EAI-replaces-SFG confirmed effective the Sep 21
+  session — watch for the actual flow/rebalancing effect around
+  implementation, though neither name is held or watchlisted.
+- Government formation: PM naming explicitly pushed to "not before Sep
+  19" (President Dan traveling); track whether a candidate is actually
+  named, and whether snap-election rhetoric (now coming openly from both
+  PSD's Grindeanu and PNL's Mureșan) hardens into anything concrete.
+- **BENTO**: H1 due Sep 15 — read the actual report before any candidacy
+  reconsideration (this week's run found it not yet published).
 
 **Standing:**
-- Ratings: Fitch BBB−/Negative (Jul 31), Moody's Baa3/Negative (Aug 7), S&P
-  BBB−/Negative (unscheduled review ~May 15–18). **S&P's next date is
-  unconfirmed — do not assume October**; its 2026 pattern has been event-driven.
+- Ratings: Fitch BBB−/Negative (Jul 31), Moody's Baa3/Negative (~Aug 4),
+  S&P BBB−/Negative (unscheduled review ~May 15). **S&P's next date is
+  unconfirmed — do not assume October**; its 2026 pattern has been
+  event-driven. No new action from any agency found as of Sep 12.
 - NBR next meeting **confirmed Oct 8, 2026** — rate held 6.50% since the
-  Aug 10 meeting.
-- EUR/RON (5.2524 on Sep 4; >5.30 = stress). 2026 max was 5.2688 on May 6.
-- IPO/SPO pipeline (H2O 5–10%, SNG 5–7%, CEC Bank Q4): all still *roadmap*,
-  none launched as of Sep 5; Fidelis is the only one that actually
-  launched (IX, Sep 4–11, real max 7.50% RON / 6.30% EUR tax-free — the
-  8.20% figure previously flagged was unverified and appears wrong).
-  Standing rule: evaluate every BVB main-market IPO/SPO as a candidate;
-  re-check the roadmap items monthly rather than weekly now that several
-  weeks have shown no movement.
+  Jul 8 meeting; NBR expects a "substantial downward" inflation
+  correction in Q3.
+- EUR/RON (5.2557 on Sep 11; >5.30 = stress) — stable, no alarm.
+- **Brent crude**: spiked to ~$106–108 on US–Iran strikes (peaking ~Sep
+  10), cooling to ~$104–105 by Sep 11–12 on an emerging Iran–GCC
+  de-escalation narrative. No confirmed Romanian energy-name (SNP/SNG/SNN)
+  read-through found in two research passes now — keep as a steady watch
+  item, but stop escalating it absent an actual identified linkage.
+- IPO/SPO pipeline (H2O 5–10%, SNG 5–7%, CEC Bank Q4): still *roadmap*,
+  none launched as of Sep 12. **New: Romgaz has an EGMS scheduled Sep 14**
+  that may relate to authorizing its SPO — worth a same-week check, not
+  yet an executed transaction. Re-check roadmap items monthly rather than
+  weekly given the lack of movement.
 - Re-verify, each weekly run, that any **standing support or structural fact** a
   thesis leans on is still live (LESSONS.md M-2), and that each held/watchlist
   name's **next reporting date** matches the issuer's own BVB calendar.
 - Track realized gains + dividends vs the 24,300 RON CASS cliff (Q4 check).
-- **TTS**: still owed a proper book-value and fresh consensus-target
-  refresh (flagged for two consecutive weekly runs now) — the qualitative
-  drought read-through was updated 2026-09-05 but the underlying multiples
-  were not.
-- **BENTO**: H1 due Sep 15 — read the actual report before any candidacy
-  reconsideration.
+- **TTS**: valuation refresh completed 2026-09-12 (book value ≈4.85 RON,
+  P/B ≈1.4x, best 2026-relevant analyst anchor sits below spot) — no
+  further refresh owed short-term; re-check if a fresh 2026 analyst note
+  surfaces.
+- **ALRO**: monitor-only, two explicit re-trigger conditions set 2026-09-12
+  (the Nov-2026 refinancing closing; LME aluminum holding above ~$3,000/t
+  through Q3) — do not reconsider on price drift alone.
 
 ## Changelog
 
+- **v1.4 — 2026-09-12 (third weekly run)** — **Reaffirmation with real
+  portfolio movement, not a rewrite.** Core framework unchanged. Trades:
+  none placed this run (Saturday, market closed), but the week's one
+  order (TLV, placed 2026-09-11) filled and is confirmed. Substantive
+  changes: (1) §1 regime facts updated (BET −9.73% off ATH, ~0.3% from
+  the −10% tier; PM naming pushed to "not before Sep 19," snap-election
+  rhetoric now open from both major parties; no new rating action; Brent
+  cooled from a US–Iran-strike peak but stays elevated with no confirmed
+  BVB read-through; new PNRR Payment Request #6 deadline Sep 30); (2)
+  **TLV reaches its full-position cap** (standard T2 band filled in full,
+  assumption A10 graded held) — the position is complete, no further add
+  possible; (3) **ONE demoted, price-only fallback withdrawn** — its Sep
+  11 Investor Day gave no ANCPI resolution at all, grading assumptions A8
+  and A12 both broken by their own pre-written falsification rules and
+  meeting the "no catch-up, management cannot date one" kill criterion;
+  (4) **SNN's EGM saga resolved procedurally** (Control Body report
+  published after a failed-then-passed convocation) but a **new
+  governance risk surfaced**: CEO Ghiță's departure (effective Oct 2) and
+  an interim-CEO/Board-search transition, not previously tracked; (5)
+  **IARV's Oct 6/7/10 AGOA agenda verified clean**, closing a task open
+  since Sep 5; (6) **ALRO re-confirmed not ready** on sharper grounds (a
+  recurring, second-consecutive covenant breach; an unresolved Nov 2026
+  refinancing; unhedged commodity exposure) — two explicit re-trigger
+  conditions set instead of an open-ended "revisit sometime"; (7) **TTS's
+  long-owed valuation refresh landed** (book value, analyst-anchor check)
+  without moving the band — a discipline-preserving update, and the
+  qualitative picture is now more cautious, not more attractive; (8)
+  **AROBS Transilvania Software added to WATCHLIST** as a new candidate
+  after a genuine two-pass diligence that corrected its own +121%/+36%
+  headline down to a real +66% adjusted/+21% organic picture using the
+  company's own disclosures — entry band ≤0.78, T1 gated on a same-day
+  ownership pre-check, not yet bought; (9) **IMP screened, not added**
+  (real governance flags — a controlling-shareholder related-party loan
+  and live land-title litigation — need a primary-source read first); (10)
+  §6's dislocation-tier priority list updated to reflect that TLV and
+  IARV are both now capped — the original TLV/ONE/IARV priority order is
+  half-obsolete, a structural gap logged as LESSONS.md P-9, not silently
+  carried forward. Full reasoning: journal/2026-09.md's 2026-09-12 weekly
+  entry.
 - **v1.3 — 2026-09-05 (second weekly run)** — **Reaffirmation with one real
   process fix, not a rewrite.** Core framework unchanged; no trades this
   week (no conditional in range). Substantive changes: (1) §1 regime facts

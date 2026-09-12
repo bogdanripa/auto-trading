@@ -602,6 +602,131 @@ _(2026-09-12 weekly update: BET closed Sep 11 at 33,016.75, -9.73% off ATH — ~
   governance event.
 - Expected holding: 1–3 years (theme duration), reviewed each earnings.
 
+## New candidate — added 2026-09-12
+
+### AROBS — AROBS Transilvania Software (satellite, new) — entry band set, T1 gated on a same-day pre-check
+- Price 0.76/0.80 (2026-09-11 last trades) | market cap ≈840–885m RON |
+  1,103,100,493 shares outstanding | ISIN check pending, ticker AROBS,
+  BVB Premium Tier
+- **Why this reached the watchlist**: screened this run as part of the
+  new-candidate research agenda (STRATEGY.md §5/§7). Romania's largest
+  BVB-listed IT/software company (Cluj-based): embedded software/IoT,
+  custom software services, and own products, with real geographic
+  diversification (Romania 38%, Europe ex-RO 31%, US 27% via its
+  Codingscape subsidiary). Edge: small/mid-cap access plus reading past
+  the headline into the primary filing (ENGINE.md §3.2/3.3) — see the
+  verification below, which is exactly the "read everything" edge doing
+  its job on a name, not a slogan.
+- **Two-pass diligence (2026-09-12)**: first pass flagged two open
+  questions (ownership of a 37.29% "legal entities" bucket; whether the
+  +121% net-profit headline was flattered by an April 2026 five-subsidiary
+  merger); a second pass read AROBS's own 91-page unaudited H1 2026
+  interim report (bvb.ro filing, 27.08.2026) directly, primary source, to
+  close both.
+  - **Ownership**: founder/CEO Voicu Oprean holds 45.2587% direct.
+    Cabrio Investment SRL (Oprean 50%-owned) was a separately disclosed
+    ~10.0001% holder at 31.12.2025 but is folded into an undifferentiated
+    37.29% "legal entities" line at 30.06.2026 — **its current stake is
+    not independently reconfirmed, see the pre-check below.** A
+    comparable-or-larger slice of that same 37.29% bucket is confirmed
+    genuinely independent: Allianz-Țiriac private pension funds (~10%,
+    crossed the 5% threshold 26.07.2024) and Metropolitan Pensii (>4%).
+    Effective Oprean-side control is **≈55%** (45.26% + ~10% Cabrio), not
+    the ~82% a naive reading of "45%+37%" would suggest — normal, even
+    moderate, founder concentration for a BVB growth-tech name.
+  - **Profit-quality correction — the real reason this took two passes**:
+    the April 2026 merger of five already-100%-consolidated subsidiaries
+    into the parent is **scope-neutral at the consolidated level**
+    (company's own words: "does not affect the Group's operational
+    activities... to streamline and simplify them") — a non-issue for the
+    headline. The actual inflators, both **company-disclosed in its own
+    MD&A**: (1) a **non-recurring RON 7.3m net FX gain** (net FX swung
+    from –2.40m in H1 2025 to +6.25m in H1 2026, tied to the ~27%-of-
+    revenue US/USD book) — AROBS's own adjusted figure, ex-FX, is **RON
+    16.9m net profit vs a RON 23m+ headline**; (2) genuine but **inorganic**
+    contribution from new (not organic) acquisitions (GESS, QUEST, full
+    Codingscape) — comparable-perimeter organic revenue growth was
+    **+21.4%**, not the +36% headline. Net: **adjusted (ex-FX) net profit
+    growth ≈+66% YoY** — strong and real, but a materially different
+    (less spectacular, more expensive on a normalized basis) number than
+    the headline. Implied normalized P/E ≈**25x**, not the ~19x the
+    headline implies — a fairly-priced real compounder, not a screaming
+    bargain.
+  - **Governance**: audit committee only 1-of-2 members formally
+    independent (Oprean himself is not on it — a mitigant); a
+    company-disclosed **transfer-pricing file for related-party
+    transactions is still "in progress,"** not complete; recurring but
+    immaterial (~3% of cost of sales) related-party dealings with several
+    Oprean-adjacent satellite businesses (hotel, travel, car sales,
+    coffee) — a founder-conglomerate texture worth monitoring, not a
+    current dealbreaker at this size. Balance sheet is a genuine
+    strength: net cash position, **Net Debt/EBITDA ≈ –4.0x**.
+  - **Liquidity**: BVB's own August 2026 monthly bulletin shows ≈RON
+    416,000/day average turnover (20 trading days), LQD score 1.03% —
+    comfortably clears ENGINE.md §2.7 (a 2,500–3,500 RON tranche is ~1%
+    of a typical day's turnover; full position well under 60% of 20-day
+    median traded value).
+  - **"Which edge is this?" test (ENGINE.md §3)**: small/mid-cap access
+    (#2) and reading past the headline into the primary filing (#3) —
+    genuinely applies, not a rationalization; this is the first candidate
+    this engine has priced *down* from its own headline numbers using
+    company-disclosed adjustments rather than taking either the bull
+    headline or a bear rejection at face value.
+- Fair-value / entry: current 0.76–0.80 already sits near a reasonable
+  entry on the normalized (~25x) multiple — not deeply cheap, a fair
+  price for real, partly-inorganic growth. **Entry band ≤0.78** (within
+  ENGINE.md §2.8's ±10% price-sanity rule of spot). Satellite tranche:
+  **T1 up to 3,000 RON net** (~3,850–4,000 sh depending on fill).
+- **T1 is GATED on a same-day pre-check, not yet clear to fire** (the
+  same discipline as IARV's 2026-08-27 AGOA pre-check before its T2):
+  **reconfirm Cabrio Investment SRL's current (post-30.06.2026) stake**
+  via a fresh Depozitarul Central registry pull or BVB threshold-crossing
+  notice — the ~10% figure on file is carried forward from 31.12.2025,
+  not independently reconfirmed at the current date. This is a same-
+  morning check for the next daily run with live tool access, not an
+  open-ended diligence backlog item. **If Cabrio's stake is confirmed at
+  ~10% or lower**, T1 may proceed at the ≤0.78 band if price is in range.
+  **If it shows a material further step-up** (e.g., pushing combined
+  Oprean-side control toward an outright majority-with-affiliates),
+  pause and re-assess before buying — do not buy through an unconfirmed
+  ownership assumption.
+- Kill criteria: H2 2026 organic (ex-FX, ex-new-M&A) growth falls
+  meaningfully below the ~20% underlying pace confirmed this run; the
+  transfer-pricing file, once complete, surfaces a material related-party
+  mispricing; a further undisclosed step-up in Oprean/Cabrio
+  concentration; any capital-structure or dividend action that dilutes
+  minorities (note: AROBS's own stated dividend policy prefers free-share
+  distributions over cash — a reinvestment story, not an income stock, by
+  design, not a red flag on its own).
+- Expected holding: 2–3+ years, reviewed each earnings. Calendar: H2/FY2026
+  report date not yet confirmed against AROBS's own BVB financial
+  calendar — a task for the next run before this thesis is fully
+  actionable long-term; the transfer-pricing file's completion is
+  undated.
+
+**IMP (Impact Developer & Contractor) — screened 2026-09-12, not added.**
+Real-estate developer/turnaround profile: consolidated H1 2026 net profit
+RON 5.98m (vs RON 19.6m at the standalone/individual-entity level — the
+gap itself unexplained in what was accessible this pass and needs a
+primary-source read), P/E ≈12.4x, **P/BV ≈0.45x (trading well below
+book)**, ~2.3% dividend yield, liquidity workable (~126,000 RON/day per
+BVB's August bulletin) though thinner than AROBS. Statistically cheap and
+exactly the satellite/turnaround profile the mandate wants — but two real
+governance flags: founder Gheorghe Iaciu (58.52% direct control)
+**personally lends the company money** (a 1-year related-party loan at
+6%, convertible into shares), and the Greenfield Copou (Iași) project
+faces **active, contentious land-title litigation** against a historical
+landowner's heirs (press reports a lowball €50k settlement offer and
+criminal complaints; management says the project isn't affected, unverified
+beyond press). A September 2026 buyback (up to 10% of capital, max RON
+6/share vs ~3.95 spot) is a mild positive signal but a controlling
+shareholder's buyback also mechanically raises his own stake. **Not a
+rejection — genuine diligence pending**: needs a direct read of the H1
+2026 report's related-party-transactions and litigation-provision notes,
+and an explanation of the consolidated-vs-standalone profit gap, before
+any further step. Carried to the research agenda, not added to
+WATCHLIST.md on the current partial picture.
+
 ## Triggered watch (defined events, no orders until they fire)
 
 Updated 2026-08-24 after a full diligence pass. **Three names were downgraded on
@@ -855,6 +980,39 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   of this run (only stale Q1 2026 and prior-year S1 2025 results indexed).
   Capitulation leg of the AND condition failed regardless of guidance, so no
   further check was needed. Detail: journal/2026-08.md 2026-08-05 entry.
+- **2026-09-12 (third weekly run)**: TLV's standard T2 band filled in
+  full 2026-09-11 (224 sh, cost basis 7,996.92 RON) — **TLV now at its
+  full-position cap**; assumption A10 graded held. **ONE demoted and its
+  price-only ≤30.00 fallback withdrawn** after its Sep 11 Investor Day
+  gave no ANCPI-backlog resolution at all (assumptions A8 and A12 both
+  graded broken by their own pre-written falsification rules; kill
+  criterion met). **SNN's Sep 10-11 EGM saga resolved procedurally**
+  (second convocation passed 93% quorum, Control Body report published,
+  new detail on an unmonitored ~€19.5m refactoring agreement) but a new
+  governance risk surfaced: CEO Cosmin Ghiță departing effective Oct 2,
+  interim CEO from Oct 3, competitive Board search underway. **IARV's Oct
+  6/7/10 AGOA agenda verified clean** (ordinary meeting, board-
+  compensation only, no capital item), closing a task open since Sep 5.
+  **ALRO re-confirmed not ready** on sharper grounds (recurring
+  covenant breach, unresolved Nov 2026 refinancing, unhedged commodity
+  exposure, bottom-tier liquidity). **TTS's long-owed valuation refresh**
+  landed: book value ≈4.85 RON (P/B ≈1.4x, richer than assumed), the only
+  genuine 2026-relevant analyst anchor (Erste, Jul 2026, Hold, 4.46) sits
+  below spot — band unchanged (≤6.00) but the qualitative picture is more
+  cautious. **Two new candidates screened**: **AROBS Transilvania
+  Software added to WATCHLIST** (entry band ≤0.78, satellite tranche up
+  to 3,000 RON, T1 gated on a same-day Cabrio-ownership pre-check) after
+  a two-pass diligence that corrected its own headline (+121% net profit,
+  +36% revenue) down to a real but more modest +66% adjusted/+21% organic
+  picture using the company's own disclosures — a genuine new edge case,
+  not a rejection or an uncritical add. **IMP (Impact Developer)
+  screened, not added** — statistically cheap (0.45x book) but a
+  related-party founder loan and live land-title litigation need a
+  primary-source read first. **Structural finding**: with TLV and IARV
+  both now capped and BET within ~0.3% of the −10% dislocation tier, the
+  reserve currently has no fresh high-conviction home if that tier fires
+  (LESSONS.md P-9) — ARS and TTS's existing bands remain the readiest
+  armed conditionals. Detail: journal/2026-09.md 2026-09-12 weekly entry.
 - **2026-08-24 (first weekly run since inception)**: major revision.
   **SNN** active buy plan withdrawn and re-banded (≤56.00 AND confirmed
   restart; fair value 75–90 → 55–70) — see LESSONS.md P-5. **ONE** promoted to
