@@ -13,6 +13,8 @@ _(2026-09-05 weekly update: BET recovered for three sessions (Sep 1-3) then fell
 
 _(2026-09-12 weekly update: BET closed Sep 11 at 33,016.75, -9.73% off ATH — ~0.3% from the -10% dislocation tier, the closest approach yet. TLV's standard T2 band fired and filled Sep 11 (224 sh, cost 7,996.92) — **TLV is now at its full-position cap, no further add possible at any price.** IARV remains capped (392 RON room). ONE's ≤30.00 fallback is **withdrawn** this run (Investor Day gave no ANCPI resolution, kill criterion hit — see ONE section). **Net effect: if the -10% tier fires, there is currently no pre-armed name with room left to deploy into except a fresh ARS or TTS tranche at their existing bands — a real gap, flagged in this week's plan.** Two new candidates (AROBS, IMP) were screened this run; AROBS is pending one final verification pass before any WATCHLIST addition.)_
 
+_(2026-09-14 daily update: AROBS's ownership pre-check completed (on indirect evidence — no BVB threshold-crossing notification found for Cabrio Investment SRL since Oct 2024 — not a freshly reconfirmed exact percentage; see journal A14). T1 order placed: BUY 3,850 sh @ limit 0.77, net 2,973.39 RON, pending fill confirmation next run. BET's last confirmed close (Sep 11) remains -9.73% off ATH; no new session data at this pre-open run.)_
+
 ## Triggered-watch — re-banded names
 
 ### ONE — One United Properties — ⛔ DEMOTED 2026-09-12: Investor Day gave no ANCPI resolution, kill criterion hit, price-only fallback WITHDRAWN
@@ -604,7 +606,19 @@ _(2026-09-12 weekly update: BET closed Sep 11 at 33,016.75, -9.73% off ATH — ~
 
 ## New candidate — added 2026-09-12
 
-### AROBS — AROBS Transilvania Software (satellite, new) — entry band set, T1 gated on a same-day pre-check
+### AROBS — AROBS Transilvania Software (satellite, new) — T1 ORDER PLACED 2026-09-14, pending fill
+- **2026-09-14 update: pre-check completed (on indirect evidence, see
+  journal), T1 order placed.** BUY 3,850 sh @ limit 0.77, day order, net
+  2,973.39 RON. Not yet broker-confirmed as filled (order placed
+  pre-open) — next run must confirm via fresh `get_holdings` before
+  treating this as an open position. Pre-check found no BVB
+  threshold-crossing notification for Cabrio Investment SRL since its
+  Oct 2024 crossing above 10% (the next tier, 15%, would be independently
+  disclosure-triggering under Law 24/2017) — treated as evidence against
+  a material step-up, not as a fresh confirmed percentage; a direct read
+  of the H1 2026 report's shareholder table for an exact number is still
+  owed (tool limitation this run, not skipped by choice) — see journal
+  assumption A14, check-by 2026-09-19.
 - Price 0.76/0.80 (2026-09-11 last trades) | market cap ≈840–885m RON |
   1,103,100,493 shares outstanding | ISIN check pending, ticker AROBS,
   BVB Premium Tier
