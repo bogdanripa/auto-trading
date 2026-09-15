@@ -606,18 +606,20 @@ _(2026-09-14 daily update: AROBS's ownership pre-check completed (on indirect ev
 
 ## New candidate — added 2026-09-12
 
-### AROBS — AROBS Transilvania Software (satellite, new) — T1 ORDER PLACED 2026-09-14, pending fill
-- **2026-09-14 update: pre-check completed (on indirect evidence, see
+### AROBS — AROBS Transilvania Software (satellite) — T1 FILLED 2026-09-14/confirmed 2026-09-15
+- **2026-09-15 update: T1 fill broker-confirmed.** `get_holdings` shows
+  3,850 sh @ avg cost 0.7623 (incl. fees), investment 2,934.78 RON — the
+  full day order filled (better than the 0.77 limit; no partial fill,
+  no resting remainder). Added to `state/positions.md`. No open orders.
+- **2026-09-14: pre-check completed (on indirect evidence, see
   journal), T1 order placed.** BUY 3,850 sh @ limit 0.77, day order, net
-  2,973.39 RON. Not yet broker-confirmed as filled (order placed
-  pre-open) — next run must confirm via fresh `get_holdings` before
-  treating this as an open position. Pre-check found no BVB
-  threshold-crossing notification for Cabrio Investment SRL since its
-  Oct 2024 crossing above 10% (the next tier, 15%, would be independently
+  2,973.39 RON preview. Pre-check found no BVB threshold-crossing
+  notification for Cabrio Investment SRL since its Oct 2024 crossing
+  above 10% (the next tier, 15%, would be independently
   disclosure-triggering under Law 24/2017) — treated as evidence against
   a material step-up, not as a fresh confirmed percentage; a direct read
   of the H1 2026 report's shareholder table for an exact number is still
-  owed (tool limitation this run, not skipped by choice) — see journal
+  owed (tool limitation that run, not skipped by choice) — see journal
   assumption A14, check-by 2026-09-19.
 - Price 0.76/0.80 (2026-09-11 last trades) | market cap ≈840–885m RON |
   1,103,100,493 shares outstanding | ISIN check pending, ticker AROBS,

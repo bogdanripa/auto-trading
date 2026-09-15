@@ -42,6 +42,17 @@ criterion approached. No trades this week. Portfolio ~23.4% invested at
 cost, cash reserve ~76.6% — comfortably above the ≥25–30% STRATEGY §2
 floor. Detail: journal/2026-09.md 2026-09-05 weekly entry.
 
+**2026-09-15 (daily run)**: AROBS T1 order (placed 2026-09-14) broker-confirmed
+filled in full: 3,850 sh @ avg cost 0.7623 (incl. fees), cost basis 2,934.78
+RON — first fill at better than the 0.77 limit (day order captured intraday
+liquidity below the limit). Portfolio value (cash + holdings, market)
+45,554.56 RON: cash 30,426.00 (66.8%), AROBS mkt 2,849.00 (6.3%), IARV mkt
+4,542.60 (10.0%), TLV mkt 7,736.96 (17.0%) — ~33.2% invested at market
+(~34.9% at cost), all single-name and sector positions well under the
+20%/40% caps, cash reserve comfortably above the ≥25–30% floor. No trades
+today beyond confirming this fill — no other watchlist trigger in range.
+Detail: journal/2026-09.md 2026-09-15 daily entry.
+
 **Weekly review 2026-09-12** (third weekly run): TLV's standard T2 band
 fired 2026-09-11 (broker-confirmed this run: 224 sh @ avg 35.7005, cost
 basis 7,996.92 RON) — TLV is now **at its full-position cap** (≤8,000).
@@ -70,3 +81,11 @@ journal/2026-09.md 2026-09-12 weekly entry.
 - Thesis (one line): dominant retail/SME bank compounding ~25–30%, 9.9x for the market's quality compounder while rates stay high. Full thesis: WATCHLIST.md.
 - Fair-value band: 38–44 RON.  Kill criteria: guidance cut below 4bn; bank tax extended AND raised for 2027; NPL inflection in H1/Q3.
 - Expected holding: 1–3+ years.
+
+## AROBS — AROBS Transilvania Software
+- Opened: 2026-09-14 (order placed pre-open; broker-confirmed filled 2026-09-15) (journal: journal/2026-09.md entries of 2026-09-14 and 2026-09-15)
+- Tranches: T1 3,850 sh @ avg 0.7623 (incl. fees), cost basis 2,934.78 RON — filled in full as a day order at better than the 0.77 limit. ~6.4% of portfolio at cost, well under the 20% single-name cap (no AeRO cap — AROBS is Premium Tier main market).
+- Entry gated on a same-day ownership pre-check (Cabrio Investment SRL's stake vs a possible undisclosed step-up toward majority-with-affiliates control): passed on indirect evidence (no BVB threshold-crossing notification since Oct 2024's crossing above 10%), not a freshly reconfirmed exact percentage — see assumption A14 (journal/2026-09.md 2026-09-14), check-by 2026-09-19.
+- Thesis (one line): Romania's largest BVB-listed IT/software company, real ~66% adjusted / ~21% organic profit growth (not the flattered +121% headline), small/mid-cap access edge. Full thesis: WATCHLIST.md.
+- Fair-value band: entry band ≤0.78 (see WATCHLIST.md for the full valuation derivation). Kill criteria: a Cabrio/Oprean-side threshold crossing confirming a material step-up in control concentration; organic growth reverting sharply toward the FX-inflated headline pace once diligenced; governance action hostile to minorities.
+- Expected holding: 1–3 years, reviewed each earnings.
