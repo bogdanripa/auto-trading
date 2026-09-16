@@ -756,7 +756,7 @@ inspection** — recorded plainly, because avoiding them is ENGINE.md §3.5 alph
 | **PBK** | 0.1435/0.147 | ⚠ **STAYS DEMOTED, pending FY26 confirmation** — Sep 8 investor presentation confirms the Sep 5 reconciliation figures unchanged (NPE 3.93%, coverage ~57%). Revisit if Q3/FY26 shows the ex-SAI growth trajectory holding AND NPE stays ≤4%. | — |
 | **BENTO** | — (AeRO, not accessible via BT Trade MCP) | ⬇ **DROPPED from active consideration.** H1 2026 **not yet published as of 2026-09-12** (due Sep 15 per Bento's own financial calendar) — re-check next run. | — |
 | **SMTL** | 39.20/39.50 | Watch only — H1 (Aug 25) margin-quality concern **confirmed, not resolved**. **New 2026-09-12**: CEO changed Sep 4 (founder/Chairman Iulian Nedea now General Director); a partial spin-off (EPC/O&M activities to a new subsidiary, listed entity renamed "SMTL Group") goes to an EGM Sep 30 — corporate-structure churn on top of the unresolved margin concern. No position contemplated. | — |
-| **BET index** | 33,016.75 (2026-09-11 close) | −5% from the **corrected ATH 36,576.55** ≈ **34,748** (already spent, does not re-arm); −10% ≈ **32,919** — BET is **−9.73% off ATH, ~0.3% (≈98 pts) away**, the closest approach yet; −15% ≈ **31,090** | Dislocation playbook, STRATEGY §6. First tier's slice (TLV + IARV T2) already fully executed 2026-08-31. **If −10% fires: TLV and IARV are both now AT their position caps with zero room to add — the −10% tier's slice has no pre-armed home in the two core holdings.** Requires re-underwriting every thesis first, not a mechanical repeat; live candidates with room are ARS (≤16.5 armed) and TTS (≤6.00 armed) at their existing bands, or a fresh look at ONE (just demoted) and any newly-diligenced name (AROBS pending, see below). |
+| **BET index** | 32,697.81 (2026-09-15 close) | −5% ≈ **34,748** (spent, does not re-arm); **−10% ≈ 32,919 — FIRED 2026-09-16** (BET closed Sep 15 at −10.61% off the corrected ATH 36,576.55, first crossing since the tiers were defined); −15% ≈ **31,090** (~4.5% further down, next live level) | Dislocation playbook, STRATEGY §6. First tier's slice (TLV + IARV T2) already fully executed 2026-08-31. **−10% tier has fired but no candidate is price-in-range**: TLV and IARV are both AT their position caps (zero room); ARS (17.65/18.00) is above both its ≤14–15 half-size floor and ≤16.5 full-tranche ceiling; TTS (6.66/6.94) is above its ≤6.00 band; AROBS has no second-tranche condition defined. Re-underwriting stays required before any order; a daily run may execute directly against WATCHLIST theses (no need to wait for the weekly run) if ARS or TTS actually trades into its band. See journal/2026-09.md 2026-09-16 entry for the driver analysis (Middle East conflict escalation + Brent >$107 + US 10Y >5%, domestic PM-naming delay + RO 10Y 7.36%). |
 
 **TTS — 2026-09-05 update.** H1 2026 published on schedule and, contrary to
 the Aug-24 concern that a clean H1 would be misleadingly pre-drought,
@@ -1173,6 +1173,31 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   ≤35.50 leg is back in price range but does not re-arm (fired once,
   2026-08-31). PM designation still not named. Detail: journal/2026-09.md
   2026-09-10 entry.
+- **2026-09-16 (daily run) — BET −10% dislocation tier FIRES for the first
+  time.** BET closed Sep 15 at 32,697.81, **−10.61% off the corrected ATH
+  (36,576.55)** — past the −10% tier (≈32,919), the closest prior approach
+  having been Sep 11's −9.73%. Corroborated independently (cursdeguvernare.ro,
+  Sep 15): "official correction territory," −10.4% off a slightly different
+  ATH reference (36,487, Aug 19) — same conclusion, different anchor; kept
+  using our own primary-source-verified 36,576.55. **Drivers, verified
+  market-wide not idiosyncratic**: external — Middle East conflict escalated
+  materially (Houthi strikes on a Saudi air base and the East-West pipeline
+  routing ~7m bbl/day around the blockaded Strait of Hormuz), Brent crude
+  above $107/bbl (four-month high, accelerating from ~$97 a week prior), US
+  10-year yields above 5% (highest since 2007); domestic — no PM still
+  named, President Dan's Sep 14 remarks made early elections "no longer
+  completely ruled out" (a real tonal escalation), and a fresh data point:
+  Romania's own 10-year bond yield hit 7.36% (five-month high) amid
+  acknowledged need for urgent budget rectification. **No order placed**:
+  the tier firing arms the possibility of a reserve slice, exactly as the
+  −5% tier did in August, but does not itself trigger a buy — TLV and IARV
+  remain at their position caps (zero room), ARS (17.65/18.00) and TTS
+  (6.66/6.94) both remain above their respective bands, and AROBS has no
+  defined second tranche. **IARV checked specifically** (down more than
+  TLV/AROBS since Sep 12): no company-specific news found in targeted or
+  broad searches — reads as the same high-beta pattern LESSONS.md M-3
+  already documented, not a thesis break; moot for action regardless since
+  IARV is capped. Full reasoning: journal/2026-09.md 2026-09-16 entry.
 - **2026-09-11 (daily run) — first order since Aug 31, TLV standard T2
   band fired.** **BET closed Sep 10 at 33,218.54 (−1.58% day), −9.18% off
   ATH** — closest approach yet to the −10% tier
