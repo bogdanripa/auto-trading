@@ -53,6 +53,16 @@ liquidity below the limit). Portfolio value (cash + holdings, market)
 today beyond confirming this fill — no other watchlist trigger in range.
 Detail: journal/2026-09.md 2026-09-15 daily entry.
 
+**2026-09-17 (daily run)**: No trades. Portfolio value (cash + holdings,
+market) 45,017.80 RON: cash 30,426.00 (67.6%), AROBS mkt 2,849.00 (6.3%),
+IARV mkt 4,261.20 (9.5%), TLV mkt 7,481.60 (16.6%) — ~32.4% invested at
+market, all single-name/sector positions well under caps. BET closed Sep
+16 at 31,693.28 (−13.35% off ATH), ~1.9% above the −15% dislocation tier
+— the closest approach yet. Portfolio down 4.13% since inception vs BET
+down 12.34% — losing 8.2pp less than BET, consistent with the
+falling-market mandate. No thesis changes. Detail: journal/2026-09.md
+2026-09-17 daily entry.
+
 **Weekly review 2026-09-12** (third weekly run): TLV's standard T2 band
 fired 2026-09-11 (broker-confirmed this run: 224 sh @ avg 35.7005, cost
 basis 7,996.92 RON) — TLV is now **at its full-position cap** (≤8,000).

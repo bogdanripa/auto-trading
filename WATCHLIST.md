@@ -374,6 +374,14 @@ _(2026-09-14 daily update: AROBS's ownership pre-check completed (on indirect ev
   they are not float overhang either. **There is no issuer bid under this price.**
   The 38 level is now only chart resistance near the 38.28 52-week high. See
   LESSONS.md M-2.
+- **2026-09-17 update — a new, much smaller buyback program has since
+  started.** Board approved 2026-09-11, initiated 2026-09-14 (BVB current
+  report): up to **550,000 shares (≈0.04% of shares outstanding)**, price
+  floor at the live market price, ceiling **38 RON**, under the 2025-04-25
+  AGEA authorization. At 0.04% of the float this is immaterial as price
+  support (nothing like the closed 5M-share programme's scale) — recorded
+  here for M-2 accuracy, not as a new trading fact. No action implication:
+  TLV is at its full-position cap regardless of any support level.
 - Fair-value band: 38–44 on 2026E (~11–12x)
 - **H1 2026 (published ~Aug 21) — thesis confirmed**: group net profit **2.5bn
   RON (+26.8% YoY)**, bank 2.1bn (+20.7%); **cost of risk 0.63% (−20bp YoY)**;
@@ -756,7 +764,7 @@ inspection** — recorded plainly, because avoiding them is ENGINE.md §3.5 alph
 | **PBK** | 0.1435/0.147 | ⚠ **STAYS DEMOTED, pending FY26 confirmation** — Sep 8 investor presentation confirms the Sep 5 reconciliation figures unchanged (NPE 3.93%, coverage ~57%). Revisit if Q3/FY26 shows the ex-SAI growth trajectory holding AND NPE stays ≤4%. | — |
 | **BENTO** | — (AeRO, not accessible via BT Trade MCP) | ⬇ **DROPPED from active consideration.** H1 2026 **not yet published as of 2026-09-12** (due Sep 15 per Bento's own financial calendar) — re-check next run. | — |
 | **SMTL** | 39.20/39.50 | Watch only — H1 (Aug 25) margin-quality concern **confirmed, not resolved**. **New 2026-09-12**: CEO changed Sep 4 (founder/Chairman Iulian Nedea now General Director); a partial spin-off (EPC/O&M activities to a new subsidiary, listed entity renamed "SMTL Group") goes to an EGM Sep 30 — corporate-structure churn on top of the unresolved margin concern. No position contemplated. | — |
-| **BET index** | 32,697.81 (2026-09-15 close) | −5% ≈ **34,748** (spent, does not re-arm); **−10% ≈ 32,919 — FIRED 2026-09-16** (BET closed Sep 15 at −10.61% off the corrected ATH 36,576.55, first crossing since the tiers were defined); −15% ≈ **31,090** (~4.5% further down, next live level) | Dislocation playbook, STRATEGY §6. First tier's slice (TLV + IARV T2) already fully executed 2026-08-31. **−10% tier has fired but no candidate is price-in-range**: TLV and IARV are both AT their position caps (zero room); ARS (17.65/18.00) is above both its ≤14–15 half-size floor and ≤16.5 full-tranche ceiling; TTS (6.66/6.94) is above its ≤6.00 band; AROBS has no second-tranche condition defined. Re-underwriting stays required before any order; a daily run may execute directly against WATCHLIST theses (no need to wait for the weekly run) if ARS or TTS actually trades into its band. See journal/2026-09.md 2026-09-16 entry for the driver analysis (Middle East conflict escalation + Brent >$107 + US 10Y >5%, domestic PM-naming delay + RO 10Y 7.36%). |
+| **BET index** | 31,693.28 (2026-09-16 close) | −5% ≈ **34,748** (spent, does not re-arm); −10% ≈ **32,919** (fired 2026-09-16); **−15% ≈ 31,090 — ~1.9% away, closest approach yet** | Dislocation playbook, STRATEGY §6. First tier's slice (TLV + IARV T2) already fully executed 2026-08-31. **−10% tier has fired but no candidate is price-in-range**: TLV and IARV are both AT their position caps (zero room); ARS (17.10/17.35) is above both its ≤14–15 half-size floor and ≤16.5 full-tranche ceiling but narrowing; TTS (6.60/6.70) is above its ≤6.00 band but narrowing; AROBS has no second-tranche condition defined. Re-underwriting stays required before any order; a daily run may execute directly against WATCHLIST theses (no need to wait for the weekly run) if ARS or TTS actually trades into its band. If the −15% tier fires, STRATEGY §6 calls for a bigger step (toward 85–90% invested, theses intact, no junk downgrade) — worth reviewing ARS/TTS/AROBS readiness before that level is reached. See journal/2026-09.md 2026-09-16 and 2026-09-17 entries for driver analysis (Middle East conflict/Brent, US 10Y, domestic PM-naming delay + RO 10Y ~7.35%). |
 
 **TTS — 2026-09-05 update.** H1 2026 published on schedule and, contrary to
 the Aug-24 concern that a clean H1 would be misleadingly pre-drought,
@@ -988,6 +996,21 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
 
 ## Log
 
+- **2026-09-17 (daily run)**: BET closed Sep 16 at 31,693.28, **−3.07%
+  day (the steepest single-day drop of this dislocation episode)**,
+  **−13.35% off ATH — now only ~1.9% above the −15% tier (≈31,090)**,
+  the closest approach yet. No single catalyst identified in Romanian
+  press; energy sector (Transgaz −5.42%, OMV Petrom) led losses, all
+  nine BVB indices down. Brent eased to ~$102 (Saudi pipeline repair
+  progress, a partial de-escalation, inconsistent with BET's own
+  continued fall that session — reads as more domestic-driven).
+  Romania's 10Y yield flat at 7.35% (5-month-high plateau, not worsening
+  further); PM-nomination consultations held today at Cotroceni, still
+  no candidate named. **TLV's new (immaterial-size) buyback program**
+  confirmed via primary BVB source (550,000 sh, ≤38 RON) — recorded for
+  M-2 accuracy, no action implication (TLV capped). ARS (17.10/17.35)
+  and TTS (6.60/6.70) both narrowing toward their bands but not yet in
+  range. No order. Full reasoning: journal/2026-09.md 2026-09-17 entry.
 - 2026-08-02: File created at inception (bootstrap session). Sources: 7-agent
   research sweep, journal/2026-08.md inception entry.
 - 2026-08-05: TRP trigger resolved — dropped from triggered-watch per its own
