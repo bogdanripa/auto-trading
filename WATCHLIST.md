@@ -334,6 +334,21 @@ _(2026-09-14 daily update: AROBS's ownership pre-check completed (on indirect ev
   after Sep 15). Price (Sep 11 close) **58.80**, down 2.65% on the day —
   ~5% above the ≤56.00 band, the closest approach yet, but neither leg of
   the entry condition is met. No order.
+- **2026-09-18 (daily run) — closest price approach yet to the ≤56.00
+  band; restart still unconfirmed, no order.** Price **56.40/56.60**,
+  down sharply from Sep 17's 58.00/58.80 (SNN appears to have caught
+  down to the broader Sep 16 selloff a day late) — the ask is now only
+  ~1.1% above the price leg, closer than at any point since the band was
+  written 2026-08-24. Targeted and broad searches for a post-Sep-15
+  Ministry of Energy evaluation (promised "after Sep 15" since Sep 9)
+  found nothing fresher than the already-logged Sep 8/9 guidance — no
+  restart confirmation, no updated timeline. Per the written plan, no
+  resting order is placed at 56 even as price approaches it, and neither
+  leg of the AND condition is met today regardless (price leg not fully
+  cleared, restart leg wholly unconfirmed). No order. Separately, a PM
+  was named the same session (Siegfried Mureșan) — a macro-favorable
+  political development, not SNN-specific, with no bearing on this
+  condition.
 - Open question tracked as assumption **A9** (check Sep 30): is this outage
   weather-cyclical, or the first instance of a recurring structural Danube
   constraint on Romanian nuclear baseload? That decides whether SNN is a cheap
@@ -758,13 +773,13 @@ inspection** — recorded plainly, because avoiding them is ENGINE.md §3.5 alph
 
 | Name | Price (2026-09-11 close, unless noted) | Trigger | Then |
 |---|---|---|---|
-| **TTS** | 6.70/6.94 (2026-09-12 weekend snapshot) | ⬇ **DOWNGRADED — earnings leg REMOVED.** Price-only **≤6.00**. | T1 ~2,500. See drought note below; valuation refresh added 2026-09-12. |
-| **ARS** | 17.55/18.05 (2026-09-12 weekend snapshot) | ⬆ **RE-UNDERWRITTEN 2026-09-05**: normalized-earnings floor ≤16–17x FX-adjusted P/E, full-size at **≤14.5–16.5 RON**. | Half-size tranche (~1,250–1,750) on the multiple floor; full T1 (~2,500–3,000) at ≤16.5. No news since Sep 5 (2026-09-12 check); still the only armed non-capped conditional besides TTS. |
+| **TTS** | 6.60/6.70 (2026-09-18 pre-open) | ⬇ **DOWNGRADED — earnings leg REMOVED.** Price-only **≤6.00**. | T1 ~2,500. See drought note below; valuation refresh added 2026-09-12. |
+| **ARS** | 16.85/17.30 (2026-09-18 pre-open) | ⬆ **RE-UNDERWRITTEN 2026-09-05**: normalized-earnings floor ≤16–17x FX-adjusted P/E, full-size at **≤14.5–16.5 RON**. | Half-size tranche (~1,250–1,750) on the multiple floor; full T1 (~2,500–3,000) at ≤16.5. Narrowing steadily but still above both legs (2026-09-18 check); still the only armed non-capped conditional besides TTS. |
 | **H2O** | 177.60/180.20 (2026-09-12 weekend snapshot) | ⬇ **NARROWED**: the state ABB **actually launching** at its discount. A drift lower is no longer sufficient. | T1 ~3,000 |
 | **PBK** | 0.1435/0.147 | ⚠ **STAYS DEMOTED, pending FY26 confirmation** — Sep 8 investor presentation confirms the Sep 5 reconciliation figures unchanged (NPE 3.93%, coverage ~57%). Revisit if Q3/FY26 shows the ex-SAI growth trajectory holding AND NPE stays ≤4%. | — |
-| **BENTO** | — (AeRO, not accessible via BT Trade MCP) | ⬇ **DROPPED from active consideration.** H1 2026 **not yet published as of 2026-09-12** (due Sep 15 per Bento's own financial calendar) — re-check next run. | — |
+| **BENTO** | — (AeRO, not accessible via BT Trade MCP) | **H1 2026 published 2026-09-15** (net profit 7.9m RON vs 0.3m H1-2025, revenue +73% YoY, FY26 guidance reaffirmed) — a materially bigger jump than the +48% Q1 figure on file. **Not yet re-evaluated against the standing concerns (lumpy contract concentration, 51.6% insider float, unverified yield) — owed to the next weekly run**, not a daily-run call. | — |
 | **SMTL** | 39.20/39.50 | Watch only — H1 (Aug 25) margin-quality concern **confirmed, not resolved**. **New 2026-09-12**: CEO changed Sep 4 (founder/Chairman Iulian Nedea now General Director); a partial spin-off (EPC/O&M activities to a new subsidiary, listed entity renamed "SMTL Group") goes to an EGM Sep 30 — corporate-structure churn on top of the unresolved margin concern. No position contemplated. | — |
-| **BET index** | 31,693.28 (2026-09-16 close) | −5% ≈ **34,748** (spent, does not re-arm); −10% ≈ **32,919** (fired 2026-09-16); **−15% ≈ 31,090 — ~1.9% away, closest approach yet** | Dislocation playbook, STRATEGY §6. First tier's slice (TLV + IARV T2) already fully executed 2026-08-31. **−10% tier has fired but no candidate is price-in-range**: TLV and IARV are both AT their position caps (zero room); ARS (17.10/17.35) is above both its ≤14–15 half-size floor and ≤16.5 full-tranche ceiling but narrowing; TTS (6.60/6.70) is above its ≤6.00 band but narrowing; AROBS has no second-tranche condition defined. Re-underwriting stays required before any order; a daily run may execute directly against WATCHLIST theses (no need to wait for the weekly run) if ARS or TTS actually trades into its band. If the −15% tier fires, STRATEGY §6 calls for a bigger step (toward 85–90% invested, theses intact, no junk downgrade) — worth reviewing ARS/TTS/AROBS readiness before that level is reached. See journal/2026-09.md 2026-09-16 and 2026-09-17 entries for driver analysis (Middle East conflict/Brent, US 10Y, domestic PM-naming delay + RO 10Y ~7.35%). |
+| **BET index** | 32,053.91 (2026-09-17 close, **+1.14% day**) | −5% ≈ **34,748** (spent, does not re-arm); −10% ≈ **32,919** (fired 2026-09-16, stays fired); **−15% ≈ 31,090 — ~4.2% away**, pulled back from Sep 16's ~1.9%-away closest approach | Dislocation playbook, STRATEGY §6. First tier's slice (TLV + IARV T2) already fully executed 2026-08-31. **−10% tier has fired but no candidate is price-in-range**: TLV and IARV are both AT their position caps (zero room); ARS (16.85/17.30) and TTS (6.60/6.70) both narrowing but still above their bands; AROBS has no second-tranche condition defined; SNN (56.40/56.60) is now the closest single name to its own band (≤56.00) but SNN was never part of the dislocation-tier priority list and its condition requires a confirmed restart regardless of index level. Re-underwriting stays required before any order; a daily run may execute directly against WATCHLIST theses if ARS/TTS/SNN actually trade fully into band. **2026-09-17: a PM was finally named (Siegfried Mureșan)** — BET reversed a ~2% intraday decline into a +1.14% close on the announcement, pulling the index back from the −15% tier rather than toward it; the political tail risk is reduced (nomination, not yet a completed investiture) but not resolved. See journal/2026-09.md 2026-09-16 through 2026-09-18 entries for full driver analysis. |
 
 **TTS — 2026-09-05 update.** H1 2026 published on schedule and, contrary to
 the Aug-24 concern that a clean H1 would be misleadingly pre-drought,
@@ -996,6 +1011,22 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
 
 ## Log
 
+- **2026-09-18 (daily run)**: **A PM was finally named** — President
+  Nicușor Dan nominated Siegfried Mureșan (PNL/USR/UDMR-backed) after
+  130+ days of caretaker government and two prior failed investitures;
+  Mureșan accepted immediately, but the 233-vote investiture majority is
+  not yet secured (nomination, not completed government formation). BET
+  reversed a ~2% intraday decline into a **+1.14% close at 32,053.91**
+  on the announcement — the index moved away from the −15% dislocation
+  tier (now ~4.2% away, vs Sep 16's ~1.9%) rather than toward it. **SNN
+  made its closest-yet approach to the ≤56.00 price band** (56.40/56.60)
+  but the restart leg remains wholly unconfirmed (no post-Sep-15
+  evaluation result found) — no order, no resting order placed per the
+  written plan. **BENTO's H1 2026 was found published** (Sep 15, net
+  profit 7.9m RON vs 0.3m YoY) — flagged for the next weekly run's
+  proper diligence pass, not evaluated today. ARS and TTS both narrowed
+  further but remain out of range. No trades. Detail: journal/2026-09.md
+  2026-09-18 entry.
 - **2026-09-17 (daily run)**: BET closed Sep 16 at 31,693.28, **−3.07%
   day (the steepest single-day drop of this dislocation episode)**,
   **−13.35% off ATH — now only ~1.9% above the −15% tier (≈31,090)**,

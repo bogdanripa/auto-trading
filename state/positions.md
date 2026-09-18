@@ -63,6 +63,17 @@ down 12.34% — losing 8.2pp less than BET, consistent with the
 falling-market mandate. No thesis changes. Detail: journal/2026-09.md
 2026-09-17 daily entry.
 
+**2026-09-18 (daily run)**: No trades. Portfolio value (cash + holdings,
+market) 45,000.50 RON: cash 30,426.00 (67.6%), AROBS mkt 2,764.30 (6.1%),
+IARV mkt 4,194.20 (9.3%), TLV mkt 7,616.00 (16.9%) — ~32.3% invested at
+market, all single-name/sector positions well under caps. BET closed Sep
+17 at 32,053.91 (+1.14% day) after a PM (Siegfried Mureșan) was finally
+named, reversing an intraday decline — −12.37% off ATH, pulled back from
+the −15% tier. Portfolio down 4.16% since inception vs BET down 11.34% —
+losing 7.2pp less than BET. No thesis changes; SNN made its closest-yet
+approach to its entry band but the restart leg remains unconfirmed.
+Detail: journal/2026-09.md 2026-09-18 daily entry.
+
 **Weekly review 2026-09-12** (third weekly run): TLV's standard T2 band
 fired 2026-09-11 (broker-confirmed this run: 224 sh @ avg 35.7005, cost
 basis 7,996.92 RON) — TLV is now **at its full-position cap** (≤8,000).
