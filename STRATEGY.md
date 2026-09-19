@@ -1,4 +1,4 @@
-# STRATEGY.md — v1.4
+# STRATEGY.md — v1.5
 
 Living strategy. Any run may amend it with a version bump, changelog entry, and
 journaled rationale (ENGINE.md §6). The constitution (ENGINE.md) always wins on
@@ -228,6 +228,75 @@ structural gap in dislocation-readiness surfaces:
   the research agenda. BET index committee's EAI-replaces-SFG change is
   confirmed on track, effective the Sep 21 session.
 
+### Regime update — 2026-09-19 (v1.5, fourth weekly run)
+
+No change to the core read; the political tail risk is fully live again
+despite this week's price action, and two governance flags on a
+candidate resolved favorably:
+
+- **BET rallied two straight sessions on the Mureșan PM nomination**
+  (Sep 17 +1.14%, Sep 18 +2.20%, closing 32,757.81, −10.44% off the
+  corrected ATH) — but **the investiture vote itself remains unsecured**.
+  President Dan signs the formal nomination decree Sep 19; Mureșan's
+  cabinet/programme go to Parliament Sep 21; a vote could land Sep 22-23
+  or slip past Oct 2 (a 15-day statutory window). Mureșan can count
+  ~169 of the 233 votes needed; **PSD's Grindeanu decides the party's
+  formal position Sep 20** and has framed support as "unlikely"; **AUR
+  will not vote for a government it isn't part of.** Commentators frame
+  Romania as edging closer to, not away from, snap elections. **The
+  market's relief on the nomination should not be read as the political
+  tail risk having resolved — it is fully live into next week.**
+- **Fitch issued a fresh verbal warning (Sep 18, no rating action)**:
+  Romania is "running out of time" to avoid a junk downgrade if the
+  political crisis persists, citing a need for ~1.5pp of GDP additional
+  fiscal correction. Fitch's next *scheduled* review is January 2027.
+  **Unconfirmed, needs independent verification next week**: press
+  references a possible S&P review dated Oct 2, 2026 — no official S&P
+  calendar confirmation found; treat as likely-but-unconfirmed.
+  10-year yield eased from its 7.35-7.36% five-month-high peak to
+  ~7.13-7.20% on the nomination news, still elevated and discussed as
+  near-junk pricing; Treasury is reportedly pausing new external
+  eurobond issuance until a government is formed. EUR/RON stable at
+  5.2644. Brent eased further to ~$103/bbl; a third consecutive research
+  pass found no confirmed Romanian energy-name (SNP/SNG/SNN) read-
+  through — downgraded further toward low-priority. New context: the
+  oil move sits within a larger, named "2026 Iran war" (US-Iran tanker/
+  naval conflict around the Strait of Hormuz, active since ~late
+  February, escalating early September) — a structural, not transient,
+  tail risk worth remembering even as price action calms.
+- **PNRR Payment Request #6 remains on track** for its Sep 30 final
+  submission (€4.348bn net); a separate, already-reflected **€770m PNRR
+  loss** from missing an unrelated Aug 31 pay-law deadline is now on
+  record (not a fresh shock). BET index committee's EAI-replaces-SFG
+  swap effective Sep 21, no new flow-magnitude detail.
+- **Assumption A14 (AROBS/Cabrio ownership) graded held** on
+  strengthened but still indirect evidence — a primary-source H1 2026
+  read plus a fully-documented, Cabrio-unrelated cause (a Codingscape
+  acquisition stock issuance) for the ownership-bucket growth that
+  previously looked ambiguous. Full reasoning: journal/2026-09.md
+  2026-09-19 weekly entry.
+- **IMP's two governance flags substantially resolved on primary-source
+  re-read** (the Iaciu loan has no share-conversion clause and appears
+  repaid; the Greenfield Copou litigation was won at first instance,
+  no provision recognized) — the case has moved meaningfully toward
+  "ready" for a WATCHLIST entry, with the remaining open question now a
+  business one (a 153→31 unit-sales decline) rather than governance.
+  **BENTO's diligence completed and it was not promoted**: earnings
+  quality is better than feared but AeRO liquidity (~90-100k RON/day)
+  can't practically support an 8%-cap position, and its previously-cited
+  dividend yield is confirmed stale (zero paid on FY2025 profit).
+- **Two new candidates screened, first pass only**: **BVB** (the
+  exchange operator — a structural beneficiary of the current drawdown,
+  diffuse ownership, but needs an H1-earnings-recurrence check) and
+  **SFG** (a mechanical, index-exit-driven single-name dislocation on a
+  real if slowing business, 6.4% yield, needs a lease-adjusted-leverage
+  and post-index-exit-liquidity check). Neither added; **AQ** screened
+  and passed on (a swing to a net loss under a momentum-driven rally —
+  the exact pattern the mandate wants avoided).
+- **No trades this week** — the Sep 17-18 rally pushed ARS, TTS, and
+  SNN's price legs all further from their bands, reversing the prior
+  two weeks' narrowing trend; TLV and IARV remain fully capped.
+
 ## 2. Portfolio construction
 
 - **5–9 positions** at full deployment. Initial tranches 2,500–3,500 RON
@@ -376,7 +445,71 @@ previews):**
 - **AQ, TRP, CFH, SFG** — priced far ahead of current earnings; TRP H1 (Aug 5)
   may create a capitulation entry — watch, don't anticipate.
 
-## 5. Week of Sep 14 plan (rewritten weekly — v1.4)
+## 5. Week of Sep 21 plan (rewritten weekly — v1.5)
+
+Full theses and conditions live in WATCHLIST.md; the authoritative
+reasoning is journal/2026-09.md's 2026-09-19 weekly entry. Activity cap:
+≤3 new position openings this week. **No conditional is price-in-range**
+— the Sep 17-18 rally pushed every un-capped candidate (ARS, TTS, SNN)
+further from its band, and TLV/IARV remain fully capped with AROBS
+having no second tranche defined. This week's plan is watch-and-execute,
+identical in structure to the prior three weeks, with three new research
+priorities layered on top.
+
+1. **Mon Sep 21 (daily run)**: BET index committee's EAI-replaces-SFG
+   swap takes effect at session open — informational, neither name held
+   or watchlisted. Mureșan's cabinet list and government programme go to
+   Parliament today — watch for the actual filing, not just the
+   schedule. **PSD's Sep 20 decision** (this weekend, before Monday's
+   run) should already be known — read the actual outcome, not the
+   pre-decision framing in this plan.
+2. **Standing all week**:
+   - **TLV, IARV**: both AT their position caps. No further add possible
+     regardless of price. Continue monitoring for thesis breaks only.
+   - **AROBS**: T1 held, no second-tranche condition defined. Not
+     freelancing one on price drift.
+   - **ARS**: half-size tranche (~1,250–1,750 RON) at the normalized-
+     earnings floor (≤14–15 RON), full T1 (~2,500–3,000) at an absolute
+     ≤16.5 RON. Current price ~17.40/17.90 (weekend snapshot) — moved
+     further from both legs this week; the first move in the wrong
+     direction since the band was re-underwritten 2026-09-05. **No
+     dedicated fresh-news check this run — the next run should do a
+     proper ARS-specific news pass**, not just a price re-check.
+   - **TTS**: no order short of ≤6.00 (price-only; unchanged since the
+     2026-09-12 valuation refresh). Current ~6.52/6.96.
+   - **SNN**: entry condition (≤56.00 AND at least one reactor confirmed
+     restarted and sustained) remains unmet. Friday's last trade (55.50)
+     dipped under the price leg but the live ask (57.80) never did — a
+     discipline point, not an action trigger. Restart remains wholly
+     unconfirmed. Watch for (a) any post-Sep-15 evaluation result, (b)
+     whether SNN acts on the Nova Power & Gas Doicești-deal reversal
+     option before it lapses **2026-10-01**.
+   - **H2O**: no order short of the state ABB *actually launching* at a
+     discount.
+   - **ONE**: no active entry price. Demoted; re-open candidacy only
+     after a fresh quarterly report and a re-derived fair-value band.
+   - **IMP**: not yet actionable — resolve the 153→31 unit-sales-decline
+     question (priority research item) before any fair-value band.
+   - **BVB, SFG**: not yet actionable — second diligence pass owed (H1
+     earnings-recurrence for BVB; lease-adjusted leverage and post-Sep-
+     21 liquidity for SFG) before either could reach WATCHLIST.
+   - **Dislocation playbook**: BET closed Sep 18 at −10.44% off ATH,
+     ~5.1% above the −15% tier (≈31,090) — further away than either of
+     the prior two weeks' closest approaches. The −10% tier stays fired
+     (fires once); if the −15% tier is reached, re-underwrite from
+     ARS/TTS/AROBS(if thesis intact)/whatever the coming week's research
+     adds, per STRATEGY §6 — not a mechanical repeat of any earlier
+     priority list.
+3. **The week's single biggest swing factor is the PM investiture vote**,
+   not any name-specific catalyst — track the actual vote outcome (or
+   confirmation it has slipped past Oct 2), since a failed third
+   investiture would be a materially worse political-tail-risk signal
+   than either prior failure.
+4. **If nothing fires, the week ends with no trades — the correct
+   outcome given every conditional's current distance from its band, not
+   a failure to act.**
+
+## 5-prior. Week of Sep 14 plan (superseded — v1.4, preserved for record)
 
 Full theses and conditions live in WATCHLIST.md; the authoritative reasoning
 is journal/2026-09.md's 2026-09-12 weekly entry. Activity cap: ≤3 new
@@ -432,72 +565,6 @@ their position caps — this week's only live buy candidate is AROBS
    most one small new position — that is the correct outcome given the
    state of every other conditional, not a failure.**
 
-## 5-prior. Week of Sep 7 plan (superseded — v1.3, preserved for record)
-
-Full theses and conditions live in WATCHLIST.md; the authoritative reasoning is
-journal/2026-09.md's 2026-09-05 weekly entry. Activity cap: ≤3 new positions
-this week. **No name is currently in-range for any trigger** — this plan is
-conditional watch-and-execute, not a forecast that trades will happen.
-
-1. **Mon Sep 7 (daily run)** — grade assumption **A13** (check-by today: did
-   the BET drawdown extend toward −10% or recover?) with the actual close in
-   hand. No order expected — no conditional is priced in range as of the
-   Sep 4 close (BET −5.91% off ATH but the −5% tier's slice is already spent;
-   next live tier is −10% ≈ 32,919, still distant).
-2. **Tue Sep 8 — H2O ex-dividend (special 2.2232 RON).** Informational only;
-   no position held, no order contemplated. Confirm the ex-date behaved as
-   expected (price adjustment ≈ the dividend amount) as a routine hygiene
-   check, not a trigger.
-3. **Wed–Thu Sep 9–10 — SNN EGM window.** The full report/EGM materials go
-   up ahead of the Sep 10 meeting (control-body report publication vote,
-   dividend record/ex-date administration — **no capital item on the
-   disclosed agenda**, confirmed 2026-09-05). Read whatever the Control Body
-   report itself says once published in full — this is a governance/
-   reputational event, not by itself a trigger. Separately, Sep 10 is also
-   Ministry of Energy's earliest floor for a Cernavodă restart *decision*
-   (not a confirmed restart) — Danube discharge forecasts show flow
-   decreasing again right around this date, so **do not expect a clean
-   restart-and-confirm on Sep 10** as a base case. SNN's entry condition
-   (≤56.00 AND at least one reactor confirmed restarted and sustained)
-   remains unmet regardless — price is ~14% above the band even before the
-   restart leg. No order unless *both* legs clear, which is not expected
-   this week.
-4. **Fri Sep 11 — ONE Investor Day (A8/A12 check-by).** No pre-released
-   agenda found; the event is the deliberate re-underwrite point for
-   whether management can date resolution of the ANCPI e-Terra backlog. If
-   management dates a resolution within one quarter with contracted
-   collections still intact: re-open the ≤34.45 tranche-1 discussion at the
-   *next* weekly run with a fresh thesis (STRATEGY §3's no-chase rule — a
-   good Investor Day does not by itself license paying up on the same day).
-   If management cannot date resolution, or gives a worse timeline: grade
-   A12 **broken**, keep the ≤30.00 price-only fallback, no order either way
-   this week regardless of outcome (day-of reaction risk; let the next
-   weekly run digest it).
-5. **Standing all week**:
-   - **TLV**: no add unless the standing T2 band (33.00–34.50) is reached —
-     the dislocation-linked leg already filled in full 2026-08-31 and does
-     not re-arm on a re-cross of −5%.
-   - **IARV**: T2 complete, 392 RON of room left under the ≤5,500 satellite
-     cap — no basis to add opportunistically even on a dip; the cap, not
-     price, is now the binding constraint.
-   - **ARS**: newly armed this week (see WATCHLIST.md) — a half-size tranche
-     (~1,250–1,750 RON) if the normalized-earnings floor (≤16–17x
-     FX-adjusted P/E, roughly ≤14–15 RON on today's normalized EPS) is hit
-     regardless of price direction; full first tranche (~2,500–3,000) at an
-     absolute ≤16.5 RON. Current price 18.70 is above both legs — watch,
-     not yet actionable.
-   - **TTS**: no order short of ≤6.00 (price-only; H1 addressed the drought
-     directly and held guidance, which is encouraging but not yet enough to
-     move the band — see WATCHLIST.md).
-   - **H2O**: no order short of the state ABB *actually launching* at a
-     discount.
-   - **Dislocation playbook**: BET at −5.91% off ATH (Sep 4 close) sits
-     just past the −5% tier, whose slice is already spent; the −10% tier
-     (≈32,919) is the next live watch level, still ~4.4% further down from
-     Sep 4's close.
-6. **If nothing fires, the week ends with no trades — that is the correct
-   outcome given the state of every conditional above, not a failure.**
-
 ## 6. Dislocation playbook (standing orders to future runs)
 
 **Levels corrected 2026-08-24** to the true ATH **36,576.55 (2026-08-04)**; the
@@ -523,11 +590,47 @@ v1.0 levels were computed off a stale 36,503.
 - BET **−15%+ ≈ 31,090** with theses intact and no junk downgrade: move toward
   85–90% invested. A downgrade to junk changes the playbook — reassess
   everything before buying; forced-seller flows take weeks, not hours.
+  **Updated 2026-09-19**: still not reached (Sep 18 close −10.44% off ATH,
+  ~5.1% above this tier — further away than the prior two weeks' closest
+  approaches, after the Sep 17-18 PM-nomination rally). Fitch's Sep 18
+  verbal warning ties a genuine junk-downgrade risk directly to whether
+  the political crisis (investiture vote, still unsecured as of Sep 19)
+  resolves — if this tier is ever approached again, check for an actual
+  rating action first, since that changes this playbook's own trigger.
 - Single-name −8%+ gap on a WATCHLIST name without thesis-relevant news:
   buying question for that day's run (ENGINE.md §3.4 edge). **A drift of 1–2%
   on no news is not a gap and not a trigger** (learned the hard way on SNN).
 
 ## 7. Research agenda for coming weekly runs
+
+**Immediate (this week / next), added 2026-09-19:**
+- **IMP**: understand the group unit-sales decline (153→31 units, H1 2026
+  vs H1 2025) — market-wide Bucharest-residential softness or company-
+  specific — before deriving a fair-value band. Now the single highest-
+  priority candidate-side research item; two of its three governance
+  flags are already resolved.
+- **BVB and SFG**: second diligence pass. BVB: how much of the H1 2026
+  earnings beat (net profit +834% YoY) is recurring trading-volume
+  economics vs one-off, checked against the Nov 17 Q3 report when
+  available. SFG: lease-adjusted leverage (P/B ~13.9x is IFRS16-
+  inflated) and post-Sep-21 liquidity once passive BET-tracking flows
+  actually exit (currently ~690k RON/day, unconfirmed post-exit).
+- **ARS**: no dedicated news check happened 2026-09-19 (only price was
+  re-verified) — the most price-sensitive un-capped conditional in the
+  book deserves a proper news pass next week, not just a quote check.
+- **S&P's rumored Oct 2, 2026 review date**: referenced in press but not
+  confirmed against an official S&P calendar as of 2026-09-19 — verify
+  independently before treating it as a real date.
+- **PM investiture**: PSD's Sep 20 decision and any actual vote outcome
+  (expected Sep 22-23 or slipping past Oct 2) — the book's single
+  biggest beta-exposure swing factor for the coming week.
+- **SNN**: whether SNN acts on the Nova Power & Gas Doicești-deal
+  reversal option before it lapses 2026-10-01; any post-Sep-15 restart
+  evaluation result; any Board-selection AGOA date.
+- **TLV's new 550,000-share buyback** (initiated Sep 14): confirm
+  whether any shares have actually been repurchased once the first
+  weekly transaction notice posts (~Sep 21-22) — immaterial to any
+  decision, closes a verification loop.
 
 **Immediate (this week / next):**
 - **AROBS**: complete the Cabrio Investment SRL ownership pre-check (a
@@ -591,6 +694,39 @@ v1.0 levels were computed off a stale 36,503.
 
 ## Changelog
 
+- **v1.5 — 2026-09-19 (fourth weekly run)** — **Reaffirmation, not a
+  rewrite.** Core framework unchanged; no trades this week (every
+  un-capped conditional moved further from its band on the week's rally,
+  reversing the prior two weeks' narrowing). Substantive changes: (1) §1
+  regime update — the PM investiture vote remains unsecured despite a
+  two-day relief rally (Sep 17 +1.14%, Sep 18 +2.20%); PSD leaning no,
+  AUR a hard no, a vote could land Sep 22-23 or slip past Oct 2; Fitch
+  issued a fresh verbal junk-downgrade warning (no rating action) tied
+  directly to the political outcome; a possible S&P Oct 2 review date is
+  flagged as unconfirmed; (2) **assumption A14 (AROBS/Cabrio ownership)
+  graded held** on strengthened but still indirect evidence — a primary-
+  source H1 2026 read plus a fully-documented, Cabrio-unrelated cause
+  for the ownership-bucket growth; (3) **BENTO's overdue diligence
+  completed and it was not promoted** — earnings quality is better than
+  feared (guidance now looks achievable) but AeRO liquidity can't
+  practically support an 8%-cap position and its cited dividend yield is
+  confirmed stale, not just imprecise; (4) **IMP's diligence advanced
+  substantially** — two of three governance flags (the Iaciu loan's
+  actual terms, the Greenfield Copou litigation outcome) resolved
+  favorably on a primary-source read; the case has moved meaningfully
+  toward WATCHLIST-ready, with the remaining open question now a
+  business one (a 153→31 unit-sales decline) rather than governance; (5)
+  **two new candidates screened, first pass only**: BVB (the exchange
+  operator, a structural beneficiary of the current drawdown) and SFG (a
+  mechanical index-exit dislocation on a real business) — both
+  diligence-worthy, neither added; AQ screened and passed on; (6) §5
+  rewritten for the week of Sep 21 — no conditional is price-in-range;
+  (7) §6's −15% tier note updated (still ~5.1% away, further than the
+  prior two weeks) with a new cross-reference to Fitch's warning; (8) §7
+  research agenda refreshed with this run's five carry-over items (IMP's
+  unit-sales question, BVB/SFG second-pass diligence, an overdue ARS
+  news check, S&P-date verification, the investiture vote). Full
+  reasoning: journal/2026-09.md's 2026-09-19 weekly entry.
 - **v1.4 — 2026-09-12 (third weekly run)** — **Reaffirmation with real
   portfolio movement, not a rewrite.** Core framework unchanged. Trades:
   none placed this run (Saturday, market closed), but the week's one

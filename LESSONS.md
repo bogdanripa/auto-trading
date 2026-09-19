@@ -57,6 +57,50 @@ other liquid name and the index in the same run — a move that isn't
 corroborated either way is not yet diagnosed, and diagnosis is cheap enough
 that there's no excuse to skip it.**
 
+### M-4: a trailing dividend-yield figure is not evidence of an active payout policy (2026-09-19 weekly, from BENTO's H1 2026 diligence; journal/2026-09.md)
+BENTO had been carried on file for weeks with a "claimed 3.4% dividend
+yield, unverified (BVB shows 3.09% trailing)" note — a figure that reads
+as a minor precision question (which number is right?) rather than a
+live risk. A primary-source read of BENTO's own H1 2026 report found the
+real issue was categorically different: the 30 April 2026 AGM allocated
+**the entire FY2025 net profit to retained earnings — zero to
+dividends** — and BENTO has not paid a dividend on either FY2024 or
+FY2025 profit. Both the 3.4% and 3.09% figures describe a payout policy
+the company has already stopped following; neither was "imprecise," both
+were **stale**. A trailing yield is calculated from past distributions
+divided by a current price — it says nothing about whether the company
+intends to keep distributing, and a name can carry an attractive-looking
+trailing yield for years after the underlying policy changed. **Lesson:
+before treating a dividend yield as part of a thesis (income component,
+or as evidence a board is shareholder-friendly), verify the *current
+year's actual AGM allocation decision* directly, not a trailing-yield
+aggregator figure** — the same discipline LESSONS M-2 already applies to
+buybacks and other "standing support" facts, extended here to payout
+policy specifically.
+
+### P-10: a second primary-source diligence pass on a pending candidate can resolve concerns in either direction — the same rigor LESSONS P-7 asks for rejections applies before any promotion too (2026-09-19 weekly; journal/2026-09.md)
+P-7 established that a *rejected* name's own numbers deserve the same
+re-verification rigor as an accepted one's, after PBK's demotion figures
+didn't fully hold up under a second look. This run ran the same
+discipline forward on two names still *pending* a decision, in one
+session, with opposite results: IMP's Iaciu-loan governance flag —
+carried on file as a personal loan "convertible into shares" — dissolved
+on inspection (the actual 2025 loan instrument has no conversion clause;
+that detail traced to an unrelated 2013 transaction conflated with it in
+an earlier pass), while BENTO's dividend-yield input turned out to be
+not merely imprecise but actively false (see M-4). Neither correction
+was findable from press coverage or from re-reading the prior screening
+note more carefully — both required going back to the actual primary
+document (a BVB current report, an H1 interim report) that the original
+screen had either not read in full or had partially misattributed.
+**Lesson: "diligence-pending" is not a stable resting state that a name
+can sit in indefinitely on the strength of its first screen — a second
+primary-source pass belongs on the research agenda for any name still
+short of a WATCHLIST entry, on the same cadence as re-verifying a
+rejection's own numbers (P-7) or a standing fact's continued validity
+(M-2), because the diligence gap can resolve favorably (clearing the way
+to add) exactly as often as it can harden the original concern.**
+
 ## Process lessons
 
 ### P-6: August's failures were entirely in process/verification, never in market or company analysis (2026-09-01 monthly; journal/2026-09.md)

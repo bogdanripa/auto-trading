@@ -72,6 +72,27 @@ named, reversing an intraday decline — −12.37% off ATH, pulled back from
 the −15% tier. Portfolio down 4.16% since inception vs BET down 11.34% —
 losing 7.2pp less than BET. No thesis changes; SNN made its closest-yet
 approach to its entry band but the restart leg remains unconfirmed.
+
+**Weekly review 2026-09-19** (fourth weekly run): all three positions
+reviewed against thesis, kill criteria and fair-value band — **all HOLD,
+no changes.** TLV and IARV remain fully capped (no room to add at any
+price); AROBS holds T1 only, no second tranche defined. Reporting dates
+re-verified clean for all three against each issuer's own BVB financial
+calendar (TLV Nov 20 Q3 / Oct 1 Investor Day; IARV Nov 13 Q3; AROBS Nov
+19 Q3, newly confirmed). Assumption A14 (AROBS/Cabrio ownership) graded
+held on strengthened indirect evidence. Portfolio value (cash +
+holdings, market) 45,472.80 RON: cash 30,426.00 (66.9%), AROBS mkt
+2,833.60 (6.2%), IARV mkt 4,261.20 (9.4%), TLV mkt 7,952.00 (17.5%) —
+~33.1% invested at market, all single-name/sector positions well under
+caps (TLV closest at 17.5%, still 2.5pp under the 20% cap). BET closed
+Sep 18 at 32,757.81 (+2.20% day, second straight rally on the PM
+nomination) — −10.44% off ATH. Portfolio down 3.16% since inception vs
+BET down 9.40% — losing about a third of what BET lost (+6.24pp gap,
+essentially flat vs last week's +6.00pp; the week-over-week arithmetic
+shows both portfolio and index are lower than 7 days ago, so this gap
+held mechanically rather than widening on stock selection — see journal
+self-check). No trades this week. Detail: journal/2026-09.md 2026-09-19
+weekly entry.
 Detail: journal/2026-09.md 2026-09-18 daily entry.
 
 **Weekly review 2026-09-12** (third weekly run): TLV's standard T2 band
@@ -106,7 +127,7 @@ journal/2026-09.md 2026-09-12 weekly entry.
 ## AROBS — AROBS Transilvania Software
 - Opened: 2026-09-14 (order placed pre-open; broker-confirmed filled 2026-09-15) (journal: journal/2026-09.md entries of 2026-09-14 and 2026-09-15)
 - Tranches: T1 3,850 sh @ avg 0.7623 (incl. fees), cost basis 2,934.78 RON — filled in full as a day order at better than the 0.77 limit. ~6.4% of portfolio at cost, well under the 20% single-name cap (no AeRO cap — AROBS is Premium Tier main market).
-- Entry gated on a same-day ownership pre-check (Cabrio Investment SRL's stake vs a possible undisclosed step-up toward majority-with-affiliates control): passed on indirect evidence (no BVB threshold-crossing notification since Oct 2024's crossing above 10%), not a freshly reconfirmed exact percentage — see assumption A14 (journal/2026-09.md 2026-09-14), check-by 2026-09-19.
+- Entry gated on a same-day ownership pre-check (Cabrio Investment SRL's stake vs a possible undisclosed step-up toward majority-with-affiliates control): passed on indirect evidence (no BVB threshold-crossing notification since Oct 2024's crossing above 10%), not a freshly reconfirmed exact percentage — see assumption A14 (journal/2026-09.md 2026-09-14). **A14 graded held 2026-09-19** on strengthened indirect evidence (a primary-source H1 2026 read plus a fully-documented, Cabrio-unrelated cause for the ownership-bucket's growth) — no fresh exact Cabrio percentage exists, but nothing found disconfirms the ≤~15% bound. See journal/2026-09.md 2026-09-19 weekly entry.
 - Thesis (one line): Romania's largest BVB-listed IT/software company, real ~66% adjusted / ~21% organic profit growth (not the flattered +121% headline), small/mid-cap access edge. Full thesis: WATCHLIST.md.
 - Fair-value band: entry band ≤0.78 (see WATCHLIST.md for the full valuation derivation). Kill criteria: a Cabrio/Oprean-side threshold crossing confirming a material step-up in control concentration; organic growth reverting sharply toward the FX-inflated headline pace once diligenced; governance action hostile to minorities.
 - Expected holding: 1–3 years, reviewed each earnings.
