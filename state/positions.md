@@ -95,6 +95,18 @@ self-check). No trades this week. Detail: journal/2026-09.md 2026-09-19
 weekly entry.
 Detail: journal/2026-09.md 2026-09-18 daily entry.
 
+**2026-09-21 (daily run)**: No trades. All three positions unchanged and
+broker-confirmed (AROBS 3,850 sh, IARV 134 sh, TLV 224 sh), no open
+orders. Portfolio value (cash + holdings, market) 45,472.80 RON —
+identical to Friday's/the weekly mark since no session has closed over
+the weekend: cash 30,426.00 (66.9%), AROBS mkt 2,833.60 (6.2%), IARV mkt
+4,261.20 (9.4%), TLV mkt 7,952.00 (17.5%). BET's last close remains Sep
+18 (32,757.81, −10.44% off ATH); no new benchmark row today. PSD's
+decision on whether to back the Mureșan investiture is being decided
+today (BPN meeting), not already resolved as STRATEGY.md's plan assumed
+— tracked for the next run. No thesis changes. Detail: journal/2026-09.md
+2026-09-21 daily entry.
+
 **Weekly review 2026-09-12** (third weekly run): TLV's standard T2 band
 fired 2026-09-11 (broker-confirmed this run: 224 sh @ avg 35.7005, cost
 basis 7,996.92 RON) — TLV is now **at its full-position cap** (≤8,000).
