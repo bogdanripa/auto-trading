@@ -107,6 +107,22 @@ today (BPN meeting), not already resolved as STRATEGY.md's plan assumed
 — tracked for the next run. No thesis changes. Detail: journal/2026-09.md
 2026-09-21 daily entry.
 
+**2026-09-22 (daily run)**: No trades — and no live broker state this
+run. The BT-Trade MCP returned a 502 on every attempt (three retries
+across ~20 minutes of other run work); `get_cash`/`get_holdings`/
+`list_orders` were never fetched, so nothing here is broker-verified
+today. Public-quote estimate only (bvb.ro closes, Sep 21): cash
+30,426.00 (last confirmed, unchanged since no order has been placed
+since), AROBS mkt ≈2,810.50 (3,850 sh @ 0.7300), IARV mkt ≈4,328.20 (134
+sh @ 32.3000), TLV mkt ≈7,884.80 (224 sh @ 35.2000) — **≈45,449.50 RON
+total, not authoritative.** The day's dominant development was PSD
+formally refusing to back the Mureșan investiture, driving a broad,
+−2.59% BET session (−12.76% off ATH) — no company-specific news on any
+held name, no kill criterion approached. The next run with working
+broker access must reconcile this estimate against a fresh
+`get_holdings`/`get_cash` call before treating it as fact. Detail:
+journal/2026-09.md 2026-09-22 daily entry.
+
 **Weekly review 2026-09-12** (third weekly run): TLV's standard T2 band
 fired 2026-09-11 (broker-confirmed this run: 224 sh @ avg 35.7005, cost
 basis 7,996.92 RON) — TLV is now **at its full-position cap** (≤8,000).

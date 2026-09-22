@@ -380,6 +380,27 @@ _(2026-09-19 weekly update: BET rallied two straight sessions on the Mureșan PM
   2026-10-01 inclusive** (three still-valid notifications from Nova) —
   watch whether SNN moves to unwind the deal before that window lapses.
   No order; neither leg of the entry condition met.
+- **2026-09-22 (daily run) — price leg clears on an executable quote for
+  the first time; restart leg still unmet; BT Trade MCP unreachable all
+  run so no order possible regardless.** bvb.ro (public data, not
+  broker-verified — the BT-Trade MCP returned a 502 on every attempt
+  this run) shows Sep 21 close 55.30, **bid/ask 55.30/55.50** — a real
+  change from Friday's 55.50/57.80 book, where the ask never actually
+  cleared 56.00 (the discipline point logged 2026-09-19). Today the ask
+  itself sits below the ≤56.00 band. **Restart remains wholly
+  unconfirmed**: no evaluation result found beyond the existing "toward
+  end of September" guidance (unchanged since Sep 9); Danube discharge
+  at Baziaș reported stationary near 1,250 m³/s, forecast to only ~1,550
+  — still ~40% of seasonal average. Both legs of the AND condition are
+  still required; one clearing does not fire the trigger. Separately and
+  independently: even a fully-met condition could not have been acted on
+  today, since no live `get_cash`/`get_holdings`/`list_orders` was
+  available (ENGINE.md §2.4). No order. Also: the day's dominant news
+  was PSD formally refusing to back the Mureșan investiture (see
+  journal/2026-09.md 2026-09-22 entry) — a market-wide, not
+  SNN-specific, driver of the broader Sep 21 selloff that brought SNN's
+  price down with it; ruled out as company-specific (BET −2.59% the same
+  session, broad-based).
 - Open question tracked as assumption **A9** (check Sep 30): is this outage
   weather-cyclical, or the first instance of a recurring structural Danube
   constraint on Romanian nuclear baseload? That decides whether SNN is a cheap
