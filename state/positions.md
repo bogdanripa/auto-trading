@@ -123,6 +123,13 @@ broker access must reconcile this estimate against a fresh
 `get_holdings`/`get_cash` call before treating it as fact. Detail:
 journal/2026-09.md 2026-09-22 daily entry.
 
+**2026-09-23 (same-day correction, ~16:40 Bucharest)**: broker access
+restored mid-session (`get_cash`/`get_holdings` succeeded; `list_orders`
+still 502'd). Reconciled against the pre-open entry below — **exact match,
+no discrepancy**: cash 30,426.00 RON, AROBS 3,850 sh @ avg 0.7623, IARV 134
+sh @ avg 37.0078, TLV 224 sh @ avg 35.7005. No unexplained activity. Full
+detail: journal/2026-09.md 2026-09-23 same-day correction entry.
+
 **2026-09-23 (daily run)**: No trades — and no live broker state this run
 either, a second consecutive day (BT-Trade MCP failed to connect at
 session start, 502). Public-quote estimate only (bvb.ro closes, Sep 22):
