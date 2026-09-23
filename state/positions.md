@@ -123,6 +123,21 @@ broker access must reconcile this estimate against a fresh
 `get_holdings`/`get_cash` call before treating it as fact. Detail:
 journal/2026-09.md 2026-09-22 daily entry.
 
+**2026-09-23 (daily run)**: No trades — and no live broker state this run
+either, a second consecutive day (BT-Trade MCP failed to connect at
+session start, 502). Public-quote estimate only (bvb.ro closes, Sep 22):
+cash 30,426.00 (last confirmed, unchanged), AROBS mkt 2,833.60 (3,850 sh @
+0.7360), IARV mkt 4,247.80 (134 sh @ 31.7000), TLV mkt 7,844.48 (224 sh @
+35.0200) — **≈45,351.88 RON total, not authoritative.** BET closed Sep 22
+at 32,140.01 (+0.72% day, −12.13% off ATH), a one-day relief bounce off
+Sep 21's −12.76%. SNN's price leg held below its ≤56.00 band for a second
+consecutive session; restart leg remains the sole blocker. ARS's overdue
+fresh-news pass completed (a hangar contract, already priced in — see
+WATCHLIST.md); no band change. No kill criterion approached on any held
+name. If a third consecutive run also lacks broker access, escalate it as
+a likely infrastructure issue (LESSONS.md P-4 precedent), not just
+re-note it. Detail: journal/2026-09.md 2026-09-23 entry.
+
 **Weekly review 2026-09-12** (third weekly run): TLV's standard T2 band
 fired 2026-09-11 (broker-confirmed this run: 224 sh @ avg 35.7005, cost
 basis 7,996.92 RON) — TLV is now **at its full-position cap** (≤8,000).

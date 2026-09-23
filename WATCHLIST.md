@@ -401,6 +401,18 @@ _(2026-09-19 weekly update: BET rallied two straight sessions on the Mureșan PM
   SNN-specific, driver of the broader Sep 21 selloff that brought SNN's
   price down with it; ruled out as company-specific (BET −2.59% the same
   session, broad-based).
+- **2026-09-23 (daily run) — price leg holds below the band for a second
+  consecutive session; restart leg still the sole blocker; BT Trade MCP
+  unreachable a second consecutive day.** bvb.ro shows Sep 22 close/book
+  55.30/55.40 — confirming Sep 21's clearance of the ≤56.00 leg was not a
+  one-day fluke. Restart: still no post-Sep-15 Ministry of Energy
+  evaluation result found (same "toward end of September" guidance carried
+  since Sep 9). Both legs remain required; the price leg being solidly, not
+  marginally, in range does not change that. Separately: no order possible
+  today regardless, since the BT-Trade MCP failed to connect again
+  (session-level 502, not a fresh in-run failure) — see journal/2026-09.md
+  2026-09-23 entry for the escalation note on a second consecutive outage.
+  No order.
 - Open question tracked as assumption **A9** (check Sep 30): is this outage
   weather-cyclical, or the first instance of a recurring structural Danube
   constraint on Romanian nuclear baseload? That decides whether SNN is a cheap
@@ -1084,6 +1096,17 @@ MOUs convert. This directly implements the fix the monthly retrospective
 flagged as needed — the blind spot (confirmation and re-rating happening
 together) is now covered by leg (a), which does not require a price dip at
 all.
+
+**ARS — 2026-09-23 fresh-news pass completed (owed since 2026-09-19).**
+Found one genuine item, not previously logged: Aerostar activated a **€8.7m
+contract for a second maintenance hangar at Iași** (€7.7m hangar + ~€1.0m
+platform/utilities, fully self-financed, 12–18 month build) — but the
+contract took effect **2026-08-14**, over five weeks before this pass; the
+coverage found today is recirculated/aggregator pickup of an already-priced
+fact, not new information. No other company-specific item found. Price
+**17.60/17.90 (2026-09-22 close, +1.44% day)** — still ~7–9% above both
+entry legs (≤14.5–16.5 normalized-earnings floor, ≤16.5 absolute T1). No
+band change; no order. Full detail: journal/2026-09.md 2026-09-23 entry.
 
 **PBK — reconciliation update 2026-09-05, stays demoted pending FY26
 confirmation.** This week's research surfaced an apparent contradiction with
