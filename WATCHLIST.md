@@ -413,6 +413,22 @@ _(2026-09-19 weekly update: BET rallied two straight sessions on the Mureșan PM
   (session-level 502, not a fresh in-run failure) — see journal/2026-09.md
   2026-09-23 entry for the escalation note on a second consecutive outage.
   No order.
+- **2026-09-24 (daily run) — price leg now clears solidly (not marginally);
+  restart leg still the sole blocker.** Live BT Trade quote 54.10/55.30 —
+  the ask itself is now **~1.25% below** the ≤56.00 band, a materially
+  cleaner clearance than the Sep 21-23 readings (which hovered right at or
+  just under the line). Restart: targeted search found no fresher Ministry
+  of Energy evaluation than the standing "toward end of September" guidance
+  (unchanged since Sep 9); the energy-sector alert state remains extended
+  through Sep 30 (a posture, not a restart date). **Both legs of the AND
+  condition are still required — one clearing solidly does not fire the
+  trigger.** No order. Separately: the PM investiture vote (this week's
+  single biggest market swing factor per STRATEGY §5) has been pushed to a
+  confirmed **Sep 29 plenary vote** (committee hearings Sep 28) — see
+  journal/2026-09.md 2026-09-24 entry for the full political-calendar
+  update; not SNN-specific but the dominant driver of this week's broader
+  BET weakness (closed Sep 23 at 31,683.03, −13.38% off ATH, ~1.6% from the
+  −15% dislocation tier — the closest approach yet).
 - Open question tracked as assumption **A9** (check Sep 30): is this outage
   weather-cyclical, or the first instance of a recurring structural Danube
   constraint on Romanian nuclear baseload? That decides whether SNN is a cheap
@@ -813,6 +829,24 @@ _(2026-09-19 weekly update: BET rallied two straight sessions on the Mureșan PM
   item open since the position was taken. The transfer-pricing file's
   completion remains undated ("in progress" as of the 27.08.2026 H1
   filing, re-confirmed 2026-09-19, no change).
+- **2026-09-24 (daily run) — A14 now confirmed on DIRECT evidence: a
+  fresh Cabrio threshold-crossing notification filed 2026-09-23** (BVB
+  current report AROBS 52/2026, primary source read in full). Cabrio
+  Investment SRL notified a **decrease** below the 10% threshold, to
+  **9.4784%** (104,556,758 shares — an unchanged absolute share count
+  versus the prior 10.0001%/104,556,758-share disclosure at 31.12.2025).
+  The trigger is explicitly marked as a voting-rights reallocation event
+  ("majorare capital social 30.06.2026"), not a purchase or sale — i.e.
+  this is exactly the Codingscape-acquisition share issuance (57,548,163
+  new shares, total votes rising from 1,045,552,330 to 1,103,100,493)
+  the 2026-09-19 entry inferred indirectly, now confirmed directly: Cabrio
+  held the same number of shares throughout and was **diluted**, not
+  built up. Oprean Voicu's direct stake is separately confirmed at
+  45.2808% (materially unchanged from 45.2587%). **This resolves A14
+  fully in the reassuring direction** — no undisclosed step-up occurred;
+  if anything, Cabrio's voting percentage moved down. No action implication
+  (T1 already filled, no second tranche defined); closes the ownership
+  monitoring item cleanly rather than leaving it on indirect evidence.
 - **2026-09-19 (weekly run) — assumption A14 graded HELD** (on
   strengthened but still indirect evidence, not a freshly confirmed
   exact percentage). A primary-source read of AROBS's own H1 2026 report

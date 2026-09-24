@@ -145,6 +145,22 @@ name. If a third consecutive run also lacks broker access, escalate it as
 a likely infrastructure issue (LESSONS.md P-4 precedent), not just
 re-note it. Detail: journal/2026-09.md 2026-09-23 entry.
 
+**2026-09-24 (daily run)**: No trades. Full broker access, holdings exactly
+match this file (AROBS 3,850 sh, IARV 134 sh, TLV 224 sh), no open orders;
+the small 22.13 RON "Sold blocat" first seen 2026-09-23 is unchanged for a
+third check running — treated as confirmed immaterial. Portfolio value
+(market) 45,202.20 RON: cash 30,426.00 (67.3%), AROBS mkt 2,818.20 (6.2%),
+IARV mkt 4,207.60 (9.3%), TLV mkt 7,750.40 (17.1%) — ~33.3% invested,
+all well under caps. BET closed Sep 23 at 31,683.03 (−1.42% day, broad-based),
+−13.38% off ATH — ~1.6% from the −15% dislocation tier, the closest
+approach yet. SNN's price leg now clears ≤56.00 solidly (54.10/55.30);
+restart leg still unconfirmed, no order. PM investiture vote now dated:
+Sep 29 plenary vote, Sep 28 committee hearings — the week's live watch
+item. AROBS's Cabrio ownership question closed favorably on a fresh
+primary-source filing (dilution, not concentration — see WATCHLIST.md).
+No kill criterion approached on any held name. Detail: journal/2026-09.md
+2026-09-24 entry.
+
 **Weekly review 2026-09-12** (third weekly run): TLV's standard T2 band
 fired 2026-09-11 (broker-confirmed this run: 224 sh @ avg 35.7005, cost
 basis 7,996.92 RON) — TLV is now **at its full-position cap** (≤8,000).
