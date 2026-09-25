@@ -172,6 +172,24 @@ possible regardless of price. Portfolio ~27.0% invested at market, cash
 reserve ~73.0% — still comfortably above the ≥25–30% floor. Detail:
 journal/2026-09.md 2026-09-12 weekly entry.
 
+**2026-09-25 (daily run)**: No trades. Full broker access, holdings exactly
+match this file (AROBS 3,850 sh, IARV 134 sh, TLV 224 sh), no open orders;
+the 22.13 RON "Sold blocat" unchanged for a fourth check running. Portfolio
+value (market, using Sep 24 closes — pre-open) 44,890.98 RON: cash 30,426.00
+(67.8%), AROBS mkt 2,779.70 (6.2%), IARV mkt 4,020.00 (9.0%), TLV mkt
+7,665.28 (17.1%) — ~32.2% invested at market, all well under caps. BET
+closed Sep 24 at **31,314.93 (−1.16% day), −14.39% off ATH** — only **~0.6%
+above the −15% dislocation tier (≈31,090)**, the closest approach yet by a
+wide margin (prior closest was Sep 23's ~1.6%). SNN's price leg now clears
+≤56.00 very solidly (52.20/52.60) but the restart leg deteriorated
+materially: Ministry of Energy (Bușoi, Sep 23) says restart will not happen
+in September, more plausibly mid-October — a real setback, not a
+restatement of existing guidance. No order (price-only clearing doesn't
+satisfy the AND condition). TLV placed a €500m subordinated bond (Sep 24,
+~2bn EUR book, tight spread) — informational, thesis unaffected. No kill
+criterion approached on any held name. Detail: journal/2026-09.md
+2026-09-25 entry.
+
 ## IARV — IAR SA Brasov
 - Opened: 2026-08-04 (fill; order placed 2026-08-03) (journal: journal/2026-08.md entries of 2026-08-03 and 2026-08-04)
 - Tranches: T1 64 sh @ avg 38.8161 (incl. fees). **T2 filled in full — completed 2026-08-31 close (confirmed 2026-09-01 daily run)**: the 52 sh remainder of the day order (limit 35.30) filled by end of day Aug 31 (blocked cash matched exactly). Combined with the 18 sh filled intraday, the full 70 sh T2 tranche is done. Broker-verified position as of 2026-09-01 pre-open: **134 sh @ avg cost 37.0078, total cost basis 4,959.04 RON** — 10.8% of portfolio at cost, just under the ≤5,500 satellite cap. Journal: journal/2026-08.md 2026-08-31 (intraday) entry; journal/2026-09.md 2026-09-01 entry.

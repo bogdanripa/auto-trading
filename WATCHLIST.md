@@ -429,6 +429,39 @@ _(2026-09-19 weekly update: BET rallied two straight sessions on the Mureșan PM
   update; not SNN-specific but the dominant driver of this week's broader
   BET weakness (closed Sep 23 at 31,683.03, −13.38% off ATH, ~1.6% from the
   −15% dislocation tier — the closest approach yet).
+- **2026-09-25 (daily run) — price leg now clears very solidly; restart leg
+  deteriorates materially, first real bad news since the Sep 9 "toward
+  end of September" guidance was set.** Live BT Trade quote 52.20/52.60 —
+  the ask sits ~6.1% *below* the ≤56.00 band, the cleanest clearance yet
+  (Sep 24's close was 54.10/55.30). But the reason the price fell this
+  hard is company/sector-specific, not generic market weakness: Cristian
+  Bușoi (Secretary of State, Ministry of Energy) stated **2026-09-23**
+  that Cernavodă "certainly" will not restart in September and that
+  restart is now more plausibly **mid-October** — a real deterioration
+  from the "toward end of September" guidance unchanged since Sep 9, not
+  a restatement of it. Corroborated across five independent outlets
+  (news.ro direct quote, Digi24, Adevărul, Capital.ro, cursdeguvernare.ro),
+  all citing the same Sep 23 briefing. Danube discharge at Baziaș ~1,600
+  m³/s vs the ~3,800 m³/s September average (~58% below), forecast to
+  *decline* further over the next 10 days per Bușoi's own framing — the
+  same INHGA pattern flagged since early September, now explicitly ruling
+  out the guidance window A9 (check-by Sep 30) was written against.
+  **Net: the price leg clearing more cleanly does not make this name more
+  buyable — the restart leg, the harder condition, just moved further
+  away, not closer, for the first time since the band was written.** Both
+  legs of the AND condition remain required; neither is met (price alone
+  is not sufficient). No order. This is very likely a meaningful
+  contributor to BET-NG's -1.33% session and the broader Sep 24 BET
+  decline (-1.16%, closing 31,314.93) alongside the dated-but-unresolved
+  PM investiture vote (Sep 29) — SNN/energy-sector weakness plausibly
+  compounding the political overhang rather than being caused by it,
+  though no source directly ties the two. Separately: TLV placed a €500m
+  subordinated bond (2026-09-24), ~2bn EUR order book, priced only 0.45pp
+  over Romanian sovereign eurobond yield — a strong capital-markets
+  access/confidence signal, informational only, no kill-criterion
+  implication, thesis unaffected. No new news found for IARV or AROBS.
+  ARS (17.50/17.60) and TTS (6.40/6.52) both still above their bands, no
+  fresh company-specific news beyond the already-logged Sep 23 ARS pass.
 - Open question tracked as assumption **A9** (check Sep 30): is this outage
   weather-cyclical, or the first instance of a recurring structural Danube
   constraint on Romanian nuclear baseload? That decides whether SNN is a cheap
