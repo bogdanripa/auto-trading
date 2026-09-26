@@ -190,6 +190,32 @@ satisfy the AND condition). TLV placed a €500m subordinated bond (Sep 24,
 criterion approached on any held name. Detail: journal/2026-09.md
 2026-09-25 entry.
 
+**Weekly review 2026-09-26** (fifth weekly run): all three positions
+reviewed against thesis, kill criteria and fair-value band — **all HOLD,
+no changes.** TLV and IARV remain fully capped (TLV 3.08 RON of room,
+immaterial; IARV no room); AROBS holds T1 only, no second tranche defined.
+Reporting dates re-verified clean for all three (TLV Nov 20 Q3/Oct 1
+Investor Day; IARV Nov 13 Q3/Oct 6-7 AGOA; AROBS Nov 19 Q3) — fourth
+consecutive clean pass. Two standing-fact updates: TLV's new 550,000-share
+buyback burned 74.8% of its allocation in week one alone (immaterial —
+TLV capped regardless); AROBS was found to be running a previously-
+untracked ongoing buyback program (management buying near T1's own cost
+basis, a mild positive signal, no T2 implication). Broker-verified
+holdings exactly match this file (AROBS 3,850 sh, IARV 134 sh, TLV 224
+sh), no open orders. Portfolio value (market, Sep 25 closes) 44,957.66
+RON: cash 30,426.00 (67.7%), AROBS mkt 2,810.50 (6.3%), IARV mkt 4,006.60
+(8.9%), TLV mkt 7,714.56 (17.2%) — ~32.3% invested at market, all well
+under caps. BET closed Sep 25 at 31,720.62 (+1.29% day, a bounce after
+four down sessions) — −13.28% off ATH, ~2.03% from the −15% dislocation
+tier. Portfolio down 4.26% since inception vs BET down 12.27% — losing
+about a third of what BET lost (+8.01pp gap, the widest yet), but this
+week's own arithmetic shows the gap is still almost entirely mechanical
+(low deployment), not stock selection — IARV was actually the week's
+laggard (−6.0%), worse than BET itself. No trades this week; the priority
+research item (IMP's unit-sales decline) resolved unfavorably — see
+WATCHLIST.md and journal/2026-09.md 2026-09-26 weekly entry for full
+detail.
+
 ## IARV — IAR SA Brasov
 - Opened: 2026-08-04 (fill; order placed 2026-08-03) (journal: journal/2026-08.md entries of 2026-08-03 and 2026-08-04)
 - Tranches: T1 64 sh @ avg 38.8161 (incl. fees). **T2 filled in full — completed 2026-08-31 close (confirmed 2026-09-01 daily run)**: the 52 sh remainder of the day order (limit 35.30) filled by end of day Aug 31 (blocked cash matched exactly). Combined with the 18 sh filled intraday, the full 70 sh T2 tranche is done. Broker-verified position as of 2026-09-01 pre-open: **134 sh @ avg cost 37.0078, total cost basis 4,959.04 RON** — 10.8% of portfolio at cost, just under the ≤5,500 satellite cap. Journal: journal/2026-08.md 2026-08-31 (intraday) entry; journal/2026-09.md 2026-09-01 entry.

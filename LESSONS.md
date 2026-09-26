@@ -103,6 +103,32 @@ to add) exactly as often as it can harden the original concern.**
 
 ## Process lessons
 
+### P-11: a company's own stated cause for a bad number must be checked against an independent benchmark of the same metric before its magnitude is accepted, not just its plausibility (2026-09-26 weekly, from IMP's unit-sales diligence; journal/2026-09.md)
+IMP's H1 2026 report stated — repeated near-verbatim three times — that
+its 153→31 unit-sales collapse (H1 2025 vs H1 2026) was caused by the VAT
+hike to 21%, political instability, and inflation. That explanation is
+plausible on its face (it is the same macro backdrop every BVB real-estate
+name faces) and specific (named, dated, repeated by management). Both
+properties made it easy to accept without a further check. The actual
+cross-check — pulling Colliers Romania's independent H1 2026 market
+report — found Romania-wide apartment transactions down only 9% and
+Bucharest specifically down only 2%, a 30–40x smaller decline than IMP's
+own 80% group-level collapse (and ~75% at IMP's own flagship Bucharest
+project). A cause can be real and still be quantitatively insufficient:
+the VAT/macro headwind demonstrably exists (Colliers confirms it,
+independently), but it cannot be the primary driver of a decline that is
+an order of magnitude larger than what the same macro conditions produced
+market-wide. **Lesson: when a company attributes a large adverse number to
+a macro or sector-wide cause, find an independent, comparable-metric
+benchmark for that same cause (an industry report, a peer's disclosure, a
+statistics-office series) and check the magnitude, not just the
+direction, before accepting the explanation — specificity and repetition
+in the company's own telling are not evidence of quantitative
+sufficiency.** This extends LESSONS M-2 (verify standing facts against
+primary sources) and P-7/P-10 (apply the same rigor to a candidate as to a
+rejection) into a distinct, reusable test: a plausible-sounding causal
+story is a hypothesis to be sized, not a finding to be filed.
+
 ### P-6: August's failures were entirely in process/verification, never in market or company analysis (2026-09-01 monthly; journal/2026-09.md)
 Auditing every assumption that reached its check-by date in August: A2 (SNN
 H1 confirms Q1 strength), A3 (TLV H1 keeps guidance alive), A6 (fee model),

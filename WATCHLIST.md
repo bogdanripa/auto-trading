@@ -17,6 +17,8 @@ _(2026-09-14 daily update: AROBS's ownership pre-check completed (on indirect ev
 
 _(2026-09-19 weekly update: BET rallied two straight sessions on the Mureșan PM nomination (Sep 17 +1.14%, Sep 18 +2.20%, closing 32,757.81, -10.44% off ATH) — the -10% tier stays fired but the -15% tier (~5.1% away) is now further off than last week, not closer. TLV and IARV remain fully capped; AROBS has no second tranche defined. ARS, TTS and SNN all moved further from their bands this week as the market rallied. Assumption A14 (AROBS/Cabrio ownership) graded held on strengthened indirect evidence — see journal. No trades this week.)_
 
+_(2026-09-26 weekly update: BET fell hard mid-week then bounced Sep 25 (+1.29%, closing 31,720.62, -13.28% off ATH) — the -15% tier (~2.03% away) is closer than every week before Sep 24's one-session ~0.6% approach, but the bounce pulled back from it. TLV and IARV remain fully capped; AROBS has no second tranche. IMP's diligence resolved unfavorably (see New candidates section) and SFG took a formal guidance cut — neither promoted. SNN's restart guidance holds at "mid-October," price leg clears but restart leg doesn't. No trades this week.)_
+
 ## Triggered-watch — re-banded names
 
 ### ONE — One United Properties — ⛔ DEMOTED 2026-09-12: Investor Day gave no ANCPI resolution, kill criterion hit, price-only fallback WITHDRAWN
@@ -462,6 +464,38 @@ _(2026-09-19 weekly update: BET rallied two straight sessions on the Mureșan PM
   implication, thesis unaffected. No new news found for IARV or AROBS.
   ARS (17.50/17.60) and TTS (6.40/6.52) both still above their bands, no
   fresh company-specific news beyond the already-logged Sep 23 ARS pass.
+- **2026-09-26 (weekly run) — restart guidance unchanged at "mid-October";
+  Board-selection date confirmed; a separate 20-year PPA auction
+  cancelled; Nova reversal window still unresolved, 5 days left.**
+  Restart: no fresher evaluation than the Sep 23 "mid-October" guidance —
+  corroborated across five outlets through Sep 25 (most authoritative: a
+  Sep 24 Digi24 interview citing a 10-day forecast of insufficient Danube
+  discharge for safe cooling-pump operation, with a brief 2-3 day uptick
+  expected to reverse into further decline). Danube discharge ~1,600 m³/s
+  at Baziaș (Sep 24, most recent point found), ~58% below seasonal
+  average; government allocated 5.1m lei for emergency dredging (Sep 25).
+  **Board selection: AGOA+AGEA now confirmed for Oct 29, 2026** (approved
+  by SNN's Board 2026-09-21) to formalize the Ministry's requested
+  5-new-Board-member selection process — closes last week's "no date
+  found" item. CEO transition unchanged (Ghiță out Oct 2, Gioară interim
+  from Oct 3). No DNA confirmation found either way (still just "annexes
+  sent," no statement on a formal investigation opening). **New: SNN
+  cancelled its planned 20-year PPA electricity auctions** (Sep 21-25
+  sessions on BRM, ~400 MW/5 lots, 2027-2046, floor ~€91.50/MWh, up to
+  €5.6-6.4bn deal value meant to underpin the €3.79bn Unit 1
+  retechnologization) — BRM cited only "the Initiator's notification," no
+  reason given by SNN; unconfirmed chatter attributes it to weak buyer
+  interest at the proposed terms. No rescheduling found. Logged as
+  informational (a separate, long-horizon financing mechanism, not the
+  current outage question) but worth tracking for a revised auction.
+  **Nova Power & Gas reversal window (through Oct 1 inclusive): still
+  unresolved** — no SNN/RoPower board decision, filing, or press
+  confirming exercise or lapse; 5 calendar days remain, the single most
+  time-sensitive open item on file. Price: last trade Sep 25, 17:57:40,
+  **52.90** (bid/ask 52.80/53.00, matching BT Trade MCP exactly) — price
+  leg clears ≤56.00 solidly (~5.5-6% below); restart leg still wholly
+  unmet. No order. Full detail: journal/2026-09.md 2026-09-26 weekly
+  entry.
 - Open question tracked as assumption **A9** (check Sep 30): is this outage
   weather-cyclical, or the first instance of a recurring structural Danube
   constraint on Romanian nuclear baseload? That decides whether SNN is a cheap
@@ -593,6 +627,24 @@ _(2026-09-19 weekly update: BET rallied two straight sessions on the Mureșan PM
   (band did eventually fill) and effectively completes the TLV position at
   its full-position cap — grade explicitly next run. Full reasoning:
   journal/2026-09.md 2026-09-11 entry.
+- **2026-09-26 (weekly run) — new buyback's pace tracked: 74.8% of the
+  550,000-share program used in week one.** The first weekly repurchase-
+  transaction notice (filed 2026-09-21, covering 14-18 Sep) shows
+  **411,419 of 550,000 shares (74.8%) already bought**, 13,975,463.84 RON
+  total, prices 33.4452-35.0557. At this pace the program will likely hit
+  its share cap well before the Nov 6, 2026 end date — a materially
+  faster pace than a "through Nov 6" duration implies on its own. No
+  action implication (TLV is at its own full-position cap regardless of
+  any support level); recorded for M-2 accuracy going forward (don't
+  assume this program is still running once the cap is hit). Separately:
+  the €500m subordinated bond placed 2026-09-24 priced at a 6.122% fixed
+  coupon (6.216% yield), matures 2037, callable 2032, ~€2bn order book
+  (~4x oversubscribed) from 30 countries, listed Euronext Dublin — a
+  genuine capital-markets-access/confidence signal, informational only.
+  Q3 (Nov 20, call Nov 23) and the Oct 1 Investor Day both reconfirmed
+  unchanged against BT's own financial calendar; no new Investor Day
+  agenda details found. No thesis-changing news. HOLD, at full-position
+  cap. Full detail: journal/2026-09.md 2026-09-26 weekly entry.
 - **2026-09-12 (weekly run) — FILL CONFIRMED, TLV now AT FULL-POSITION
   CAP.** `get_holdings` shows **224 sh @ avg cost 35.7005, total cost basis
   7,996.92 RON** — 1.83 RON under the ≤8,000 cap. Assumption A10 graded
@@ -862,6 +914,20 @@ _(2026-09-19 weekly update: BET rallied two straight sessions on the Mureșan PM
   item open since the position was taken. The transfer-pricing file's
   completion remains undated ("in progress" as of the 27.08.2026 H1
   filing, re-confirmed 2026-09-19, no change).
+- **2026-09-26 (weekly run) — new standing fact found: AROBS is also
+  running a live share buyback, not previously tracked.** Weekly
+  repurchase-transaction notices (AGEA Resolution No. 4, 15.06.2026) have
+  been filed for at least three consecutive weeks (31.08-04.09, 07-11.09,
+  14-18.09.2026) — the latest (filed 2026-09-21): **555,489 shares** at
+  weighted-average prices 0.7200-0.7437 across 14-18 Sep. Management
+  buying near T1's own 0.7623 average cost is a mild positive governance
+  signal (skin in the game at a similar price the engine itself paid) but
+  creates no T2 condition and does not change the entry thesis — added
+  here per LESSONS M-2 discipline so it is tracked and re-verified each
+  week going forward rather than re-discovered. Transfer-pricing file:
+  still "in progress," no change. No other thesis-changing news found
+  (contracts, earnings guidance). HOLD, T1 only. Full detail:
+  journal/2026-09.md 2026-09-26 weekly entry.
 - **2026-09-24 (daily run) — A14 now confirmed on DIRECT evidence: a
   fresh Cabrio threshold-crossing notification filed 2026-09-23** (BVB
   current report AROBS 52/2026, primary source read in full). Cabrio
@@ -903,7 +969,59 @@ _(2026-09-19 weekly update: BET rallied two straight sessions on the Mureșan PM
   wrong and should be corrected as a new entry, not a rewrite. Full
   reasoning: journal/2026-09.md 2026-09-19 weekly entry.
 
-**IMP — diligence update 2026-09-19: two of three governance flags
+**IMP — diligence update 2026-09-26: the business-quality question
+resolves UNFAVORABLY — mostly company-specific, not sector-wide.** Read
+IMP's full 125-page H1 2026 report directly (PDF text-extracted, not press
+summary) plus its Q1 2026 report and BVB communiqué, cross-checked against
+Colliers Romania's independent H1 2026 residential-market report. IMP's
+own stated cause for the 153→31 unit-sales collapse — VAT hike to 21%,
+political instability, inflation — is repeated near-verbatim three times
+in the H1 report, with **zero mentions anywhere of ANCPI, e-Terra,
+cadastral backlog, or a deliberate slowdown strategy** (confirmed by
+full-text search). **This explanation does not survive a quantitative
+cross-check**: Colliers' independent data shows Romania-wide apartment
+transactions down only **−9%** H1 2026 vs H1 2025, and **Bucharest
+specifically down only −2%** (Cluj −16%, Iași −11%, Timișoara **+3%**) — a
+real, verified sector headwind, but nowhere close to explaining an **80%
+unit-count collapse at IMP group level, or a ~75% collapse at IMP's own
+flagship Bucharest project** (Greenfield Băneasa, 103→26 units). The
+magnitude gap (Bucharest market −2% vs. IMP's own Bucharest project −75%,
+a 30-40x difference) is unreconciled by any company or independent
+source — an inference from combining two primary datasets, not a sourced
+conclusion, but a strong one. **The ANCPI e-Terra cadastral-ransomware
+disruption cannot explain IMP's H1 figure on timing grounds**: the attack
+began 2026-07-14, three weeks after IMP's H1 period (through Jun 30) had
+already closed; a lone analyst note (TrevIQ, Aug 20) speculates ANCPI
+could threaten IMP's *H2*, but that is forward-looking speculation, not an
+explanation for the already-reported H1 collapse, and IMP itself does not
+raise it. Average selling price per unit rose only ~17% (≈€135.5k→€158k),
+a minor mix effect that does not offset the unit-count collapse —
+residential development revenue itself fell ~76%, almost matching the
+unit decline one-for-one. Consolidated revenue looking less bad (−38%) is
+structural, not pricing: 69% of H1 2026 group revenue came from the
+construction-services arm (RCTI), which held up and masked the real-estate
+collapse (only 22% of group revenue). No post-H1 management commentary on
+the sales-volume question was found; next data point is the Nov 23, 2026
+nine-month report. The 0.45x P/BV figure was independently corroborated
+(book net assets €199.1m ≈ RON 990-1,020m vs. ~RON 445-484m market cap).
+On governance: the Iaciu-loan finding is unchanged; the specific "won at
+first instance" claim for the Greenfield Copou litigation (carried on file
+since 2026-09-19) **could not be independently re-verified this run** —
+the case's 2025 filing was confirmed but no ruling report was found;
+flagged as an open verification gap, not a retraction, pending a future
+run re-opening the original primary-source H1-report read. **Verdict:
+IMP is NOT added to WATCHLIST, and — contrary to the 2026-09-19 entry's
+"meaningfully closer to ready" framing below — the remaining
+business-quality question is now a sharper red flag, not a narrowing
+one.** A statistically-cheap name whose own stated explanation for an 80%
+volume collapse fails a quantitative cross-check against independent
+sector data reads closer to a value-trap pattern than a bargain pattern
+until IMP produces a better explanation or the Nov 23 report shows
+recovery. See LESSONS.md P-11. Full detail: journal/2026-09.md 2026-09-26
+weekly entry.
+
+**IMP — diligence update 2026-09-19 (superseded by the 2026-09-26 entry
+above — preserved for the record): two of three governance flags
 substantially resolved; the real open question is now a business one.**
 Read IMP's actual 125-page H1 2026 report (consolidated + standalone
 statements and notes) directly. **(a) The consolidated-vs-standalone
@@ -990,6 +1108,23 @@ headlines into an overlooked structural beneficiary. **Diligence-worthy,
 not added — needs the H1-recurrence question answered (Q3 report due
 Nov 17, 2026) before any entry band.**
 
+**2026-09-26 second-pass update**: current price 69.40 RON (down from ~72
+mid-September, tracking the broad sell-off, not idiosyncratic), market cap
+707.56m RON. **CCP.RO contributed zero revenue to the H1 beat and is a
+pure cost center through 2026** (derivatives clearing not expected
+operational until late 2026/early 2027; a CCP.RO-related impairment
+actually dented BVB's 2025 results) — the entire H1 earnings beat is
+attributable to the trading-volume/fee surge, not the new business line.
+Weekly equity-turnover data (Aug-Sep 2026) is choppy (380m-787m lei on
+shares week to week) rather than cleanly sustained or cleanly normalizing,
+but the biggest up-weeks (Aug 31-Sep 4, Sep 14-18) coincide exactly with
+the market's own drawdown/volatility episodes — the mechanism that drove
+H1 profit is still visibly present into September. No sell-side Q3 model
+found. A valuation discrepancy surfaced (one source shows ~60x trailing
+P/E / ~30x EV/EBITDA vs. this file's 34x) that could not be reconciled —
+flagged, not resolved. **Still diligence-worthy, not added — the Nov 17
+Q3 report remains the actual resolving event.**
+
 **SFG (Sphera Franchise Group) — KFC/Pizza Hut/Taco Bell master
 franchisee.** Being removed from BET effective 2026-09-21 (replaced by
 Electro-Alfa on a pure index-mechanics rule — a >€3bn cap threshold
@@ -1010,6 +1145,33 @@ Maps most honestly to edge (4), a prepared buyer in a mechanical (not
 fundamentals-driven) drawdown. **Diligence-worthy, not added — needs
 lease-adjusted leverage and post-index-exit liquidity confirmed before
 any entry band.**
+
+**2026-09-26 second-pass update — the case is objectively weaker this
+week, not stronger.** **Material new negative fact: a formal guidance
+cut, filed 2026-09-22** (BVB current report SFG 43/2026): FY2026 revenue
+guidance cut to 1.58-1.60bn RON (from a 1.696bn RON board-approved budget,
+-5.7% to -6.9%), normalized EBITDA to 130-145m RON (from 160m, down as
+much as -18.75% at the low end), normalized net profit to 50-65m RON
+(from 72.7m, down as much as -31.2%) — cited causes: inflation, the 21%
+VAT rate, weaker consumer purchasing power. This directly reinforces,
+rather than offsets, the H1 "difficult consumption context" caution flag
+already on file — a real earnings deterioration landing three trading
+days after the mechanical index-removal dislocation, not a coincidence to
+read past. Liquidity since the Sep 21 removal could not be precisely
+quantified (no daily lei-turnover series found), though continued large
+price moves (a further leg down after the guidance cut; Erste's Sep 21
+note observing a 35% one-month decline) suggest active, not frozen,
+trading — genuinely unresolved either way. Erste cut SFG to "hold" (from
+"accumulate") on Sep 21, target 34.2 RON, citing the same consumer-caution
+theme, not the index removal itself. A lease-adjusted debt/EBITDA figure
+was not found (needs a direct balance-sheet pull). SFG has called an AGM
+for Oct 28 to approve an additional 0.932 RON/share dividend (~36m RON)
+from retained 2025 earnings while also seeking ~€50m new credit facilities
+— a real tension (distributing more cash while cutting guidance and
+raising new debt), not a costless ~6.4% yield. Correction: the CEO-share-
+sale/Wellkept-purchase item flagged last week is a **five-month-old
+(April 2026) transaction**, not contemporaneous — noted so it isn't
+re-flagged as new. **Verdict: still not added.**
 
 **AQ (Aquila Part Prod Com) — screened 2026-09-19, passed on.** FMCG
 distribution/logistics. Revenue growth decelerated sharply (+18% FY2025
@@ -1323,6 +1485,29 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
 
 ## Log
 
+- **2026-09-26 (fifth weekly run)**: **IMP's diligence resolved
+  unfavorably** — the 153→31 unit-sales collapse is mostly company-
+  specific, not sector-wide (Colliers: Bucharest market only −2%, Romania
+  −9%, vs IMP's own −80% group / −75% flagship-project decline); the
+  ANCPI cadastral disruption can't explain it either (started after H1
+  closed). Not added; reframed from "meaningfully closer to ready" to "a
+  sharper red flag." **SFG took a formal guidance cut (Sep 22)** — revenue/
+  EBITDA/profit all trimmed for FY2026, reinforcing rather than offsetting
+  the H1 caution flag; still not added, case is weaker than last week.
+  **BVB**: CCP.RO confirmed a zero contributor to H1 (pure cost center
+  through 2026); turnover choppy but volatility-linked into September;
+  still diligence-worthy, not added. **New standing facts found**: TLV's
+  new buyback burned 74.8% of its allocation in week one (immaterial, TLV
+  capped); AROBS has a previously-untracked ongoing buyback (mild positive
+  signal, no T2 implication). **SNN**: restart guidance unchanged at
+  "mid-October"; Board-selection AGOA/AGEA now dated Oct 29; a 20-year PPA
+  auction was cancelled (new, informational); the Nova Power & Gas
+  reversal window (through Oct 1) remains unresolved with 5 days left.
+  **S&P's Oct 2 Romania review confirmed** (not just rumored) via
+  multiple press sources. No assumption reaches its check-by date (A9/A4/
+  A11 all Sep 30, four days out). No trades this week — no conditional is
+  price-in-range, TLV/IARV remain capped, AROBS has no second tranche.
+  Detail: journal/2026-09.md 2026-09-26 weekly entry.
 - **2026-09-19 (fourth weekly run)**: Assumption **A14 graded held** on
   strengthened indirect evidence (a primary-source H1 2026 read plus a
   fully-documented, Cabrio-unrelated cause for the "legal entities"
