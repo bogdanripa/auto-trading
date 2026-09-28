@@ -521,13 +521,17 @@ is a watch-and-execute week dominated by an unusually dense external
 calendar rather than any name-specific trigger.
 
 1. **Mon Sep 28 / Tue–Wed Sep 29–30 (daily runs)**: PM investiture
-   committee hearings (Mon–Tue) then the plenary vote itself — **the exact
-   day is ambiguous between Sep 29 and Sep 30 across sources**, read the
-   actual outcome, not the schedule. PSD's refusal and a ~24–25-vote
-   shortfall even in an optimistic scenario make a failed or chaotic vote
-   a real possibility. This is the single biggest swing factor for the
-   whole book's beta exposure this week — no held or watchlist name has a
-   comparable external risk this large.
+   committee hearings (Mon–Tue) then the plenary vote itself — **update
+   2026-09-28: the ambiguity is resolved, the plenary vote is confirmed
+   for Wednesday Sep 30, 13:00** (multiple corroborating sources: Digi24,
+   Profit.ro, Veridica, cursdeguvernare.ro), not Sep 29 as one prior
+   reading had it. Minister hearings run Mon 14:00–20:00 and Tue
+   10:00–20:00. Mureșan counts ~170 votes (PNL+USR+UDMR) against 233
+   needed; PSD's National Permanent Bureau already formally refused
+   support (Sep 21) and AUR will not vote for a government it isn't
+   part of. This is the single biggest swing factor for the whole book's
+   beta exposure this week — no held or watchlist name has a comparable
+   external risk this large.
 2. **Wed Sep 30**: assumptions **A9, A4, and A11 all reach check-by** —
    whichever daily run lands on or after this date must grade all three
    explicitly (do not let them go silently overdue; see journal §3 for

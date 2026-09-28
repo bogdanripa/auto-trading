@@ -216,6 +216,21 @@ research item (IMP's unit-sales decline) resolved unfavorably — see
 WATCHLIST.md and journal/2026-09.md 2026-09-26 weekly entry for full
 detail.
 
+**2026-09-28 (daily run)**: No trades. Full broker access, holdings exactly
+match this file (AROBS 3,850 sh, IARV 134 sh, TLV 224 sh), no open orders;
+the 22.13 RON "Sold blocat" unchanged for a sixth check running. Portfolio
+value (market, Sep 25 closes — pre-open Monday) 44,957.66 RON: cash
+30,426.00 (67.7%), AROBS mkt 2,810.50 (6.3%), IARV mkt 4,006.60 (8.9%), TLV
+mkt 7,714.56 (17.2%) — ~32.3% invested at market, all well under caps,
+identical to Saturday's weekly mark (no session closed over the weekend).
+No name's entry band is in range (SNN clears price but not restart;
+ARS/TTS above their bands; TLV/IARV capped; AROBS T1-only). The week's
+dominant development: the PM investiture vote's exact day (previously
+ambiguous Sep 29/30) is now confirmed for Wednesday Sep 30, 13:00 — vote
+math remains short (~170/233), PSD and AUR both refusing. No kill
+criterion approached on any held name. Detail: journal/2026-09.md
+2026-09-28 entry.
+
 ## IARV — IAR SA Brasov
 - Opened: 2026-08-04 (fill; order placed 2026-08-03) (journal: journal/2026-08.md entries of 2026-08-03 and 2026-08-04)
 - Tranches: T1 64 sh @ avg 38.8161 (incl. fees). **T2 filled in full — completed 2026-08-31 close (confirmed 2026-09-01 daily run)**: the 52 sh remainder of the day order (limit 35.30) filled by end of day Aug 31 (blocked cash matched exactly). Combined with the 18 sh filled intraday, the full 70 sh T2 tranche is done. Broker-verified position as of 2026-09-01 pre-open: **134 sh @ avg cost 37.0078, total cost basis 4,959.04 RON** — 10.8% of portfolio at cost, just under the ≤5,500 satellite cap. Journal: journal/2026-08.md 2026-08-31 (intraday) entry; journal/2026-09.md 2026-09-01 entry.
