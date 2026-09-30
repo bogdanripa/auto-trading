@@ -258,3 +258,5 @@ criterion approached on any held name. Detail: journal/2026-09.md
 - Expected holding: 1–3 years, reviewed each earnings.
 
 **2026-09-29 (daily run)**: No trades. Portfolio (Sep 28 marks) 44,454.00 RON, cash 30,426.00 (68.4%); AROBS 2,772.00, IARV 3,752.00, TLV 7,504.00. BET closed 31,018.23 (−15.20% off ATH), crossing the −15% dislocation tier; no candidate in band, decision NO ACTION pending Sep 30 vote / Oct 2 S&P. Detail: journal/2026-09.md 2026-09-29.
+
+**2026-09-30 (daily run)**: No trades. Holdings unchanged (AROBS 3,850, IARV 134, TLV 224), no open orders. Cash 30,403.87 (the 22.13 "blocked" settled out as a charge). Portfolio (Sep 29 closes) 44,434.27 RON, −5.37% vs BET −14.73%. A9 broke, A11 held, A4 unclear. Detail: journal/2026-09.md 2026-09-30.
