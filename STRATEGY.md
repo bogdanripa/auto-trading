@@ -1,4 +1,4 @@
-# STRATEGY.md — v1.6
+# STRATEGY.md — v1.7
 
 Living strategy. Any run may amend it with a version bump, changelog entry, and
 journaled rationale (ENGINE.md §6). The constitution (ENGINE.md) always wins on
@@ -227,6 +227,15 @@ structural gap in dislocation-readiness surfaces:
   supporting documentation due **Sep 15** — a fresh, dated risk item for
   the research agenda. BET index committee's EAI-replaces-SFG change is
   confirmed on track, effective the Sep 21 session.
+
+### Regime update — 2026-10-01 (v1.7, second monthly retrospective)
+
+BET closed Sep 30 at 31,093.91 (−14.00% vs baseline, −15.0% off ATH 36,576.55): the −10% tier fired Sep 16 and the −15% tier Sep 28. The investiture vote failed Sep 30 (182/233, second rejected cabinet), opening the snap-election path; the market shrugged (+0.86%). S&P's Oct 2 Romania review is the next binary event. Portfolio −4.77% vs BET −14.00% since inception (−2.36% vs −7.85% in September), 68% cash, mostly mechanical (see journal/2026-10.md 2026-10-01 monthly). Two evidence-based amendments to §6 and the weekly plan format, below; everything else reaffirmed.
+
+**v1.7 amendments (§6 dislocation playbook):**
+1. **Tier-scaled deployment.** The −5% tier deploys *half* of the intended first slice, −10% the next ~third, −15% the remainder (total envelope unchanged). A name that is a thin, high-beta mover on the dislocation day (IARV-type, ≥ −10% intraday, beta ≥ ~1.5) is not bought in the first tier. Evidence: IARV T2 bought at the −5% tier on Aug 31 is −18% (≈ −450 RON) after BET fell a further −7.85%.
+2. **Tier-conditioned bands are mandatory.** Every candidate in the weekly plan must state, besides its valuation band, the price at which it is a buy *if BET is ≥10% / ≥15% off ATH* (a market-wide discount justifies a valuation haircut). The Sep 28 −15% tier fired with 68% cash and nothing in band; the playbook's "move toward 85–90% invested" was unusable.
+3. **Assumption hygiene.** Timing assumptions on physical/state/political processes carry ≥2 weeks buffer and default to "unclear" if the event lands within 3 days of check-by (A9, A4); pre-committed falsification rules (A8, A12) are the preferred form.
 
 ### Regime update — 2026-09-26 (v1.6, fifth weekly run)
 
@@ -713,6 +722,7 @@ their position caps — this week's only live buy candidate is AROBS
 **Levels corrected 2026-08-24** to the true ATH **36,576.55 (2026-08-04)**; the
 v1.0 levels were computed off a stale 36,503.
 
+- **v1.7 (2026-10-01) overlay — ladder, not a single slice**: the tiers below deploy half / next ~third / remainder of the envelope; thin high-beta names (IARV-type) are not first-tier buys; every candidate carries a tier-conditioned band in the weekly plan. See Regime update 2026-10-01.
 - BET **−5% ≈ 34,748**: deploy one reserve slice (~10% of portfolio) into the
   highest-conviction WATCHLIST names at their bands. Priority order: **TLV
   ≤35.50, ONE ≤30.00** (re-banded 2026-08-26 — H1 condition failed, see
@@ -811,6 +821,8 @@ v1.0 levels were computed off a stale 36,503.
   through Q3) — do not reconsider on price drift alone.
 
 ## Changelog
+
+- **v1.7 — 2026-10-01 (second monthly retrospective)** — **Core reaffirmed; §6 and weekly-plan format amended narrowly.** September: portfolio −2.36% vs BET −7.85% (−4.77% vs −14.00% since inception) — mandate met in a falling tape, but credit is the reserve posture (≈28% average invested ⇒ expected ≈ −2.2%), not selection (TLV +, AROBS ≈, IARV −9.6pp vs BET). Amendments: tier-scaled dislocation deployment (half/third/remainder across −5/−10/−15%; thin high-beta names not first-tier); mandatory tier-conditioned bands per candidate; timing-assumption buffer. Rationale and full evidence: journal/2026-10.md 2026-10-01 monthly. No change to caps, valuation bands, tranche sizing, cost/tax mechanics, routine cadence. ENGINE.md untouched.
 
 - **v1.6 — 2026-09-26 (fifth weekly run)** — **Reaffirmation, not a
   rewrite.** Core framework unchanged; no trades this week (no conditional

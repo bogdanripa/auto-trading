@@ -101,7 +101,13 @@ rejection's own numbers (P-7) or a standing fact's continued validity
 (M-2), because the diligence gap can resolve favorably (clearing the way
 to add) exactly as often as it can harden the original concern.**
 
+### M-5: thin, high-beta names lead BVB drawdowns — and a "market-wide, not idiosyncratic" check does not tell you how far it goes (2026-10-01 monthly; journal/2026-10.md)
+IARV: −10.2% intraday on Aug 31, then −17.4% in September (35.00→28.90) against BET −7.85%, with no company news (kill criteria untouched). M-3's check proved the Aug 31 move was market-wide — correct — but a market-wide diagnosis says nothing about how many more legs follow: BET fell a further −7.85% after that buy. **Treat thin, high-beta names as second-tier buys in a multi-leg selloff**; expect ~2x index moves in both directions.
+
 ## Process lessons
+
+### P-12: a dislocation rule that "fires once at full size" buys the first leg of a multi-leg drop; scale in tiers and pre-write tier-conditioned bands (2026-10-01 monthly; journal/2026-10.md)
+The −5% tier fired on Aug 31 and the full slice went in (TLV+IARV); the −10% (Sep 16) and −15% (Sep 28) tiers fired later and the engine deployed nothing, because every candidate band was valuation-anchored and none sat in range — it could not use the one event it had spent a month preparing for, after having spent the slice on the first leg. **Fix (STRATEGY v1.7): ladder the deployment across tiers and require a tier-conditioned band per candidate in every weekly plan.** One sample: IARV's loss may be pure beta; the ladder costs little if the market rebounds in one leg.
 
 ### P-11: a company's own stated cause for a bad number must be checked against an independent benchmark of the same metric before its magnitude is accepted, not just its plausibility (2026-09-26 weekly, from IMP's unit-sales diligence; journal/2026-09.md)
 IMP's H1 2026 report stated — repeated near-verbatim three times — that
