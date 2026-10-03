@@ -19,6 +19,8 @@ _(2026-09-19 weekly update: BET rallied two straight sessions on the Mureșan PM
 
 _(2026-09-26 weekly update: BET fell hard mid-week then bounced Sep 25 (+1.29%, closing 31,720.62, -13.28% off ATH) — the -15% tier (~2.03% away) is closer than every week before Sep 24's one-session ~0.6% approach, but the bounce pulled back from it. TLV and IARV remain fully capped; AROBS has no second tranche. IMP's diligence resolved unfavorably (see New candidates section) and SFG took a formal guidance cut — neither promoted. SNN's restart guidance holds at "mid-October," price leg clears but restart leg doesn't. No trades this week.)_
 
+_(2026-10-03 weekly update: S&P affirmed BBB−/negative Oct 2; BET 32,330.90 (−11.61% off ATH), 3.8% above the −15% tier. First **tier-conditioned bands** written (v1.8): ARS ≤16.50 base / ≤16.90 at T-10 / ≤17.40 at T-15; AROBS T2 ≤0.705 at T-15 only; SNN base ≤56 + restart, ≤58/≤60 at T-10/T-15; TTS ≤6.00, ≤6.25 at T-15. TLV/IARV capped. Cabrio fell to 9.48% by passive dilution (AROBS, BVB report 52/2026). SNN now 56.2/56.5 (price leg off, restart not before mid-Oct). No trades. Detail: journal/2026-10.md 2026-10-03.)_
+
 ## Triggered-watch — re-banded names
 
 ### ONE — One United Properties — ⛔ DEMOTED 2026-09-12: Investor Day gave no ANCPI resolution, kill criterion hit, price-only fallback WITHDRAWN

@@ -1,4 +1,4 @@
-# STRATEGY.md — v1.7
+# STRATEGY.md — v1.8
 
 Living strategy. Any run may amend it with a version bump, changelog entry, and
 journaled rationale (ENGINE.md §6). The constitution (ENGINE.md) always wins on
@@ -519,7 +519,18 @@ previews):**
 - **AQ, TRP, CFH, SFG** — priced far ahead of current earnings; TRP H1 (Aug 5)
   may create a capitulation entry — watch, don't anticipate.
 
-## 5. Week of Sep 28 plan (rewritten weekly — v1.6)
+## 5. Week of Oct 5 plan (rewritten weekly — v1.8)
+
+Authoritative text: journal/2026-10.md 2026-10-03 weekly §6. Summary: **no order is in range.** First tier-conditioned ladder (v1.7 rule 2):
+BET tiers off ATH 36,576.55 — T-10 ≤32,919 (active; BET 32,330.90 on Oct 2, −11.61%), T-15 ≤31,090 close (unspent), T-20 ≤29,261.
+- **ARS**: base ≤16.50 full; T-10 half-size (~1,250) ≤16.90; T-15 up to ~2,500 ≤17.40. Gate: read the Oct 1 art. 19 notice first (a director sale blocks). Now 17.50/17.60.
+- **AROBS T2**: only at T-15 close, ≤0.705, ≤~1,500 RON (T-20: ≤0.68, ~2,000). Now 0.728/0.732.
+- **SNN**: restart confirmed AND sustained ≥3 sessions, then ≤56 base / ≤58 T-10 / ≤60 T-15. Restart not before mid-Oct (both units offline); price 56.5 — no order possible this week.
+- **TTS**: ≤6.00; T-15 only ≤6.25 half-size. Now 6.78/6.82.
+- **TLV, IARV**: capped, no add at any tier. Others unchanged.
+- Calendar: Oct 5 presidential consultations + PM nomination (evening); IARV AGOA Oct 6–7 (read agenda); NBR ~Oct 7 and CPI ~Oct 12 are UNVERIFIED dates. S&P affirmed BBB−/neg Oct 2; EUR/RON record 5.3447 (Oct 2).
+
+## 5-prior. Week of Sep 28 plan (superseded — v1.8, preserved for record)
 
 Full theses and conditions live in WATCHLIST.md; the authoritative
 reasoning is journal/2026-09.md's 2026-09-26 weekly entry. Activity cap:
@@ -821,6 +832,8 @@ v1.0 levels were computed off a stale 36,503.
   through Q3) — do not reconsider on price drift alone.
 
 ## Changelog
+
+- **v1.8 — 2026-10-03 (sixth weekly run)** — Core unchanged; no trades. §5 rewritten with the first tier-conditioned ladder (ARS, AROBS T2, SNN, TTS); TLV/IARV explicitly "no band — capped". S&P affirmed BBB−/neg (A-new held); EUR/RON record flagged; SNN price leg flipped off on a sector-rotation rally (AND-condition retained). Rationale: journal/2026-10.md 2026-10-03.
 
 - **v1.7 — 2026-10-01 (second monthly retrospective)** — **Core reaffirmed; §6 and weekly-plan format amended narrowly.** September: portfolio −2.36% vs BET −7.85% (−4.77% vs −14.00% since inception) — mandate met in a falling tape, but credit is the reserve posture (≈28% average invested ⇒ expected ≈ −2.2%), not selection (TLV +, AROBS ≈, IARV −9.6pp vs BET). Amendments: tier-scaled dislocation deployment (half/third/remainder across −5/−10/−15%; thin high-beta names not first-tier); mandatory tier-conditioned bands per candidate; timing-assumption buffer. Rationale and full evidence: journal/2026-10.md 2026-10-01 monthly. No change to caps, valuation bands, tranche sizing, cost/tax mechanics, routine cadence. ENGINE.md untouched.
 
