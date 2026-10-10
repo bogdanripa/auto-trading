@@ -21,6 +21,8 @@ _(2026-09-26 weekly update: BET fell hard mid-week then bounced Sep 25 (+1.29%, 
 
 _(2026-10-03 weekly update: S&P affirmed BBB−/negative Oct 2; BET 32,330.90 (−11.61% off ATH), 3.8% above the −15% tier. First **tier-conditioned bands** written (v1.8): ARS ≤16.50 base / ≤16.90 at T-10 / ≤17.40 at T-15; AROBS T2 ≤0.705 at T-15 only; SNN base ≤56 + restart, ≤58/≤60 at T-10/T-15; TTS ≤6.00, ≤6.25 at T-15. TLV/IARV capped. Cabrio fell to 9.48% by passive dilution (AROBS, BVB report 52/2026). SNN now 56.2/56.5 (price leg off, restart not before mid-Oct). No trades. Detail: journal/2026-10.md 2026-10-03.)_
 
+_(2026-10-10 weekly update: BET 33,400.45 (−8.69% off ATH), no tier active; ladder bands from 2026-10-03 carried unchanged. ARS 17.05/17.40, SNN 56.7/57.8 (both units offline, restart leg unmet), TTS 7.26/7.34 (further above ≤6.00), AROBS ~0.746. TLV/IARV capped. ARS Q3 report Nov 6 verified on BVB calendar. No trades. Detail: journal/2026-10.md 2026-10-10.)_
+
 ## Triggered-watch — re-banded names
 
 ### ONE — One United Properties — ⛔ DEMOTED 2026-09-12: Investor Day gave no ANCPI resolution, kill criterion hit, price-only fallback WITHDRAWN

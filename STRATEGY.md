@@ -1,4 +1,4 @@
-# STRATEGY.md — v1.8
+# STRATEGY.md — v1.9
 
 Living strategy. Any run may amend it with a version bump, changelog entry, and
 journaled rationale (ENGINE.md §6). The constitution (ENGINE.md) always wins on
@@ -519,7 +519,17 @@ previews):**
 - **AQ, TRP, CFH, SFG** — priced far ahead of current earnings; TRP H1 (Aug 5)
   may create a capitulation entry — watch, don't anticipate.
 
-## 5. Week of Oct 5 plan (rewritten weekly — v1.8)
+## 5. Week of Oct 12 plan (rewritten weekly — v1.9)
+
+Authoritative text: journal/2026-10.md 2026-10-10 weekly §6. Summary: **no order is in range; no tier is active** (BET 33,400.45 on Oct 9, −8.69% off ATH, above T-10 ≈32,919). Tier-conditioned ladder carried unchanged from v1.8 — bands only widen when BET *closes* at a tier.
+- **ARS** (17.05/17.40): base ≤16.50 full; T-10 half ≤16.90; T-15 ≤17.40 up to ~2,500. Not in range.
+- **AROBS T2**: only at T-15 close, ≤0.705, ≤~1,500 RON. Now ~0.746.
+- **SNN**: restart confirmed AND sustained ≥3 sessions, then ≤56 / ≤58 (T-10) / ≤60 (T-15). Both units still offline (56.7/57.8). No order possible.
+- **TTS** (7.26/7.34, drifted *further* from band on no news found): ≤6.00; T-15 ≤6.25 half-size.
+- **TLV, IARV**: capped, no add at any tier.
+- Calendar: NBR held 6.50% Oct 8 (verified); Aug CPI 6.17%, Sep CPI ~Oct 12–14 (date unverified); A16/A20 check-by Oct 15; TLV buyback to Oct 19; Niculescu investiture vote reported Oct 19 (anonymous sources, unconfirmed); ARS Q3 Nov 6 (BVB calendar, verified).
+
+## 5-prior. Week of Oct 5 plan (superseded — v1.8, preserved for record)
 
 Authoritative text: journal/2026-10.md 2026-10-03 weekly §6. Summary: **no order is in range.** First tier-conditioned ladder (v1.7 rule 2):
 BET tiers off ATH 36,576.55 — T-10 ≤32,919 (active; BET 32,330.90 on Oct 2, −11.61%), T-15 ≤31,090 close (unspent), T-20 ≤29,261.
@@ -832,6 +842,8 @@ v1.0 levels were computed off a stale 36,503.
   through Q3) — do not reconsider on price drift alone.
 
 ## Changelog
+
+- **v1.9 — 2026-10-10 (seventh weekly run)** — Core unchanged; no trades. §5 rewritten for Oct 12–16: ladder carried unchanged (no tier active after BET rallied to 33,400); investiture vote now reported ~Oct 19; NBR held 6.50%. Rationale: journal/2026-10.md 2026-10-10.
 
 - **v1.8 — 2026-10-03 (sixth weekly run)** — Core unchanged; no trades. §5 rewritten with the first tier-conditioned ladder (ARS, AROBS T2, SNN, TTS); TLV/IARV explicitly "no band — capped". S&P affirmed BBB−/neg (A-new held); EUR/RON record flagged; SNN price leg flipped off on a sector-rotation rally (AND-condition retained). Rationale: journal/2026-10.md 2026-10-03.
 
