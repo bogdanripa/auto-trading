@@ -49,3 +49,7 @@ a strategist. Its default and most common outcome is **NO ACTION**.
   tranche.
 - If yesterday's close data or account state cannot be fetched, record what you
   can, place nothing, and say so in the briefing (ENGINE.md §2.12).
+- If the weekly plan carries a key date marked "unconfirmed" (e.g. a vote or
+  report date), spend one web search refreshing it before closing the run; a
+  date that slips by a day is how a plan's timing note goes stale (2026-10-17
+  weekly self-check).

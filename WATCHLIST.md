@@ -1802,3 +1802,5 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   ONE Investor Day is today (A12 check-by) — no pre-event agenda leak
   found; outcome to be read by a later run. Detail: journal/2026-09.md
   2026-09-11 entry.
+
+- **2026-10-17 (eighth weekly run)**: no band changes. Prices Oct 16: ARS 17.50 (T1 ≤16.50), SNN 59.30 (restart unconfirmed), TTS 7.36 (≤6.00), AROBS 0.736. Report dates re-verified on bvb.ro: ARS Nov 6, SNN Nov 20, TTS Nov 27. SNN SMR general meeting Oct 29–30 added to the pre-Plan-C read list. Detail: journal/2026-10.md 2026-10-17.
