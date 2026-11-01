@@ -1092,6 +1092,8 @@ and an explanation of the consolidated-vs-standalone profit gap, before
 any further step. Carried to the research agenda, not added to
 WATCHLIST.md on the current partial picture.
 
+_(2026-11-01 weekly update: Niculescu cabinet invested Oct 20 (280 votes); BET 35,129.76 (-3.96% off ATH), no tier active. ARS 18.35/18.60, TTS 6.84/7.10, SNN 59.9/60.6 (both reactors offline, restart ~Nov 15 at the earliest) — all above their bands; no order possible. IARV 27.90, Q3 Nov 13 kill gate. Cash-drag rule applied: no name cheap on its own merits, existing base bands stand, no re-banding. Detail: journal/2026-11.md.)_
+
 ## New candidates — screened 2026-09-19, first pass only, not added
 
 **BVB (Bursa de Valori București) — the exchange operator itself.** H1
