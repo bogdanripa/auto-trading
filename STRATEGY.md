@@ -1,4 +1,4 @@
-# STRATEGY.md — v1.9
+# STRATEGY.md — v1.10
 
 Living strategy. Any run may amend it with a version bump, changelog entry, and
 journaled rationale (ENGINE.md §6). The constitution (ENGINE.md) always wins on
@@ -842,6 +842,8 @@ v1.0 levels were computed off a stale 36,503.
   through Q3) — do not reconsider on price drift alone.
 
 ## Changelog
+
+- **v1.10 — 2026-11-01 (third monthly retrospective, run blind: broker dark since Oct 21)** — **Core reaffirmed; four narrow amendments.** October to Oct 19: portfolio +1.46% vs BET +12.91% (−11.45pp; since inception −3.38% vs −2.89%, lead of +9.2pp on Sep 30 gone). Amendments: (1) cash-drag budget — in the ladder-off regime (BET <5% off ATH) with <40% invested, the weekly must write valuation-only base entries for the 2–3 best-valued names; (2) broker-outage protocol — alert owner after 2nd consecutive failed contact, continue read-only research, journal as unverified; (3) reconciliation-first resume; (4) IARV Q3 gate (Nov 13). ENGINE.md §2.12 clarification proposed (cooling-off). Rationale: journal/2026-11.md 2026-11-01.
 
 - **v1.9 — 2026-10-10 (seventh weekly run)** — Core unchanged; no trades. §5 rewritten for Oct 12–16: ladder carried unchanged (no tier active after BET rallied to 33,400); investiture vote now reported ~Oct 19; NBR held 6.50%. Rationale: journal/2026-10.md 2026-10-10.
 

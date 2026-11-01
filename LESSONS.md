@@ -261,3 +261,6 @@ first pass was right just because it came first.
 ## Assumption-grading notes
 
 _Grades accumulate in journal entries; patterns worth keeping get promoted here._
+
+- **P-13 (2026-11-01, journal/2026-11.md)** — A dependency the engine cannot repair (BT-Trade OAuth) needs an alert path that does not depend on the engine succeeding. Ten aborted runs (Oct 21–31) journaled the failure and notified no one; the owner finds out only by reading git. Rule (STRATEGY v1.10): alert after the 2nd consecutive failed contact, continue read-only research.
+- **M-6 (2026-11-01, journal/2026-11.md)** — A cash-heavy book that gains ~9pp relative in a −14% month loses more than that in a +13% month (Oct 1–19: portfolio +1.46% vs BET +12.91%). The reserve is a directional bet, not an edge; judge it in both tails, and do not call the mandate "met" on cash weight alone.
