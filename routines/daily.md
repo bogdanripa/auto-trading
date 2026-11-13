@@ -59,3 +59,5 @@ a strategist. Its default and most common outcome is **NO ACTION**.
 On ANY error (MCP/tool failure, aborted run, failed push, unexplained account state), in addition to Telegram send a WhatsApp alert: `node scripts/whatsapp_alert.mjs "<one-line what failed + what was/was not done>"`. If it exits 2/3, note it in the journal and fall back to PushNotification. Never blocks the run.
 
 **Update 2026-11-13**: the owner has connected a WhatsApp MCP to this schedule. Prefer it: `ToolSearch` for "whatsapp" at run start and use its send-message tool (to the owner) for error alerts; use scripts/whatsapp_alert.mjs only if no WhatsApp MCP tools appear.
+
+Note: the WhatsApp MCP is named **gepetel** — `ToolSearch` for "gepetel" (and "whatsapp") to find its tools.
