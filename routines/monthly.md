@@ -48,3 +48,7 @@ run where the engine is allowed to change its mind about how it operates.
   weekly plan. Separating judgment-of-system from in-system action keeps both honest.
 - Resist strategy churn: a strategy needs time to be judged. Amend on evidence,
   reaffirm on noise. State explicitly which one you are doing and why.
+
+## Error alerts (added 2026-11-13, owner request)
+
+On ANY error (MCP/tool failure, aborted run, failed push, unexplained account state), in addition to Telegram send a WhatsApp alert: `node scripts/whatsapp_alert.mjs "<one-line what failed + what was/was not done>"`. If it exits 2/3, note it in the journal and fall back to PushNotification. Never blocks the run.

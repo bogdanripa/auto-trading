@@ -53,3 +53,7 @@ a strategist. Its default and most common outcome is **NO ACTION**.
   report date), spend one web search refreshing it before closing the run; a
   date that slips by a day is how a plan's timing note goes stale (2026-10-17
   weekly self-check).
+
+## Error alerts (added 2026-11-13, owner request)
+
+On ANY error (MCP/tool failure, aborted run, failed push, unexplained account state), in addition to Telegram send a WhatsApp alert: `node scripts/whatsapp_alert.mjs "<one-line what failed + what was/was not done>"`. If it exits 2/3, note it in the journal and fall back to PushNotification. Never blocks the run.

@@ -71,3 +71,7 @@ Take your time — this run is allowed to be long and thorough. Ultrathink.
 - Do not place orders on Sunday (market closed, quotes stale) unless placing a
   GTC deliberately below market with written rationale; default is to let Monday's
   daily run execute against live quotes.
+
+## Error alerts (added 2026-11-13, owner request)
+
+On ANY error (MCP/tool failure, aborted run, failed push, unexplained account state), in addition to Telegram send a WhatsApp alert: `node scripts/whatsapp_alert.mjs "<one-line what failed + what was/was not done>"`. If it exits 2/3, note it in the journal and fall back to PushNotification. Never blocks the run.
