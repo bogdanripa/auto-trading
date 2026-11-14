@@ -67,6 +67,9 @@ Interpretation (agreed at inception, 2026-08-02):
 12. **Failure posture**: if any tool fails or data is unavailable, do less, not
     more. An engine that cannot verify state places no orders that run. Log the
     failure, alert via Telegram, exit cleanly. Never retry into the dark.
+    A failed broker contact for 2 consecutive runs is an alert-worthy event:
+    the run must notify the owner (Telegram, WhatsApp or PushNotification per
+    the routine playbooks) and may continue read-only research.
 
 ## 3. Sources of edge (why 2x BET is even plausible)
 
@@ -179,3 +182,4 @@ the paper trail:
 ## 8. Amendment log
 
 - 2026-08-02 — v1.0 — Initial constitution, written at engine inception.
+- 2026-11-14 — v1.1 — §2.12: explicit owner alert after 2 consecutive failed broker contacts, plus read-only research allowed. Proposed in the 2026-11-01 monthly (cooling-off 13 days, no owner veto found); applied by the 2026-11-14 weekly. Clarification, not a loosening. Rationale: 10 silent aborted runs Oct 21–31 (journal/2026-11.md).

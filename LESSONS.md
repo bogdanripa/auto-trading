@@ -104,7 +104,16 @@ to add) exactly as often as it can harden the original concern.**
 ### M-5: thin, high-beta names lead BVB drawdowns — and a "market-wide, not idiosyncratic" check does not tell you how far it goes (2026-10-01 monthly; journal/2026-10.md)
 IARV: −10.2% intraday on Aug 31, then −17.4% in September (35.00→28.90) against BET −7.85%, with no company news (kill criteria untouched). M-3's check proved the Aug 31 move was market-wide — correct — but a market-wide diagnosis says nothing about how many more legs follow: BET fell a further −7.85% after that buy. **Treat thin, high-beta names as second-tier buys in a multi-leg selloff**; expect ~2x index moves in both directions.
 
+### M-7: restarts after long outages are fragile, and official timelines err in both directions (2026-11-14 weekly; journal/2026-11.md)
+Cernavodă: the ministry said "mid-October" (Sep 23) → "~Nov 15" (Oct 27). U1 actually resynced Nov 6 (early), then tripped Nov 9 on a conventional-island fault, and its reconnection slipped twice (Nov 12 → 13). A restart is not "sustained" until a filing confirms several sessions of operation (A9, A30, A39).
+
 ## Process lessons
+
+### P-14: "no filing" is not "no news" — scan Romanian press by company name, and fetch bvb.ro directly for filings due (2026-11-14 weekly; journal/2026-11.md)
+IARV fell ~17% in October while ~20 runs journaled "no company news". The bvb.ro feed was empty, but IAR's GM had told the press on Oct 12 that workers feared "no real work next year" because the SAFE H225Ms would be built abroad (bizbrasov.ro/realitatea). Separately, the ARS Q3 sat on bvb.ro for 7 days while dailies reported "not found" from web search (Nov 6–12), and SNN's U1 restart was missed for 3 runs (Nov 9–10). Rule: every daily runs one Romanian-language search **by company name** for each held name, and fetches the issuer's bvb.ro page directly for any name with a filing due within ±2 trading days. A position falling >10% on "no news" makes the press search mandatory that same run.
+
+### P-15: a company's forward-dated statement is a plan, not an event — grade only on a confirming filing (2026-11-14 weekly; journal/2026-11.md)
+The Nov 13 daily graded A39 ("SNN U1 stays online") as held, because SNN said both units "will operate at nominal power from Nov 13". U1 had in fact tripped on Nov 9 and its reconnection had slipped twice. Assumptions about physical events are graded only against a filing that reports the event as done.
 
 ### P-12: a dislocation rule that "fires once at full size" buys the first leg of a multi-leg drop; scale in tiers and pre-write tier-conditioned bands (2026-10-01 monthly; journal/2026-10.md)
 The −5% tier fired on Aug 31 and the full slice went in (TLV+IARV); the −10% (Sep 16) and −15% (Sep 28) tiers fired later and the engine deployed nothing, because every candidate band was valuation-anchored and none sat in range — it could not use the one event it had spent a month preparing for, after having spent the slice on the first leg. **Fix (STRATEGY v1.7): ladder the deployment across tiers and require a tier-conditioned band per candidate in every weekly plan.** One sample: IARV's loss may be pure beta; the ladder costs little if the market rebounds in one leg.

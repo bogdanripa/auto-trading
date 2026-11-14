@@ -1,4 +1,4 @@
-# STRATEGY.md — v1.10
+# STRATEGY.md — v1.11
 
 Living strategy. Any run may amend it with a version bump, changelog entry, and
 journaled rationale (ENGINE.md §6). The constitution (ENGINE.md) always wins on
@@ -519,7 +519,18 @@ previews):**
 - **AQ, TRP, CFH, SFG** — priced far ahead of current earnings; TRP H1 (Aug 5)
   may create a capitulation entry — watch, don't anticipate.
 
-## 5. Week of Oct 12 plan (rewritten weekly — v1.9)
+## 5. Week of Nov 16 plan (rewritten weekly — v1.11)
+
+Authoritative text: journal/2026-11.md 2026-11-14 weekly §6. Summary: BET 34,516.49 (Nov 13, −5.63% off ATH); no tier active.
+- **TRIP (NEW)**: T1 ~2,500 RON at ≤min(1.40, last+2%), only after the Nov 16 Q3 is read on bvb.ro and shows 9M NP up YoY + FY26 NP guidance 33.2m reaffirmed + no debt-funded/>12x/related-party deal. No chase above 1.40.
+- **ARS**: ≤16.50 base / ≤16.90 T-10 / ≤17.40 T-15 (re-derived with Q3, unchanged). Now 18.55/19.15.
+- **AROBS T2**: T-15 only ≤0.705. Q3 Nov 19.
+- **SNN**: both units online *by filing* ≥3 sessions (U1 tripped Nov 9) AND ≤56/58/60. Now 60.5/61.1.
+- **TTS**: ≤6.00; T-15 ≤6.25. Q3 Nov 27.
+- **TLV, IARV**: no add. IARV FV cut to 30–50 with new dated kill criteria (WATCHLIST).
+- **STOP**: junk downgrade; EUR/RON fixing >5.45 or +1.5% in 5 sessions (redefined v1.11; was ">5.30", breached unnoticed since early Oct).
+
+## 5-prior. Week of Oct 12 plan (superseded — v1.9, preserved for record)
 
 Authoritative text: journal/2026-10.md 2026-10-10 weekly §6. Summary: **no order is in range; no tier is active** (BET 33,400.45 on Oct 9, −8.69% off ATH, above T-10 ≈32,919). Tier-conditioned ladder carried unchanged from v1.8 — bands only widen when BET *closes* at a tier.
 - **ARS** (17.05/17.40): base ≤16.50 full; T-10 half ≤16.90; T-15 ≤17.40 up to ~2,500. Not in range.
@@ -818,7 +829,7 @@ v1.0 levels were computed off a stale 36,503.
 - NBR next meeting **confirmed Oct 8, 2026** — rate held 6.50% since the
   Jul 8 meeting; NBR expects a "substantial downward" inflation
   correction in Q3.
-- EUR/RON (5.2557 on Sep 11; >5.30 = stress) — stable, no alarm.
+- EUR/RON (5.2557 on Sep 11; 5.3498 on Nov 13). **Stress redefined v1.11: fixing >5.45, or a >1.5% rise within 5 sessions** (the old ">5.30" line was breached by a slow managed drift in early October and never honoured; a threshold the drift makes permanent is not a stress signal).
 - **Brent crude**: spiked to ~$106–108 on US–Iran strikes (peaking ~Sep
   10), cooling to ~$104–105 by Sep 11–12 on an emerging Iran–GCC
   de-escalation narrative. No confirmed Romanian energy-name (SNP/SNG/SNN)
@@ -842,6 +853,8 @@ v1.0 levels were computed off a stale 36,503.
   through Q3) — do not reconsider on price drift alone.
 
 ## Changelog
+
+- **v1.11 — 2026-11-14 (tenth weekly run)** — Core unchanged; no orders. (1) §5 rewritten for Nov 16–20, with **TRIP (Christian Tour) added as the first new armed candidate since AROBS**: 8.8x FY26 guided NP, net cash post-IPO, gated on its Nov 16 Q3. (2) EUR/RON stress threshold redefined (>5.45 or +1.5%/5 sessions). (3) SNN restart leg tightened to *filing-confirmed* both-unit operation after the U1 Nov 9 trip. (4) IARV fair value cut 48–60 → 30–50 with dated kill criteria, after the GM's Oct 12 2027-workload warning (missed by the engine for a month). Rationale: journal/2026-11.md 2026-11-14.
 
 - **v1.10 — 2026-11-01 (third monthly retrospective, run blind: broker dark since Oct 21)** — **Core reaffirmed; four narrow amendments.** October to Oct 19: portfolio +1.46% vs BET +12.91% (−11.45pp; since inception −3.38% vs −2.89%, lead of +9.2pp on Sep 30 gone). Amendments: (1) cash-drag budget — in the ladder-off regime (BET <5% off ATH) with <40% invested, the weekly must write valuation-only base entries for the 2–3 best-valued names; (2) broker-outage protocol — alert owner after 2nd consecutive failed contact, continue read-only research, journal as unverified; (3) reconciliation-first resume; (4) IARV Q3 gate (Nov 13). ENGINE.md §2.12 clarification proposed (cooling-off). Rationale: journal/2026-11.md 2026-11-01.
 

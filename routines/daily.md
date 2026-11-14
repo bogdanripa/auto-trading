@@ -24,6 +24,13 @@ a strategist. Its default and most common outcome is **NO ACTION**.
    Bursa.ro), one glance at global tone (DAX futures direction, Brent, EUR/RON).
    You are looking for *material* news about names you own or plan to act on —
    not for new ideas. New ideas go to a watchlist note for the weekly run.
+   **Mandatory (added 2026-11-14, LESSONS P-14):** (a) one Romanian-language web
+   search per held name **by company name** ("IAR Brașov", "Banca Transilvania",
+   "AROBS"), not the ticker; (b) for any held/planned name with a filing due
+   within ±2 trading days, fetch the issuer's bvb.ro page
+   (`FinancialInstrumentsDetails.aspx?s=TICKER`) directly — search indexes lag
+   by days; (c) grade physical-event assumptions only on a filing that reports
+   the event as done (P-15).
 6. **Planned actions**: if STRATEGY.md or the last weekly entry defines a trigger
    whose conditions you can verify *now* (live quote via `get_instrument`, spread
    sane, liquidity cap respected) → execute per ENGINE.md §4 (thesis already

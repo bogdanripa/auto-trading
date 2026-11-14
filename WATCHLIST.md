@@ -23,6 +23,8 @@ _(2026-10-03 weekly update: S&P affirmed BBB−/negative Oct 2; BET 32,330.90 (�
 
 _(2026-10-10 weekly update: BET 33,400.45 (−8.69% off ATH), no tier active; ladder bands from 2026-10-03 carried unchanged. ARS 17.05/17.40, SNN 56.7/57.8 (both units offline, restart leg unmet), TTS 7.26/7.34 (further above ≤6.00), AROBS ~0.746. TLV/IARV capped. ARS Q3 report Nov 6 verified on BVB calendar. No trades. Detail: journal/2026-10.md 2026-10-10.)_
 
+_(2026-11-14 weekly update: BET 34,516.49 (−5.63% off ATH), no tier active. **TRIP (Christian Tour) added: armed T1 behind its Nov 16 Q3** (see the TRIP section under "New candidate — added 2026-11-14"). IARV Q3 passed the kill gate (Q3 NP +26% YoY) but the thesis is impaired: H225M tranche 1 is built abroad and the GM warned Oct 12 about 2027 workload. FV cut to 30–50, new dated kill criteria (see the IARV section). SNN U1 tripped Nov 9, so the restart leg now requires filing-confirmed both-unit operation. ARS band re-derived with Q3, unchanged ≤16.50. Detail: journal/2026-11.md 2026-11-14.)_
+
 ## Triggered-watch — re-banded names
 
 ### ONE — One United Properties — ⛔ DEMOTED 2026-09-12: Investor Day gave no ANCPI resolution, kill criterion hit, price-only fallback WITHDRAWN
@@ -682,6 +684,8 @@ _(2026-10-10 weekly update: BET 33,400.45 (−8.69% off ATH), no tier active; la
 - Expected holding: 1–3+ years.
 
 ### IARV — IAR Brașov (satellite, defense) — HELD 134 sh, T2 filled in full (confirmed 2026-09-01)
+
+> **2026-11-14 re-underwrite (supersedes the FV band and adds kills below):** Q3 2026 (primary, bvb.ro Nov 13): 9M NP 48.30m (+132%), Q3-only ≈16.07m vs ≈12.71m (+26%); billed turnover flat (312.0m vs 310.9m), with an 82.7m WIP/finished-goods build. **Thesis IMPAIRED:** SAFE H225M tranche 1 (12 units, ~€757m via DGA, confirmed Oct 7) is built by Airbus abroad with IAR doing customization only; the production-participation contract is "being negotiated" (GM Rasaliu, Oct 12, bizbrasov.ro/realitatea, secondary), and he did not deny workers' fears of "no real work next year". **FV band 30–50** (no-follow-on 24–30; follow-on signed 46–50). **New kills:** (a) a collective layoff or strike announced → exit at the next run; (b) no IAR H225M production/assembly contract signed by the FY26 preliminary results (~late Feb 2027) AND the 2027 budget/KPIs show revenue down → exit. No averaging down, at any price. Governance: the Nov 16 AGOA (KPIs) and Dec 17 AGEA (GEO 109 board-independence articles) are benign (primary).
 - Price 38.90/39.00 (2026-08-24) | P/E ~15 | div 1.342 gross paid 2026-07-16
 - Thesis: near-monopoly helicopter MRO for a state whose defense budget is
   SAFE-funded (€16.68bn, signed 2026-05-21, ~50% local-content pledge); Q1 2026
@@ -800,6 +804,17 @@ _(2026-10-10 weekly update: BET 33,400.45 (−8.69% off ATH), no tier active; la
   General, Vaiso appointed CFO under OUG 109/2011 — reads routine, not a
   governance event.
 - Expected holding: 1–3 years (theme duration), reviewed each earnings.
+
+## New candidate — added 2026-11-14
+
+### TRIP — Christian '76 Tour (satellite, consumer/travel) — ARMED T1, gated on the Nov 16 Q3
+- **Thesis (≤5 lines):** Romania's largest tour operator (63 owned + 1,200 partner agencies, online), listed Jun 2026 (Main/Standard). It trades **8.8x FY26 guided NP (33.2m)** at a ~292m RON cap with ~110m surplus IPO cash and no bank debt, ~27% below the IPO price, while bookings grow (H1 booking sales +7.7%, Black Friday +41%). Edges: small-cap access, patience vs post-IPO seller overhang, reading filings. Full thesis: journal/2026-11.md 2026-11-14 §5.
+- **Fair value 1.55–1.85** (10–12x guided NP). Holding 1–3 years.
+- **Entry:** T1 ~2,500 RON at ≤min(1.40, last+2%) after the Q3 is read on bvb.ro and shows 9M NP up YoY, the FY guidance reaffirmed (not silent), and no debt-funded/>12x EBITDA/related-party acquisition. T-10: ≤1.45. **T2 not armed** (needs the lock-up expiry date + one more quarter). Full position ≤5,000 RON at cost.
+- **Invalidation / kills:** FY26 NP <28m or a guidance cut; value-destroying or related-party M&A; enlarged related-party flows; unexplained founder selling (CPM Cambridge Holding 61.95%).
+- **Liquidity:** ~63k RON/day median (secondary; verify the book live). 2,500 RON ≈ 4%, passes.
+- **Sources (primary):** H1 report TRIP_20260824182135 (bvb.ro); current report 17/2026 (Nov 10); 215,998,109 shares.
+- **Also screened 2026-11-14, not added:** COTE (fair-priced yield ~6–7%, 9M NP −31% on the Petrotel shutdown, no edge beyond yield); BRK (trading-gain earnings). Rejected: WINE, BIO (delisting), ATB, SOCP, OIL, DIGI, PTR, ELMA, CMF, IPRU, PREB, TBM, PPL, CRC, VNC, SNC, AST, CMVX, DN, SNO.
 
 ## New candidate — added 2026-09-12
 

@@ -231,13 +231,15 @@ math remains short (~170/233), PSD and AUR both refusing. No kill
 criterion approached on any held name. Detail: journal/2026-09.md
 2026-09-28 entry.
 
+**Weekly review 2026-11-14** (tenth weekly run): all three positions **HOLD, no changes**. Broker-verified: AROBS 3,850 sh, IARV 134 sh, TLV 224 sh, cash 29,738.02, no open orders. Portfolio (Nov 13 closes) 45,107.72 RON (cash 65.9%): −3.94% since inception vs BET −4.53% (+0.59pp). IARV Q3 passed its kill gate (A31 held), but the thesis is impaired; FV cut to 30–50 with new dated kill criteria (below). AROBS buyback re-verified live (~1.76m RON Oct 5–Nov 6 at ~0.750). Detail: journal/2026-11.md 2026-11-14.
+
 ## IARV — IAR SA Brasov
 - Opened: 2026-08-04 (fill; order placed 2026-08-03) (journal: journal/2026-08.md entries of 2026-08-03 and 2026-08-04)
 - Tranches: T1 64 sh @ avg 38.8161 (incl. fees). **T2 filled in full — completed 2026-08-31 close (confirmed 2026-09-01 daily run)**: the 52 sh remainder of the day order (limit 35.30) filled by end of day Aug 31 (blocked cash matched exactly). Combined with the 18 sh filled intraday, the full 70 sh T2 tranche is done. Broker-verified position as of 2026-09-01 pre-open: **134 sh @ avg cost 37.0078, total cost basis 4,959.04 RON** — 10.8% of portfolio at cost, just under the ≤5,500 satellite cap. Journal: journal/2026-08.md 2026-08-31 (intraday) entry; journal/2026-09.md 2026-09-01 entry.
 - 2026-08-24 review: **HOLD.** Thesis intact and progressing — H225M 12-unit contract signed 2026-07-17 at €757m (correction: €852m was the SAFE allocation ceiling, not the price); the 30-unit follow-on carrying the local-production thesis remains unsigned and conditional. Mgmt reconfirmed 2026-08-19 (routine).
 - 2026-08-28: H1 2026 condition MET (net profit 3.98x YoY) — T2 armed, order blocked that day by a BT Trade outage; executed (partially) 2026-08-31 once broker access returned, per a market-wide dislocation (BET -7% off ATH) that also brought the price well under the ≤41.00 band. See the 2026-08-28 and 2026-08-31 journal entries.
 - Thesis (one line): near-monopoly helicopter MRO for a SAFE-funded (€16.68bn) defense demand step-up, 15x for doubled earnings power. Full thesis: WATCHLIST.md.
-- Fair-value band: 48–60 RON.  Kill criteria: H1 profit flat-or-down YoY; SAFE awards bypassing IAR; governance action hostile to minorities.
+- Fair-value band: ~~48–60~~ **30–50 RON (cut 2026-11-14)**.  Kill criteria: profit flat-or-down YoY at a print; SAFE awards bypassing IAR; governance action hostile to minorities; **(added 2026-11-14)** a collective layoff/strike announced → exit next run; no IAR H225M production contract by the FY26 prelims (~Feb 2027) AND the 2027 budget/KPIs show revenue down → exit.
 - Expected holding: 1–3 years (theme duration), reviewed each earnings.
 
 ## TLV — Banca Transilvania
