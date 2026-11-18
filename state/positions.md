@@ -276,3 +276,5 @@ criterion approached on any held name. Detail: journal/2026-09.md
 **2026-11-16 (daily run)**: No trades. Broker-verified: AROBS 3,850 sh, IARV 134 sh, TLV 224 sh, cash 29,738.02, no open orders. Portfolio (Nov 13 closes) 45,107.72 RON: −3.94% since inception vs BET −4.53%. TRIP Q3 read: 9M NP +13% but FY guidance not restated → Plan T carried to the Nov 21 weekly. Detail: journal/2026-11.md 2026-11-16.
 
 **2026-11-17 (daily run)**: No trades. Broker-verified: AROBS 3,850 sh, IARV 134 sh, TLV 224 sh, cash 29,738.02, no open orders. Portfolio (Nov 16 closes) 45,270.02 RON: −3.59% since inception vs BET −3.90%. IARV OGMS postponed KPI approval. TRIP +5.2% to 1.418 (above the Plan T cap of 1.40). Detail: journal/2026-11.md 2026-11-17.
+
+**2026-11-18 (daily run)**: No trades. Broker-verified: AROBS 3,850 sh, IARV 134 sh, TLV 224 sh, Sold numerar 29,738.02 (Sold blocat 668.44 with no orders; probably a quarterly fee, per the Aug 17–25 precedent, A54), no open orders. Portfolio (Nov 17 closes) 45,139.24 RON: −3.87% since inception vs BET −4.17%. Detail: journal/2026-11.md 2026-11-18.
