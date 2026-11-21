@@ -109,6 +109,9 @@ Cernavodă: the ministry said "mid-October" (Sep 23) → "~Nov 15" (Oct 27). U1 
 
 ## Process lessons
 
+### P-16: before naming a "de-risking" print, check which quarter actually carries the year's profit (2026-11-21 weekly; journal/2026-11.md)
+The Nov 14 weekly gated TRIP's entry on its Q3 as "the real test of the 33.2m guidance". TRIP's own Q3 report says Q4 2025 produced 72% of FY2025 net profit. The guidance-silence rule (P-8) correctly stopped the buy, but the gate was aimed at a quarter that could not confirm or refute the budget. Rule: for any seasonal business, write down the quarterly profit split (from the issuer's prior-year quarterlies) **before** choosing the gate event. The gate is the print that covers most of the year's earnings, or the price must already pay for a miss.
+
 ### P-14: "no filing" is not "no news" — scan Romanian press by company name, and fetch bvb.ro directly for filings due (2026-11-14 weekly; journal/2026-11.md)
 IARV fell ~17% in October while ~20 runs journaled "no company news". The bvb.ro feed was empty, but IAR's GM had told the press on Oct 12 that workers feared "no real work next year" because the SAFE H225Ms would be built abroad (bizbrasov.ro/realitatea). Separately, the ARS Q3 sat on bvb.ro for 7 days while dailies reported "not found" from web search (Nov 6–12), and SNN's U1 restart was missed for 3 runs (Nov 9–10). Rule: every daily runs one Romanian-language search **by company name** for each held name, and fetches the issuer's bvb.ro page directly for any name with a filing due within ±2 trading days. A position falling >10% on "no news" makes the press search mandatory that same run.
 

@@ -25,6 +25,8 @@ _(2026-10-10 weekly update: BET 33,400.45 (−8.69% off ATH), no tier active; la
 
 _(2026-11-14 weekly update: BET 34,516.49 (−5.63% off ATH), no tier active. **TRIP (Christian Tour) added: armed T1 behind its Nov 16 Q3** (see the TRIP section under "New candidate — added 2026-11-14"). IARV Q3 passed the kill gate (Q3 NP +26% YoY) but the thesis is impaired: H225M tranche 1 is built abroad and the GM warned Oct 12 about 2027 workload. FV cut to 30–50, new dated kill criteria (see the IARV section). SNN U1 tripped Nov 9, so the restart leg now requires filing-confirmed both-unit operation. ARS band re-derived with Q3, unchanged ≤16.50. Detail: journal/2026-11.md 2026-11-14.)_
 
+_(2026-11-21 weekly update: BET 34,101.01 (−6.77% off ATH), no tier active. **AROBS T2 armed at ≤0.76 (~2,500 RON)**, re-banded on the Q3 print (FV 0.85–1.00). **TRIP's Q3-gated Plan T is dropped** (guidance silent through the call) and replaced by a valuation-only T1 ≤1.30. SNN Q3: 9M NP −27%, Q3 ≈ 0, the FY26 dividend reportedly cut to ~0.79/sh (secondary, gate A63); the restart-evidence rule is widened. Detail: journal/2026-11.md 2026-11-21.)_
+
 ## Triggered-watch — re-banded names
 
 ### ONE — One United Properties — ⛔ DEMOTED 2026-09-12: Investor Day gave no ANCPI resolution, kill criterion hit, price-only fallback WITHDRAWN
@@ -159,6 +161,7 @@ _(2026-11-14 weekly update: BET 34,516.49 (−5.63% off ATH), no tier active. **
   this grading, not reversing it outright.
 
 ### SNN — Nuclearelectrica — ⚠ ACTIVE BUY PLAN WITHDRAWN 2026-08-24, RE-BANDED
+- **2026-11-21 update (Q3, primary: publication report, bvb.ro 20.11):** 9M standalone NP 1,182.2m (−27.3%) vs H1 1,184m, so **Q3 ≈ −2m** (both units shut by the low Danube, U1 from Jul 28, U2 from Aug 13, through Sep 30); 9M production −31.1%. The 2026 budget was amended by OGMS 8/29.10. Secondary (agent, unverified): FY NP target 1.18bn and a 239.7m dividend allocation (~0.79/sh vs 3.91). U1 resynchronized Nov 14 per Transelectrica-sourced press; SNN files no reconnection reports. **Plan:** band ≤56/58/60 unchanged. Restart leg: both units running ≥3 sessions on SNN filing, Transelectrica data or an SNN periodic report. **New gate:** read the amended-budget dividend line from a primary source before any fill (A63). FV 55–70 kept; the 2027 yield floor is gone.
 - Price 65.10/65.30 (2026-08-24) | H1 2026 individual net profit 1,184m RON
   (+36.6% YoY) but Q2 alone ~296m (−16% YoY)
 - **Status change (2026-08-24 weekly run)**: the tranche-1 order paused since
@@ -807,7 +810,8 @@ _(2026-11-14 weekly update: BET 34,516.49 (−5.63% off ATH), no tier active. **
 
 ## New candidate — added 2026-11-14
 
-### TRIP — Christian '76 Tour (satellite, consumer/travel) — ARMED T1, gated on the Nov 16 Q3
+### TRIP — Christian '76 Tour (satellite, consumer/travel) — Plan T DROPPED 2026-11-21; VALUATION-ONLY T1 ≤1.30 ARMED
+- **2026-11-21 re-underwrite:** the Q3 gate failed on guidance (silent in the report, CR 18, CR 19 and press; A45 broke), so the gated T1 ≤1.40 is withdrawn per its own pre-commitment. The company says **Q4-25 produced 72% of FY25 NP**, so the FY prelim (late Feb 2027), not Q3, tests the 33.2m budget (LESSONS P-16). **New entry:** T1 ~2,000 RON at **≤1.30** (≈10x the 28m kill-line NP). **Event leg:** an explicit FY reaffirmation, or a kill-(2)-compliant first acquisition → T1 ~2,500 at ≤min(1.45, last+2%). Only one T1 can fire. **Lock-up: 360 days from settlement (~Jun 4 2026) → ~May 30 2027** (prospectus pp. 41, 169–170, CPM Cambridge + Oxford Investment Alliance). T2 not before the FY prelim. TradeVille TP 2.17 (pre-results, secondary). Price 1.412/1.428 (Nov 20). Kill criteria unchanged.
 - **Thesis (≤5 lines):** Romania's largest tour operator (63 owned + 1,200 partner agencies, online), listed Jun 2026 (Main/Standard). It trades **8.8x FY26 guided NP (33.2m)** at a ~292m RON cap with ~110m surplus IPO cash and no bank debt, ~27% below the IPO price, while bookings grow (H1 booking sales +7.7%, Black Friday +41%). Edges: small-cap access, patience vs post-IPO seller overhang, reading filings. Full thesis: journal/2026-11.md 2026-11-14 §5.
 - **Fair value 1.55–1.85** (10–12x guided NP). Holding 1–3 years.
 - **Entry:** T1 ~2,500 RON at ≤min(1.40, last+2%) after the Q3 is read on bvb.ro and shows 9M NP up YoY, the FY guidance reaffirmed (not silent), and no debt-funded/>12x EBITDA/related-party acquisition. T-10: ≤1.45. **T2 not armed** (needs the lock-up expiry date + one more quarter). Full position ≤5,000 RON at cost.
@@ -818,7 +822,8 @@ _(2026-11-14 weekly update: BET 34,516.49 (−5.63% off ATH), no tier active. **
 
 ## New candidate — added 2026-09-12
 
-### AROBS — AROBS Transilvania Software (satellite) — T1 FILLED 2026-09-14/confirmed 2026-09-15
+### AROBS — AROBS Transilvania Software (satellite) — T1 FILLED 2026-09-14/confirmed 2026-09-15; T2 ARMED ≤0.76 (2026-11-21)
+- **2026-11-21 re-underwrite (Q3, primary PDF):** adjusted NP ex-financial result 9M 28.2m (+40%; Q3 11.4m, +30%); FY NP budget (35m) already beaten on headline; like-for-like organic revenue ~+20%; net cash incl. leases 162.2m; EBITDA margin 14.8% in Q3 (from 15.5%, mix). Mcap 834m → EV ~672m ≈ 17x FY26E adjusted NP (~39m), ~7.5x EV/EBITDA. **FV band 0.85–1.00** (was "entry ≤0.78, fair"). **T2: ~2,500 RON at ≤min(0.76, ask)**, day order, Nov 23+; suspend if the Nov 24 call cuts targets or guides margin <13%. T-10 ≤0.78. Full position ≤5,500 RON at cost. **Added kill:** EBITDA margin <13% for two consecutive quarters. The ≤0.705 T-15-only leg is superseded. Full thesis: journal/2026-11.md 2026-11-21 §5a.
 - **2026-09-15 update: T1 fill broker-confirmed.** `get_holdings` shows
   3,850 sh @ avg cost 0.7623 (incl. fees), investment 2,934.78 RON — the
   full day order filled (better than the 0.77 limit; no partial fill,
@@ -1821,3 +1826,4 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
   2026-09-11 entry.
 
 - **2026-10-17 (eighth weekly run)**: no band changes. Prices Oct 16: ARS 17.50 (T1 ≤16.50), SNN 59.30 (restart unconfirmed), TTS 7.36 (≤6.00), AROBS 0.736. Report dates re-verified on bvb.ro: ARS Nov 6, SNN Nov 20, TTS Nov 27. SNN SMR general meeting Oct 29–30 added to the pre-Plan-C read list. Detail: journal/2026-10.md 2026-10-17.
+- **2026-11-21 (eleventh weekly run)**: AROBS T2 armed ≤0.76 (re-banded on Q3; FV 0.85–1.00). TRIP Plan T dropped → valuation-only ≤1.30 (+ event leg), lock-up ~May 30 2027. SNN Q3 read (9M NP −27%, Q3 ≈ 0); restart-evidence rule widened, dividend-line gate added. ARS/TTS bands unchanged (18.4/18.7; 7.42/7.50). No trades. Detail: journal/2026-11.md 2026-11-21.

@@ -1,4 +1,4 @@
-# STRATEGY.md — v1.11
+# STRATEGY.md — v1.12
 
 Living strategy. Any run may amend it with a version bump, changelog entry, and
 journaled rationale (ENGINE.md §6). The constitution (ENGINE.md) always wins on
@@ -519,16 +519,20 @@ previews):**
 - **AQ, TRP, CFH, SFG** — priced far ahead of current earnings; TRP H1 (Aug 5)
   may create a capitulation entry — watch, don't anticipate.
 
-## 5. Week of Nov 16 plan (rewritten weekly — v1.11)
+## 5. Week of Nov 23 plan (rewritten weekly — v1.12)
 
-Authoritative text: journal/2026-11.md 2026-11-14 weekly §6. Summary: BET 34,516.49 (Nov 13, −5.63% off ATH); no tier active.
-- **TRIP (NEW)**: T1 ~2,500 RON at ≤min(1.40, last+2%), only after the Nov 16 Q3 is read on bvb.ro and shows 9M NP up YoY + FY26 NP guidance 33.2m reaffirmed + no debt-funded/>12x/related-party deal. No chase above 1.40.
-- **ARS**: ≤16.50 base / ≤16.90 T-10 / ≤17.40 T-15 (re-derived with Q3, unchanged). Now 18.55/19.15.
-- **AROBS T2**: T-15 only ≤0.705. Q3 Nov 19.
-- **SNN**: both units online *by filing* ≥3 sessions (U1 tripped Nov 9) AND ≤56/58/60. Now 60.5/61.1.
-- **TTS**: ≤6.00; T-15 ≤6.25. Q3 Nov 27.
-- **TLV, IARV**: no add. IARV FV cut to 30–50 with new dated kill criteria (WATCHLIST).
-- **STOP**: junk downgrade; EUR/RON fixing >5.45 or +1.5% in 5 sessions (redefined v1.11; was ">5.30", breached unnoticed since early Oct).
+Authoritative text: journal/2026-11.md 2026-11-21 weekly §6. Summary: BET 34,101.01 (Nov 20, −6.77% off ATH); no tier active.
+- **AROBS T2 (ARMED, re-banded on Q3)**: ~2,500 RON at ≤min(0.76, ask), any daily Nov 23–27, if no target cut/dilution/control step-up filing; suspend if the Nov 24 call brings a cut or a margin outlook <13% EBITDA. T-10 ≤0.78. FV 0.85–1.00. The old ≤0.705 T-15-only leg is superseded.
+- **TRIP**: Plan T dropped (guidance gate failed: silent through the call). **T' valuation-only T1 ~2,000 at ≤1.30**, or an event leg (explicit FY reaffirmation, or a compliant first acquisition) ~2,500 at ≤min(1.45, last+2%). Lock-up ~May 30 2027. Now 1.412/1.428.
+- **ARS**: ≤16.50 base / ≤16.90 T-10 / ≤17.40 T-15. Now 18.4/18.7.
+- **SNN**: ≤56/58/60 + both units running ≥3 sessions (evidence: SNN filing, Transelectrica data or an SNN periodic report) + the amended-budget dividend line read from a primary source before any fill. Now 58.6/59.0.
+- **TTS**: ≤6.00; T-15 ≤6.25. Q3 Nov 27. Now 7.42/7.50.
+- **TLV, IARV**: no add.
+- **STOP**: junk downgrade; EUR/RON fixing >5.45 or +1.5% in 5 sessions; unverifiable broker state; a 2027 bank-tax *raise* adopted or formally proposed.
+
+## 5-prior. Week of Nov 16 plan (superseded — v1.11, preserved for record)
+
+Authoritative text: journal/2026-11.md 2026-11-14 weekly §6. TRIP T1 gated on Q3 + guidance (dropped Nov 21: guidance silent); ARS/AROBS/SNN/TTS ladder bands; no fills.
 
 ## 5-prior. Week of Oct 12 plan (superseded — v1.9, preserved for record)
 
@@ -853,6 +857,8 @@ v1.0 levels were computed off a stale 36,503.
   through Q3) — do not reconsider on price drift alone.
 
 ## Changelog
+
+- **v1.12 — 2026-11-21 (eleventh weekly run)** — Core unchanged; no orders. (1) §5 rewritten for Nov 23–27. (2) **AROBS T2 re-banded to ≤0.76** (from ≤0.705 at T-15 only) on the Q3 print: adjusted NP +40% 9M, FY NP budget beaten early, net cash 162m, EV/FY26E adj NP ~17x; FV 0.85–1.00. (3) **TRIP Plan T dropped** per its own pre-commitment (guidance silent); replaced by a valuation-only ≤1.30 T1 that survives a 15% budget miss, because Q4 carries ~72% of annual profit (the Q3 gate was aimed at the wrong quarter, LESSONS P-16). (4) The SNN restart leg's evidence standard widened (SNN never files reconnections, so the filing-only leg was unsatisfiable), plus a primary-read gate on the 2026 dividend cut. (5) STOP list adds a 2027 bank-tax raise. Rationale: journal/2026-11.md 2026-11-21.
 
 - **v1.11 — 2026-11-14 (tenth weekly run)** — Core unchanged; no orders. (1) §5 rewritten for Nov 16–20, with **TRIP (Christian Tour) added as the first new armed candidate since AROBS**: 8.8x FY26 guided NP, net cash post-IPO, gated on its Nov 16 Q3. (2) EUR/RON stress threshold redefined (>5.45 or +1.5%/5 sessions). (3) SNN restart leg tightened to *filing-confirmed* both-unit operation after the U1 Nov 9 trip. (4) IARV fair value cut 48–60 → 30–50 with dated kill criteria, after the GM's Oct 12 2027-workload warning (missed by the engine for a month). Rationale: journal/2026-11.md 2026-11-14.
 
