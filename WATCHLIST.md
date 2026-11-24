@@ -22,6 +22,7 @@ _(2026-09-26 weekly update: BET fell hard mid-week then bounced Sep 25 (+1.29%, 
 _(2026-10-03 weekly update: S&P affirmed BBB−/negative Oct 2; BET 32,330.90 (−11.61% off ATH), 3.8% above the −15% tier. First **tier-conditioned bands** written (v1.8): ARS ≤16.50 base / ≤16.90 at T-10 / ≤17.40 at T-15; AROBS T2 ≤0.705 at T-15 only; SNN base ≤56 + restart, ≤58/≤60 at T-10/T-15; TTS ≤6.00, ≤6.25 at T-15. TLV/IARV capped. Cabrio fell to 9.48% by passive dilution (AROBS, BVB report 52/2026). SNN now 56.2/56.5 (price leg off, restart not before mid-Oct). No trades. Detail: journal/2026-10.md 2026-10-03.)_
 
 _(2026-11-23 daily update: AROBS Plan B T2 order placed pre-open: BUY 3,289 sh @ limit 0.76, day, net 2,507.14 RON. Book was 0.756/0.764 (Friday close), so the order rests one tick below the ask; it is not chasing. Pending fill; the next run confirms. Detail: journal/2026-11.md 2026-11-23.)_
+_(2026-11-24 daily update: AROBS T2 **filled in full** Nov 23 @0.76; position 7,139 sh, cost 5,441.91 — at the 5,500 cap, Plan B complete. CR 69 buyback Nov 16–20: 394k sh, avg ~0.755. No other band in reach. Detail: journal/2026-11.md 2026-11-24.)_
 
 _(2026-10-10 weekly update: BET 33,400.45 (−8.69% off ATH), no tier active; ladder bands from 2026-10-03 carried unchanged. ARS 17.05/17.40, SNN 56.7/57.8 (both units offline, restart leg unmet), TTS 7.26/7.34 (further above ≤6.00), AROBS ~0.746. TLV/IARV capped. ARS Q3 report Nov 6 verified on BVB calendar. No trades. Detail: journal/2026-10.md 2026-10-10.)_
 
