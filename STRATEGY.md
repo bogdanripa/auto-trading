@@ -1044,3 +1044,4 @@ v1.0 levels were computed off a stale 36,503.
   caps, small caps, mechanics/tax, catalysts, recent news, prior-engine
   history). Core stance: staged value-biased entry into a melt-up with a
   dense autumn risk calendar; reserve is a position.
+**2026-11-27 (daily run)**: Broker-verified: AROBS 7,139, TLV 224, IARV 134, cash 26,562.45, no open orders. Portfolio at Nov 26 closes is 43,901.70 RON: −6.50% since inception vs BET −7.73%, so +1.22pp ahead. BET is −8.79% off its ATH (T-10 is 1.3% away). No action. SNN ask is 56.9 against its ≤56 band, with its gates unread. TTS Q3 goes to the Nov 28 weekly. EUR/RON is 5.3431. Detail: journal/2026-11.md 2026-11-27.
