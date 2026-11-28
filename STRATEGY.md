@@ -1,4 +1,4 @@
-# STRATEGY.md — v1.12
+# STRATEGY.md — v1.13
 
 Living strategy. Any run may amend it with a version bump, changelog entry, and
 journaled rationale (ENGINE.md §6). The constitution (ENGINE.md) always wins on
@@ -519,16 +519,20 @@ previews):**
 - **AQ, TRP, CFH, SFG** — priced far ahead of current earnings; TRP H1 (Aug 5)
   may create a capitulation entry — watch, don't anticipate.
 
-## 5. Week of Nov 23 plan (rewritten weekly — v1.12)
+## 5. Week of Dec 2 plan (rewritten weekly — v1.13)
 
-Authoritative text: journal/2026-11.md 2026-11-21 weekly §6. Summary: BET 34,101.01 (Nov 20, −6.77% off ATH); no tier active.
-- **AROBS T2 (ARMED, re-banded on Q3)**: ~2,500 RON at ≤min(0.76, ask), any daily Nov 23–27, if no target cut/dilution/control step-up filing; suspend if the Nov 24 call brings a cut or a margin outlook <13% EBITDA. T-10 ≤0.78. FV 0.85–1.00. The old ≤0.705 T-15-only leg is superseded.
-- **TRIP**: Plan T dropped (guidance gate failed: silent through the call). **T' valuation-only T1 ~2,000 at ≤1.30**, or an event leg (explicit FY reaffirmation, or a compliant first acquisition) ~2,500 at ≤min(1.45, last+2%). Lock-up ~May 30 2027. Now 1.412/1.428.
-- **ARS**: ≤16.50 base / ≤16.90 T-10 / ≤17.40 T-15. Now 18.4/18.7.
-- **SNN**: ≤56/58/60 + both units running ≥3 sessions (evidence: SNN filing, Transelectrica data or an SNN periodic report) + the amended-budget dividend line read from a primary source before any fill. Now 58.6/59.0.
-- **TTS**: ≤6.00; T-15 ≤6.25. Q3 Nov 27. Now 7.42/7.50.
-- **TLV, IARV**: no add.
-- **STOP**: junk downgrade; EUR/RON fixing >5.45 or +1.5% in 5 sessions; unverifiable broker state; a 2027 bank-tax *raise* adopted or formally proposed.
+Authoritative text: journal/2026-11.md 2026-11-28 weekly §6. Summary: BET 33,708.19 (Nov 27, −7.84% off ATH); no tier active. Nov 30 / Dec 1 BVB holidays; trading Dec 2–4.
+- **AROBS**: at the 5,500 cap. **T-10-only extension**: if BET closes ≤32,919 and ask ≤0.72 and no adverse filing → ~1,500 RON at ≤min(0.72, ask); cap 7,000 at cost via this leg only. Now 0.736.
+- **SNN (re-banded)**: both non-price gates met (Transelectrica ≥1,258 MW daily since Nov 15; dividend line 239.7m ≈0.79/sh, primary). FV 55–70 → **50–65**; band **≤52 base / ≤54 T-10 / ≤56 T-15** (U1 refurbishment from ~end-2027, FY26 NP budget 1.18bn). Now 58.2/58.5.
+- **TTS (re-banded)**: Q3 blowout (NP 72.3m vs 14.3m; FY26E EBITDA 230–245m). Band **≤6.30 base, ≤6.60 T-15**; FV 6.5–8.0. Now ~7.48.
+- **TRIP**: ≤1.30 (event leg unchanged). Now 1.384/1.394.
+- **ARS**: ≤16.50 / 16.90 / 17.40. Now 18.3/18.5.
+- **TLV, IARV**: no add. TLV ROBOR-fine watch (A73).
+- **STOP**: junk downgrade; EUR/RON fixing >5.45 or +1.5% in 5 sessions; unverifiable broker state; a 2027 bank-tax *raise* adopted or formally proposed; **a further unexplained cash debit before the owner explains the three on file (~1,974 RON)**.
+
+## 5-prior. Week of Nov 23 plan (superseded — v1.12, preserved for record)
+
+Authoritative text: journal/2026-11.md 2026-11-21 weekly §6. AROBS T2 ≤0.76 (filled in full Nov 23); TRIP T' ≤1.30; ARS/SNN/TTS ladder bands; no other fills.
 
 ## 5-prior. Week of Nov 16 plan (superseded — v1.11, preserved for record)
 
@@ -857,6 +861,8 @@ v1.0 levels were computed off a stale 36,503.
   through Q3) — do not reconsider on price drift alone.
 
 ## Changelog
+
+- **v1.13 — 2026-11-28 (twelfth weekly run)** — Core unchanged; no orders. (1) §5 rewritten for Dec 2–4. (2) **TTS re-banded ≤6.00 → ≤6.30** on a blowout Q3 that refuted the engine's own drought read-across (A64 broke, LESSONS P-17); book corrected to 5.21 on 180m shares. (3) **SNN band cut ≤56 → ≤52** (FV 50–65) although both non-price gates cleared: the FY26 NP budget is 1.18bn (primary) and U1 refurbishment starts ~end-2027. (4) AROBS cap 5,500 → 7,000 usable only via a T-10 leg (P-9: keep one diligenced, uncapped name for the drawdown edge). (5) STOP list adds a further unexplained cash debit. Rationale: journal/2026-11.md 2026-11-28.
 
 - **v1.12 — 2026-11-21 (eleventh weekly run)** — Core unchanged; no orders. (1) §5 rewritten for Nov 23–27. (2) **AROBS T2 re-banded to ≤0.76** (from ≤0.705 at T-15 only) on the Q3 print: adjusted NP +40% 9M, FY NP budget beaten early, net cash 162m, EV/FY26E adj NP ~17x; FV 0.85–1.00. (3) **TRIP Plan T dropped** per its own pre-commitment (guidance silent); replaced by a valuation-only ≤1.30 T1 that survives a 15% budget miss, because Q4 carries ~72% of annual profit (the Q3 gate was aimed at the wrong quarter, LESSONS P-16). (4) The SNN restart leg's evidence standard widened (SNN never files reconnections, so the filing-only leg was unsatisfiable), plus a primary-read gate on the 2026 dividend cut. (5) STOP list adds a 2027 bank-tax raise. Rationale: journal/2026-11.md 2026-11-21.
 

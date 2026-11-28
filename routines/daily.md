@@ -16,6 +16,7 @@ a strategist. Its default and most common outcome is **NO ACTION**.
    - fills since last run → journal them (entry price, fees; update `state/positions.md`)
    - expired/rejected orders → decide re-place or drop, journal the reasoning
    - unexplained positions/orders → owner activity: read-only, note it
+   - **any cash debit or Sold blocat with no order behind it** → do not grade it "broker fee" by pattern; it is an unexplained account state (error alert), and while three such debits (Aug/Oct/Nov 2026, ~1,974 RON) remain unexplained by the owner, a new one is a STOP on buys (STRATEGY v1.13, journal 2026-11-28)
 4. **Benchmark row**: append yesterday's BET and BET-TR closes, portfolio value,
    cash to `state/benchmark.csv` (via `scripts/benchmark.mjs` if it exists, else
    fetch from bvb.ro manually).
@@ -28,7 +29,7 @@ a strategist. Its default and most common outcome is **NO ACTION**.
    search per held name **by company name** ("IAR Brașov", "Banca Transilvania",
    "AROBS"), not the ticker; (b) for any held/planned name with a filing due
    within ±2 trading days, fetch the issuer's bvb.ro page
-   (`FinancialInstrumentsDetails.aspx?s=TICKER`) directly — search indexes lag
+   (`https://www.bvb.ro/FinancialInstruments/Details/FinancialInstrumentsDetails.aspx?s=TICKER` — the short `bvb.ro/FinancialInstrumentsDetails.aspx?s=` path 404s since Nov 2026) directly — search indexes lag
    by days; (c) grade physical-event assumptions only on a filing that reports
    the event as done (P-15).
 6. **Planned actions**: if STRATEGY.md or the last weekly entry defines a trigger

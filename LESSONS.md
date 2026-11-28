@@ -109,6 +109,12 @@ Cernavodă: the ministry said "mid-October" (Sep 23) → "~Nov 15" (Oct 27). U1 
 
 ## Process lessons
 
+### P-17: an operational shock read across from one company must be checked against the second company's own segment mix (2026-11-28 weekly; journal/2026-11.md)
+The Nov 21 weekly expected TTS's Q3 to show "the drought damage" and a target cut (A64), reasoning from SNN's data that the Danube was too low all quarter. The shock was real — TTS says upstream navigation was halted the entire quarter — but TTS's Q3 NP rose 5x, because its money that quarter came from Constanța port handling and a fleet relocated downstream, on record grain and Ukrainian flows. TTS's own H1 segment table would have shown which segments needed the upstream river. Rule: before writing "company B will be hit by the shock that hit company A", list B's segments and ask which of them actually depend on the shocked input, from B's own last report. A shared macro driver is a hypothesis about B, not evidence (cf. P-11, which sizes a company's own excuse; this sizes the engine's).
+
+### P-18: a repeating debit is not a fee until a fee document says so (2026-11-28 weekly; journal/2026-11.md)
+Three cash debits of ~640–668 RON (Aug, Oct, Nov; 1,973.67 total, 4.2% of capital) were journaled as "probably a quarterly fee" and A54 was graded held on Nov 24 because the pattern repeated. BT's published annex caps BVB custody at 49 lei/year. Nobody opened it for three months; the unexplained cost exceeds the engine's whole lead over BET. Rule: an account movement with no order behind it is graded only against a document (fee schedule, statement line, owner confirmation); pattern repetition makes it *more* urgent to explain, not less.
+
 ### P-16: before naming a "de-risking" print, check which quarter actually carries the year's profit (2026-11-21 weekly; journal/2026-11.md)
 The Nov 14 weekly gated TRIP's entry on its Q3 as "the real test of the 33.2m guidance". TRIP's own Q3 report says Q4 2025 produced 72% of FY2025 net profit. The guidance-silence rule (P-8) correctly stopped the buy, but the gate was aimed at a quarter that could not confirm or refute the budget. Rule: for any seasonal business, write down the quarterly profit split (from the issuer's prior-year quarterlies) **before** choosing the gate event. The gate is the print that covers most of the year's earnings, or the price must already pay for a miss.
 

@@ -30,6 +30,8 @@ _(2026-11-14 weekly update: BET 34,516.49 (−5.63% off ATH), no tier active. **
 
 _(2026-11-21 weekly update: BET 34,101.01 (−6.77% off ATH), no tier active. **AROBS T2 armed at ≤0.76 (~2,500 RON)**, re-banded on the Q3 print (FV 0.85–1.00). **TRIP's Q3-gated Plan T is dropped** (guidance silent through the call) and replaced by a valuation-only T1 ≤1.30. SNN Q3: 9M NP −27%, Q3 ≈ 0, the FY26 dividend reportedly cut to ~0.79/sh (secondary, gate A63); the restart-evidence rule is widened. Detail: journal/2026-11.md 2026-11-21.)_
 
+_(2026-11-28 weekly update: BET 33,708.19 (−7.84% off ATH), no tier active. **TTS Q3 blowout** (Q3 NP 72.3m vs 14.3m; FY26E EBITDA 230–245m) → band ≤6.00 → **≤6.30**, FV 6.5–8.0. **SNN gates met** (both units ≥1,258 MW daily since Nov 15, Transelectrica; dividend line 239.7m ≈0.79/sh, primary) but **band cut to ≤52/54/56, FV 50–65** (FY26 NP budget 1.18bn; U1 refurbishment ~end-2027). AROBS at cap; T-10-only extension ~1,500 at ≤0.72 (cap 7,000). IARV band restated as two scenarios (no-contract 24–30 / contract 46–50). ATB/WINE pass; ONE stays demoted. Detail: journal/2026-11.md 2026-11-28.)_
+
 ## Triggered-watch — re-banded names
 
 ### ONE — One United Properties — ⛔ DEMOTED 2026-09-12: Investor Day gave no ANCPI resolution, kill criterion hit, price-only fallback WITHDRAWN
@@ -164,6 +166,7 @@ _(2026-11-21 weekly update: BET 34,101.01 (−6.77% off ATH), no tier active. **
   this grading, not reversing it outright.
 
 ### SNN — Nuclearelectrica — ⚠ ACTIVE BUY PLAN WITHDRAWN 2026-08-24, RE-BANDED
+- **2026-11-28 re-underwrite (primary: BVC 2026 rectificat Anexa 1; Transelectrica output data):** both gates now met — nuclear output 1,258–1,348 MW every day Nov 15–27 (both units, 13+ days); amended FY26 NP **1,177.9m** (was 2,064.6m), dividends from 2026 profit **239.7m ≈ 0.79/sh** (A63 held). Premise of FV 55–70 (FY26 1.6–1.8bn) refuted. U1 refurbishment ~end-2027 for ~2 years (SNN via press, secondary; €1.85bn). Normal two-unit EPS ~6.6, one-unit ~3.3. **New FV 50–65; band ≤52 base / ≤54 T-10 / ≤56 T-15**, T1 ~2,500. Kills: further budget cut; refurbishment pulled into H1 2027 or capex overrun >20%; SMR funding beyond plan on SNN's balance sheet; a third extended Danube shutdown in 2027. Price 58.2/58.5. Detail: journal/2026-11.md 2026-11-28 §5b.
 - **2026-11-21 update (Q3, primary: publication report, bvb.ro 20.11):** 9M standalone NP 1,182.2m (−27.3%) vs H1 1,184m, so **Q3 ≈ −2m** (both units shut by the low Danube, U1 from Jul 28, U2 from Aug 13, through Sep 30); 9M production −31.1%. The 2026 budget was amended by OGMS 8/29.10. Secondary (agent, unverified): FY NP target 1.18bn and a 239.7m dividend allocation (~0.79/sh vs 3.91). U1 resynchronized Nov 14 per Transelectrica-sourced press; SNN files no reconnection reports. **Plan:** band ≤56/58/60 unchanged. Restart leg: both units running ≥3 sessions on SNN filing, Transelectrica data or an SNN periodic report. **New gate:** read the amended-budget dividend line from a primary source before any fill (A63). FV 55–70 kept; the 2027 yield floor is gone.
 - Price 65.10/65.30 (2026-08-24) | H1 2026 individual net profit 1,184m RON
   (+36.6% YoY) but Q2 alone ~296m (−16% YoY)
@@ -690,6 +693,7 @@ _(2026-11-21 weekly update: BET 34,101.01 (−6.77% off ATH), no tier active. **
 - Expected holding: 1–3+ years.
 
 ### IARV — IAR Brașov (satellite, defense) — HELD 134 sh, T2 filled in full (confirmed 2026-09-01)
+- **2026-11-28 band re-examination:** 29.40, under the 30 floor. The 30–50 band is probability-weighted; its **no-contract scenario is 24–30** (12x × ~2.0 normalized EPS) and the **contract scenario 46–50**. The market is pricing no-contract. Not a valuation sell; kill (b) (no production contract + 2027 revenue down, by the FY prelim) governs. No averaging down. EGM Dec 17/18: Art. 12 AML clean-up, Art. 16 board independence (mildly positive).
 
 > **2026-11-14 re-underwrite (supersedes the FV band and adds kills below):** Q3 2026 (primary, bvb.ro Nov 13): 9M NP 48.30m (+132%), Q3-only ≈16.07m vs ≈12.71m (+26%); billed turnover flat (312.0m vs 310.9m), with an 82.7m WIP/finished-goods build. **Thesis IMPAIRED:** SAFE H225M tranche 1 (12 units, ~€757m via DGA, confirmed Oct 7) is built by Airbus abroad with IAR doing customization only; the production-participation contract is "being negotiated" (GM Rasaliu, Oct 12, bizbrasov.ro/realitatea, secondary), and he did not deny workers' fears of "no real work next year". **FV band 30–50** (no-follow-on 24–30; follow-on signed 46–50). **New kills:** (a) a collective layoff or strike announced → exit at the next run; (b) no IAR H225M production/assembly contract signed by the FY26 preliminary results (~late Feb 2027) AND the 2027 budget/KPIs show revenue down → exit. No averaging down, at any price. Governance: the Nov 16 AGOA (KPIs) and Dec 17 AGEA (GEO 109 board-independence articles) are benign (primary).
 - Price 38.90/39.00 (2026-08-24) | P/E ~15 | div 1.342 gross paid 2026-07-16
@@ -825,7 +829,8 @@ _(2026-11-21 weekly update: BET 34,101.01 (−6.77% off ATH), no tier active. **
 
 ## New candidate — added 2026-09-12
 
-### AROBS — AROBS Transilvania Software (satellite) — T1 FILLED 2026-09-14/confirmed 2026-09-15; T2 ARMED ≤0.76 (2026-11-21)
+### AROBS — AROBS Transilvania Software (satellite) — HELD 7,139 sh (T2 filled 2026-11-23), at the 5,500 cap; T-10-only extension armed (2026-11-28)
+- **2026-11-28:** 0.736 (−3.4% vs cost 0.7623), ~13–26% under FV 0.85–1.00; EV ≈ 650m ≈ 16.7x FY26E adj NP. No filing after CR 70; A59 held (written record). **Extension:** only if BET closes ≤32,919 (T-10) and ask ≤0.72 and no adverse filing → ~1,500 RON at ≤min(0.72, ask); cap 7,000 at cost via this leg only (~16% of book). Kills unchanged (journal 2026-11-21 §5a).
 - **2026-11-21 re-underwrite (Q3, primary PDF):** adjusted NP ex-financial result 9M 28.2m (+40%; Q3 11.4m, +30%); FY NP budget (35m) already beaten on headline; like-for-like organic revenue ~+20%; net cash incl. leases 162.2m; EBITDA margin 14.8% in Q3 (from 15.5%, mix). Mcap 834m → EV ~672m ≈ 17x FY26E adjusted NP (~39m), ~7.5x EV/EBITDA. **FV band 0.85–1.00** (was "entry ≤0.78, fair"). **T2: ~2,500 RON at ≤min(0.76, ask)**, day order, Nov 23+; suspend if the Nov 24 call cuts targets or guides margin <13%. T-10 ≤0.78. Full position ≤5,500 RON at cost. **Added kill:** EBITDA margin <13% for two consecutive quarters. The ≤0.705 T-15-only leg is superseded. Full thesis: journal/2026-11.md 2026-11-21 §5a.
 - **2026-09-15 update: T1 fill broker-confirmed.** `get_holdings` shows
   3,850 sh @ avg cost 0.7623 (incl. fees), investment 2,934.78 RON — the
@@ -1229,7 +1234,7 @@ inspection** — recorded plainly, because avoiding them is ENGINE.md §3.5 alph
 
 | Name | Price (2026-09-18 close, unless noted) | Trigger | Then |
 |---|---|---|---|
-| **TTS** | 6.52/6.96 (2026-09-19 weekend snapshot) | ⬇ **DOWNGRADED — earnings leg REMOVED.** Price-only **≤6.00**. | T1 ~2,500. See drought note below; valuation refresh added 2026-09-12. |
+| **TTS** | 6.52/6.96 (2026-09-19 weekend snapshot) | ⬇ **DOWNGRADED — earnings leg REMOVED.** Price-only ~~≤6.00~~ **≤6.30 (re-banded 2026-11-28 on Q3)**. | T1 ~2,500. See drought note below; valuation refresh added 2026-09-12. |
 | **ARS** | 17.40/17.90 (2026-09-19 weekend snapshot) | ⬆ **RE-UNDERWRITTEN 2026-09-05**: normalized-earnings floor ≤16–17x FX-adjusted P/E, full-size at **≤14.5–16.5 RON**. | Half-size tranche (~1,250–1,750) on the multiple floor; full T1 (~2,500–3,000) at ≤16.5. **Moved further from band this week** (the Sep 17-18 rally reversed the prior two weeks' narrowing) — still above both legs; still the only armed non-capped conditional besides TTS. No dedicated fresh-news check this run — priority item for next week. |
 | **H2O** | 182.20/185.20 (2026-09-19 weekend snapshot) | ⬇ **NARROWED**: the state ABB **actually launching** at its discount. A drift lower is no longer sufficient. | T1 ~3,000 |
 | **PBK** | 0.1355/0.1425 (2026-09-19 weekend snapshot) | ⚠ **STAYS DEMOTED, pending FY26 confirmation** — Sep 8 investor presentation confirms the Sep 5 reconciliation figures unchanged (NPE 3.93%, coverage ~57%). No fresh check this run. Revisit if Q3/FY26 shows the ex-SAI growth trajectory holding AND NPE stays ≤4%. | — |
@@ -1272,6 +1277,8 @@ liquidity alone would force any position far below the nominal 8% cap
 to be practically exitable, and the dividend-yield thesis input is now
 known to be false rather than stale. Watch only; re-check at FY26 close
 whether H2 actually lands at the run-rate H1 now implies.
+
+**TTS — 2026-11-28 re-underwrite (Q3, primary EN PDF bvb.ro 27.11, read in full by the weekly).** The drought read-across was wrong (A64 broke, LESSONS P-17): Q3 NP **72.3m vs 14.3m**, EBITDA 102.0m vs 37.9m; 9M NP 72.5m vs −4.6m (attributable 70.2m, EPS 0.39); FY26 group estimate revenue 790–825m, **EBITDA 230–245m**, operating result 143–158m. Drivers: fleet relocated downstream of Cernavodă, record grain via Constanța, Ukraine export flows. Net debt ~47m; parent equity 938.5m on **180.0m shares → book 5.21** (earlier notes' 4.85 superseded). FY26E EPS ~0.64 (11.7x at 7.48), normalized ~0.40–0.47 (16–19x). **New band ≤6.30 base (T1 ~2,500), ≤6.60 at T-15 half-size; FV 6.5–8.0.** Kills: FY26 EBITDA <200m; Ukraine corridor closing; related-party asset deal. Price 7.48 (Nov 27, pre-print reaction). Earnings leg remains removed; band is valuation-only. Detail: journal/2026-11.md 2026-11-28 §5a.
 
 **TTS — 2026-09-05 update.** H1 2026 published on schedule and, contrary to
 the Aug-24 concern that a clean H1 would be misleadingly pre-drought,
@@ -1830,3 +1837,4 @@ float, dead-money), FP/EVER/LION/INFINITY (funds — outside mandate).
 
 - **2026-10-17 (eighth weekly run)**: no band changes. Prices Oct 16: ARS 17.50 (T1 ≤16.50), SNN 59.30 (restart unconfirmed), TTS 7.36 (≤6.00), AROBS 0.736. Report dates re-verified on bvb.ro: ARS Nov 6, SNN Nov 20, TTS Nov 27. SNN SMR general meeting Oct 29–30 added to the pre-Plan-C read list. Detail: journal/2026-10.md 2026-10-17.
 - **2026-11-21 (eleventh weekly run)**: AROBS T2 armed ≤0.76 (re-banded on Q3; FV 0.85–1.00). TRIP Plan T dropped → valuation-only ≤1.30 (+ event leg), lock-up ~May 30 2027. SNN Q3 read (9M NP −27%, Q3 ≈ 0); restart-evidence rule widened, dividend-line gate added. ARS/TTS bands unchanged (18.4/18.7; 7.42/7.50). No trades. Detail: journal/2026-11.md 2026-11-21.
+- **2026-11-28 (twelfth weekly run)**: TTS Q3 blowout → band ≤6.30 (A64 broke). SNN gates met but band cut to ≤52/54/56 (FV 50–65). AROBS T-10-only extension ≤0.72 (cap 7,000). IARV band restated as two scenarios. Screen: ATB, WINE pass; ONE stays demoted (ANCPI undated; extraordinary dividend debt-financed). TRIP fair sales +74% (no event-leg trigger). No trades. Detail: journal/2026-11.md 2026-11-28.
